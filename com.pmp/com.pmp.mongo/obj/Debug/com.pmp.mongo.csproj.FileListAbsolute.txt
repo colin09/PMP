@@ -1,0 +1,12 @@
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\obj\Debug\com.pmp.mongo.csprojResolveAssemblyReference.cache
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\com.pmp.mongo.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\com.pmp.mongo.pdb
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\com.pmp.common.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\MongoDB.Bson.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\MongoDB.Driver.Core.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\MongoDB.Driver.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\com.pmp.common.pdb
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\MongoDB.Bson.xml
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\bin\Debug\MongoDB.Driver.xml
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\obj\Debug\com.pmp.mongo.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.mongo\obj\Debug\com.pmp.mongo.pdb

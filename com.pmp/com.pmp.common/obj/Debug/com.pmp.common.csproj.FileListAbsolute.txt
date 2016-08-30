@@ -1,0 +1,4 @@
+F:\colin\git-file\PMP\com.pmp\com.pmp.common\bin\Debug\com.pmp.common.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.common\bin\Debug\com.pmp.common.pdb
+F:\colin\git-file\PMP\com.pmp\com.pmp.common\obj\Debug\com.pmp.common.dll
+F:\colin\git-file\PMP\com.pmp\com.pmp.common\obj\Debug\com.pmp.common.pdb
