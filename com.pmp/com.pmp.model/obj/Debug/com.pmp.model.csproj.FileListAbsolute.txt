@@ -1,4 +1,0 @@
-F:\colin\git-file\PMP\com.pmp\com.pmp.model\bin\Debug\com.pmp.model.dll
-F:\colin\git-file\PMP\com.pmp\com.pmp.model\bin\Debug\com.pmp.model.pdb
-F:\colin\git-file\PMP\com.pmp\com.pmp.model\obj\Debug\com.pmp.model.dll
-F:\colin\git-file\PMP\com.pmp\com.pmp.model\obj\Debug\com.pmp.model.pdb
