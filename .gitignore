@@ -62,3 +62,5 @@ Desktop.ini
 packages/
 
 .vs/config/applicationhost.config
+*.cache
+com.pmp/com.pmp.web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
