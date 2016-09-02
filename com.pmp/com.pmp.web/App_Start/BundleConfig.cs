@@ -22,10 +22,27 @@ namespace com.pmp.web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            
+
+
+
+
+
+            bundles.Add(new ScriptBundle("~/bundles/jq-bs-ng").Include(
+                     "~/Scripts/jquery-1.10.2.min.js",
+                     //"~/Scripts/jquery.cxscroll.min.js",
+                     "~/Scripts/jquery.lazyload.min.js",
+                     "~/Scripts/angular.min.js",
+                     "~/Scripts/angular-sanitize.min.js",
+                     "~/Scripts/bootstrap.min.js",
+                     "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/main.css"));
+
+
         }
     }
 }

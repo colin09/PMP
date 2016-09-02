@@ -13,6 +13,25 @@ namespace com.pmp.mongo.service
     public class BaseService<T> where T : MgBaseModel, new()
     {
 
+        /// <summary>
+        /// 创建实例T 的自增长起始值：0 
+        /// 每个T(Model)只需调用一次
+        /// </summary>
+        public void CreateCounter()
+        {
+            MgClient.CreateDefaultCounter<T>();
+        }
+
+
+        /// <summary>
+        /// 获取一个新的自增Id
+        /// </summary>
+        /// <returns></returns>
+        public int GetNewId()
+        {
+           return MgClient.CreateNewId<T>();
+        }
+
         public void Insert(T model)
         {
             MgClient.Insert<T>(model);
@@ -47,6 +66,11 @@ namespace com.pmp.mongo.service
         {
             return MgClient.Aggregate(filter, group);
         }
+
+
+
+
+        
 
     }
 }
