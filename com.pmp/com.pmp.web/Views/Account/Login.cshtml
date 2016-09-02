@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="container login">
+
+    <h1 class="pt35">here is the title ...</h1>
+
+    <div class="form" >
+        <h3> Sign In </h3>
+            
+
+        <div class="sign-in">
+            <form action="/Account/SignIn" method="post">
+                <input type="text" class="name" name="username" placeholder="Username" required="">
+                <input type="password" class="password" name="password" placeholder="Password" required="">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="brand1" value="">
+                        <label for="brand1"><span></span>Remember me</label>
+                    </li>
+                </ul>
+                <input type="submit" value="Sign In">
+                <div class="clear"></div>
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
