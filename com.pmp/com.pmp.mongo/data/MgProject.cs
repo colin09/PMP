@@ -6,22 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.pmp.model
+namespace com.pmp.mongo.data
 {
     /// <summary>
     /// 项目
     /// </summary>
     [BsonIgnoreExtraElements]
-    public class Model_Project : MgBaseModel
+    public class MgProject : MgBaseModel
     {
 
-        public Model_Project()
+        public MgProject()
         {
             Project_FlieList = new List<Model_Project_Flie>();
 
             Project_PlanList = new List<Model_Project_Plan>();
-
-            Project_EvaluateList = new List<Model_Project_Evaluate>();
         }
         /// <summary>
         /// 主键
@@ -114,7 +112,7 @@ namespace com.pmp.model
         /// <summary>
         /// 项目评价
         /// </summary>
-        public List<Model_Project_Evaluate> Project_EvaluateList { get; set; }
+        //public List<Model_Project_Evaluate> Project_EvaluateList { get; set; }
     }
 
 
@@ -126,66 +124,20 @@ namespace com.pmp.model
     public class Model_Project_Plan
     {
         /// <summary>
-        /// 主键
-        /// </summary>
-        public int Project_Plan_ID { get; set; }
-
-        /// <summary>
-        /// 项目ID
-        /// </summary>
-        public int Project_ID { get; set; }
-        /// <summary>
         /// 描述
         /// </summary>
-        /// 
-        public string Project_Plan_Desc { get; set; }
+        public string ProcessDesc { get; set; }
         /// <summary>
         /// 操作人
         /// </summary>
-        public int Project_Plan_UserID { get; set; }
+        public int UserID { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public int Project_Plan_CreateTime { get; set; }
+        public double CreateTime { get; set; }
     }
 
-    /// <summary>
-    /// 项目评价
-    /// </summary>
-    public class Model_Project_Evaluate
-    {
-        /// <summary>
-        /// 主键
-        /// </summary>
-        public int Project_Evaluate_ID { get; set; }
-
-        /// <summary>
-        /// 项目ID
-        /// </summary>
-        public int Project_ID { get; set; }
-
-        /// <summary>
-        /// 项目评价类型（雇主对实施人评价/实施人对雇主评价）
-        /// [1.雇主评价][2.实施评价]
-        /// </summary>
-        public int Project_Evaluate_Type { get; set; }
-
-        /// <summary>
-        /// 评价描述
-        /// </summary>
-        public string Project_Evaluate_Desc { get; set; }
-
-        /// <summary>
-        /// 项目评分
-        /// </summary>
-        public double Project_Evaluate_Grade { get; set; }
-
-        /// <summary>
-        /// 评分级别【1-5】
-        /// </summary>
-        public double Project_Evaluate_Level { get; set; }
-    }
-
+ 
 
     /// <summary>
     /// 项目文件
@@ -193,24 +145,11 @@ namespace com.pmp.model
     public class Model_Project_Flie
     {
         /// <summary>
-        /// 主键
-        /// </summary>
-        public int Project_Flie_ID { get; set; }
-
-        /// <summary>
-        /// 项目ID
-        /// </summary>
-        public int Project_ID { get; set; }
-
-        /// <summary>
         /// 项目文件评价（立项说明、方案文件）
         /// [1.立项说明][2.方案文件]
         /// </summary>
-        public int Project_Evaluate_Type { get; set; }
-
-        /// <summary>
-        /// 评价描述
-        /// </summary>
-        public int Project_Flie_Url { get; set; }
+        public int FileType { get; set; }
+        
+        public string FileUrl { get; set; }
     }
 }

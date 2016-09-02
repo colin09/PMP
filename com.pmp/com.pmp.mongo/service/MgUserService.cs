@@ -27,7 +27,8 @@ namespace com.pmp.mongo.service
         {
             Insert(new MgUser()
             {
-                Phone = phone,Password = pwd,Leval = (UserLevel)userLevel,
+                Phone = phone,Password = pwd,
+                Level = (UserLevel)userLevel,
                 CTime = DateTime.Now,UTime = DateTime.Now
             });
         }
