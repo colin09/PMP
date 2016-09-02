@@ -6,7 +6,7 @@ namespace com.pmp.mongo.data
 {
 
     [BsonIgnoreExtraElements]
-    public class MgUser : MgBaseModel
+    public class MgPersonInfo : MgBaseModel
     {
         public int Id { set; get; }
         public string Name { set; get; }
@@ -15,8 +15,7 @@ namespace com.pmp.mongo.data
         public DateTime CodePwdTime { set; get; }
         public string NickName { set; get; }
         public string Phone { set; get; }
-
-        public UserLevel Leval { set; get; }
+        
 
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
@@ -24,7 +23,7 @@ namespace com.pmp.mongo.data
     }
 
 
-    public enum UserLevel
+    public enum UserLevel1
     {
         Default=0,
         Person=1,

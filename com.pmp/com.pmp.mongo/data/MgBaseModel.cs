@@ -7,13 +7,13 @@ namespace com.pmp.mongo.data
     public class MgBaseModel
     {
         //public int Id { set; get; }
-        public ObjectId Id { get; set; }
+        public ObjectId _id { get; set; }
 
         public string StringId
         {
             get
             {
-                return Id.ToString();
+                return _id.ToString();
             }
         }
 
