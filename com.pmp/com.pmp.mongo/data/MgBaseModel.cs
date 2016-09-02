@@ -24,6 +24,25 @@ namespace com.pmp.mongo.data
     }
 
 
+    public class counters
+    {
+        public string _id { set; get; }
+        public int seq { set; get; }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static class MgBaseModelExt
     {
@@ -32,5 +51,11 @@ namespace com.pmp.mongo.data
             return string.Format("{0}_{1}", AppSettingConfig.MgPrefix, model.GetType().Name.ToLower());
         }
     }
+
+
+
+
+
+
 
 }

@@ -115,13 +115,55 @@ namespace com.pmp.mongo.client
                 getClient();
 
             var result = _database.ListCollections();
-            var list= result.ToList();
+            var list = result.ToList();
             list.ForEach(item =>
             {
                 Console.WriteLine(item.ToJson());
             });
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        public static void CreateDefaultCounter<T>()
+        {
+            if (_database == null)
+                getClient();
+
+            var collection = _database.GetCollection<counters>("counters");
+            var filter = Builders<counters>.Filter.Eq("_id", nameof(T).ToLower());
+            var result = collection.Find(filter);
+            if (result.Any())
+                return;
+            collection.InsertOneAsync(new counters()
+            {
+                _id = nameof(T).ToLower(),
+                seq = 0
+            });
+        }
+
+
+        public static int CreateNewId<T>()
+        {
+            if (_database == null)
+                getClient();
+            var filter = Builders<counters>.Filter.Eq("_id", nameof(T).ToLower());
+            var update = Builders<counters>.Update.Inc("seq", 1);
+
+            var cancelToken = new System.Threading.CancellationTokenSource();
+            var result = _database.GetCollection<counters>("counters").FindOneAndUpdate(filter, update, null, cancelToken.Token);
+            return result.seq;
+
+        }
 
 
 
