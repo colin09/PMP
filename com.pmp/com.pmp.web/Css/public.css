@@ -1,0 +1,104 @@
+﻿.page .previous i,.page .next i,.left_rounded ,.right_rounded,.layer_top .colse,.refund_success .layer_bd .text i,.refund_failure .layer_bd .text i,.confirm_refund .info .img_lt,.confirm_refund .info .info_right .ticket_rt .train_num i,.cancel .layer_bd .text i{ background-image:url(/images/public/train.png); background-repeat:no-repeat;}
+/*当前位置*/
+.member_bd { width:1000px;margin:0 auto;}
+.currentP { float:left;width:1000px;height:42px;line-height:42px;color:#666666;}
+.currentP a { color:#666666;}
+.currentP .blue { color:#2e81d4;}
+.member_bd .member_lt { float:left;}
+/*右侧标题*/
+.member_rt { float:right;width:791px;}
+.member_rt .title_rt { float:left;width:789px;border:1px solid #e7e7e7; border-bottom:1px solid #93bde6;border-radius:2px 2px 0 0;height:30px;}
+.member_rt .title_rt p { float:left;width:769px;height:29px;border-bottom:1px solid #3483d1;line-height:29px;color:#3483d1; font-size:14px;padding-left:20px;}
+/*page*/
+.page { width:100%;float:left;margin-top:20px;}
+.page a { color:#555555;}
+.page .previous,.page .next { float:right;width:63px;height:27px;border:1px solid #dcdcdc;line-height:27px;}
+.page .previous i{ background-position:-113px -209px;width:7px;height:10px;float:left;margin:10px 6px 0 8px;}
+.page .next i { background-position:-133px -209px;width:7px;height:10px;float:left;margin:10px 6px 0 8px;}
+.page .pageIndex,.page .next { float:right;margin:0 4px;border-right:1px solid #dcdcdc;height:29px;}
+.page .pageIndex a,.page .next a{float:left; width:31px;height:27px;text-align:center;line-height:27px;border:1px solid #dcdcdc;border-right:0px;}
+.page .pageIndex a:hover, .page .pageIndex a:active, .page .pageIndex a.current {background-color:#ff9700;color:#fff;border:1px solid #ff9700;border-right:0px;}
+
+/*弹出层*/
+.meng_layer { width:100%;height:100%;position:fixed;left:0px;top:0px;background-color:#000;opacity:0.6;filter:alpha(opacity=60); z-index:10000;}
+.layer_wrapper { position:absolute;z-index:10001;}
+.left_rounded { background-position:-254px -147px;float:left;width:6px;height:33px;}
+.right_rounded { background-position:-270px -147px;float:left;width:6px;height:33px;}
+.layer_top { float:left;width:100%;height:33px;}
+.layer_top span { float:left;background-color:#35bcfc;height:33px;padding-left:14px;}
+.layer_top span u { float:left;color:#ffffff;font-size:14px;line-height:33px;}
+.layer_top .colse { background-position:-86px -148px;width:22px;height:22px;float:right;margin:6px 4px 0 0;}
+.layer_top .colse:hover,.layer_top .colse:active { background-position:-124px -148px;}
+.layer_con { background-color:#35bcfc;float:left;width:100%;border-top:1px solid #00aaf3;}
+.layer_bd{ float:left;margin:0 4px 4px 4px;background-color:#fff;}
+.layer_btn { float:left;width:100%;text-align:center;margin-top:35px;}
+.layer_btn button { width:59px;height:24px;background-color:#25b8ff;color:#fff;font-size:14px;}
+.layer_btn button:hover,.layer_btn button:active { background-color:#04abf4;}
+.layer_btn button.reset { background-color:#fff;color:#36b6f4;font-size:14px;}
+.layer_btn button.reset:hover, .layer_btn button.reset:active {color:#0798de;}
+/*退票成功*/
+.refund_success { width:517px;height:243px;}
+.refund_success .layer_top span { width:491px;}
+.refund_success .layer_con { height:210px;}
+.refund_success .layer_bd{ width:509px;height:206px;}
+.refund_success .layer_bd p { float:left;width:100%;color:#555555;text-align:center;padding-top:20px;}
+.refund_success .layer_bd .text { margin:30px 0 0 160px;width:349px;}
+.refund_success .layer_bd .text i{background-position:-215px -148px;width:29px;height:29px;float:left;}
+.refund_success .layer_bd .text u { float:left;font-size:16px;color:#85be00;margin:0 0 0 12px;line-height:29px;}
+/*退票失败*/
+.refund_failure { width:517px;height:287px;}
+.refund_failure .layer_top span { width:491px;}
+.refund_failure .layer_con { height:254px;}
+.refund_failure .layer_bd{ width:509px;height:250px;}
+.refund_failure .layer_bd p { float:left;width:100%;color:#5f5f5f;text-align:center;}
+.refund_failure .layer_bd .text { margin:28px 0 0 70px;width:429px;}
+.refund_failure .layer_bd .text i{background-position:-162px -147px;width:37px;height:37px;float:left;}
+.refund_failure .layer_bd .text u { float:left;font-size:16px;color:#ff9c00;margin:0 0 0 12px;line-height:37px;}
+.refund_failure .layer_bd .reason { text-align:center;font-size:14px;padding-top:25px;}
+.refund_failure .layer_bd ul{ float:left;width:324px;margin-top:8px;padding-left:185px;}
+.refund_failure .layer_bd ul li { float:left;width:100%;line-height:20px;color:#7b7b7b;}
+.refund_failure .layer_btn {margin-top:23px;}
+/*是否确认退票*/
+.confirm_refund { width:652px;}
+.confirm_refund .layer_top span { width:626px;}
+.confirm_refund .layer_bd{ width:644px;padding-bottom:15px;}
+.confirm_refund .info { float:left;width:100%;margin-top:25px; }
+.confirm_refund .info .img_lt { float:left;width:68px;height:68px; margin-left:90px;background-position:-6px -132px;}
+.confirm_refund .info .info_right { float:left;width:454px;margin-left:30px;}
+.confirm_refund .info .info_right .title {font-weight:bold;font-size:18px;color:#555555;margin-top:16px;}
+.confirm_refund .info .info_right .ticket {float:left;width:100%; margin-top:14px;}
+.confirm_refund .info .info_right label { float:left;margin-right:28px;color:#969696;}
+.confirm_refund .info .info_right .ticket_rt { float:left;width:376px;}
+.confirm_refund .info .info_right span,.passenge span {float:left;color:#444444;}
+.confirm_refund .info .info_right .ticket label{ line-height:30px;}
+.confirm_refund .info .info_right .ticket_rt .place { width:53px;line-height:30px;}
+.confirm_refund .info .info_right .ticket_rt .time { width:47px;text-align:center;line-height:15px;margin-right:18px;}
+.confirm_refund .info .info_right .ticket_rt .train_num { width:52px;margin-right:16px;}
+.confirm_refund .info .info_right .ticket_rt .train_num u { width:100%;padding-left:9px;}
+.confirm_refund .info .info_right .ticket_rt .train_num i { background-position:-137px -92px;width:52px;height:8px;float:left;}
+.confirm_refund .passenger { margin-top:14px;float:left;width:100%;}
+.confirm_refund .passenger ul,.passenger ul li { float:left;width:376px;line-height:20px;}
+.confirm_refund .passenger ul li label {line-height:20px;}
+.confirm_refund .passenger ul .user {width:53px;}
+.confirm_refund .passenger ul .train { width:106px;}
+.confirm_refund .amount {float:left;width:100%;margin-top:14px;}
+.confirm_refund .amount span { float:left;width:85px;}
+.confirm_refund .amount span u { color:#ff9c00; font-size:14px;}
+.confirm_refund .layer_btn { margin-top:20px;text-align:left;margin-left:82px;width:360px;}
+.confirm_refund .layer_btn button {margin-right:10px;}
+.confirm_refund .layer_btn button.reset { background-color:#fff;color:#36b6f4;font-size:14px;}
+.confirm_refund .reminder {margin:15px 8px 0;border-top:1px dashed #bebebe;float:left;width:628px;}
+.confirm_refund .reminder p { float:left;width:600px;margin-left:16px;color:#a3a3a3;line-height:18px;margin-top:5px;}
+.confirm_refund .reminder p label { float:left;width:60px;color:#a3a3a3;}
+.confirm_refund .reminder p span { float:left;width:540px;color:#a3a3a3;font-size:11px;}
+.confirm_refund .reminder p.title {font-size:13px;font-weight:700;margin-top:10px;}
+/*取消*/
+.layer_cancel { width:519px;height:197px;margin-left:-259px;margin-top:-98px;}
+.layer_cancel .layer_top span { width:493px;}
+.layer_cancel .layer_con { height:163px;}
+.layer_cancel .layer_bd{ width:511px;height:160px;}
+.layer_cancel .layer_bd p { float:left;width:100%;color:#5f5f5f;text-align:center;}
+.layer_cancel .layer_bd .text { margin:35px 0 0 145px;width:366px;}
+.layer_cancel .layer_bd .text i{background-position:-249px -193px;width:31px;height:31px;float:left;}
+.layer_cancel .layer_bd .text u { float:left;font-size:16px;color:#555555;margin:0 0 0 12px;line-height:37px;line-height:31px;font-weight:700}
+.layer_cancel .layer_btn {margin-top:30px;}

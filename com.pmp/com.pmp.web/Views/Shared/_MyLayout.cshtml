@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/left.css" rel="stylesheet" />
+<link href="~/css/public.css" rel="stylesheet" />
+<script>
+    $(function () {
+        //左侧导航
+        $("div.left_nav dt").each(function () {
+            $(this).click(function () {
+                if ($(this).find("i").hasClass("up")) {
+                    $(this).find("i").removeClass("up").addClass("down");
+                    $(this).siblings("dd").hide();
+                } else {
+                    $("div.left_nav dt i").removeClass("up").addClass("down");
+                    $("div.left_nav dd").hide();
+                    $(this).find("i").removeClass("down").addClass("up");
+                    $(this).siblings("dd").show();
+                }
+            }).mousemove(function () {
+                $(this).addClass("hover");
+            }).mouseleave(function () {
+                $(this).removeClass("hover");
+            });
+        });
+
+
+    });
+</script>
+<div class="member_bd">
+    <p class="currentP" id="currentLocation"><a href="/" class="blue">我是雇主&nbsp;></a>&nbsp;<a href="javascript:;" class="blue">我的信息&nbsp;</a>&nbsp;<a href="javascript:;"></a></p>
+    <div class="member_lt">
+        <div class="my">
+            <a href="/">我是雇主</a>
+        </div>
+        <div class="left_nav">
+            <dl>
+                <dt><u class="info"></u><span>我的信息</span><i class="up"></i></dt>
+                <dd style="display: none;">
+                    <ul>
+                        <li><a class="selected" href="#">个人信息</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><u class="member"></u><span>公司信息</span><i class="up"></i></dt>
+                <dd style="display: none;">
+                    <ul>
+                        <li><a class="selected" href="#">公司信息</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><u class="info"></u><span>员工管理</span><i class="up"></i></dt>
+                <dd style="display: none;">
+                    <ul>
+                        <li><a class="selected" href="#">员工管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><u class="order"></u><span>任务中心</span><i class="down"></i></dt>
+                <dd>
+                    <ul>
+                        <li><a href="#">我的任务</a></li>
+                        <li><a href="#">发布任务</a></li>
+                    </ul>
+                </dd>
+            </dl>
+           
+            <dl>
+                <dt><u class="manage"></u><span>评价管理</span><i class="down"></i></dt>
+                <dd style="display: none;">
+                    <ul>
+                        <li><a href="#">我的评价</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            @*<dl>
+        <dt><u class="member"></u><span><a style="font-size:16px;" href="@ViewBag.OnlineMemberUrl/Vip/v_index.aspx">会员专区</a> </span></dt>
+    </dl>
+    <dl style="display:none">
+        <dt><u class="memberIndex"></u><span>会员首页</span></dt>
+    </dl>
+    <dl>
+        <dt><u class="integral"></u><span> <a style="font-size:16px;" href="@ViewBag.OnlineMemberUrl/MemberServices/MemberIntegral/MemberStore.aspx"> 积分商城</a></span></dt>
+    </dl>
+    <dl>
+        <dt><u class="travel"></u><span><a style="font-size:16px;" href="@ViewBag.OnlineMemberUrl/MemberServices/MyAssistant.aspx">出行助手</a> </span></dt>
+    </dl>*@
+    @*<dl  class="last_dl">
+        <dt><u class="ComSug"></u><span>投诉与建议</span></dt>
+    </dl>*@
+        </div>
+    </div>
+    <div class="member_rt">
+        @RenderBody()
+    </div>
+</div>

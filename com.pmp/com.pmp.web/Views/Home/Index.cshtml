@@ -1,31 +1,109 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2016-派单</title>
+    <link href="~/Css/Index.css" rel="stylesheet" />
+    <link href="~/Css/IndexFonts.css" rel="stylesheet" />
+    <link href="~/Css/IndexFonts2.css" rel="stylesheet" />
+    <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <h1>System Name</h1>
+    <div class="container">
+        <div class="right">
+            <div class="sign-in">
+                    <input type="text" class="name" name="username" placeholder="账号" required="">
+                    <input type="password" class="password" name="password" placeholder="密码" required="">
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="brand1" value="">
+                            <label for="brand1"><span></span>记住我</label>
+                        </li>
+                    </ul>
+                    <input type="submit" id="login" value="登录">
+                    <a href="#" id="a_registered"> 注册</a>
+                    <div class="clear"></div>
+            </div>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+        </div>
+        <div class="clear"></div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="footer agile">
+        <p> &copy; 2016 Impressive Multiple Forms . All Rights Reserved | Design by <a href="http://baidu.com">W3layouts</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="layui-layer layui-layer-page layui-layer-rim " id="Pop_layer" style="display:none">
+        <div style="cursor: move;" class="layui-layer-title" id="Pop_layer_Title">注册</div>
+        <div class="layui-layer-content" id="Pop_layer_Content">
+            <div style="width:410px;height:510px">
+                <div class="register agileits">
+                    <input type="text" class="name" name="username" placeholder="账号" required="">
+                    <input type="password" class="password" name="password" placeholder="密码" required="">
+                    <input type="password" class="password" name="confirm password" placeholder="确认密码" required="">
+                    <input type="text" class="location" name="电话" placeholder="联系方式" required="">
+                    <input type="text" class="email" name="email" placeholder="邮箱" required="">
+                    <input type="submit" value="注册">
+                </div>
+            </div>
+        </div>
+        <span class="layui-layer-setwin">
+            <a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1"></a>
+        </span>
     </div>
-</div>
+
+    <script type="text/javascript">
+        $(function () {
+            var iTop = (window.screen.height / 2) - 80 - ($("#Pop_layer_Content div").height() / 2); //获得窗口的垂直位置;
+            var iLeft = (window.screen.width / 2) - ($("#Pop_layer_Content").width() / 2); //获得窗口的水平位置;
+            $("#Pop_layer").css("top", iTop + "px");
+            $("#Pop_layer").css("left", iLeft + "px");
+        })
+        $(".layui-layer-setwin a").click(function () {
+            $("#Pop_layer").hide();
+        });
+
+        $("#a_registered").click(function () {
+            $("#Pop_layer").show();
+        });
+
+        $("#login").click(function () {
+            window.location.href = "/Home/Home";
+        });
+      
+        var $j = function (id) { return document.getElementById("Pop_layer"); };
+        var getMouseP = function (e) {
+            //获取鼠标坐标 请传递evnet参数
+            e = e || window.event;
+            var m = (e.pageX || e.pageY) ? { x: e.pageX, y: e.pageY } : { x: e.clientX + document.body.scrollLeft - document.body.clientLeft, y: e.clientY + document.body.scrollTop - document.body.clientTop };
+            return m;
+        };
+        move = function (o, t) {
+            o = $j(o);
+            t = $j(t);
+            o.onmousedown = function (ev) {
+                var mxy = getMouseP(ev);//获取当前鼠标坐标
+                var by = { x: mxy.x - (t.offsetLeft), y: mxy.y - (t.offsetTop) };
+                o.style.cursor = "move";
+                document.onmousemove = function (ev) {
+                    var mxy = getMouseP(ev);
+                    t.style.left = mxy.x - by.x + "px";
+                    t.style.top = mxy.y - by.y + "px";
+                };
+                document.onmouseup = function () {
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                    this.onmousemove = null;
+                }
+            }
+        }
+        move("Pop_layer", "Pop_layer");
+    </script>
+</body>
+</html>

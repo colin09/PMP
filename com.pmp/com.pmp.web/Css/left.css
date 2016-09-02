@@ -1,0 +1,29 @@
+﻿.member_lt .my,.member_lt .left_nav dl dt u,.member_lt .left_nav dl dt i { background-image:url(../images/public/train.png); background-repeat:no-repeat;}
+.member_lt { width:180px;padding:20px 0 45px 0;background-color:#f8f8f8;margin-left:7px;}
+.member_lt .my { float:left;background-position:0 0;width:187px;height:43px;margin-left:-7px;}
+.member_lt .my a { float:left;width:127px;height:37px;line-height:37px;color:#555555;font-size:16px;padding-left:60px;}
+.member_lt .left_nav {margin:10px 0 0 0;float:left;width:154px;padding:0 13px;}
+.member_lt .left_nav dl { float:left;width:100%;border-top:1px dashed #ccc;padding-bottom:12px;}
+.member_lt .left_nav dl.last_dl { border-bottom:1px dashed #ccc;}
+.member_lt .left_nav dl dt { float:left;width:100%;padding-top:12px;cursor:pointer;}
+.member_lt .left_nav dl dt.hover span { color:#2e81d4;}
+.member_lt .left_nav dl dt.hover i.up {  background-position:-192px -81px;}
+.member_lt .left_nav dl dt.hover i.down {  background-position:-205px -82px;}
+.member_lt .left_nav dl dt u { float:left;}
+.member_lt .left_nav dl dt u.info { background-position:-10px -52px;width:15px;height:15px;margin:2px 11px 0 24px;}
+.member_lt .left_nav dl dt u.order { background-position:-35px -52px;width:11px;height:16px;margin:1px 13px 0 26px;}
+.member_lt .left_nav dl dt u.manage { background-position:-57px -52px;width:12px;height:16px;margin:1px 12px 0 26px;}
+.member_lt .left_nav dl dt u.member { background-position:-78px -52px;width:15px;height:15px;margin:2px 11px 0 24px;}
+.member_lt .left_nav dl dt u.memberIndex { background-position:-100px -52px;width:16px;height:16px;margin:1px 10px 0 24px;}
+.member_lt .left_nav dl dt u.integral { background-position:-123px -53px;width:13px;height:16px;margin:3px 11px 0 24px;}
+.member_lt .left_nav dl dt u.travel { background-position:-147px -50px;width:12px;height:19px;margin:0 13px 0 24px;}
+.member_lt .left_nav dl dt u.ComSug { background-position:-169px -53px;width:14px;height:14px;margin:2px 12px 0 24px;}
+.member_lt .left_nav dl dt span {font-size:16px;float:left;line-height:18px;}
+.member_lt .left_nav dl dt i { float:right;width:12px;height:7px;margin-top:6px;overflow:hidden;}
+.member_lt .left_nav dl dt i.up { background-position:-192px -93px;}
+.member_lt .left_nav dl dt i.down { background-position:-205px -92px;}
+.member_lt .left_nav dl dd { float:left;width:100%;}
+.member_lt .left_nav dl dd ul { float:left;width:100%;}
+.member_lt .left_nav dl dd ul li{ float:left;width:100%;margin-top:15px;}
+.member_lt .left_nav dl dd a {float:left; color:#555555;width:99px;padding-left:55px;}
+.member_lt .left_nav dl dd a:hover,.member_lt .left_nav dl dd a.selected{ color:#2e81d4;}
