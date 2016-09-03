@@ -442,7 +442,16 @@ namespace com.pmp.common.helper
             return ConfigurationManager.AppSettings.Cast<string>().Any(key => key == strKey) ? ConfigurationManager.AppSettings[strKey] : null;
         }
 
-       
 
+        /// <summary>
+        /// 将对象序列化成Json
+        /// </summary>
+        /// <param name="obj">需要序列化的对象</param>
+        /// <returns>序列化后的字符串</returns>
+        public static string ObjectToJson(object obj)
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+        }
+       
     }
 }

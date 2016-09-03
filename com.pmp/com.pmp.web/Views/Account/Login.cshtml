@@ -1,34 +1,160 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    //Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-
-<div class="container login">
-
-    <h1 class="pt35">here is the title ...</h1>
-
-    <div class="form" >
-        <h3> Sign In </h3>
-            
-
-        <div class="sign-in">
-            <form action="/Account/SignIn" method="post">
-                <input type="text" class="name" name="username" placeholder="Username" required="">
-                <input type="password" class="password" name="password" placeholder="Password" required="">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2016-派单</title>
+    <link href="~/Css/Index.css" rel="stylesheet" />
+    <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+</head>
+<body>
+    <div class="container login">
+        <h1 class="pt35">here is the title ...</h1>
+        <div class="form">
+            @*<h3> Sign In </h3>*@
+            <div class="sign-in">
+                <input type="text" class="name" name="username" placeholder="手机号" required="">
+                <input type="password" class="password" name="password" placeholder="密码" required="">
                 <ul>
                     <li>
                         <input type="checkbox" id="brand1" value="">
-                        <label for="brand1"><span></span>Remember me</label>
+                        <label for="brand1"><span></span>记住我</label>
+                        <a href="javascript::" id="a_registered">注册</a>
                     </li>
                 </ul>
-                <input type="submit" value="Sign In">
+                <input type="submit" id="login" value="登陆">
                 <div class="clear"></div>
-            </form>
+            </div>
         </div>
 
+        <div class="layui-layer layui-layer-page layui-layer-rim " id="Pop_layer" style="display:none">
+            <div style="cursor: move;" class="layui-layer-title" id="Pop_layer_Title">注册</div>
+            <div class="layui-layer-content" id="Pop_layer_Content">
+                <div style="width:410px;height:450px">
+                    <div class="register agileits">
+                        <input type="text" class="name" id="username" placeholder="账号" required="">
+                        <input type="password" class="password" id="password" placeholder="密码" required="">
+                        <input type="password" class="password" id="checkpassword" placeholder="确认密码" required="">
 
+                        <input name="type" type="radio" checked="checked" value="1">
+                        <span>我要赚钱</span>
+
+                        <input name="type" type="radio" value="2">
+                        <span>我要程序员</span>
+
+                        <input type="submit" id="btn_registered" value="注册">
+                    </div>
+                </div>
+            </div>
+            <span class="layui-layer-setwin">
+                <a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1"></a>
+            </span>
+        </div>
     </div>
 
-</div>
+    <script type="text/javascript">
+        $(function () {
+            var iTop = (window.screen.height / 2) - 100 - ($("#Pop_layer_Content div").height() / 2); //获得窗口的垂直位置;
+            var iLeft = (window.screen.width / 2) - 200 - ($("#Pop_layer_Content").width() / 2); //获得窗口的水平位置;
+            $("#Pop_layer").css("top", iTop + "px");
+            $("#Pop_layer").css("left", iLeft + "px");
+        })
+        $(".layui-layer-setwin a").click(function () {
+            $("#Pop_layer").hide();
+        });
+
+        $("#a_registered").click(function () {
+            $("#Pop_layer").show();
+        });
+
+        $("#btn_registered").click(function () {
+            if ($("#username").val() == "") {
+                layer.msg("请输入账号！"); return;
+            }
+
+            if ($("#password").val() == "") {
+                layer.msg("请输入密码！"); return;
+            }
+
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请确认密码！"); return;
+            }
+
+            if ($("#password").val() == $("#checkpassword").val()) {
+                var data = {
+                    code: $("#username").val(),
+                    password: $("#password").val(),
+                    type: $("input[name='type']").val()
+                };
+                $.get("/Account/AcconutRegistered", data, function (res) {
+                    if (res.IsSuccess == "True") {
+                        $("#Pop_layer").hide();
+                        layer.msg(res.message);
+                    } else {
+                        layer.msg(res.message);
+                    }
+                }, "json")
+            } else {
+                layer.msg("两次密码不统一,请重新输入!");
+            }
+        })
+
+
+        $("#login").click(function () {
+            if ($("input[name='username']").val() == "") {
+                layer.msg("请输入账号！"); return;
+            }
+
+            if ($("input[name='password']").val() == "") {
+                layer.msg("请输入密码！"); return;
+            }
+
+            var data = {
+                code: $("input[name='username']").val(),
+                password: $("input[name='password']").val(),
+                Codes: ""
+            };
+            $.get("/Account/SignIn", data, function (res) {
+                if (res.IsSuccess =="True") {
+                    window.location.href = "/Account/Index";
+                } else {
+                    layer.msg(res.message);
+                }
+            }, "json")
+        });
+
+        var $j = function (id) { return document.getElementById("Pop_layer"); };
+        var getMouseP = function (e) {
+            //获取鼠标坐标 请传递evnet参数
+            e = e || window.event;
+            var m = (e.pageX || e.pageY) ? { x: e.pageX, y: e.pageY } : { x: e.clientX + document.body.scrollLeft - document.body.clientLeft, y: e.clientY + document.body.scrollTop - document.body.clientTop };
+            return m;
+        };
+        move = function (o, t) {
+            o = $j(o);
+            t = $j(t);
+            o.onmousedown = function (ev) {
+                var mxy = getMouseP(ev);//获取当前鼠标坐标
+                var by = { x: mxy.x - (t.offsetLeft), y: mxy.y - (t.offsetTop) };
+                o.style.cursor = "move";
+                document.onmousemove = function (ev) {
+                    var mxy = getMouseP(ev);
+                    t.style.left = mxy.x - by.x + "px";
+                    t.style.top = mxy.y - by.y + "px";
+                };
+                document.onmouseup = function () {
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                    this.onmousemove = null;
+                }
+            }
+        }
+        move("Pop_layer", "Pop_layer");
+    </script>
+</body>
+</html>

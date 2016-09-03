@@ -202,8 +202,6 @@
     <Content Include="Images\tick.png" />
     <Content Include="Images\train.png" />
     <Content Include="Images\user.png" />
-    <Content Include="Configurations\appSettings.config" />
-    <Content Include="Configurations\Log4Net.config" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRcITWGgmQvtcmgaGakhz0f4.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRfZL2QQ6ZygscP6wIFo8mp8.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRQqftcMOL_w0yR9WY4zwDNA.woff2" />
@@ -283,6 +281,7 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Manage\index.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
