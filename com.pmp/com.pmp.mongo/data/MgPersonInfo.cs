@@ -20,7 +20,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 证件照
         /// </summary>
-        public List<string> Credentials { set; get; }
+       // public List<string> Credentials { set; get; }
         /// <summary>
         /// 简介
         /// </summary>
@@ -32,6 +32,26 @@ namespace com.pmp.mongo.data
 
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
+
+        //是否认证
+        public int IsApprove { set; get; }
+    }
+
+
+    public class MgPersonReal : MgBaseModel
+    {
+        public string RealName { set; get; }
+        public string CardId{ set; get; }
+        public string Gender { set; get; }
+        public string CardJustImg { set; get; }
+        public string CardAgainstImg { set; get; }
+        //职业
+        public int Profession { set; get; }
+        public string Address { set; get; }
+
+    }
+    public class MgCompanyReal : MgBaseModel
+    {
 
     }
 

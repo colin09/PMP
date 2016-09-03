@@ -32,12 +32,21 @@ namespace com.pmp.mongo.service
             var update = Builders<MgUser>.Update.Set(u => u.CodePwd, "").Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
+        //修改个人信息
+        public bool UpdateAccountInfo(string phone, MgPersonInfo mp)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.PersonInfo, mp)
+                .Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
 
 
         public void CreateUser(string phone, string pwd, int userLevel)
         {
             Insert(new MgUser()
             {
+                ID = GetNewId(),
                 Phone = phone,
                 Password = pwd,
                 Level = (UserLevel)userLevel,

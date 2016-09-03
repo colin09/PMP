@@ -17,7 +17,7 @@ namespace com.pmp.common.mvc.ctl
     {
         private readonly string cookieName = "COOKIE_MANAGER_INFO";
 
-        protected int UserId = 0;
+        protected int UserId = -1;
         protected string Mobile = "0";
         protected int UserLevel = -1;
         protected string NickName = "0";
@@ -33,10 +33,10 @@ namespace com.pmp.common.mvc.ctl
             log.Info($"base.Init,read cookie ==> {cookie}");
             if (!string.IsNullOrEmpty(cookie))
             {
-                var user = JsonConvert.DeserializeObject(cookie) as JObject;
+                var user = (JArray)JsonConvert.DeserializeObject(cookie);
                 if (user != null)
                 {
-                    UserId = (int)user["id"];
+                    UserId = (int)user["Id"];
                     Mobile = user["mobile"].ToString();
                     UserLevel = (int)user["userLevel"];
                     NickName = user["nickName"].ToString();

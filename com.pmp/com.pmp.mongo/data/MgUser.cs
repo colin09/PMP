@@ -8,7 +8,7 @@ namespace com.pmp.mongo.data
     [BsonIgnoreExtraElements]
     public class MgUser : MgBaseModel
     {
-       // public int Id { set; get; }
+        public int ID { set; get; }
         public string UserName { set; get; }
         public string Phone { set; get; }
         public string Password { set; get; }

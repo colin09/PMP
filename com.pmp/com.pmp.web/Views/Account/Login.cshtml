@@ -121,7 +121,7 @@
                 Codes: ""
             };
             $.get("/Account/SignIn", data, function (res) {
-                if (res.IsSuccess =="True") {
+                if (res.IsSuccess == "True") {
                     window.location.href = "/Account/Index";
                 } else {
                     layer.msg(res.message);
@@ -129,32 +129,23 @@
             }, "json")
         });
 
-        var $j = function (id) { return document.getElementById("Pop_layer"); };
-        var getMouseP = function (e) {
-            //获取鼠标坐标 请传递evnet参数
-            e = e || window.event;
-            var m = (e.pageX || e.pageY) ? { x: e.pageX, y: e.pageY } : { x: e.clientX + document.body.scrollLeft - document.body.clientLeft, y: e.clientY + document.body.scrollTop - document.body.clientTop };
-            return m;
-        };
-        move = function (o, t) {
-            o = $j(o);
-            t = $j(t);
-            o.onmousedown = function (ev) {
-                var mxy = getMouseP(ev);//获取当前鼠标坐标
-                var by = { x: mxy.x - (t.offsetLeft), y: mxy.y - (t.offsetTop) };
-                o.style.cursor = "move";
-                document.onmousemove = function (ev) {
-                    var mxy = getMouseP(ev);
-                    t.style.left = mxy.x - by.x + "px";
-                    t.style.top = mxy.y - by.y + "px";
-                };
-                document.onmouseup = function () {
-                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-                    this.onmousemove = null;
-                }
-            }
+        var posX;
+        var posY;
+        fdiv = document.getElementById("Pop_layer");
+        document.getElementById("Pop_layer_Title").onmousedown = function (e) {
+            if (!e) e = window.event; //IE
+            posX = e.clientX - parseInt(fdiv.style.left);
+            posY = e.clientY - parseInt(fdiv.style.top);
+            document.onmousemove = mousemove;
         }
-        move("Pop_layer", "Pop_layer");
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        }
+        function mousemove(ev) {
+            if (ev == null) ev = window.event;//IE
+            fdiv.style.left = (ev.clientX - posX) + "px";
+            fdiv.style.top = (ev.clientY - posY) + "px";
+        }
     </script>
 </body>
 </html>

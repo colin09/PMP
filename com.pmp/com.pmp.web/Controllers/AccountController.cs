@@ -1,5 +1,6 @@
 ﻿using com.pmp.common.helper;
 using com.pmp.common.mvc.ctl;
+using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,48 @@ namespace com.pmp.web.Controllers
         {
             return View();
         }
+
+
+        public ActionResult AccountPersonal()
+        {
+            var model = new MgUserService().SearchLogin(Mobile);
+            return View(model[0].PersonInfo);
+        }
+
+        /// <summary>
+        /// 个人认证
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountP_Approve()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 公司认证
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountCompany_Approve()
+        {
+            return View();
+        }
+
+        //提交个人信息
+        public ActionResult AccountPersonalInfo()
+        {
+            MgPersonInfo model = new MgPersonInfo();
+            model.RealName = Request.Form["txtname"];
+            model.Address = Request.Form["txtaddress"];
+            model.Birthday = Request.Form["txtbirthday"];
+            model.Gender = Request.Form["radiossex"];
+            model.Skill = Request.Form["txtskll"];
+            model.Introduction = Request.Form["txtintro"];
+            new MgUserService().UpdateAccountInfo(Mobile, model);
+            Response.Redirect("Account/AccountPersonal");
+            return View();
+        }
+
+      
+
 
         public string SignIn()
         {
@@ -78,7 +121,7 @@ namespace com.pmp.web.Controllers
             catch (Exception ex)
             {
                 IsSuccess = false;
-                message = "失败,数据库连接异常！";
+                message = "失败,数据库异常！";
                 log.Info($"注册失败 == name> {name }");
             }
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}"; ;
