@@ -281,13 +281,9 @@
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\AccountPersonal.cshtml" />
     <Content Include="Views\Account\AccountP_Approve.cshtml" />
     <Content Include="Views\Account\AccountCompany_Approve.cshtml" />
-=======
-    <Content Include="Views\Manage\index.cshtml" />
->>>>>>> e322633b1b1a6a29672a522c32f7147abd8404ef
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

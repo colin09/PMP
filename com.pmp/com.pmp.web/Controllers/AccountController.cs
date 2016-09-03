@@ -26,7 +26,9 @@ namespace com.pmp.web.Controllers
 
         public ActionResult AccountPersonal()
         {
-            var model = new MgUserService().SearchLogin(Mobile);
+            var model = new MgUserService().SearchLogin(Phone);
+            if (model[0].PersonInfo == null)
+                model[0].PersonInfo = new MgPersonInfo();
             return View(model[0].PersonInfo);
         }
 
@@ -36,19 +38,66 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountP_Approve()
         {
+            //var model = new MgUserService().SearchLogin(Phone);
+            //if (model[0].PersonReal == null)
+            //    model[0].PersonReal = new MgPersonReal();
+            //return View(model[0].PersonReal);
+            ViewBag.phone = Phone;
             return View();
         }
+
+        /// <summary>
+        /// 个人认证提交
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountP_ApproveSumbit()
+        {
+            MgPersonReal mgPersonReal = new MgPersonReal();
+            mgPersonReal.RealName = Request.Form["txtname"];
+            mgPersonReal.CardId = Request.Form["txtcardID"];
+            mgPersonReal.Gender = Request.Form["radiossex"];
+            mgPersonReal.CardJustImg = Request.Form["txtcardImg1"];
+            mgPersonReal.CardAgainstImg = Request.Form["txtcardImg2"];
+            if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
+                mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
+            mgPersonReal.Address = Request.Form["txtaddress"];
+            new MgUserService().UpdateAccountApprove(Phone, mgPersonReal);
+            Response.Redirect("/Account/AccountP_Approve");
+            return View();
+        }
+
         /// <summary>
         /// 公司认证
         /// </summary>
         /// <returns></returns>
         public ActionResult AccountCompany_Approve()
         {
+            ViewBag.phone = Phone;
+            return View();
+        }
+        /// <summary>
+        /// 提交公司认证
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountCompany_ApproveSumbit()
+        {
+            MgCompanyReal mr = new MgCompanyReal();
+            mr.Name = Request.Form["txtname"];
+            mr.RegistrID = Request.Form["txtcode"];
+            mr.CompanyAddress = Request.Form["txtcompanyaddress"];
+            mr.BuinessScope = Request.Form["txtrange"];
+            mr.OrganizationCode = Request.Form["txtzzjgcode"];
+            mr.CompanyJustImg = Request.Form["txtzzjgimg"];
+            mr.Address = Request.Form["txtaddress"];
+            mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
+            new MgUserService().UpdateAccountCompanyReal(Phone, mr);
+            Response.Redirect("/Account/AccountP_Approve");
             return View();
         }
 
+
         //提交个人信息
-        public ActionResult AccountPersonalInfo()
+        public ActionResult AccountPersonalInfoSumbit()
         {
             MgPersonInfo model = new MgPersonInfo();
             model.RealName = Request.Form["txtname"];
@@ -57,12 +106,12 @@ namespace com.pmp.web.Controllers
             model.Gender = Request.Form["radiossex"];
             model.Skill = Request.Form["txtskll"];
             model.Introduction = Request.Form["txtintro"];
-            new MgUserService().UpdateAccountInfo(Mobile, model);
-            Response.Redirect("Account/AccountPersonal");
+            new MgUserService().UpdateAccountInfo(Phone, model);
+            Response.Redirect("/Account/AccountPersonal");
             return View();
         }
 
-      
+
 
 
         public string SignIn()
@@ -83,7 +132,7 @@ namespace com.pmp.web.Controllers
                         message = "登录失败,密码错误！";
                     }
                     else
-                        RecordUserLogonStatus(HttpHelper.ObjectToJson(info));
+                        RecordUserLogonStatus(HttpHelper.ObjectToJson(info[0]));
                 }
                 else
                 {
@@ -124,7 +173,7 @@ namespace com.pmp.web.Controllers
                 message = "失败,数据库异常！";
                 log.Info($"注册失败 == name> {name }");
             }
-            return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}"; ;
+            return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}";
         }
 
 

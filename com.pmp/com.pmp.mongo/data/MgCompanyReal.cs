@@ -7,20 +7,21 @@ namespace com.pmp.mongo.data
 {
 
     [BsonIgnoreExtraElements]
-    public class MgCompanyInfo : MgBaseModel
+    public class MgCompanyReal : MgBaseModel
     {
-        public MgCompanyInfo()
+        public MgCompanyReal()
         {
             CTime = DateTime.Now.ToOADate();
             UTime = DateTime.Now.ToOADate();
         }
 
-        public int Id { set; get; }
+        public int ID { set; get; }
         public string Name { set; get; }
-        public string ShortName { set; get; }
-        public string Email { set; get; }
         public string Address { set; get; }
-        public string CardID { set; get; }
+        /// <summary>
+        /// 公司地址
+        /// </summary>
+        public string CompanyAddress { set; get; }
         /// <summary>
         /// 营业执照注册号
         /// </summary>
@@ -30,21 +31,18 @@ namespace com.pmp.mongo.data
         /// </summary>
         public string BuinessScope { set; get; }
         /// <summary>
-        /// 营业年限
-        /// </summary>
-        public int Years { set; get; }
-        /// <summary>
         /// 组织机构代码证号
         /// </summary>
         public string OrganizationCode { set; get; }
+
         /// <summary>
-        /// 证件照
+        /// 组织机构代码证扫描件
         /// </summary>
-        public List<string> Credentials { set; get; }
+        public string CompanyJustImg { set; get; }
         /// <summary>
-        /// 简介
+        /// 营业执照副本扫描件
         /// </summary>
-        public string Introduction { set; get; }
+        public string CompanyAgainstImg { set; get; }
 
         public double CTime { set; get; }
         //[BsonDefaultValue((object)(DateTime.Now.ToOADate()))]

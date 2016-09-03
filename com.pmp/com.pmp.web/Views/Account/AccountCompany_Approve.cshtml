@@ -17,62 +17,64 @@
 </div>
 
 <div style="padding:15px">
-    <form class="form-horizontal" role="form" method="post" action="">
+    <form class="form-horizontal" role="form" method="post" action="/Account/AccountCompany_ApproveSumbit">
         <div class="form-group">
-            <span style="color:red">*</span><label for="firstname" class="col-sm-2 control-label">企业名称：</label>
+            <label for="firstname" class="col-sm-2 control-label">企业名称：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="@Model.RealName" placeholder="请输入企业名称">
+                <input type="text" class="form-control" name="txtname" value="" placeholder="请输入企业名称">
             </div>
         </div>
         <div class="form-group">
-            <span style="color:red">*</span><label for="lastname" class="col-sm-2 control-label">营业执照注册号：</label>
+            <label for="lastname" class="col-sm-2 control-label">营业执照注册号：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="营业执照注册号">
+                <input type="text" class="form-control" name="txtcode" value="" placeholder="营业执照注册号">
             </div>
         </div>
         <div class="form-group">
-            <span style="color:red">*</span>  <label for="lastname" class="col-sm-2 control-label">常用地址：</label>
+            <label for="lastname" class="col-sm-2 control-label">常用地址：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="常用地址">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <span style="color:red">*</span>  <label for="lastname" class="col-sm-2 control-label">经营范围：</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="经营范围">
-            </div>
-        </div>
-        <div class="form-group">
-            <span style="color:red">*</span>  <label for="lastname" class="col-sm-2 control-label">组织机构代码证号：</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="组织机构代码证号">
-            </div>
-        </div>
-        <div class="form-group">
-            <span style="color:red">*</span><label for="lastname" class="col-sm-2 control-label">组织机构代码证扫描件：</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="组织机构代码证扫描件">
-            </div>
-        </div>
-     
-        <div class="form-group">
-            <span style="color:red">*</span> <label for="firstname" class="col-sm-2 control-label">联系电话：</label>
-            <div class="col-sm-10">
-                <span>110</span>
+                <input type="text" class="form-control" name="txtcompanyaddress" value="" placeholder="常用地址">
             </div>
         </div>
 
         <div class="form-group">
-            <span style="color:red">*</span> <label for="firstname" class="col-sm-2 control-label">家庭或居住地址：</label>
+            <label for="lastname" class="col-sm-2 control-label">经营范围：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtrange" value="" placeholder="经营范围">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">组织机构代码证号：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtzzjgcode" value="" placeholder="组织机构代码证号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">组织机构代码证扫描件：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtzzjgimg"  placeholder="组织机构代码证扫描件" style="width:250px;float:left;" required="">
+                <input type="file" style="float:left;margin-left:15px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">联系电话：</label>
+            <div class="col-sm-10">
+                <span>@ViewBag.phone</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">家庭或居住地址：</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="txtaddress" value="" placeholder="居住地址">
             </div>
         </div>
         <div class="form-group">
-            <span style="color:red">*</span><label for="lastname" class="col-sm-2 control-label">营业执照副本扫描件：</label>
+            <label for="lastname" class="col-sm-2 control-label">营业执照副本扫描件：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="营业执照副本扫描件">
+                <input type="text" class="form-control" name="txt_yyzzfbimg" placeholder="营业执照副本扫描件" style="width:250px;float:left;" required="">
+                <input type="file"  style="float:left;margin-left:15px">
             </div>
         </div>
         <div class="form-group">
