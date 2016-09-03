@@ -14,7 +14,14 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
-        
+        public void Create(MgProject m)
+        {
+            m.Id = GetNewId();
+            Insert(m);
+        }
+
+
+
 
     }
 }

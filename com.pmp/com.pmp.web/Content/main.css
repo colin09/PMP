@@ -109,3 +109,7 @@ footer {}
 .accountLeft ul li{padding:8px 0 8px 30px; letter-spacing:2px; line-height:35px; border-bottom:dashed 1px #ccc; border-top:dashed 1px #ccc; border-collapse:collapse;}
 .accountLeft ul li ic{background:url(../images/train.png) -10px -52px no-repeat;width:15px;height:15px;display:block;float:left;margin:10px;}
 .accountLeft ul li dt{padding-left:30px; font-weight:normal; line-height:28px;color:#666;}
+
+
+.subTitle{margin:25px auto;}
+form{margin:25px 0;}

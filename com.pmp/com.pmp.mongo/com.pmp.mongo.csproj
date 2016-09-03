@@ -72,6 +72,10 @@
       <Project>{48053b2f-c8a4-4b64-8f8f-6c4fdd72c32c}</Project>
       <Name>com.pmp.common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\com.pmp.model\com.pmp.model.csproj">
+      <Project>{247e1b2d-af38-400f-9f28-ccb058e34a43}</Project>
+      <Name>com.pmp.model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
