@@ -17,7 +17,7 @@ namespace com.pmp.mongo.service
         /// 创建实例T 的自增长起始值：0 
         /// 每个T(Model)只需调用一次
         /// </summary>
-        public void CreateCounter()
+        protected void CreateCounter()
         {
             MgClient.CreateDefaultCounter<T>();
         }
@@ -27,7 +27,7 @@ namespace com.pmp.mongo.service
         /// 获取一个新的自增Id
         /// </summary>
         /// <returns></returns>
-        public int GetNewId()
+        protected int GetNewId()
         {
            return MgClient.CreateNewId<T>();
         }

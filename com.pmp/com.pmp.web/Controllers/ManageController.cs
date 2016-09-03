@@ -32,8 +32,8 @@ namespace com.pmp.web.Controllers
         }
         public ActionResult InitCounters()
         {
-            _userService.CreateCounter();
-            _projectService.CreateCounter();
+            _userService.Init();
+            _projectService.Init();
 
             return RedirectToAction("Index");
         }
