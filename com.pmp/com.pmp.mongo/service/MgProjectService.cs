@@ -23,7 +23,7 @@ namespace com.pmp.mongo.service
 
         public void Create(MgProject m)
         {
-            m.Id = GetNewId();
+            m.ID = GetNewId();
             Insert(m);
         }
 

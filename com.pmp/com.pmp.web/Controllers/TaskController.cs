@@ -3,6 +3,7 @@ using com.pmp.common.mvc.ctl;
 using com.pmp.model.enums;
 using com.pmp.model.request;
 using com.pmp.mongo.data;
+using com.pmp.mongo.service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,14 @@ namespace com.pmp.web.Controllers
 {
     public class TaskController : BaseController
     {
+
+        private readonly MgProjectService _projectService;
+        public TaskController()
+        {
+            _projectService = new MgProjectService();
+
+        }
+
         // GET: Task
         public ActionResult Index()
         {
@@ -45,12 +54,12 @@ namespace com.pmp.web.Controllers
                 CreatesTime = DateTime.Now.ToOADate()
             };
 
+            _projectService.Create(project);
 
 
 
 
-
-            return View();
+            return RedirectToAction("Create");
         }
 
 

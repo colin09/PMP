@@ -16,5 +16,9 @@ namespace com.pmp.web.Controllers
         {
             return View();
         }
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

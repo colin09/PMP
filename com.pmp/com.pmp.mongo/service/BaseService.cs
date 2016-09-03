@@ -32,37 +32,37 @@ namespace com.pmp.mongo.service
            return MgClient.CreateNewId<T>();
         }
 
-        public void Insert(T model)
+        protected void Insert(T model)
         {
             MgClient.Insert<T>(model);
         }
 
-        public long Update(FilterDefinition<T> filter, UpdateDefinition<T> update)
+        protected long Update(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
             return MgClient.Update<T>(filter, update);
         }
 
-        public List<T> Search(FilterDefinition<T> filter)
+        protected List<T> Search(FilterDefinition<T> filter)
         {
             return MgClient.Search<T>(filter);
         }
 
-        public List<T> Search()
+        protected List<T> Search()
         {
             return MgClient.Search<T>();
         }
 
-        public long Delete(FilterDefinition<T> filter)
+        protected long Delete(FilterDefinition<T> filter)
         {
             return MgClient.Delete<T>(filter);
         }
 
-        public string Index(IndexKeysDefinition<T> indexKeys)
+        protected string Index(IndexKeysDefinition<T> indexKeys)
         {
             return MgClient.Index<T>(indexKeys);
         }
 
-        public List<BsonDocument> Aggregate(FilterDefinition<T> filter, ProjectionDefinition<T> group)
+        protected List<BsonDocument> Aggregate(FilterDefinition<T> filter, ProjectionDefinition<T> group)
         {
             return MgClient.Aggregate(filter, group);
         }

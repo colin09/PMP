@@ -25,7 +25,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 主键
         /// </summary>
-        public int Id { get; set; }
+        public int ID { get; set; }
         /// <summary>
         /// 项目编号
         /// </summary>
