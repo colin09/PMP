@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -188,12 +189,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1.jpg" />
+    <Content Include="Images\headtop.gif" />
     <Content Include="Images\img-sprite.png" />
     <Content Include="Images\location.png" />
     <Content Include="Images\mail.png" />
     <Content Include="Images\password.png" />
     <Content Include="Images\phone.png" />
+    <Content Include="Images\pmp.ico" />
+    <Content Include="Images\pmp.png" />
     <Content Include="Images\tick.png" />
+    <Content Include="Images\train.png" />
     <Content Include="Images\user.png" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\Log4Net.config" />
@@ -275,11 +280,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Shared\_TaskLayout.cshtml" />
+    <Content Include="Views\Task\List.cshtml" />
+    <Content Include="Views\Account\index.cshtml" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Css\public\" />
-    <Folder Include="Images\public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container">
+        <ul class="taskTop">
+            <li>
+                <a href="http://#"><img src="~/images/pmp.png" class="logoTask" /> PMP </a>
+            </li>
+            <li class="taskTopCenter">
+                <a href="#" target="_blank" rel="nofollow">
+                    <span class="phoneapp">&nbsp;</span>
+                    <span>手机APP</span>
+                    <u> | </u>
+                </a>
+                <a href="#" target="_blank" rel="nofollow">
+                    <span class="weibo">&nbsp;</span>
+                    <span>关注微博</span>
+                    <u> | </u>
+                </a>
+                <span>客服电话:</span> <red>400-810-1688</red>
+                </a>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="container-full taskNav">
+        <div class="container">
+            <ul>
+                <li>首页</li>
+                <li>我的任务</li>
+                <li>会员中心</li>
+                <li>Nav</li>
+                <li>Nav</li>
+                <li>Nav</li>
+                <li>Nav</li>
+                <li>Nav</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer class="container">
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

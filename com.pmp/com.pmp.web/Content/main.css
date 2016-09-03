@@ -86,3 +86,26 @@ footer {}
 	left: 4px;
 	bottom: 4px;
 }
+
+
+
+.taskTop {height:60px;}
+.taskTop .logoTitle{font-size:32px; font-family:Arial,"微软雅黑";}
+.taskTop li{float:left;}
+.taskTop li .logoTask{height:60px;}
+.taskTop .taskTopCenter{width:50%; text-align:center;line-height:60px;}
+.taskTop .taskTopCenter .phoneapp{background: url(../images/headtop.gif) -406px -36px no-repeat;width:8px;height:14px;margin-top:23px;}
+.taskTop .taskTopCenter .weibo{background: url(../images/headtop.gif) -433px -15px no-repeat;width:19px;height:16px;margin-top:21px;}
+.taskTop .taskTopCenter u{text-decoration:none;}
+
+.taskNav{background:#3B8DE3; height:40px;}
+.taskNav ul li{float:left;width:100px; color:#fff;line-height:40px;font-size:16px;}
+
+.accountBody{padding-top:25px;}
+.accountBody ul{margin:0 0 25px;}
+.accountLeft{background:#f8f8f8;width:180px;height:800px; padding-top:25px; float:left;}
+.accountLeft .top{width:187px;height:43px; background-image: url(../images/train.png);padding:8px 0 0 50px; letter-spacing:2px;}
+
+.accountLeft ul li{padding:8px 0 8px 30px; letter-spacing:2px; line-height:35px; border-bottom:dashed 1px #ccc; border-top:dashed 1px #ccc; border-collapse:collapse;}
+.accountLeft ul li ic{background:url(../images/train.png) -10px -52px no-repeat;width:15px;height:15px;display:block;float:left;margin:10px;}
+.accountLeft ul li dt{padding-left:30px; font-weight:normal; line-height:28px;color:#666;}
