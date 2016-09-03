@@ -8,6 +8,13 @@ namespace com.pmp.mongo.service
 {
     public class MgUserService : BaseService<MgUser>
     {
+
+        public void Init()
+        {
+            CreateCounter();
+        }
+
+
         public List<MgUser> SearchById(long id)
         {
             var filter = Builders<MgUser>.Filter.Eq("Id", id);

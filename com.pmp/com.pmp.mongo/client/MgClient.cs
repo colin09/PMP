@@ -134,33 +134,34 @@ namespace com.pmp.mongo.client
 
 
 
-        public static void CreateDefaultCounter<T>()
+        public static void CreateDefaultCounter<T>() where T : MgBaseModel, new()
         {
             if (_database == null)
                 getClient();
 
             var collection = _database.GetCollection<counters>("counters");
-            var filter = Builders<counters>.Filter.Eq("_id", nameof(T).ToLower());
+            var filter = Builders<counters>.Filter.Eq("_id", typeof(T).Name.ToLower());
             var result = collection.Find(filter);
-            if (result.Any())
+            if (result.FirstOrDefault() != null)
                 return;
             collection.InsertOneAsync(new counters()
             {
-                _id = nameof(T).ToLower(),
+                _id = typeof(T).Name.ToLower(),
                 seq = 0
             });
         }
 
 
-        public static int CreateNewId<T>()
+        public static int CreateNewId<T>() where T : MgBaseModel, new()
         {
             if (_database == null)
                 getClient();
-            var filter = Builders<counters>.Filter.Eq("_id", nameof(T).ToLower());
+            var filter = Builders<counters>.Filter.Eq("_id", typeof(T).Name.ToLower());
             var update = Builders<counters>.Update.Inc("seq", 1);
+            var options = new FindOneAndUpdateOptions<counters, counters>() { IsUpsert = true };
 
             var cancelToken = new System.Threading.CancellationTokenSource();
-            var result = _database.GetCollection<counters>("counters").FindOneAndUpdate(filter, update, null, cancelToken.Token);
+            var result = _database.GetCollection<counters>("counters").FindOneAndUpdate(filter, update, options, cancelToken.Token);
             return result.seq;
 
         }

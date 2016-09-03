@@ -51,7 +51,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,8 +202,6 @@
     <Content Include="Images\tick.png" />
     <Content Include="Images\train.png" />
     <Content Include="Images\user.png" />
-    <Content Include="Configurations\appSettings.config" />
-    <Content Include="Configurations\Log4Net.config" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRcITWGgmQvtcmgaGakhz0f4.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRfZL2QQ6ZygscP6wIFo8mp8.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRQqftcMOL_w0yR9WY4zwDNA.woff2" />
@@ -241,6 +240,7 @@
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\Log4Net.config" />
+    <None Include="Properties\PublishProfiles\pmp.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\js\jquery-1.10.2.js" />
     <Content Include="Scripts\js\jquery-1.10.2.min.js" />
@@ -281,9 +281,13 @@
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Account\AccountPersonal.cshtml" />
     <Content Include="Views\Account\AccountP_Approve.cshtml" />
     <Content Include="Views\Account\AccountCompany_Approve.cshtml" />
+=======
+    <Content Include="Views\Manage\index.cshtml" />
+>>>>>>> e322633b1b1a6a29672a522c32f7147abd8404ef
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

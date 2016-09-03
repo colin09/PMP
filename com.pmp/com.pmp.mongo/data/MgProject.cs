@@ -1,4 +1,5 @@
-﻿using com.pmp.mongo.data;
+﻿using com.pmp.model.enums;
+using com.pmp.mongo.data;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 主键
         /// </summary>
-        public int Id { get; set; }
+        public int ID { get; set; }
         /// <summary>
         /// 项目编号
         /// </summary>
@@ -41,7 +42,7 @@ namespace com.pmp.mongo.data
         /// 项目状态
         /// [1.待领取][2.待审核][3.进行中][4.待评价][5.已完成]
         /// </summary>
-        public string Status { get; set; }
+        public ProjectStatus Status { get; set; }
         /// <summary>
         /// 项目经理
         /// </summary>
@@ -75,7 +76,7 @@ namespace com.pmp.mongo.data
         /// 审核状态
         /// [1.审核通过][0.未审核][2.审核未通过]
         /// </summary>
-        public int AuditStatus { get; set; }
+        public AuditStatus AuditStatus { get; set; }
         /// <summary>
         /// 领取人项目方案
         /// </summary>
@@ -83,7 +84,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 创建时间
         /// </summary>
-        public string CreatesTime { get; set; }
+        public double CreatesTime { get; set; }
 
         /// <summary>
         /// 雇主是否评价
@@ -137,7 +138,7 @@ namespace com.pmp.mongo.data
         public double CreateTime { get; set; }
     }
 
- 
+
 
     /// <summary>
     /// 项目文件
@@ -149,7 +150,19 @@ namespace com.pmp.mongo.data
         /// [1.立项说明][2.方案文件]
         /// </summary>
         public int FileType { get; set; }
-        
+
         public string FileUrl { get; set; }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -4,30 +4,96 @@
     Layout = "~/Views/Shared/_TaskLayout.cshtml";
 }
 
-<h2>发布任务</h2>
+<h2 class="subTitle">发布任务</h2>
 
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" method="post" action="/Task/CreateSubmint">
     <div class="form-group">
-        <label for="exampleInputEmail1" class="col-sm-2 control-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="exampleInputEmail1" class="col-sm-2 control-label">项目类别</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="项目类别" required="">
+        </div>
     </div>
     <div class="form-group">
-        <label for="exampleInputFile">File input</label>
-        <input type="file" id="exampleInputFile">
-        <p class="help-block">Example block-level help text here.</p>
+        <label class="col-sm-2 control-label">项目编号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="prjectCode" placeholder="项目编号" required="">
+        </div>
     </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox"> Check me out
-        </label>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="col-sm-2 control-label">项目名称</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="项目名称" required="">
+        </div>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">合同号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="ContractCode" placeholder="合同号" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目经理</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Manager" placeholder="项目经理" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系人</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Linkman" placeholder="联系人" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系方式</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Mobile" placeholder="联系方式" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目描述</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" name="Desc" placeholder="项目描述" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目开始时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="StartTime" placeholder="项目开始时间" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目结束时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="EndTime" placeholder="项目结束时间" required="">
+        </div>
+    </div>
 
 
+
+
+
+
+
+
+
+    <div class="form-group">
+        <label for="exampleInputFile" class="col-sm-2 control-label">项目文件</label>
+        <div class="col-sm-10">
+            <input type="file" id="exampleInputFile">
+            <span class="help-block">Example block-level help text here.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="checkbox col-sm-offset-2 col-sm-10">
+            <label>
+                <input type="checkbox"> Check me out
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default"> 发布任务 </button>
+        </div>
+    </div>
 </form>
 
- 
