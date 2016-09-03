@@ -5,6 +5,7 @@ using System.Linq;
 using com.pmp.common.Config;
 using MongoDB.Bson;
 using com.pmp.mongo.data;
+using System.Linq.Expressions;
 
 namespace com.pmp.mongo.client
 {
@@ -57,6 +58,22 @@ namespace com.pmp.mongo.client
             var collection = _database.GetCollection<T>(new T().GetCollectionName());
             return collection.Find(filter).ToList();
         }
+
+        public static List<T> Search<T>(FilterDefinition<T> filter, Expression<Func<T, object>> sort, bool isAsc, int pageSize, int pageIndex, out long total) where T : MgBaseModel, new()
+        {
+            if (_database == null)
+                getClient();
+
+            var collection = _database.GetCollection<T>(new T().GetCollectionName());
+            var find = collection.Find(filter);
+            total = find.Count();
+
+            if (isAsc)
+                return find.SortBy(sort).Skip((pageIndex-1)*pageSize).Limit(pageSize).ToList();
+            else
+                return find.SortByDescending(sort).Skip((pageIndex - 1) * pageSize).Limit(pageSize).ToList();
+        }
+
 
         public static List<T> Search<T>() where T : MgBaseModel, new()
         {

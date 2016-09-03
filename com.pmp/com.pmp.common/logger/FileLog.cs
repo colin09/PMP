@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = @"configuration\Log4Net.config", Watch = true)]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = @"configurations\Log4Net.config", Watch = true)]
 namespace com.pmp.common.logger
 {
     public class FileLog : ILog

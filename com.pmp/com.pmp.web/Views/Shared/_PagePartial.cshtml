@@ -1,0 +1,22 @@
+﻿@model com.pmp.model.response.PageInfo
+<nav>
+    <ul class="pagination" data-index="1">
+        <li data-page="-1">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (var i = 0; i < Model.PageCount; i++)
+        {
+            <li class="num @Model.PageIndex==i?'active':''"><a href="#">@(i+1)</a></li>
+        }
+
+
+        <li data-page="+1">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
