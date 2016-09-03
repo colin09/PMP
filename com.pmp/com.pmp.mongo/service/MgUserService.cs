@@ -14,27 +14,40 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
+        /// <summary>
+        /// 验证是否存在电话账号
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public List<MgUser> SearchLogin(string code)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", code);
+            return Search(filter);
+        }
+
 
         public bool CreateCodePwd(string phone)
         {
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
-            var update = Builders<MgUser>.Update.Set(u=>u.CodePwd,"").Set(u=>u.CodePwdTime,DateTime.Now);
+            var update = Builders<MgUser>.Update.Set(u => u.CodePwd, "").Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
-        
 
-        public void CreateUser(string phone, string pwd,int userLevel)
+
+        public void CreateUser(string phone, string pwd, int userLevel)
         {
             Insert(new MgUser()
             {
-                Phone = phone,Password = pwd,
+                Phone = phone,
+                Password = pwd,
                 Level = (UserLevel)userLevel,
-                CTime = DateTime.Now,UTime = DateTime.Now
+                CTime = DateTime.Now,
+                UTime = DateTime.Now
             });
         }
 
 
-        public MgUser Login(string phone,string pwd,string codePwd)
+        public MgUser Login(string phone, string pwd, string codePwd)
         {
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var user = Search(filter).FirstOrDefault();

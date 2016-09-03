@@ -15,9 +15,6 @@ namespace com.pmp.common.mvc.ctl
     [ErrorFilter]
     public class BaseController : System.Web.Mvc.Controller
     {
-
-
-
         private readonly string cookieName = "COOKIE_MANAGER_INFO";
 
         protected int UserId = 0;
@@ -47,7 +44,5 @@ namespace com.pmp.common.mvc.ctl
                 }
             }
         }
-
-
     }
 }

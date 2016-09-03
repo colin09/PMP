@@ -554,7 +554,7 @@ input.name, input.password, input.email, input.location, .recover input.number {
 	input.name, input.password, input.email, input.location, .recover input.number {
 		width: 78%;
 	}
-	.register input[type="submit"].send-mail input[type="submit"] ,.sign-in input[type="submit"]{
+	.register input[type="submit"].send-mail input[type="submit"],.sign-in input[type="submit"]{
 		padding:10px;
 	}
 	.socialicons ul li a {
