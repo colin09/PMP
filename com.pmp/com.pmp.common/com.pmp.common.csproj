@@ -30,9 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,12 +51,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Config\AppSettingConfig.cs" />
     <Compile Include="Config\BaseConfig.cs" />
     <Compile Include="Config\ElasticSearchConfig.cs" />
     <Compile Include="Config\MongodbConfig.cs" />
+    <Compile Include="helper\CryptoHelper.cs" />
+    <Compile Include="helper\ExpandMethod.cs" />
+    <Compile Include="helper\HttpHelper.cs" />
+    <Compile Include="helper\SessionHelper.cs" />
+    <Compile Include="helper\Utility.cs" />
+    <Compile Include="logger\FileLog.cs" />
+    <Compile Include="logger\ILog.cs" />
+    <Compile Include="logger\Logger.cs" />
+    <Compile Include="mvc\attribute\ErrorFilterAttribute.cs" />
+    <Compile Include="mvc\attribute\UserAuthorizeAttribute.cs" />
+    <Compile Include="mvc\ctl\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -285,6 +285,7 @@
     <Content Include="Views\Task\List.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
