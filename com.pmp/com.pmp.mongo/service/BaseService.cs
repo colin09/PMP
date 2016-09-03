@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using com.pmp.mongo.data;
 using com.pmp.mongo.client;
+using System.Linq.Expressions;
 
 namespace com.pmp.mongo.service
 {
@@ -45,6 +46,13 @@ namespace com.pmp.mongo.service
         protected List<T> Search(FilterDefinition<T> filter)
         {
             return MgClient.Search<T>(filter);
+        }
+        protected List<T> SearchByPage(FilterDefinition<T> filter, Expression<Func<T, object>> sort, bool isAsc, int pageIndex, int pageSize, out long total)
+        {
+            pageIndex = pageIndex > 0 ? pageIndex : 1;
+            pageSize = pageSize > 0 ? pageSize : 12;
+
+            return MgClient.Search<T>(filter,sort,isAsc,pageSize,pageIndex,out total);
         }
 
         protected List<T> Search()

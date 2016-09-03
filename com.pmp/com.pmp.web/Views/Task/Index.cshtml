@@ -1,0 +1,51 @@
+﻿@using com.pmp.mongo.data;
+@model List<com.pmp.mongo.data.MgProject>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+
+<div>
+    <table class="table table-hover">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        @{ if (ViewBag.total > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Code | @item.ContractCode<br />
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Manager | @item.Linkman<br />
+                            @item.Mobile
+                        </td>
+                        <td>
+                            @item.Desc
+
+                        </td>
+                        <td>
+                            @item.StartTime ~ @item.EndTime
+
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-list-alt"></span>
+
+                        </td>
+                    </tr>
+
+                }
+            }
+        }
+    </table>
+</div>
+
+@Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = 1, PageSize = 12, Total = ViewBag.total })

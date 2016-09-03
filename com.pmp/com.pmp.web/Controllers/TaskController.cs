@@ -23,9 +23,16 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index()
+        public ActionResult Index(int pageIndex = 1)
         {
-            return View();
+            var pageSize = 12;
+            var total = 0L;
+            var list = _projectService.GetAllActive(pageIndex, pageSize, out total);
+
+            //ViewBag.list = list;
+            ViewBag.total = total;
+
+            return View(list);
         }
         public ActionResult Create()
         {
@@ -59,7 +66,7 @@ namespace com.pmp.web.Controllers
 
 
 
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
 

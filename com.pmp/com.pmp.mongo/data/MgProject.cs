@@ -26,6 +26,7 @@ namespace com.pmp.mongo.data
         /// 主键
         /// </summary>
         public int ID { get; set; }
+        public ProjectCategroy Category { set; get; }
         /// <summary>
         /// 项目编号
         /// </summary>
