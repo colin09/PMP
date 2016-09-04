@@ -175,7 +175,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Controllers\TaskController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -275,21 +274,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Task\Create.cshtml" />
     <Content Include="Views\Shared\_TaskLayout.cshtml" />
-    <Content Include="Views\Task\List.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\AccountPersonal.cshtml" />
     <Content Include="Views\Account\AccountP_Approve.cshtml" />
     <Content Include="Views\Account\AccountCompany_Approve.cshtml" />
-=======
     <Content Include="Views\Manage\index.cshtml" />
-    <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Shared\_PagePartial.cshtml" />
->>>>>>> c68c1621fd917d9c3287c61263eb502dca02180e
+    <Content Include="Views\Account\AccountAudit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

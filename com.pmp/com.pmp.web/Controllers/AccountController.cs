@@ -23,14 +23,33 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 个人基本信息页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AccountPersonal()
         {
-            var model = new MgUserService().SearchLogin(Phone);
+            var model = new MgUserService().SearchLogin(_Longin_Phone);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
             return View(model[0].PersonInfo);
         }
+
+        //提交个人信息
+        public ActionResult AccountPersonalInfoSumbit()
+        {
+            MgPersonInfo model = new MgPersonInfo();
+            model.RealName = Request.Form["txtname"];
+            model.Address = Request.Form["txtaddress"];
+            model.Birthday = Request.Form["txtbirthday"];
+            model.Gender = Request.Form["radiossex"];
+            model.Skill = Request.Form["txtskll"];
+            model.Introduction = Request.Form["txtintro"];
+            new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
+            Response.Redirect("/Account/AccountPersonal");
+            return View();
+        }
+
 
         /// <summary>
         /// 个人认证
@@ -42,7 +61,7 @@ namespace com.pmp.web.Controllers
             //if (model[0].PersonReal == null)
             //    model[0].PersonReal = new MgPersonReal();
             //return View(model[0].PersonReal);
-            ViewBag.phone = Phone;
+            ViewBag.phone = _Longin_Phone;
             return View();
         }
 
@@ -61,7 +80,8 @@ namespace com.pmp.web.Controllers
             if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
                 mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
             mgPersonReal.Address = Request.Form["txtaddress"];
-            new MgUserService().UpdateAccountApprove(Phone, mgPersonReal);
+            mgPersonReal.IsApprove = 1;
+            new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
         }
@@ -72,9 +92,10 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountCompany_Approve()
         {
-            ViewBag.phone = Phone;
+            ViewBag.phone = _Longin_Phone;
             return View();
         }
+
         /// <summary>
         /// 提交公司认证
         /// </summary>
@@ -90,24 +111,22 @@ namespace com.pmp.web.Controllers
             mr.CompanyJustImg = Request.Form["txtzzjgimg"];
             mr.Address = Request.Form["txtaddress"];
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
-            new MgUserService().UpdateAccountCompanyReal(Phone, mr);
+            mr.CUserID = _Longin_UserId;
+            mr.IsApprove = 1;
+            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
         }
 
-
-        //提交个人信息
-        public ActionResult AccountPersonalInfoSumbit()
+        /// <summary>
+        /// 系统管理员审核
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountAudit()
         {
-            MgPersonInfo model = new MgPersonInfo();
-            model.RealName = Request.Form["txtname"];
-            model.Address = Request.Form["txtaddress"];
-            model.Birthday = Request.Form["txtbirthday"];
-            model.Gender = Request.Form["radiossex"];
-            model.Skill = Request.Form["txtskll"];
-            model.Introduction = Request.Form["txtintro"];
-            new MgUserService().UpdateAccountInfo(Phone, model);
-            Response.Redirect("/Account/AccountPersonal");
+            ViewBag.userList = new MgUserService().SearchAll();
+            ViewBag.userList = new MgUserService().SearchAll();
+
             return View();
         }
 
