@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +196,7 @@
     <Content Include="Images\img-sprite.png" />
     <Content Include="Images\location.png" />
     <Content Include="Images\mail.png" />
+    <Content Include="Images\noise.white.png" />
     <Content Include="Images\password.png" />
     <Content Include="Images\phone.png" />
     <Content Include="Images\pmp.ico" />
@@ -226,6 +228,7 @@
     <Content Include="Scripts\layer\skin\default\loading-1.gif" />
     <Content Include="Scripts\layer\skin\default\loading-2.gif" />
     <Content Include="Scripts\layer\skin\layer.css" />
+    <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="images\1.jpg" />
     <Content Include="images\body.jpg" />
@@ -284,8 +287,14 @@
     <Content Include="Views\Account\AccountCompany_Approve.cshtml" />
     <Content Include="Views\Manage\index.cshtml" />
     <Content Include="Views\Shared\_PagePartial.cshtml" />
+    <Content Include="Views\Task\Detail.cshtml" />
     <Content Include="Views\Account\AccountAudit.cshtml" />
-    <Content Include="Views\Account\AccountDetail.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\MyList.cshtml" />
+    <Content Include="Scripts\userLevel.json" />
+    <Content Include="Views\Task\AuditList.cshtml" />
+    <Content Include="Views\Task\AuditDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

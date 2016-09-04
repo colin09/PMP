@@ -99,17 +99,30 @@ footer {}
 .taskTop .taskTopCenter u{text-decoration:none;}
 
 .taskNav{background:#3B8DE3; height:40px;}
-.taskNav ul li{float:left;width:100px; color:#fff;line-height:40px;font-size:16px;}
+.taskNav ul li{float:left;width:100px; color:#fff;line-height:40px;font-size:16px;font-weight:600;}
+.taskNav ul li a,a:hover,a:visited{color:#fff;}
 
-.accountBody{padding-top:25px;}
-.accountBody ul{margin:0 0 25px;}
-.accountLeft{background:#f8f8f8;width:180px;height:800px; padding-top:25px; float:left;}
+.accountBody{padding-top:25px;min-width:1200px;}
+.accountBody ul{margin:0 0 25px;width:100%;}
+.accountLeft{background:#eee;width:15%;height:800px; padding-top:25px; float:left;}
 .accountLeft .top{width:187px;height:43px; background-image: url(../images/train.png);padding:8px 0 0 50px; letter-spacing:2px;}
 
 .accountLeft ul li{padding:8px 0 8px 30px; letter-spacing:2px; line-height:35px; border-bottom:dashed 1px #ccc; border-top:dashed 1px #ccc; border-collapse:collapse;}
 .accountLeft ul li ic{background:url(../images/train.png) -10px -52px no-repeat;width:15px;height:15px;display:block;float:left;margin:10px;}
 .accountLeft ul li dt{padding-left:30px; font-weight:normal; line-height:28px;color:#666;}
 
+.accountBody .accountRight {float:left; width:84%; margin:0 5px 25px 5px;border:solid 1px #ddd;border-radius:5px; min-height:800px; padding:10px;background: url("../images/noise.white.png") repeat scroll;}
 
 .subTitle{margin:25px auto;}
 form{margin:25px 0;}
+
+
+.taskAuditList{}
+.taskAuditList li{border-bottom:solid 1px grey;}
+.taskAuditList li .line1{font-weight:600;}
+.taskAuditList li .line2{color:#666;}
+.taskAuditList li .line3{text-align:right;}
+
+.descDiv3{overflow:hidden;text-overflow:ellipsis; max-height:60px;}
+
+table.noborder tr td{border:0;}

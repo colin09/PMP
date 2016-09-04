@@ -42,13 +42,14 @@
         </div>
     </div>
     <div class="container accountBody">
-        <div style="float:left">
-            <ul>
+        <div ng-app="userMenuApp">
+            <ul ng-controller="MenuItemCtl1">
                 <li class="accountLeft">
                     <div class="top">
-                        <span>我是雇主</span>
+                        <span>{{body.title}}</span>
                     </div>
                     <ul>
+<<<<<<< HEAD
                         <li>
                             <a href="/Account/AccountDetail"><ic>&nbsp; </ic> 我的信息</a>
                             <a href="/Account/AccountPersonal"> <dt>> 基本资料</dt></a>
@@ -72,13 +73,22 @@
                                 <dt>> 发布任务</dt>
                             </li>*@
                         <li><a href="#"><ic></ic>评价管理</a></li>
+=======
+                        <li ng-repeat="el in body.menu">
+                            <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
+                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
+                        </li>
+
+>>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
                     </ul>
+                </li>
+                <li class="accountRight">
+                        @RenderBody()
                 </li>
             </ul>
         </div>
-        <div style="float:left;width: 80%; ">
-            @RenderBody()
-        </div>
+
+        <div class="clear"></div>
     </div>
 
     <footer class="container">
@@ -86,6 +96,7 @@
     </footer>
 
     @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/menu.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

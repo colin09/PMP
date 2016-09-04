@@ -24,6 +24,8 @@ namespace com.pmp.model.enums
     {
         //[1.待领取][2.待审核][3.进行中][4.待评价][5.已完成]
 
+        Delete = -6,
+
         /// <summary>
         /// 待审核
         /// </summary>
@@ -35,15 +37,15 @@ namespace com.pmp.model.enums
         /// <summary>
         /// 进行中
         /// </summary>
-        Action,
+        Action = 2,
         /// <summary>
         /// 结束
         /// </summary>
-        Over,
+        Over = 3,
         /// <summary>
         /// 带评价
         /// </summary>
-        Evaluation,
+        Evaluation = 4,
 
     }
 

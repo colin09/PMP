@@ -17,7 +17,7 @@ namespace com.pmp.mongo.data
 
         public UserRole Role { set; get; }
         public UserLevel Level { set; get; }
-        
+
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
 
@@ -36,7 +36,7 @@ namespace com.pmp.mongo.data
 
         //注册类型
         public UserLevel AccountType { set; get; }
-       
+
     }
 
     public class UserRole
@@ -49,7 +49,8 @@ namespace com.pmp.mongo.data
     {
         Default = 0,
         Person = 1,
-        CompanyAdmin,
-        CompanyUser,
+        CompanyAdmin = 2,
+        ProjectManager = 3,
+        CompanyUser = 4,
     }
 }

@@ -2,6 +2,7 @@
 using com.pmp.common.mvc.ctl;
 using com.pmp.model.enums;
 using com.pmp.model.request;
+using com.pmp.model.response;
 using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
@@ -16,18 +17,22 @@ namespace com.pmp.web.Controllers
     {
 
         private readonly MgProjectService _projectService;
+        private readonly MgSolutionService _solutionService;
+
+
         public TaskController()
         {
             _projectService = new MgProjectService();
+            _solutionService = new MgSolutionService();
 
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0)
         {
-            var pageSize = 12;
+            var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAllActive(pageIndex, pageSize, out total);
+            var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
@@ -44,24 +49,6 @@ namespace com.pmp.web.Controllers
         //[UserAuthorize]
         public ActionResult CreateSubmint(TaskInfoReq task)
         {
-<<<<<<< HEAD
-            //var project = new MgProject()
-            //{
-            //    Code = task.Code,
-            //    Name = task.Name,
-            //    ContractCode = task.ContractCode,
-            //    Status = ProjectStatus.Default,
-            //    Manager = task.Manager,
-            //    Linkman = task.Linkman,
-            //    Mobile = task.Mobile,
-            //    Desc = task.Desc,
-            //    CreatesUserID = this.UserId,
-            //    StartTime = task.StartTime,
-            //    EndTime = task.EndTime,
-            //    AuditStatus = AuditStatus.Default,
-            //    CreatesTime = DateTime.Now.ToOADate()
-            //};
-=======
             var project = new MgProject()
             {
                 Code = task.Code,
@@ -76,22 +63,83 @@ namespace com.pmp.web.Controllers
                 StartTime = task.StartTime,
                 EndTime = task.EndTime,
                 AuditStatus = AuditStatus.Default,
-                CreatesTime = DateTime.Now.ToOADate()
+                CreateTime = DateTime.Now.ToOADate()
             };
->>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
 
-            //_projectService.Create(project);
-
-
-
-
-            //return RedirectToAction("Index");
+            _projectService.Create(project);
+            return RedirectToAction("AuditList");
         }
 
 
-        public ActionResult List()
+
+        public ActionResult Detail(int id)
+        {
+            var project = _projectService.GetOneById(id);
+
+            return View(project);
+        }
+
+        public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
+        {
+            var page = new PageInfo() { PageIndex = pageIndex };
+            var total = 0L;
+            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, (int)audit, page, out total);
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(list);
+        }
+        public ActionResult AuditDetail(int id)
+        {
+            var project = _projectService.GetOneById(id);
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(project);
+        }
+        public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
+        {
+            log.Info($"state:{auditState}, desc:{auditDesc}");
+            _projectService.AuditProject(id, auditState, auditDesc);
+            return RedirectToAction("AuditList");
+        }
+
+
+
+
+        public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
+        {
+            var cUser = 0;
+            var rUser = 0;
+            var auditState = (int)audit;
+            if (this._Longin_UserLevel == (int)UserLevel.CompanyAdmin)
+            {
+                cUser = this._Longin_UserId;
+                auditState = -99;
+            }
+            else
+            {
+                rUser = this._Longin_UserId;
+                auditState = (int)AuditStatus.Pass;
+            }
+            var page = new PageInfo() { PageIndex = pageIndex };
+            var total = 0L;
+            var list = _projectService.GetAll(cUser, rUser, type, state, auditState, page, out total);
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(list);
+        }
+
+
+        public ActionResult CreateSln()
         {
             return View();
         }
+
+
     }
 }

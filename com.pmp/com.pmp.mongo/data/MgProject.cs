@@ -18,9 +18,9 @@ namespace com.pmp.mongo.data
 
         public MgProject()
         {
-            Project_FlieList = new List<Model_Project_Flie>();
+            FlieList = new List<ProjectFlieList>();
 
-            Project_PlanList = new List<Model_Project_Plan>();
+            ProcessDesc = new List<ProjectProcessDesc>();
         }
         /// <summary>
         /// 主键
@@ -79,13 +79,17 @@ namespace com.pmp.mongo.data
         /// </summary>
         public AuditStatus AuditStatus { get; set; }
         /// <summary>
+        /// 项目 执行人
+        /// </summary>
+        public int ReceiveUserId { set; get; }
+        /// <summary>
         /// 领取人项目方案
         /// </summary>
-        public string GetProgram { get; set; }
+        //public string GetProgram { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public double CreatesTime { get; set; }
+        public double CreateTime { get; set; }
 
         /// <summary>
         /// 雇主是否评价
@@ -106,11 +110,11 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 项目文件
         /// </summary>
-        public List<Model_Project_Flie> Project_FlieList { get; set; }
+        public List<ProjectFlieList> FlieList { get; set; }
         /// <summary>
         /// 项目进度
         /// </summary>
-        public List<Model_Project_Plan> Project_PlanList { get; set; }
+        public List<ProjectProcessDesc> ProcessDesc { get; set; }
         /// <summary>
         /// 项目评价
         /// </summary>
@@ -123,7 +127,7 @@ namespace com.pmp.mongo.data
     /// <summary>
     /// 项目进度
     /// </summary>
-    public class Model_Project_Plan
+    public class ProjectProcessDesc
     {
         /// <summary>
         /// 描述
@@ -144,7 +148,7 @@ namespace com.pmp.mongo.data
     /// <summary>
     /// 项目文件
     /// </summary>
-    public class Model_Project_Flie
+    public class ProjectFlieList
     {
         /// <summary>
         /// 项目文件评价（立项说明、方案文件）

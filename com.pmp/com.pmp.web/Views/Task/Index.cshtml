@@ -1,19 +1,44 @@
 ﻿@using com.pmp.mongo.data;
 @model List<com.pmp.mongo.data.MgProject>
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+    ViewBag.Title = "全部任务";
 }
 
-
+<form method="post">
+    <div class="row mt25">
+        <div class="col-sm-4 pt5">
+            <select class="w320 pt5" id="proType" name="type">
+                <option value="1">有线</option>
+                <option value="2">无线</option>
+                <option value="3">服务器</option>
+                <option value="4">设备安装</option>
+                <option value="5">出差</option>
+            </select>
+        </div>
+        <div class="col-sm-4 pt5">
+            <select class="w320 pt5 " id="proState" name="state">
+                <option value="0">所有项目</option>
+                <option value="2">待领取的项目</option>
+                <option value="3">进行中的项目</option>
+                <option value="4">完成的项目</option>
+                <option value="5">已评价的项目</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-default btn-sm w100">
+                <span class="glyphicon glyphicon-search"></span> 搜 索
+            </button>
+        </div>
+    </div>
+</form>
 <div class="mt25">
     <table class="table table-hover">
         <tr>
-            <th>编号/合同号/名称</th>
-            <th>联系人/电话</th>
+            <th class="w220">编号/合同号/名称</th>
+            <th class="w100">联系人/电话</th>
             <th>项目说明</th>
-            <th>项目时间</th>
-            <th>领取</th>
+            <th class="w220">项目时间</th>
+            <th class="w100">领取</th>
         </tr>
         @{ if (ViewBag.total > 0)
             {
@@ -29,15 +54,16 @@
                             @item.Mobile
                         </td>
                         <td>
-                            @item.Desc
-
+                            <div class="descDiv3">
+                                @item.Desc
+                            </div>
                         </td>
                         <td>
                             @item.StartTime ~ @item.EndTime
 
                         </td>
                         <td>
-                            <span class="glyphicon glyphicon-list-alt"></span>
+                            <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span>领取任务</a>
 
                         </td>
                     </tr>
@@ -49,3 +75,18 @@
 </div>
 
 @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".pagination li").click(function () {
+                var pageindex = $(this).data("page");
+                var type = $("#proType").val();
+                var state = $("#proState").val();
+
+                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state;
+            });
+        });
+    </script>
+}
