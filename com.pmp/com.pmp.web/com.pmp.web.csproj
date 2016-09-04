@@ -291,6 +291,7 @@
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Task\List.cshtml" />
     <Content Include="Scripts\userLevel.json" />
+    <Content Include="Views\Task\Audit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

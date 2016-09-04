@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="container accountBody">
-        <div style="float:left" ng-app="userMenuApp">
+        <div ng-app="userMenuApp">
             <ul ng-controller="MenuItemCtl1">
                 <li class="accountLeft">
                     <div class="top">
@@ -51,33 +51,19 @@
                     </div>
                     <ul>
                         <li ng-repeat="el in body.menu">
-                            <a ng-href="el.url"><ic>&nbsp; </ic> {{el.title}}</a>
-                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu">><a ng-href="sub.url"></a> {{sub.title}}</dt>
+                            <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
+                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
                         </li>
 
                     </ul>
-
-                    @*<ul>
-                        <li><a href="/Account/AccountPersonal"><ic>&nbsp; </ic> 我的信息</a></li>
-                        <li><a href="#"><ic>&nbsp; </ic> 基本资料</a></li>
-                        <li><a href="#"><ic></ic>公司信息</a></li>
-                        <li><a href="#"><ic></ic>员工信息</a></li>
-                        <li><a href="/Account/AccountP_Approve"><ic></ic>个人认证</a></li>
-                        <li><a href="/Account/AccountCompany_Approve"><ic></ic>公司认证</a></li>
-                        <li><a href="#"><ic></ic>员工管理</a></li>
-                        <li>
-                            <a href="#"><ic></ic>任务中心</a>
-                            <dt>> 我的任务</dt>
-                            <dt>> 发布任务</dt>
-                        </li>
-                        <li><a href="#"><ic></ic>评价管理</a></li>
-                    </ul>*@
+                </li>
+                <li class="accountRight">
+                        @RenderBody()
                 </li>
             </ul>
         </div>
-        <div style="float:left;width: 80%; ">
-            @RenderBody()
-        </div>
+
+        <div class="clear"></div>
     </div>
 
     <footer class="container">

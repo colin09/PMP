@@ -77,7 +77,18 @@ namespace com.pmp.web.Controllers
             return View(project);
         }
 
+        public ActionResult Audit(AuditStatus audit=AuditStatus.Default ,int pageIndex = 1, int type = 0, int state = 0)
+        {
+            var page = new PageInfo() { PageIndex = pageIndex };
+            var total = 0L;
+            var list = _projectService.GetAll(type, state, audit, page, out total);
 
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(list);
+        }
 
         public ActionResult List()
         {

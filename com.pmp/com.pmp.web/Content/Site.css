@@ -60,6 +60,7 @@ div,ul,li,p,span,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {padding: 
 .ptb25{ padding-top: 25px;padding-bottom: 25px;}
 .pb15{ padding-bottom: 15px;}
 .mt10{ margin-top: 10px;}
+.mc10{ margin: 10px auto; text-align:center;}
 .mt25{ margin-top: 25px;}
 
 .cf{ color: #fff;}

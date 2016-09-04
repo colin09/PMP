@@ -15,6 +15,7 @@ namespace com.pmp.web.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
         // GET: Account
