@@ -23,6 +23,7 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// 个人基本信息页面
         /// </summary>
@@ -30,6 +31,12 @@ namespace com.pmp.web.Controllers
         public ActionResult AccountPersonal()
         {
             var model = new MgUserService().SearchLogin(_Longin_Phone);
+=======
+
+        public ActionResult AccountPersonal(string phone)
+        {
+            var model = new MgUserService().SearchLogin(phone);
+>>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
             return View(model[0].PersonInfo);
@@ -80,7 +87,10 @@ namespace com.pmp.web.Controllers
             if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
                 mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
             mgPersonReal.Address = Request.Form["txtaddress"];
+<<<<<<< HEAD
             mgPersonReal.IsApprove = 1;
+=======
+>>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
             new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
@@ -111,8 +121,11 @@ namespace com.pmp.web.Controllers
             mr.CompanyJustImg = Request.Form["txtzzjgimg"];
             mr.Address = Request.Form["txtaddress"];
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
+<<<<<<< HEAD
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
+=======
+>>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
             new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
@@ -124,9 +137,21 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountAudit()
         {
+<<<<<<< HEAD
             ViewBag.userList = new MgUserService().SearchAll();
             ViewBag.userList = new MgUserService().SearchAll();
 
+=======
+            MgPersonInfo model = new MgPersonInfo();
+            model.RealName = Request.Form["txtname"];
+            model.Address = Request.Form["txtaddress"];
+            model.Birthday = Request.Form["txtbirthday"];
+            model.Gender = Request.Form["radiossex"];
+            model.Skill = Request.Form["txtskll"];
+            model.Introduction = Request.Form["txtintro"];
+            new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
+            Response.Redirect("/Account/AccountPersonal");
+>>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
             return View();
         }
 
