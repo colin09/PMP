@@ -43,13 +43,21 @@
         </div>
     </div>
     <div class="container accountBody">
-        <div style="float:left">
-            <ul>
+        <div style="float:left" ng-app="userMenuApp">
+            <ul ng-controller="MenuItemCtl1">
                 <li class="accountLeft">
                     <div class="top">
-                        <span>我是雇主</span>
+                        <span>{{body.title}}</span>
                     </div>
                     <ul>
+                        <li ng-repeat="el in body.menu">
+                            <a ng-href="el.url"><ic>&nbsp; </ic> {{el.title}}</a>
+                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu">><a ng-href="sub.url"></a> {{sub.title}}</dt>
+                        </li>
+
+                    </ul>
+
+                    @*<ul>
                         <li><a href="/Account/AccountPersonal"><ic>&nbsp; </ic> 我的信息</a></li>
                         <li><a href="#"><ic>&nbsp; </ic> 基本资料</a></li>
                         <li><a href="#"><ic></ic>公司信息</a></li>
@@ -63,7 +71,7 @@
                             <dt>> 发布任务</dt>
                         </li>
                         <li><a href="#"><ic></ic>评价管理</a></li>
-                    </ul>
+                    </ul>*@
                 </li>
             </ul>
         </div>
@@ -77,6 +85,7 @@
     </footer>
 
     @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/menu.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

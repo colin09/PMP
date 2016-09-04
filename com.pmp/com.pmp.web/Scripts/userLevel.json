@@ -1,0 +1,98 @@
+[
+  {
+    "userLevel": 1,
+    "title": "我是雇主",
+    "menu": [
+      {
+        "title": "我的信息",
+        "style": "",
+        "url": "/Account/AccountPersonal",
+        "sort": 1
+      },
+      {
+        "title": "公司信息",
+        "style": "",
+        "url": "",
+        "sort": 1
+      },
+      {
+        "title": "公司认证",
+        "style": "",
+        "url": "",
+        "sort": 1
+      },
+      {
+        "title": "员工管理",
+        "style": "",
+        "url": "",
+        "sort": 1,
+        "subMenu": [ ]
+      },
+      {
+        "title": "任务中心",
+        "style": "",
+        "url": "",
+        "sort": 1,
+        "subMenu": [
+          {
+            "title": "所有任务",
+            "style": "",
+            "url": ""
+          },
+          {
+            "title": "发布任务",
+            "style": "",
+            "url": ""
+          },
+          {
+            "title": "审核任务",
+            "style": "",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "title": "评价管理",
+        "style": "",
+        "url": "",
+        "sort": 1
+      }
+    ]
+  },
+  {
+    "userLevel": 2,
+    "title": "寻找项目",
+    "menu": [
+      {
+        "title": "我的账号",
+        "style": "",
+        "url": "/Account/AccountPersonal",
+        "sort": 1
+      },
+      {
+        "title": "基本资料",
+        "style": "",
+        "url": "",
+        "sort": 1
+      },
+      {
+        "title": "个人认证",
+        "style": "",
+        "url": "",
+        "sort": 1
+      },
+      {
+        "title": "我的任务",
+        "style": "",
+        "url": "",
+        "sort": 1
+      },
+      {
+        "title": "评价管理",
+        "style": "",
+        "url": "",
+        "sort": 1
+      }
+    ]
+  }
+]

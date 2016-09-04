@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,6 +226,7 @@
     <Content Include="Scripts\layer\skin\default\loading-1.gif" />
     <Content Include="Scripts\layer\skin\default\loading-2.gif" />
     <Content Include="Scripts\layer\skin\layer.css" />
+    <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="images\1.jpg" />
     <Content Include="images\body.jpg" />
@@ -285,6 +287,10 @@
     <Content Include="Views\Shared\_PagePartial.cshtml" />
     <Content Include="Views\Task\Detail.cshtml" />
     <Content Include="Views\Account\AccountAudit.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\List.cshtml" />
+    <Content Include="Scripts\userLevel.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,7 +332,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>25302</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -37,6 +37,8 @@ namespace com.pmp.web.Controllers
             var model = new MgUserService().SearchLogin(_Longin_Phone);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
+
+            ViewBag.level = this._Longin_UserLevel;
             return View(model[0].PersonInfo);
         }
 
