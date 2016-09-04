@@ -7,6 +7,7 @@ using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -135,8 +136,31 @@ namespace com.pmp.web.Controllers
         }
 
 
-        public ActionResult CreateSln()
+        public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase file)
         {
+            if (file == null)
+                return Content("没有选择文件", "text/plain");
+
+            var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
+            try
+            {
+                file.SaveAs(savePath);
+
+                var sln = new MgSolution()
+                {
+                    ID = _projectService.GetNewId(),
+                    ProjectId = projectId,
+                    SlnDesc = desc,
+                    FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
+                    UserId = this._Longin_UserId,
+                };
+            }
+            catch
+            {
+                return Content("上传异常 ！", "text/plain");
+            }
+
+
             return View();
         }
 

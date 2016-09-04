@@ -26,7 +26,36 @@
         "style": "",
         "url": "",
         "sort": 1,
-        "subMenu": [ ]
+        "subMenu": [
+          {
+            "title": "添加员工",
+            "style": "",
+            "url": ""
+          },
+          {
+            "title": "员工列表",
+            "style": "",
+            "url": ""
+          }
+        ]
+      },
+      {
+        "title": "用户管理",
+        "style": "",
+        "url": "",
+        "sort": 1,
+        "subMenu": [
+          {
+            "title": "会员审核",
+            "style": "",
+            "url": "/Account/AccountAudit"
+          },
+          {
+            "title": "会员管理",
+            "style": "",
+            "url": ""
+          }
+        ]
       },
       {
         "title": "任务中心",
@@ -72,13 +101,13 @@
       {
         "title": "基本资料",
         "style": "",
-        "url": "",
+        "url": "/Account/AccountPersonal",
         "sort": 1
       },
       {
-        "title": "个人认证",
+        "title": "实名认证",
         "style": "",
-        "url": "",
+        "url": "/Account/AccountP_Approve",
         "sort": 1
       },
       {

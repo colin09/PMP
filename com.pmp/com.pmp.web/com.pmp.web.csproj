@@ -191,19 +191,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\1.jpg" />
-    <Content Include="Images\headtop.gif" />
-    <Content Include="Images\img-sprite.png" />
-    <Content Include="Images\location.png" />
-    <Content Include="Images\mail.png" />
-    <Content Include="Images\noise.white.png" />
-    <Content Include="Images\password.png" />
-    <Content Include="Images\phone.png" />
-    <Content Include="Images\pmp.ico" />
-    <Content Include="Images\pmp.png" />
-    <Content Include="Images\tick.png" />
-    <Content Include="Images\train.png" />
-    <Content Include="Images\user.png" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRcITWGgmQvtcmgaGakhz0f4.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRfZL2QQ6ZygscP6wIFo8mp8.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRQqftcMOL_w0yR9WY4zwDNA.woff2" />
@@ -219,6 +206,32 @@
     <Content Include="Css\Fonts\xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="Images\1.jpg" />
+    <Content Include="Images\body.jpg" />
+    <Content Include="Images\default\arrow-active.png" />
+    <Content Include="Images\default\bghover.png" />
+    <Content Include="Images\default\headerbg.png" />
+    <Content Include="Images\default\icons_sprite.png" />
+    <Content Include="Images\default\icons_sprite2.png" />
+    <Content Include="Images\default\menuarrow.png" />
+    <Content Include="Images\default\noise.white.png" />
+    <Content Include="Images\default\notibg.png" />
+    <Content Include="Images\default\searchbutton.png" />
+    <Content Include="Images\default\searchcancel.png" />
+    <Content Include="Images\default\topheaderbg.png" />
+    <Content Include="Images\default\userinfoarrow.png" />
+    <Content Include="Images\headtop.gif" />
+    <Content Include="Images\img-sprite.png" />
+    <Content Include="Images\location.png" />
+    <Content Include="Images\mail.png" />
+    <Content Include="Images\noise.white.png" />
+    <Content Include="Images\password.png" />
+    <Content Include="Images\phone.png" />
+    <Content Include="Images\pmp.ico" />
+    <Content Include="Images\pmp.png" />
+    <Content Include="Images\tick.png" />
+    <Content Include="Images\train.png" />
+    <Content Include="Images\user.png" />
     <Content Include="Scripts\Footer.js" />
     <Content Include="Scripts\Header.js" />
     <Content Include="Scripts\layer\layer.js" />
@@ -230,19 +243,11 @@
     <Content Include="Scripts\layer\skin\layer.css" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="images\1.jpg" />
-    <Content Include="images\body.jpg" />
-    <Content Include="images\img-sprite.png" />
-    <Content Include="images\location.png" />
-    <Content Include="images\mail.png" />
-    <Content Include="images\password.png" />
-    <Content Include="images\phone.png" />
-    <Content Include="images\tick.png" />
-    <Content Include="images\user.png" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\Log4Net.config" />
+    <Content Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\pmp.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\js\jquery-1.10.2.js" />
@@ -269,6 +274,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -300,7 +306,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\js\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>

@@ -16,19 +16,6 @@ namespace com.pmp.mongo.service
         }
 
 
-        public void Insert(int userId,int projectId, string desc, List<string> files)
-        {
-            var sln = new MgSolution() {
-                ID = GetNewId(),
-                ProjectId=projectId,
-                SlnDesc = desc,
-                FileList = files,
-                UserId = userId,
-            };
-
-            Insert(sln);
-
-        }
 
 
 
