@@ -17,9 +17,13 @@ namespace com.pmp.web.Controllers
     {
 
         private readonly MgProjectService _projectService;
+        private readonly MgSolutionService _solutionService;
+
+
         public TaskController()
         {
             _projectService = new MgProjectService();
+            _solutionService = new MgSolutionService();
 
         }
 
@@ -129,5 +133,13 @@ namespace com.pmp.web.Controllers
 
             return View(list);
         }
+
+
+        public ActionResult CreateSln()
+        {
+            return View();
+        }
+
+
     }
 }
