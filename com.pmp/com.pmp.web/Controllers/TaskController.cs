@@ -29,7 +29,7 @@ namespace com.pmp.web.Controllers
             var total = 0L;
             var list = _projectService.GetAllActive(pageIndex, pageSize, out total);
 
-            //ViewBag.list = list;
+            ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
 
             return View(list);

@@ -2,21 +2,20 @@
 <nav>
     <ul class="pagination" data-index="1">
         <li data-page="-1">
-            <a href="#" aria-label="Previous">
+            <a href="?pageindex=@(Model.PageIndex>1?Model.PageIndex-1:1)" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         @for (var i = 0; i < Model.PageCount; i++)
         {
-            <li class="num @Model.PageIndex==i?'active':''"><a href="#">@(i+1)</a></li>
+            <li class="num @Model.PageIndex==i?'active':''"><a href="?pageindex=@(i+1)">@(i + 1)</a></li>
         }
 
 
         <li data-page="+1">
-            <a href="#" aria-label="Next">
+            <a href="?pageindex=@(Model.PageIndex<Model.PageCount?Model.PageIndex+1:Model.PageCount)" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
     </ul>
 </nav>
-
