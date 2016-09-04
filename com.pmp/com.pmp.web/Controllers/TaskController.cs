@@ -54,7 +54,7 @@ namespace com.pmp.web.Controllers
                 Linkman = task.Linkman,
                 Mobile = task.Mobile,
                 Desc = task.Desc,
-                CreatesUserID = this.UserId,
+                CreatesUserID = this._Longin_UserId,
                 StartTime = task.StartTime,
                 EndTime = task.EndTime,
                 AuditStatus = AuditStatus.Default,

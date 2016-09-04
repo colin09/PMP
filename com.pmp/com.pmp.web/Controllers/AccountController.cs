@@ -24,9 +24,9 @@ namespace com.pmp.web.Controllers
         }
 
 
-        public ActionResult AccountPersonal()
+        public ActionResult AccountPersonal(string phone)
         {
-            var model = new MgUserService().SearchLogin(Phone);
+            var model = new MgUserService().SearchLogin(phone);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
             return View(model[0].PersonInfo);
@@ -42,7 +42,7 @@ namespace com.pmp.web.Controllers
             //if (model[0].PersonReal == null)
             //    model[0].PersonReal = new MgPersonReal();
             //return View(model[0].PersonReal);
-            ViewBag.phone = Phone;
+            ViewBag.phone = _Longin_Phone;
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace com.pmp.web.Controllers
             if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
                 mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
             mgPersonReal.Address = Request.Form["txtaddress"];
-            new MgUserService().UpdateAccountApprove(Phone, mgPersonReal);
+            new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
         }
@@ -72,7 +72,7 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountCompany_Approve()
         {
-            ViewBag.phone = Phone;
+            ViewBag.phone = _Longin_Phone;
             return View();
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace com.pmp.web.Controllers
             mr.CompanyJustImg = Request.Form["txtzzjgimg"];
             mr.Address = Request.Form["txtaddress"];
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
-            new MgUserService().UpdateAccountCompanyReal(Phone, mr);
+            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
         }
@@ -106,7 +106,7 @@ namespace com.pmp.web.Controllers
             model.Gender = Request.Form["radiossex"];
             model.Skill = Request.Form["txtskll"];
             model.Introduction = Request.Form["txtintro"];
-            new MgUserService().UpdateAccountInfo(Phone, model);
+            new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
             Response.Redirect("/Account/AccountPersonal");
             return View();
         }
