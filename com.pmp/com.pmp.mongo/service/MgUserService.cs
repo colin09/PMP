@@ -16,7 +16,7 @@ namespace com.pmp.mongo.service
 
         public List<MgUser> SearchById(long id)
         {
-            var filter = Builders<MgUser>.Filter.Eq("Id", id);
+            var filter = Builders<MgUser>.Filter.Eq("ID", id);
             return Search(filter);
         }
 
@@ -40,6 +40,57 @@ namespace com.pmp.mongo.service
             return Search();
         }
 
+
+        #region 用户审核相关
+        /// <summary>
+        /// 根据审核状态查询所有用户
+        /// </summary>
+        /// <returns></returns>
+        public List<MgUser> SearchAllByAudit(int auditType, int accountType)
+        {
+            List<MgUser> mgUser = new List<MgUser>();
+            if (accountType == 1)
+            {
+                var list = Search();
+                foreach (var item in list)
+                {
+                    if (item.PersonReal != null)
+                    {
+                        if (item.PersonReal.IsApprove == auditType)
+                        {
+                            mgUser.Add(item);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var list = new MgCompanyRealService().SearchAllByAudit(auditType);
+                foreach (var item in list)
+                {
+                    mgUser.AddRange(SearchById(item.CUserID));
+                }
+            }
+            return mgUser;
+        }
+
+        /// <summary>
+        /// 更新审核状态
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="accountType"></param>
+        /// <returns></returns>
+        public bool UpdateAudit(int Id, int auditType,string notpassstr)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("ID", Id);
+            var update = Builders<MgUser>.Update.Set(u => u.PersonReal.IsApprove, auditType).
+                Set(u => u.PersonReal.NotPassReason, notpassstr).
+                Set(u => u.PersonReal.AuditTime, DateTime.Now.ToString());
+            return Update(filter, update) > 0;
+        }
+
+
+        #endregion
 
 
         public bool CreateCodePwd(string phone)
@@ -80,9 +131,10 @@ namespace com.pmp.mongo.service
 
         public void CreateUser(string phone, string pwd, int userLevel)
         {
-            MgPersonReal mp = new MgPersonReal();
+            MgPersonReal mp =null;
             if ((UserLevel)userLevel == UserLevel.Person)
             {
+                mp = new MgPersonReal();
                 mp.IsApprove = 0;
             }
 

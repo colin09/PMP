@@ -15,17 +15,54 @@ namespace com.pmp.mongo.service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<MgCompanyReal> SearchById(int  id)
+        public List<MgCompanyReal> SearchById(int id)
         {
             var filter = Builders<MgCompanyReal>.Filter.Eq("ID", id);
             return Search(filter);
         }
 
+
+        /// <summary>
+        /// 查询所有公司
+        /// </summary>
+        /// <returns></returns>
+        public List<MgCompanyReal> SearchAll()
+        {
+            return Search();
+        }
+
+        /// <summary>
+        /// 查询所有公司
+        /// </summary>
+        /// <returns></returns>
+        public List<MgCompanyReal> SearchAllByAudit(int auditType)
+        {
+            List<MgCompanyReal> mgCompanyReal = new List<MgCompanyReal>();
+            var list = Search();
+            foreach (var item in list)
+            {
+                if (item.IsApprove == auditType)
+                {
+                    mgCompanyReal.Add(item);
+                }
+            }
+            return mgCompanyReal;
+        }
+
+
+        public bool UpdateAudit(int Id,int auditType,string notpassstr)
+        {
+            var filter = Builders<MgCompanyReal>.Filter.Eq("ID", Id);
+            var update = Builders<MgCompanyReal>.Update.Set(u => u.IsApprove, auditType).
+                 Set(u => u.NotPassReason, notpassstr)
+                .Set(u => u.ATime, DateTime.Now.ToString());
+            return Update(filter, update) > 0;
+        }
         /// <summary>
         /// 添加认证
         /// </summary>
         /// <param name="mc"></param>
-        public void CreateCompanyReal(MgCompanyReal mc,ref int id)
+        public void CreateCompanyReal(MgCompanyReal mc, ref int id)
         {
             id = GetNewId();
             Insert(new MgCompanyReal()
@@ -42,7 +79,7 @@ namespace com.pmp.mongo.service
                 Name = mc.Name,
                 OrganizationCode = mc.OrganizationCode,
                 RegistrID = mc.RegistrID,
-                UTime = mc.UTime
+                ATime = mc.ATime
             });
         }
 

@@ -27,11 +27,6 @@ namespace com.pmp.web.Controllers
         /// 个人基本信息页面
         /// </summary>
         /// <returns></returns>
-        //public ActionResult AccountPersonal()
-        //{
-        //    var model = new MgUserService().SearchLogin(_Longin_Phone);
-        //}
-
         public ActionResult AccountPersonal()
         {
             var model = new MgUserService().SearchLogin(_Longin_Phone);
@@ -54,7 +49,6 @@ namespace com.pmp.web.Controllers
             Response.Redirect("/Account/AccountPersonal");
             return View();
         }
-
 
         /// <summary>
         /// 个人认证
@@ -86,7 +80,7 @@ namespace com.pmp.web.Controllers
                 mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
             mgPersonReal.Address = Request.Form["txtaddress"];
             mgPersonReal.IsApprove = 1;
-
+            mgPersonReal.CreatesTime = DateTime.Now.ToString();
             new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
@@ -119,6 +113,7 @@ namespace com.pmp.web.Controllers
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
+            mr.CTime = DateTime.Now.ToString();
             new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr);
             Response.Redirect("/Account/AccountP_Approve");
             return View();
@@ -130,11 +125,73 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountAudit()
         {
-            ViewBag.userList = new MgUserService().SearchAll();
-            ViewBag.userList = new MgUserService().SearchAll();
             return View();
         }
 
+        /// <summary>
+        /// 系统管理员审核
+        /// </summary>
+        /// <returns></returns>
+        public string AccountAuditRes()
+        {
+            var accountType = Request["type"];
+            var accountId = Request["id"];
+            var resAudit = Request["res"];
+            var notpassstr = Request["notpassstr"];
+            bool res = true;
+            if (int.Parse(accountType) == 1)
+                res = new MgUserService().UpdateAudit(int.Parse(accountId), int.Parse(resAudit), notpassstr);
+            else
+            {
+                //List <MgUser>  list = new MgUserService().SearchById(int.Parse(accountId));
+                res = new MgCompanyRealService().UpdateAudit(int.Parse(accountId), int.Parse(resAudit), notpassstr);
+            }
+            return res.ToString();
+        }
+
+
+        /// <summary>
+        /// 获取审核列表
+        /// </summary>
+        /// <returns></returns>
+        public string GetAccountAuditList()
+        {
+            var auditType = int.Parse(Request["AuditType"]);
+            var accountType = int.Parse(Request["AccountType"]);
+
+            return HttpHelper.ObjectToJson(new MgUserService().SearchAllByAudit(auditType, accountType));
+        }
+
+
+        /// <summary>
+        /// 个人详细信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AccountDetail()
+        {
+
+            long uid = 0;
+            if (!string.IsNullOrWhiteSpace(Request["uid"]))
+            {
+                uid = long.Parse(Request["uid"]);
+            }
+            else
+            {
+                uid = long.Parse(_Longin_UserId.ToString());
+            }
+
+            MgCompanyReal mgCompanyReal = new MgCompanyReal();
+            MgUser mgUser = new MgUser() { PersonInfo = new MgPersonInfo(), PersonReal = new MgPersonReal() };
+
+            mgUser = new MgUserService().SearchById(uid)[0];
+            if (mgUser.CompanyReal_ID > 0)
+            {
+                mgCompanyReal = new MgCompanyRealService().SearchById(mgUser.CompanyReal_ID)[0];
+            }
+            ViewBag.CompanyReal = mgCompanyReal;
+            ViewBag.mgUser = mgUser;
+            return View();
+        }
 
 
 

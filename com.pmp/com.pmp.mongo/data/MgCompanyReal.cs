@@ -11,8 +11,8 @@ namespace com.pmp.mongo.data
     {
         public MgCompanyReal()
         {
-            CTime = DateTime.Now.ToOADate();
-            UTime = DateTime.Now.ToOADate();
+            CTime = DateTime.Now.ToString();
+           ATime = DateTime.Now.ToString();
         }
 
         public int ID { set; get; }
@@ -44,9 +44,9 @@ namespace com.pmp.mongo.data
         /// </summary>
         public string CompanyAgainstImg { set; get; }
 
-        public double CTime { set; get; }
+        public string CTime { set; get; }
 
-        public double UTime { set; get; }
+        public string ATime { set; get; }
         /// <summary>
         ///创建用户
         /// </summary>
@@ -55,6 +55,11 @@ namespace com.pmp.mongo.data
         /// 是否认证[默认0,提交1,审核通过2.审核不通过3.]
         /// </summary>
         public int IsApprove { set; get; }
+
+        /// <summary>
+        /// 不通过原因
+        /// </summary>
+        public string NotPassReason { get; set; }
 
     }
 

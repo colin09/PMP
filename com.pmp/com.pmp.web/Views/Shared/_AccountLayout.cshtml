@@ -7,7 +7,6 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="container">
@@ -16,17 +15,17 @@
                 <a href="http://#"><img src="~/images/pmp.png" class="logoTask" /> [PMP] 任务服务平台 </a>
             </li>
             <li class="taskTopCenter">
-                <a href="#" target="_blank" rel="nofollow">
-                    <span class="phoneapp">&nbsp;</span>
-                    <span>手机APP</span>
-                    <u> | </u>
-                </a>
+                @*<a href="#" target="_blank" rel="nofollow">
+                        <span class="phoneapp">&nbsp;</span>
+                        <span>手机APP</span>
+                        <u> | </u>
+                    </a>*@
                 <a href="#" target="_blank" rel="nofollow">
                     <span class="weibo">&nbsp;</span>
-                    <span>关注微博</span>
+                    <span>关注公众号</span>
                     <u> | </u>
                 </a>
-                <span>客服电话:</span> <red>400-810-1688</red>
+                <span>客服电话:</span> <red>110</red>
                 </a>
             </li>
             <li></li>
@@ -50,18 +49,28 @@
                         <span>我是雇主</span>
                     </div>
                     <ul>
-                        <li><a href="/Account/AccountPersonal"><ic>&nbsp; </ic> 我的信息</a></li>
-                        <li><a href="#"><ic>&nbsp; </ic> 基本资料</a></li>
-                        <li><a href="#"><ic></ic>公司信息</a></li>
-                        <li><a href="#"><ic></ic>员工信息</a></li>
-                        <li><a href="/Account/AccountP_Approve"><ic></ic>个人认证</a></li>
-                        <li><a href="/Account/AccountCompany_Approve"><ic></ic>公司认证</a></li>
-                        <li><a href="#"><ic></ic>员工管理</a></li>
                         <li>
-                            <a href="#"><ic></ic>任务中心</a>
-                            <dt>> 我的任务</dt>
-                            <dt>> 发布任务</dt>
+                            <a href="/Account/AccountDetail"><ic>&nbsp; </ic> 我的信息</a>
+                            <a href="/Account/AccountPersonal"> <dt>> 基本资料</dt></a>
+                            <a href="/Account/AccountP_Approve"><dt>> 实名认证</dt></a>
+                            <a href="/Account/AccountCompany_Approve"><dt>> 公司认证</dt></a>
                         </li>
+                        <li>
+                            <a href=""><ic>&nbsp; </ic> 员工管理</a>
+                            <a href="#"> <dt>> 添加员工</dt></a>
+                            <a href="#"> <dt>> 员工列表</dt></a>
+                        </li>
+                        <li>
+                            <a href="#"><ic>&nbsp; </ic> 用户管理</a>
+                            <a href="/Account/AccountAudit"> <dt>> 会员审核</dt></a>
+                            <a href="#"> <dt>> 公司管理</dt></a>
+                            <a href="#"> <dt>> 会员管理</dt></a>
+                        </li>
+                        @*<li>
+                                <a href="#"><ic></ic>任务中心</a>
+                                <dt>> 我的任务</dt>
+                                <dt>> 发布任务</dt>
+                            </li>*@
                         <li><a href="#"><ic></ic>评价管理</a></li>
                     </ul>
                 </li>
