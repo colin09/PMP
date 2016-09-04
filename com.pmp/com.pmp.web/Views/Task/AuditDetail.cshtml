@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "AuditDetail";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+<h5>会员中心 > 任务中心 > 任务审核 > 审核</h5>
+<h3 class="mc10">审核</h3>
+<input type="hidden" id="userLevel" value="@ViewBag.level" />
+
+<table class="table noborder">
+    <tr>
+        <td class="t-r w220">项目类别： </td>
+        <td>@Model.Category</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目编号： </td>
+        <td>@Model.Code</td>
+    </tr>
+    <tr>
+        <td class="t-r">合同号： </td>
+        <td>@Model.ContractCode</td>
+    </tr>
+    <tr>
+        <td class="t-r">预计工期： </td>
+        <td>@Model.StartTime - @Model.EndTime</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目描述： </td>
+        <td>@Model.Desc</td>
+    </tr>
+    <tr>
+        <td class="t-r">审核状态： </td>
+        <td>@Model.AuditStatus</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目阶段： </td>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目经理： </td>
+        <td>@Model.Manager</td>
+    </tr>
+    <tr>
+        <td class="t-r">联系方式： </td>
+        <td>@Model.Linkman [ @Model.Mobile ]</td>
+    </tr>
+    <tr>
+        <td class="t-r">发布时间： </td>
+        <td>@Model.CreateTime</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目文件： </td>
+        <td>@Model.FlieList</td>
+    </tr>
+    <tr>
+        <td class="t-r">审核此任务： </td>
+        <td>
+            <form method="post" action="/Task/AuditSubmit">
+                <label class="radio-inline">
+                    <input type="radio" name="auditState" value="1"> 通过
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="auditState" value="-1"> 不通过
+                </label>
+
+                <input type="text" class="form-control" name="auditDesc" placeholder="审核说明">
+
+                <input type="hidden" name="id" value="@Model.ID" />
+                <button type="submit" class="btn btn-default"> 提 交 </button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td class="t-r">指派此任务：</td>
+        <td>
+            <button type="button" class="btn btn-default"> 选择执行人 </button>
+            <span id="spnReceiveName"> -- </span>
+            <input type="hidden" name="id" value="@Model.ID" />
+            <input type="hidden" name="ReceiveId" value="0" />
+            <button type="submit" class="btn btn-default"> 确定指派 </button>
+        </td>
+    </tr>
+</table>
+
+

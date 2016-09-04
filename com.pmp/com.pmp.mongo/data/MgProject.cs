@@ -79,9 +79,13 @@ namespace com.pmp.mongo.data
         /// </summary>
         public AuditStatus AuditStatus { get; set; }
         /// <summary>
+        /// 项目 执行人
+        /// </summary>
+        public int ReceiveUserId { set; get; }
+        /// <summary>
         /// 领取人项目方案
         /// </summary>
-        public string GetProgram { get; set; }
+        //public string GetProgram { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

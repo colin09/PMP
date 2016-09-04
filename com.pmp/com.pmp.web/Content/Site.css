@@ -78,8 +78,14 @@ red{color:#fe0200;}
 .bc-y{ background: #febb36;}
 .bc-g{ background: #f2f3f0;}
 
+.w50{width:50px;}
 .w100{width:100px;}
 .w320{width:320px;}
 .w220{width:220px;}
 .w320h{width:320px; height:230px;}
 .w600{width:600px;}
+
+
+.t-l{text-align:left;}
+.t-c{text-align:center;}
+.t-r{text-align:right;}

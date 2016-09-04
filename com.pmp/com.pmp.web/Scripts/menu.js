@@ -5,7 +5,7 @@
              if (json.length > 0) {
                  var level = $("#userLevel").val();
                  $.each(json, function (key, item) {
-                     if (item.userLevel == level) {
+                     if (item.userLevel.indexOf(level + ',') >= 0) {
                          $scope.body = item;
                      }
                  });

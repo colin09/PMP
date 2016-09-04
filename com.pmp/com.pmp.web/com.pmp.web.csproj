@@ -195,6 +195,7 @@
     <Content Include="Images\img-sprite.png" />
     <Content Include="Images\location.png" />
     <Content Include="Images\mail.png" />
+    <Content Include="Images\noise.white.png" />
     <Content Include="Images\password.png" />
     <Content Include="Images\phone.png" />
     <Content Include="Images\pmp.ico" />
@@ -289,9 +290,10 @@
     <Content Include="Views\Account\AccountAudit.cshtml" />
     <Content Include="Views\Task\Create.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
-    <Content Include="Views\Task\List.cshtml" />
+    <Content Include="Views\Task\MyList.cshtml" />
     <Content Include="Scripts\userLevel.json" />
-    <Content Include="Views\Task\Audit.cshtml" />
+    <Content Include="Views\Task\AuditList.cshtml" />
+    <Content Include="Views\Task\AuditDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 [
   {
-    "userLevel": 1,
+    "userLevel": "2,",
     "title": "我是雇主",
     "menu": [
       {
@@ -37,7 +37,7 @@
           {
             "title": "所有任务",
             "style": "",
-            "url": ""
+            "url": "/Task/MyList"
           },
           {
             "title": "发布任务",
@@ -47,7 +47,7 @@
           {
             "title": "审核任务",
             "style": "",
-            "url": "/Task/Audit"
+            "url": "/Task/AuditList"
           }
         ]
       },
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "userLevel": 2,
+    "userLevel": "1,4,",
     "title": "寻找项目",
     "menu": [
       {
@@ -84,7 +84,7 @@
       {
         "title": "我的任务",
         "style": "",
-        "url": "",
+        "url": "/Task/MyList",
         "sort": 1
       },
       {

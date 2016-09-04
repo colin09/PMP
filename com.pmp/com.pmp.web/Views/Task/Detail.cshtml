@@ -3,62 +3,113 @@
     ViewBag.Title = "详细";
 }
 
-<h2>@Model.Name</h2>
+<h3 class="mc10">
+    @Model.Name
+</h3>
 
 
-<div class="mt25">
-    <div class="row">
-        <div class="col-sm-4">项目类别：</div>
-        <div class="col-sm-8">@Model.Category</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">项目编号：</div>
-        <div class="col-sm-8">@Model.Code</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">合同号：</div>
-        <div class="col-sm-8">@Model.ContractCode</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">预计工期：</div>
-        <div class="col-sm-8">@Model.StartTime - @Model.EndTime</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">审核状态：</div>
-        <div class="col-sm-8">@Model.AuditStatus</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">项目阶段：</div>
-        <div class="col-sm-8">@Model.Status</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">项目经理：</div>
-        <div class="col-sm-8">@Model.Manager</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">联系方式：</div>
-        <div class="col-sm-8">@Model.Linkman [ @Model.Mobile ]</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">发布时间：</div>
-        <div class="col-sm-8">@Model.CreateTime</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">项目文件：</div>
-        <div class="col-sm-8">@Model.FlieList</div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">项目进度：</div>
-        <div class="col-sm-8">@Model.ProcessDesc</div>
-    </div>
-</div>
+<table class="table noborder">
+    <tr>
+        <td class="t-r w220">项目类别：</td>
+        <td>@Model.Category </td>
+    </tr>
+    <tr>
+        <td class="t-r">项目编号：</td>
+        <td>@Model.Code</td>
+    </tr>
+    <tr>
+        <td class="t-r">合同号：</td>
+        <td>@Model.ContractCode</td>
+    </tr>
+    <tr>
+        <td class="t-r">预计工期：</td>
+        <td>@Model.StartTime - @Model.EndTime</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目描述：</td>
+        <td>@Model.Desc</td>
+    </tr>
+    <tr>
+        <td class="t-r">审核状态：</td>
+        <td>@Model.AuditStatus</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目阶段：</td>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目经理：</td>
+        <td>@Model.Manager</td>
+    </tr>
+    <tr>
+        <td class="t-r">联系方式：</td>
+        <td>@Model.Linkman [ @Model.Mobile ]</td>
+    </tr>
+    <tr>
+        <td class="t-r">发布时间：</td>
+        <td>@Model.CreateTime</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目文件：</td>
+        <td>@Model.FlieList</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目进度：</td>
+        <td>@Model.ProcessDesc</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button type="button" id="btnGetProject" class="btn btn-default"> 领取项目 </button>
+
+        </td>
+    </tr>
+</table>
 
 
 
 
+<div class="modal fade" id="getModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提交方案说明</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table noborder">
+                    <tr>
+                        <td>方案描述： </td>
+                        <td>
+                            <textarea class="form-control" name="slnDesc" placeholder="方案描述" rows="5"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>项目文件：</td>
+                        <td><input type="file" id="exampleInputFile"></td>
+                    </tr>
+                </table>
+                <div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                <button type="button" class="btn btn-primary"> 确定领取 </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
 
-
-
+@section scripts{
+    <script>
+        $(function () {
+            $("#btnGetProject").click(function () {
+                $('#getModel').modal('show');
+            });
+        });
+    </script>
+}

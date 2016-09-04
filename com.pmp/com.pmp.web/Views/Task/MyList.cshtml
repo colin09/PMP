@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+<h5>会员中心 > 任务中心 > 任务审核</h5>
+<h3 class="mc10">我的任务</h3>
+<input type="hidden" id="userLevel" value="@ViewBag.level" />
+
+<ul class="taskAuditList">
+    @{ if (ViewBag.total > 0)
+        {
+            foreach (var item in Model)
+            {
+                <li>
+                    <div class="line1">
+                        <a href="/Task/AuditDetail?id=@item.ID">[@item.Status]</a>   @item.Code | @item.ContractCode | @item.Name |
+                    </div>
+                    <div class="line2">@item.Desc</div>
+                    <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime - @item.EndTime</div>
+                </li>
+            }
+        }
+    }
+    <li>
+        @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+    </li>
+</ul>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".pagination li").click(function () {
+                var pageindex = $(this).data("page");
+                var type = $("#proType").val();
+                var state = $("#proState").val();
+
+                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state;
+            });
+        });
+    </script>
+}

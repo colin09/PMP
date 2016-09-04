@@ -28,7 +28,7 @@ namespace com.pmp.web.Controllers
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(type, state, AuditStatus.Pass, page, out total);
+            var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
@@ -63,7 +63,7 @@ namespace com.pmp.web.Controllers
             };
 
             _projectService.Create(project);
-            return RedirectToAction("Index");
+            return RedirectToAction("AuditList");
         }
 
 
@@ -72,16 +72,14 @@ namespace com.pmp.web.Controllers
         {
             var project = _projectService.GetOneById(id);
 
-
-
             return View(project);
         }
 
-        public ActionResult Audit(AuditStatus audit=AuditStatus.Default ,int pageIndex = 1, int type = 0, int state = 0)
+        public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(type, state, audit, page, out total);
+            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, (int)audit, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
@@ -89,10 +87,47 @@ namespace com.pmp.web.Controllers
 
             return View(list);
         }
-
-        public ActionResult List()
+        public ActionResult AuditDetail(int id)
         {
-            return View();
+            var project = _projectService.GetOneById(id);
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(project);
+        }
+        public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
+        {
+            log.Info($"state:{auditState}, desc:{auditDesc}");
+            _projectService.AuditProject(id, auditState, auditDesc);
+            return RedirectToAction("AuditList");
+        }
+
+
+
+
+        public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
+        {
+            var cUser = 0;
+            var rUser = 0;
+            var auditState = (int)audit;
+            if (this._Longin_UserLevel == (int)UserLevel.CompanyAdmin)
+            {
+                cUser = this._Longin_UserId;
+                auditState = -99;
+            }
+            else
+            {
+                rUser = this._Longin_UserId;
+                auditState = (int)AuditStatus.Pass;
+            }
+            var page = new PageInfo() { PageIndex = pageIndex };
+            var total = 0L;
+            var list = _projectService.GetAll(cUser, rUser, type, state, auditState, page, out total);
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(list);
         }
     }
 }
