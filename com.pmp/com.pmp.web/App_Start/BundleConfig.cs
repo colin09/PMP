@@ -29,13 +29,13 @@ namespace com.pmp.web
 
 
             bundles.Add(new ScriptBundle("~/bundles/jq-bs-ng").Include(
-                     "~/Scripts/jquery-1.10.2.min.js",
-                     //"~/Scripts/jquery.cxscroll.min.js",
-                     "~/Scripts/jquery.lazyload.min.js",
-                     "~/Scripts/angular.min.js",
-                     "~/Scripts/angular-sanitize.min.js",
-                     "~/Scripts/bootstrap.min.js",
-                     "~/Scripts/respond.js"));
+                     "~/Scripts/js/jquery-1.10.2.min.js",
+                     //"~/Scripts/js/jquery.cxscroll.min.js",
+                     "~/Scripts/js/jquery.lazyload.min.js",
+                     "~/Scripts/js/angular.min.js",
+                     "~/Scripts/js/angular-sanitize.min.js",
+                     "~/Scripts/js/bootstrap.min.js",
+                     "~/Scripts/js/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -2,6 +2,7 @@
 using com.pmp.common.mvc.ctl;
 using com.pmp.model.enums;
 using com.pmp.model.request;
+using com.pmp.model.response;
 using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
@@ -23,11 +24,11 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0)
         {
-            var pageSize = 12;
+            var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAllActive(pageIndex, pageSize, out total);
+            var list = _projectService.GetAll(type, state, AuditStatus.Pass, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
@@ -58,7 +59,7 @@ namespace com.pmp.web.Controllers
                 StartTime = task.StartTime,
                 EndTime = task.EndTime,
                 AuditStatus = AuditStatus.Default,
-                CreatesTime = DateTime.Now.ToOADate()
+                CreateTime = DateTime.Now.ToOADate()
             };
 
             _projectService.Create(project);
@@ -68,6 +69,18 @@ namespace com.pmp.web.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+
+        public ActionResult Detail(int id)
+        {
+            var project = _projectService.GetOneById(id);
+
+
+
+            return View(project);
+        }
+
 
 
         public ActionResult List()

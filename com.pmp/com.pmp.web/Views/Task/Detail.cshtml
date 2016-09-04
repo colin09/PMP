@@ -1,0 +1,64 @@
+﻿@model com.pmp.mongo.data.MgProject
+@{
+    ViewBag.Title = "详细";
+}
+
+<h2>@Model.Name</h2>
+
+
+<div class="mt25">
+    <div class="row">
+        <div class="col-sm-4">项目类别：</div>
+        <div class="col-sm-8">@Model.Category</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">项目编号：</div>
+        <div class="col-sm-8">@Model.Code</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">合同号：</div>
+        <div class="col-sm-8">@Model.ContractCode</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">预计工期：</div>
+        <div class="col-sm-8">@Model.StartTime - @Model.EndTime</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">审核状态：</div>
+        <div class="col-sm-8">@Model.AuditStatus</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">项目阶段：</div>
+        <div class="col-sm-8">@Model.Status</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">项目经理：</div>
+        <div class="col-sm-8">@Model.Manager</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">联系方式：</div>
+        <div class="col-sm-8">@Model.Linkman [ @Model.Mobile ]</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">发布时间：</div>
+        <div class="col-sm-8">@Model.CreateTime</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">项目文件：</div>
+        <div class="col-sm-8">@Model.FlieList</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">项目进度：</div>
+        <div class="col-sm-8">@Model.ProcessDesc</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

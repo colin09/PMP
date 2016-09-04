@@ -287,6 +287,7 @@
     <Content Include="Views\Manage\index.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Shared\_PagePartial.cshtml" />
+    <Content Include="Views\Task\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

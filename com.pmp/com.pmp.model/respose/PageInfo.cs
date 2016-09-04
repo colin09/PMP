@@ -8,6 +8,13 @@ namespace com.pmp.model.response
 {
     public class PageInfo
     {
+        public PageInfo()
+        {
+            PageIndex = 1;
+            PageSize = 12;
+            Total = 0;
+        }
+
 
         public int PageIndex { set; get; }
         public int PageSize { set; get; }
