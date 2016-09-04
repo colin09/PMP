@@ -319,7 +319,254 @@ base.Init,read cookie ==>  <BR>
 <BR><HR COLOR=blue> INFO  £º2016-09-04 08:54:40,595 [346] 
 <BR> 
 base.Init,read cookie ==>  <BR>
+<<<<<<< HEAD
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:48:34,701 [6] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:48:35,177 [6] 
+<BR> 
+MongoDB.Driver.MongoCommandException: Command count failed: not authorized on pmp to execute command { count: "pro_mgproject", query: { Status: 0 } }.
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.ProcessReply(ConnectionId connectionId, ReplyMessage`1 reply)
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.Execute(IConnection connection, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.ExecuteProtocol[TResult](IWireProtocol`1 protocol, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.Command[TResult](DatabaseNamespace databaseNamespace, BsonDocument command, IElementNameValidator commandValidator, Func`1 responseHandling, Boolean slaveOk, IBsonSerializer`1 resultSerializer, MessageEncoderSettings messageEncoderSettings, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelHandle channel, ServerDescription serverDescription, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelSource channelSource, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.ReadCommandOperation`1.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CountOperation.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.OperationExecutor.ExecuteReadOperation[TResult](IReadBinding binding, IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.Count(FilterDefinition`1 filter, CountOptions options, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.FindFluent`2.Count(CancellationToken cancellationToken)
+   ÔÚ com.pmp.mongo.client.MgClient.Search[T](FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageSize, Int32 pageIndex, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\client\MgClient.cs:ÐÐºÅ 69
+   ÔÚ com.pmp.mongo.service.BaseService`1.SearchByPage(FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\BaseService.cs:ÐÐºÅ 55
+   ÔÚ com.pmp.mongo.service.MgProjectService.GetAllActive(Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\MgProjectService.cs:ÐÐºÅ 31
+   ÔÚ com.pmp.web.Controllers.TaskController.Index(Int32 pageIndex) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.web\Controllers\TaskController.cs:ÐÐºÅ 30
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:49:23,069 [5] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:49:23,386 [5] 
+<BR> 
+MongoDB.Driver.MongoCommandException: Command count failed: not authorized on pmp to execute command { count: "pro_mgproject", query: { Status: 0 } }.
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.ProcessReply(ConnectionId connectionId, ReplyMessage`1 reply)
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.Execute(IConnection connection, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.ExecuteProtocol[TResult](IWireProtocol`1 protocol, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.Command[TResult](DatabaseNamespace databaseNamespace, BsonDocument command, IElementNameValidator commandValidator, Func`1 responseHandling, Boolean slaveOk, IBsonSerializer`1 resultSerializer, MessageEncoderSettings messageEncoderSettings, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelHandle channel, ServerDescription serverDescription, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelSource channelSource, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.ReadCommandOperation`1.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CountOperation.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.OperationExecutor.ExecuteReadOperation[TResult](IReadBinding binding, IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.Count(FilterDefinition`1 filter, CountOptions options, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.FindFluent`2.Count(CancellationToken cancellationToken)
+   ÔÚ com.pmp.mongo.client.MgClient.Search[T](FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageSize, Int32 pageIndex, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\client\MgClient.cs:ÐÐºÅ 69
+   ÔÚ com.pmp.mongo.service.BaseService`1.SearchByPage(FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\BaseService.cs:ÐÐºÅ 55
+   ÔÚ com.pmp.mongo.service.MgProjectService.GetAllActive(Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\MgProjectService.cs:ÐÐºÅ 31
+   ÔÚ com.pmp.web.Controllers.TaskController.Index(Int32 pageIndex) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.web\Controllers\TaskController.cs:ÐÐºÅ 30
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:51:21,526 [31] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:51:21,527 [31] 
+<BR> 
+MongoDB.Driver.MongoCommandException: Command count failed: not authorized on pmp to execute command { count: "pro_mgproject", query: { Status: 0 } }.
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.ProcessReply(ConnectionId connectionId, ReplyMessage`1 reply)
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.Execute(IConnection connection, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.ExecuteProtocol[TResult](IWireProtocol`1 protocol, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.Command[TResult](DatabaseNamespace databaseNamespace, BsonDocument command, IElementNameValidator commandValidator, Func`1 responseHandling, Boolean slaveOk, IBsonSerializer`1 resultSerializer, MessageEncoderSettings messageEncoderSettings, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelHandle channel, ServerDescription serverDescription, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelSource channelSource, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.ReadCommandOperation`1.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CountOperation.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.OperationExecutor.ExecuteReadOperation[TResult](IReadBinding binding, IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.Count(FilterDefinition`1 filter, CountOptions options, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.FindFluent`2.Count(CancellationToken cancellationToken)
+   ÔÚ com.pmp.mongo.client.MgClient.Search[T](FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageSize, Int32 pageIndex, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\client\MgClient.cs:ÐÐºÅ 69
+   ÔÚ com.pmp.mongo.service.BaseService`1.SearchByPage(FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\BaseService.cs:ÐÐºÅ 55
+   ÔÚ com.pmp.mongo.service.MgProjectService.GetAllActive(Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\MgProjectService.cs:ÐÐºÅ 31
+   ÔÚ com.pmp.web.Controllers.TaskController.Index(Int32 pageIndex) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.web\Controllers\TaskController.cs:ÐÐºÅ 30
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:59:44,962 [18] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 09:59:44,964 [18] 
+<BR> 
+MongoDB.Driver.MongoCommandException: Command count failed: not authorized on pmp to execute command { count: "pro_mgproject", query: { Status: 0 } }.
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.ProcessReply(ConnectionId connectionId, ReplyMessage`1 reply)
+   ÔÚ MongoDB.Driver.Core.WireProtocol.CommandWireProtocol`1.Execute(IConnection connection, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.ExecuteProtocol[TResult](IWireProtocol`1 protocol, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Servers.ClusterableServer.ServerChannel.Command[TResult](DatabaseNamespace databaseNamespace, BsonDocument command, IElementNameValidator commandValidator, Func`1 responseHandling, Boolean slaveOk, IBsonSerializer`1 resultSerializer, MessageEncoderSettings messageEncoderSettings, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelHandle channel, ServerDescription serverDescription, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CommandOperationBase`1.ExecuteProtocol(IChannelSource channelSource, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.ReadCommandOperation`1.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.Core.Operations.CountOperation.Execute(IReadBinding binding, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.OperationExecutor.ExecuteReadOperation[TResult](IReadBinding binding, IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, ReadPreference readPreference, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.ExecuteReadOperation[TResult](IReadOperation`1 operation, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.MongoCollectionImpl`1.Count(FilterDefinition`1 filter, CountOptions options, CancellationToken cancellationToken)
+   ÔÚ MongoDB.Driver.FindFluent`2.Count(CancellationToken cancellationToken)
+   ÔÚ com.pmp.mongo.client.MgClient.Search[T](FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageSize, Int32 pageIndex, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\client\MgClient.cs:ÐÐºÅ 69
+   ÔÚ com.pmp.mongo.service.BaseService`1.SearchByPage(FilterDefinition`1 filter, Expression`1 sort, Boolean isAsc, Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\BaseService.cs:ÐÐºÅ 55
+   ÔÚ com.pmp.mongo.service.MgProjectService.GetAllActive(Int32 pageIndex, Int32 pageSize, Int64& total) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.mongo\service\MgProjectService.cs:ÐÐºÅ 31
+   ÔÚ com.pmp.web.Controllers.TaskController.Index(Int32 pageIndex) Î»ÖÃ D:\Git-Repository\PMP\com.pmp\com.pmp.web\Controllers\TaskController.cs:ÐÐºÅ 30
+   ÔÚ lambda_method(Closure , ControllerBase , Object[] )
+   ÔÚ System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:03:12,102 [65] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:04:15,976 [61] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:04:19,803 [58] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:04:20,674 [56] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:04:21,444 [65] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:06:39,915 [60] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:06:57,268 [65] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:08:01,716 [66] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:08:35,018 [66] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:09:34,988 [21] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:10:06,763 [50] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:10:54,068 [73] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:11:24,387 [49] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:11:34,833 [49] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:11:52,603 [50] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:12:16,523 [50] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:12:24,563 [63] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:48:46,469 [162] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:48:52,705 [47] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:48:54,343 [176] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:48:55,489 [162] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:48:56,439 [178] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:50:11,437 [179] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:50:21,158 [174] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:53:11,987 [163] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:54:02,607 [172] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:54:38,945 [163] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 10:54:44,572 [170] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+=======
 >>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
+<<<<<<< HEAD
 <BR><HR COLOR=blue> INFO  £º2016-09-04 11:04:03,367 [5] 
 <BR> 
 base.Init,read cookie ==> {"ID":1,"UserName":null,"Phone":"13717776357","Password":"123","CodePwd":null,"CodePwdTime":"2016-09-04T02:06:11.682Z","Role":null,"Level":1,"CTime":"2016-09-04T02:01:31.378Z","UTime":"2016-09-04T02:01:31.379Z","PersonInfo":{"NickName":null,"RealName":"ÕÅÈý","Birthday":"1992-07-07","Gender":"2","Age":null,"Email":null,"Address":"±±¾©ÊÐ·áÌ¨Çø","CardID":null,"Introduction":"ÎÒÊÇÒ»¸öºÃÈË","Skill":"C#","CTime":"0001-01-01T00:00:00Z","UTime":"0001-01-01T00:00:00Z","PersonReal":null,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cb807bcea8a50a40e8ff6f","StringId":"57cb807bcea8a50a40e8ff6f"} <BR>
@@ -654,6 +901,186 @@ System.Web.HttpParseException (0x80004005): ÔÚ "@" ×Ö·ûºóÃæÓöµ½ÁË¿Õ¸ñ»ò»»ÐÐ·û¡£Ö
    ÔÚ System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
    ÔÚ System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
    ÔÚ System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+=======
+>>>>>>> 5e94ef3a889ad98b7608f17b9ba2897e953b2e63
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:48:41,912 [5] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:48:41,987 [5] 
+<BR> 
+System.ArgumentException: ¶ÔÓÚ¡°com.pmp.web.Controllers.TaskController¡±ÖÐ·½·¨¡°System.Web.Mvc.ActionResult Audit(com.pmp.model.enums.AuditStatus, Int32, Int32, Int32)¡±µÄ²»¿ÉÒÔÎª null µÄÀàÐÍ¡°com.pmp.model.enums.AuditStatus¡±µÄ²ÎÊý¡°audit¡±£¬²ÎÊý×Öµä°üº¬Ò»¸ö null Ïî¡£¿ÉÑ¡²ÎÊý±ØÐëÎªÒýÓÃÀàÐÍ¡¢¿ÉÒÔÎª null µÄÀàÐÍ»òÉùÃ÷Îª¿ÉÑ¡²ÎÊý¡£
+²ÎÊýÃû: parameters
+   ÔÚ System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:49:50,594 [6] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:49:58,204 [7] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:50:01,400 [9] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:50:05,606 [11] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:00,043 [8] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:27,197 [8] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:31,289 [25] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:40,169 [9] 
+<BR> 
+base.Init,read cookie ==>  <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:40,379 [8] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:51:56,636 [12] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:52:06,981 [25] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:54:01,007 [34] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:54:33,422 [5] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:54:37,307 [9] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:55:21,986 [25] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:56:18,917 [41] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 12:56:27,252 [40] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:15:59,182 [117] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:16:07,164 [147] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:16:07,429 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:16:10,362 [135] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:18:38,747 [163] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:19:15,314 [151] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:19:39,130 [148] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:21:18,379 [147] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:22:01,272 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:24:32,594 [147] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:25:35,507 [163] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:28:09,420 [160] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:31:22,521 [163] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:31:41,090 [134] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:31:55,631 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:32:54,999 [154] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:35:09,832 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:35:33,864 [137] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:36:06,248 [119] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:36:08,454 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:36:09,068 [126] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:36:10,998 [117] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:38:44,456 [188] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:46:57,408 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:52:11,871 [142] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:57:04,137 [142] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:58:43,214 [113] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 13:59:33,806 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:01:31,597 [142] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:01:49,671 [108] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:02:36,051 [108] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:02:41,022 [172] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:02:41,034 [172] 
+<BR> 
+System.InvalidOperationException: ´«Èë×ÖµäµÄÄ£ÐÍÏîµÄÀàÐÍÎª¡°System.Collections.Generic.List`1[com.pmp.mongo.data.MgProject]¡±£¬µ«´Ë×ÖµäÐèÒªÀàÐÍ¡°com.pmp.mongo.data.MgProject¡±µÄÄ£ÐÍÏî¡£
+   ÔÚ System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+   ÔÚ System.Web.Mvc.ViewDataDictionary..ctor(ViewDataDictionary dictionary)
+   ÔÚ System.Web.Mvc.WebViewPage`1.SetViewData(ViewDataDictionary viewData)
+   ÔÚ System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+>>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
    ÔÚ System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
    ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
@@ -663,6 +1090,7 @@ System.Web.HttpParseException (0x80004005): ÔÚ "@" ×Ö·ûºóÃæÓöµ½ÁË¿Õ¸ñ»ò»»ÐÐ·û¡£Ö
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
    ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<<<<<<< HEAD
 <BR><HR COLOR=blue> INFO  £º2016-09-04 13:41:44,892 [17] 
 <BR> 
 base.Init,read cookie ==> {"ID":1,"UserName":null,"Phone":"13717776357","Password":"123","CodePwd":null,"CodePwdTime":"2016-09-04T02:06:11.682Z","Role":null,"Level":1,"CTime":"2016-09-04T02:01:31.378Z","UTime":"2016-09-04T02:01:31.379Z","PersonInfo":{"NickName":null,"RealName":"ÕÅÈý","Birthday":"1992-07-07","Gender":"2","Age":null,"Email":null,"Address":"±±¾©ÊÐ·áÌ¨Çø","CardID":null,"Introduction":"ÎÒÊÇÒ»¸öºÃÈË","Skill":"C#","CTime":"0001-01-01T00:00:00Z","UTime":"0001-01-01T00:00:00Z","PersonReal":null,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cb807bcea8a50a40e8ff6f","StringId":"57cb807bcea8a50a40e8ff6f"} <BR>
@@ -689,6 +1117,29 @@ System.Web.HttpParseException (0x80004005): ÔÚ "@" ×Ö·ûºóÃæÓöµ½ÁË¿Õ¸ñ»ò»»ÐÐ·û¡£Ö
    ÔÚ System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
    ÔÚ System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
    ÔÚ System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+=======
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:23:49,599 [160] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:24:38,397 [110] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:30:11,244 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:30:12,190 [182] 
+<BR> 
+System.InvalidOperationException: Î´ÕÒµ½ÊÓÍ¼¡°Audit¡±»òÆäÄ¸°æÊÓÍ¼£¬»òÃ»ÓÐÊÓÍ¼ÒýÇæÖ§³ÖËÑË÷µÄÎ»ÖÃ¡£ËÑË÷ÁËÒÔÏÂÎ»ÖÃ: 
+~/Views/Task/Audit.aspx
+~/Views/Task/Audit.ascx
+~/Views/Shared/Audit.aspx
+~/Views/Shared/Audit.ascx
+~/Views/Task/Audit.cshtml
+~/Views/Task/Audit.vbhtml
+~/Views/Shared/Audit.cshtml
+~/Views/Shared/Audit.vbhtml
+   ÔÚ System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+>>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
    ÔÚ System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
@@ -697,6 +1148,7 @@ System.Web.HttpParseException (0x80004005): ÔÚ "@" ×Ö·ûºóÃæÓöµ½ÁË¿Õ¸ñ»ò»»ÐÐ·û¡£Ö
    ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
    ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
    ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<<<<<<< HEAD
 <BR><HR COLOR=blue> INFO  £º2016-09-04 13:43:23,952 [8] 
 <BR> 
 base.Init,read cookie ==> {"ID":1,"UserName":null,"Phone":"13717776357","Password":"123","CodePwd":null,"CodePwdTime":"2016-09-04T02:06:11.682Z","Role":null,"Level":1,"CTime":"2016-09-04T02:01:31.378Z","UTime":"2016-09-04T02:01:31.379Z","PersonInfo":{"NickName":null,"RealName":"ÕÅÈý","Birthday":"1992-07-07","Gender":"2","Age":null,"Email":null,"Address":"±±¾©ÊÐ·áÌ¨Çø","CardID":null,"Introduction":"ÎÒÊÇÒ»¸öºÃÈË","Skill":"C#","CTime":"0001-01-01T00:00:00Z","UTime":"0001-01-01T00:00:00Z","PersonReal":null,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cb807bcea8a50a40e8ff6f","StringId":"57cb807bcea8a50a40e8ff6f"} <BR>
@@ -2960,4 +3412,474 @@ base.Init,read cookie ==> {"ID":1,"UserName":null,"Phone":"13717776357","Passwor
 <BR><HR COLOR=blue> INFO  £º2016-09-04 20:45:54,281 [31] 
 <BR> 
 base.Init,read cookie ==> {"ID":1,"UserName":null,"Phone":"13717776357","Password":"123","CodePwd":null,"CodePwdTime":"2016-09-04T12:13:18Z","Role":null,"Level":1,"CTime":"2016-09-04T12:11:19Z","UTime":"2016-09-04T12:11:19Z","PersonInfo":{"NickName":null,"RealName":"ÕÅÈý","Birthday":"1989-01-01","Gender":"1","Address":"±±¾©´óÐËÒ°ÍÃ»ùµØ","Introduction":"ÎÒÊÇÒ»¸öºÃÈË","Skill":"C#","CTime":"0001-01-01T00:00:00Z","UTime":"0001-01-01T00:00:00Z","_id":"000000000000000000000000","StringId":"000000000000000000000000"},"PersonReal":{"RealName":"ÕÅÈý","CardId":"113","Gender":"1","CardJustImg":"asd","CardAgainstImg":"dsa","Profession":6,"Address":"±±¾©´óÐË","IsApprove":3,"NotPassReason":"¾ÍÊÇ²»¸øÄã¹ý¸öÈË","CreatesTime":"2016/9/4 20:13:18","AuditTime":"2016/9/4 20:16:49","_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cc0f67cea8a53384864256","StringId":"57cc0f67cea8a53384864256"} <BR>
+=======
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:47:20,789 [155] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:47:24,603 [155] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:47:27,714 [150] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:49:10,353 [124] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:49:17,745 [165] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:49:17,748 [165] 
+<BR> 
+System.ArgumentException: ¶ÔÓÚ¡°com.pmp.web.Controllers.TaskController¡±ÖÐ·½·¨¡°System.Web.Mvc.ActionResult AuditSubmit(Int32, System.String)¡±µÄ²»¿ÉÒÔÎª null µÄÀàÐÍ¡°System.Int32¡±µÄ²ÎÊý¡°auditStates¡±£¬²ÎÊý×Öµä°üº¬Ò»¸ö null Ïî¡£¿ÉÑ¡²ÎÊý±ØÐëÎªÒýÓÃÀàÐÍ¡¢¿ÉÒÔÎª null µÄÀàÐÍ»òÉùÃ÷Îª¿ÉÑ¡²ÎÊý¡£
+²ÎÊýÃû: parameters
+   ÔÚ System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:50:16,245 [155] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:50:20,370 [146] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:50:22,962 [155] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:50:28,240 [136] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 14:50:28,243 [136] 
+<BR> 
+System.ArgumentException: ¶ÔÓÚ¡°com.pmp.web.Controllers.TaskController¡±ÖÐ·½·¨¡°System.Web.Mvc.ActionResult AuditSubmit(Int32, System.String)¡±µÄ²»¿ÉÒÔÎª null µÄÀàÐÍ¡°System.Int32¡±µÄ²ÎÊý¡°auditStates¡±£¬²ÎÊý×Öµä°üº¬Ò»¸ö null Ïî¡£¿ÉÑ¡²ÎÊý±ØÐëÎªÒýÓÃÀàÐÍ¡¢¿ÉÒÔÎª null µÄÀàÐÍ»òÉùÃ÷Îª¿ÉÑ¡²ÎÊý¡£
+²ÎÊýÃû: parameters
+   ÔÚ System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:05:09,377 [66] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:05:09,501 [66] 
+<BR> 
+System.ArgumentException: ¶ÔÓÚ¡°com.pmp.web.Controllers.TaskController¡±ÖÐ·½·¨¡°System.Web.Mvc.ActionResult AuditSubmit(Int32, System.String)¡±µÄ²»¿ÉÒÔÎª null µÄÀàÐÍ¡°System.Int32¡±µÄ²ÎÊý¡°auditStates¡±£¬²ÎÊý×Öµä°üº¬Ò»¸ö null Ïî¡£¿ÉÑ¡²ÎÊý±ØÐëÎªÒýÓÃÀàÐÍ¡¢¿ÉÒÔÎª null µÄÀàÐÍ»òÉùÃ÷Îª¿ÉÑ¡²ÎÊý¡£
+²ÎÊýÃû: parameters
+   ÔÚ System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   ÔÚ System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   ÔÚ System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult) <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:11:46,481 [75] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:11:53,622 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:11:53,623 [71] 
+<BR> 
+state:Pass, desc:gggggggg <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:11:53,691 [181] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:06,174 [103] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:09,951 [77] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:09,952 [77] 
+<BR> 
+state:Pass, desc:hhhhhhhh <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:09,960 [181] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:12,769 [107] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:15,663 [75] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:15,663 [75] 
+<BR> 
+state:Pass, desc:hhhhhhhhhhh <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:15,670 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:17,422 [181] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:20,606 [181] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:20,606 [181] 
+<BR> 
+state:Pass, desc:hhhhhhhhhhhhh <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:20,615 [73] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:24,152 [73] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:29,639 [69] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:34,519 [181] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:37,303 [73] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:40,267 [77] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:40,267 [77] 
+<BR> 
+state:Pass, desc:hhhhhhhhhhhhh <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:40,274 [75] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:42,008 [73] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:43,845 [103] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:45,605 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:48,917 [75] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:51,739 [77] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:51,739 [77] 
+<BR> 
+state:Pass, desc:hhhhhhhhhhh <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:51,748 [107] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:53,557 [69] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:56,245 [107] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:12:57,327 [73] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:18:31,615 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:28:36,524 [132] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:29:07,845 [132] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:29:41,685 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:29:45,340 [131] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:00,437 [131] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:00,565 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:02,972 [132] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:04,252 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:07,382 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:30:50,436 [111] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:31:24,463 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:32:48,494 [154] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:32:57,627 [182] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:34:55,879 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:34:55,898 [154] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:02,574 [132] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:05,317 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:12,477 [154] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:14,701 [111] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:14,702 [111] 
+<BR> 
+state:Pass, desc: <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:14,720 [64] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:35:16,939 [131] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:49:09,185 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:51:22,588 [95] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:51:55,373 [176] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:52:08,745 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:59:14,862 [145] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 15:59:20,620 [164] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:00:47,376 [138] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:00:47,503 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:01:43,284 [138] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:01:43,287 [61] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:23,007 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:23,498 [177] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:33,018 [138] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:35,059 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:35,060 [133] 
+<BR> 
+state:Pass, desc: <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:35,114 [74] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:36,297 [138] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:38,043 [128] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:38,043 [128] 
+<BR> 
+state:Pass, desc: <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:03:38,050 [129] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:04:01,520 [123] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:04:03,810 [74] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:04:40,057 [128] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:04:50,411 [129] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:05:01,187 [177] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:05:04,017 [79] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:05:06,779 [164] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:18:13,129 [129] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:18:52,655 [177] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:19:59,498 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:19:59,510 [110] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:20:01,674 [166] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:20:04,193 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:20:04,193 [71] 
+<BR> 
+state:Pass, desc: <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:20:04,201 [69] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:20:06,631 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:22:55,392 [123] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:22:57,184 [177] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:25:50,986 [79] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:25:59,282 [129] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:26:08,672 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:26:15,737 [69] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":1,"CTime":"2016-09-04T04:51:31.335Z","UTime":"2016-09-04T04:51:31.335Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:26:15,885 [123] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:30:34,662 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:30:53,718 [71] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:31:24,838 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:31:28,465 [121] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:40:48,239 [110] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:43:01,021 [110] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:44:33,133 [167] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:53:44,576 [54] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:55:06,550 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:55:19,252 [171] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 16:55:24,390 [133] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:01:12,516 [114] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:01:37,924 [140] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:01:43,414 [151] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:01:45,205 [118] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:02:08,940 [140] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:02:27,668 [114] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:02:29,084 [140] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:05:45,232 [139] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:06:27,598 [151] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:11:30,039 [151] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:27:48,739 [65] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:29:24,245 [120] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:30:00,148 [151] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:30:20,009 [152] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:30:23,448 [171] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+<BR><HR COLOR=blue> INFO  £º2016-09-04 17:30:27,683 [140] 
+<BR> 
+base.Init,read cookie ==> {"ID":2,"UserName":null,"Phone":"1234567","Password":"123456","CodePwd":null,"CodePwdTime":"0001-01-01T00:00:00Z","Role":null,"Level":2,"CTime":"2016-09-04T04:51:31Z","UTime":"2016-09-04T04:51:31Z","PersonInfo":null,"PersonReal":{"RealName":null,"CardId":null,"Gender":null,"CardJustImg":null,"CardAgainstImg":null,"Profession":0,"Address":null,"IsApprove":0,"_id":"000000000000000000000000","StringId":"000000000000000000000000"},"CompanyReal_ID":0,"Status":1,"AccountType":1,"_id":"57cba8537dcc32380cc343df","StringId":"57cba8537dcc32380cc343df"} <BR>
+>>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
 <BR>

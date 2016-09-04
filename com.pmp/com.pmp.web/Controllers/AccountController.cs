@@ -15,6 +15,7 @@ namespace com.pmp.web.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
         // GET: Account
@@ -32,6 +33,8 @@ namespace com.pmp.web.Controllers
             var model = new MgUserService().SearchLogin(_Longin_Phone);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
+
+            ViewBag.level = this._Longin_UserLevel;
             return View(model[0].PersonInfo);
         }
 

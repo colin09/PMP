@@ -26,8 +26,13 @@ namespace com.pmp.web
             
             bundles.Add(new ScriptBundle("~/bundles/jq-bs-ng").Include(
                      "~/Scripts/js/jquery-1.10.2.min.js",
+<<<<<<< HEAD
                      //"~/Scripts/jquery.cxscroll.min.js",
                     // "~/Scripts/jquery.lazyload.min.js",
+=======
+                     //"~/Scripts/js/jquery.cxscroll.min.js",
+                     "~/Scripts/js/jquery.lazyload.min.js",
+>>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
                      "~/Scripts/js/angular.min.js",
                      "~/Scripts/js/angular-sanitize.min.js",
                      "~/Scripts/js/bootstrap.min.js",
