@@ -283,10 +283,7 @@
     <Content Include="Views\Account\AccountCompany_Approve.cshtml" />
     <Content Include="Views\Manage\index.cshtml" />
     <Content Include="Views\Shared\_PagePartial.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\AccountAudit.cshtml" />
-=======
->>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
