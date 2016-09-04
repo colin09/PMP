@@ -18,30 +18,40 @@ namespace com.pmp.mongo.service
         /// 创建实例T 的自增长起始值：0 
         /// 每个T(Model)只需调用一次
         /// </summary>
-        protected void CreateCounter()
+        public void CreateCounter()
         {
             MgClient.CreateDefaultCounter<T>();
         }
-
-
         /// <summary>
         /// 获取一个新的自增Id
         /// </summary>
         /// <returns></returns>
-        protected int GetNewId()
+        public int GetNewId()
         {
            return MgClient.CreateNewId<T>();
         }
 
-        protected void Insert(T model)
+
+
+
+        public void Insert(T model)
         {
             MgClient.Insert<T>(model);
         }
 
-        protected long Update(FilterDefinition<T> filter, UpdateDefinition<T> update)
+        public long Update(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
             return MgClient.Update<T>(filter, update);
         }
+
+
+
+
+
+
+
+
+
 
         protected List<T> Search(FilterDefinition<T> filter)
         {
