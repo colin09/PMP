@@ -17,10 +17,7 @@ namespace com.pmp.mongo.data
 
         public UserRole Role { set; get; }
         public UserLevel Level { set; get; }
-        /// <summary>
-        /// 默认1启用，0禁用
-        /// </summary>
-        public int Status { set; get; }
+        
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
 
@@ -28,14 +25,18 @@ namespace com.pmp.mongo.data
 
         public MgPersonReal PersonReal { get; set; }
 
-        public MgCompanyReal CompanyReal { get; set; }
+        //public MgCompanyReal CompanyReal { get; set; }
+        //公司ID
+        public int CompanyReal_ID { get; set; }
+
+        /// <summary>
+        /// 默认1启用，0禁用
+        /// </summary>
+        public int Status { set; get; }
 
         //注册类型
-        public int AccountType { set; get; }
-        /// <summary>
-        /// 是否认证[默认0,提交1,审核通过2.审核不通过3.]
-        /// </summary>
-        public int IsApprove { set; get; }
+        public UserLevel AccountType { set; get; }
+       
     }
 
     public class UserRole

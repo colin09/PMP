@@ -45,6 +45,24 @@ namespace com.pmp.web.Controllers
         //[UserAuthorize]
         public ActionResult CreateSubmint(TaskInfoReq task)
         {
+<<<<<<< HEAD
+            //var project = new MgProject()
+            //{
+            //    Code = task.Code,
+            //    Name = task.Name,
+            //    ContractCode = task.ContractCode,
+            //    Status = ProjectStatus.Default,
+            //    Manager = task.Manager,
+            //    Linkman = task.Linkman,
+            //    Mobile = task.Mobile,
+            //    Desc = task.Desc,
+            //    CreatesUserID = this.UserId,
+            //    StartTime = task.StartTime,
+            //    EndTime = task.EndTime,
+            //    AuditStatus = AuditStatus.Default,
+            //    CreatesTime = DateTime.Now.ToOADate()
+            //};
+=======
             var project = new MgProject()
             {
                 Code = task.Code,
@@ -61,13 +79,14 @@ namespace com.pmp.web.Controllers
                 AuditStatus = AuditStatus.Default,
                 CreateTime = DateTime.Now.ToOADate()
             };
+>>>>>>> 8a9e1dfc0cb0b41a169a1ca088da2dd758ea43fb
 
-            _projectService.Create(project);
+            //_projectService.Create(project);
 
 
 
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
 

@@ -45,8 +45,16 @@ namespace com.pmp.mongo.data
         public string CompanyAgainstImg { set; get; }
 
         public double CTime { set; get; }
-        //[BsonDefaultValue((object)(DateTime.Now.ToOADate()))]
+
         public double UTime { set; get; }
+        /// <summary>
+        ///创建用户
+        /// </summary>
+        public int CUserID { get; set; }
+        /// <summary>
+        /// 是否认证[默认0,提交1,审核通过2.审核不通过3.]
+        /// </summary>
+        public int IsApprove { set; get; }
 
     }
 

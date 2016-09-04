@@ -53,7 +53,7 @@ namespace com.pmp.common.mvc.ctl
                     _Longin_UserLevel = (int)user["Level"];
                     _Longin_NickName = user["UserName"].ToString();
                     _Longin_Status = (int)user["Status"];
-                    _Longin_Approve = (int)user["IsApprove"];
+                    //_Longin_Approve = (int)user["IsApprove"];
                     _Longin_AccountType = (int)user["AccountType"];
                 }
             }

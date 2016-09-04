@@ -31,6 +31,16 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
+        /// <summary>
+        /// 查看所有用户
+        /// </summary>
+        /// <returns></returns>
+        public List<MgUser> SearchAll()
+        {
+            return Search();
+        }
+
+
 
         public bool CreateCodePwd(string phone)
         {
@@ -52,23 +62,30 @@ namespace com.pmp.mongo.service
         {
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var update = Builders<MgUser>.Update.Set(u => u.PersonReal, mp)
-                .Set(u => u.IsApprove, 1)
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
 
-        //提交企业认证
+        //提交企业认证并且增加公司
         public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mp)
         {
+            int companyID = 0;
+            new MgCompanyRealService().CreateCompanyReal(mp, ref companyID);
+
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
-            var update = Builders<MgUser>.Update.Set(u => u.CompanyReal, mp)
-                .Set(u => u.IsApprove, 1)
+            var update = Builders<MgUser>.Update.Set(u => u.CompanyReal_ID, companyID)
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
 
         public void CreateUser(string phone, string pwd, int userLevel)
         {
+            MgPersonReal mp = new MgPersonReal();
+            if ((UserLevel)userLevel == UserLevel.Person)
+            {
+                mp.IsApprove = 0;
+            }
+
             Insert(new MgUser()
             {
                 ID = GetNewId(),
@@ -76,9 +93,10 @@ namespace com.pmp.mongo.service
                 Phone = phone,
                 Password = pwd,
                 Level = (UserLevel)userLevel,
-                AccountType = userLevel,
+                AccountType = (UserLevel)userLevel,
                 CTime = DateTime.Now,
-                UTime = DateTime.Now
+                UTime = DateTime.Now,
+                PersonReal = mp
             });
         }
 

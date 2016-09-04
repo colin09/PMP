@@ -20,5 +20,9 @@ namespace com.pmp.mongo.data
         public int Profession { set; get; }
         public string Address { set; get; }
 
+        /// <summary>
+        /// 是否认证[提交1,审核通过2.审核不通过3.]
+        /// </summary>
+        public int IsApprove { set; get; }
     }
 }
