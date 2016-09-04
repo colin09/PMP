@@ -6,7 +6,7 @@ namespace com.pmp.mongo.data
 {
     public class MgBaseModel
     {
-        //public int Id { set; get; }
+        // public int Id { set; get; }
         public ObjectId _id { get; set; }
 
         public string StringId

@@ -54,9 +54,10 @@
   <ItemGroup>
     <Compile Include="client\MgClient.cs" />
     <Compile Include="data\MgBaseModel.cs" />
-    <Compile Include="data\MgCompanyInfo.cs" />
+    <Compile Include="data\MgCompanyReal.cs" />
     <Compile Include="data\MgEvaluation.cs" />
     <Compile Include="data\MgPersonInfo.cs" />
+    <Compile Include="data\MgPersonReal.cs" />
     <Compile Include="data\MgUser.cs" />
     <Compile Include="data\MgProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

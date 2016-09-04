@@ -14,7 +14,6 @@ namespace com.pmp.mongo.service
             CreateCounter();
         }
 
-
         public List<MgUser> SearchById(long id)
         {
             var filter = Builders<MgUser>.Filter.Eq("Id", id);
@@ -39,15 +38,45 @@ namespace com.pmp.mongo.service
             var update = Builders<MgUser>.Update.Set(u => u.CodePwd, "").Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
+        //修改个人信息
+        public bool UpdateAccountInfo(string phone, MgPersonInfo mp)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.PersonInfo, mp)
+                .Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
 
+        //提交个人认证
+        public bool UpdateAccountApprove(string phone, MgPersonReal mp)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.PersonReal, mp)
+                .Set(u => u.IsApprove, 1)
+                .Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
+
+        //提交企业认证
+        public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mp)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.CompanyReal, mp)
+                .Set(u => u.IsApprove, 1)
+                .Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
 
         public void CreateUser(string phone, string pwd, int userLevel)
         {
             Insert(new MgUser()
             {
+                ID = GetNewId(),
+                Status = 1,
                 Phone = phone,
                 Password = pwd,
                 Level = (UserLevel)userLevel,
+                AccountType = userLevel,
                 CTime = DateTime.Now,
                 UTime = DateTime.Now
             });

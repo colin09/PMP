@@ -20,7 +20,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 证件照
         /// </summary>
-        public List<string> Credentials { set; get; }
+       // public List<string> Credentials { set; get; }
         /// <summary>
         /// 简介
         /// </summary>
@@ -33,7 +33,6 @@ namespace com.pmp.mongo.data
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
 
+        public MgPersonReal PersonReal { get; set; }
     }
-
-
 }

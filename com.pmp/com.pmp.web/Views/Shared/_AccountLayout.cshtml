@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -43,38 +43,35 @@
         </div>
     </div>
     <div class="container accountBody">
-        <ul>
-            <li class="accountLeft">
-                <div class="top">
-                    <span>我是雇主</span>
-                </div>
-                <ul>
-                    <li><a href="#"><ic>&nbsp; </ic> 我的信息</a></li>
-                    <li><a href="#"><ic></ic>公司信息</a></li>
-                    <li><a href="#"><ic></ic>员工信息</a></li>
-                    <li><a href="#"><ic></ic>员工管理</a></li>
-                    <li>
-                        <a href="#"><ic></ic>任务中心</a>
-                        <dt>> 我的任务</dt>
-                        <dt>> 发布任务</dt>
-                    </li>
-                    <li><a href="#"><ic></ic>评价管理</a></li>
-                </ul>
-            </li>
-            <li>
-                @RenderBody()
-            </li>
-            <div class="clear"></div>
-        </ul>
-        <hr />
-        <footer class="container">
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
+        <div style="float:left">
+            <ul>
+                <li class="accountLeft">
+                    <div class="top">
+                        <span>我是雇主</span>
+                    </div>
+                    <ul>
+                        <li><a href="#"><ic>&nbsp; </ic> 我的信息</a></li>
+                        <li><a href="#"><ic></ic>公司信息</a></li>
+                        <li><a href="#"><ic></ic>员工信息</a></li>
+                        <li><a href="#"><ic></ic>员工管理</a></li>
+                        <li>
+                            <a href="#"><ic></ic>任务中心</a>
+                            <dt>> 我的任务</dt>
+                            <dt>> 发布任务</dt>
+                        </li>
+                        <li><a href="#"><ic></ic>评价管理</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div style="float:left;width: 80%; ">
+            @RenderBody()
+        </div>
     </div>
 
-
-
-
+    <footer class="container">
+        <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jq-bs-ng")
     @RenderSection("scripts", required: false)
