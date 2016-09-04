@@ -25,7 +25,7 @@
                     <span>关注公众号</span>
                     <u> | </u>
                 </a>
-                <span>客服电话:</span> <red>110</red>
+                <span>客服电话:</span> <red>400-123-4567</red>
                 </a>
             </li>
             <li></li>
@@ -49,9 +49,7 @@
                         <span>{{body.title}}</span>
                     </div>
                     <ul>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        <li>
+                        @*<li>
                             <a href="/Account/AccountDetail"><ic>&nbsp; </ic> 我的信息</a>
                             <a href="/Account/AccountPersonal"> <dt>> 基本资料</dt></a>
                             <a href="/Account/AccountP_Approve"><dt>> 实名认证</dt></a>
@@ -67,27 +65,13 @@
                             <a href="/Account/AccountAudit"> <dt>> 会员审核</dt></a>
                             <a href="#"> <dt>> 公司管理</dt></a>
                             <a href="#"> <dt>> 会员管理</dt></a>
-                        </li>
-                        @*<li>
-                                <a href="#"><ic></ic>任务中心</a>
-                                <dt>> 我的任务</dt>
-                                <dt>> 发布任务</dt>
-                            </li>*@
-                        <li><a href="#"><ic></ic>评价管理</a></li>
-=======
+                        </li>*@
+                     
                         <li ng-repeat="el in body.menu">
                             <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
                             <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
                         </li>
 
->>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
-=======
-                        <li ng-repeat="el in body.menu">
-                            <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
-                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
-                        </li>
-
->>>>>>> f5d7b0d1bdecf34b23ee0117fddac88049ed3ce2
                     </ul>
                 </li>
                 <li class="accountRight">

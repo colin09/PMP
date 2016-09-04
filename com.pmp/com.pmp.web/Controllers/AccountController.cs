@@ -64,6 +64,7 @@ namespace com.pmp.web.Controllers
             //    model[0].PersonReal = new MgPersonReal();
             //return View(model[0].PersonReal);
             ViewBag.phone = _Longin_Phone;
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
 
@@ -96,6 +97,7 @@ namespace com.pmp.web.Controllers
         public ActionResult AccountCompany_Approve()
         {
             ViewBag.phone = _Longin_Phone;
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
 
@@ -128,6 +130,7 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountAudit()
         {
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
 
@@ -193,6 +196,7 @@ namespace com.pmp.web.Controllers
             }
             ViewBag.CompanyReal = mgCompanyReal;
             ViewBag.mgUser = mgUser;
+            ViewBag.level = this._Longin_UserLevel;
             return View();
         }
 
