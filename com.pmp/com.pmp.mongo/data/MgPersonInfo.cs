@@ -13,10 +13,10 @@ namespace com.pmp.mongo.data
         public string RealName { set; get; }
         public string Birthday { set; get; }
         public string Gender { set; get; }
-        public string Age { set; get; }
-        public string Email { set; get; }
+        //public string Age { set; get; }
+        //public string Email { set; get; }
         public string Address { set; get; }
-        public string CardID { set; get; }
+        //public string CardID { set; get; }
         /// <summary>
         /// 证件照
         /// </summary>
@@ -33,6 +33,7 @@ namespace com.pmp.mongo.data
         public DateTime CTime { set; get; }
         public DateTime UTime { set; get; }
 
-        public MgPersonReal PersonReal { get; set; }
+        //public MgPersonReal PersonReal { get; set; }
+
     }
 }

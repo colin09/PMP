@@ -90,7 +90,7 @@
                 var data = {
                     code: $("#username").val(),
                     password: $("#password").val(),
-                    type: $("input[name='type']").val()
+                    type: $("input[name='type']:checked").val()
                 };
                 $.get("/Account/AcconutRegistered", data, function (res) {
                     if (res.IsSuccess == "True") {

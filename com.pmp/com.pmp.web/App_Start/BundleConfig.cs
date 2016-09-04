@@ -20,16 +20,14 @@ namespace com.pmp.web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/js/bootstrap.js"
+                      //,"~/Scripts/respond.js"
+                      ));
             
-
-
-
-
-
             bundles.Add(new ScriptBundle("~/bundles/jq-bs-ng").Include(
                      "~/Scripts/js/jquery-1.10.2.min.js",
+                     //"~/Scripts/jquery.cxscroll.min.js",
+                    // "~/Scripts/jquery.lazyload.min.js",
                      //"~/Scripts/js/jquery.cxscroll.min.js",
                      "~/Scripts/js/jquery.lazyload.min.js",
                      "~/Scripts/js/angular.min.js",

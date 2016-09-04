@@ -186,6 +186,7 @@
     <Content Include="Css\left.css" />
     <Content Include="Css\public.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Css\style.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -24,5 +24,15 @@ namespace com.pmp.mongo.data
         /// 是否认证[提交1,审核通过2.审核不通过3.]
         /// </summary>
         public int IsApprove { set; get; }
+
+        /// <summary>
+        /// 不通过原因
+        /// </summary>
+        public string NotPassReason { get; set; }
+
+
+        public string CreatesTime { get; set; }
+
+        public string AuditTime { get; set; }
     }
 }
