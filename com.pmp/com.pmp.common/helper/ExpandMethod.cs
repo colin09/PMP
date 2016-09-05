@@ -31,9 +31,15 @@ namespace com.pmp.common.helper
 
         public static T DesJson<T>(this string obj)
         {
-          return  JsonConvert.DeserializeObject<T>(obj);
+            return JsonConvert.DeserializeObject<T>(obj);
         }
 
+
+        public static string ToDate(this double oadate)
+        {
+            var date = DateTime.Parse("1899-12-30").AddMilliseconds(Math.Round(oadate * 24 * 60 * 60 * 1000));
+            return date.ToString("yyyy-MM-dd");
+        }
 
 
     }
