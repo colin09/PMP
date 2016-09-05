@@ -136,32 +136,35 @@ namespace com.pmp.web.Controllers
         }
 
 
-        public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase file)
+        public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
-            if (file == null)
+            if (files == null)
                 return Content("没有选择文件", "text/plain");
-
-            var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
+            
             try
             {
-                file.SaveAs(savePath);
-
-                var sln = new MgSolution()
+                foreach (var file in files)
                 {
-                    ID = _projectService.GetNewId(),
-                    ProjectId = projectId,
-                    SlnDesc = desc,
-                    FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
-                    UserId = this._Longin_UserId,
-                };
+                    var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
+                    file.SaveAs(savePath);
+
+                    var sln = new MgSolution()
+                    {
+                        ID = _projectService.GetNewId(),
+                        ProjectId = projectId,
+                        SlnDesc = desc,
+                        FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
+                        UserId = this._Longin_UserId,
+                    };
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 return Content("上传异常 ！", "text/plain");
             }
 
 
-            return View();
+            return RedirectToAction("");
         }
 
 

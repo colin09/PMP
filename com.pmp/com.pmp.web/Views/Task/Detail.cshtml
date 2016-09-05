@@ -72,31 +72,32 @@
 <div class="modal fade" id="getModel">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="/Task/CreateSln">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">提交方案说明</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table noborder">
-                        <tr>
-                            <td>方案描述： </td>
-                            <td>
-                                <textarea class="form-control" name="slnDesc" placeholder="方案描述" rows="5"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>项目文件：</td>
-                            <td><input type="file" id="exampleInputFile"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
-                    <button type="submit" class="btn btn-primary"> 确定领取 </button>
-                </div>
-            </form>
+                @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">提交方案说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table noborder">
+                            <tr>
+                                <td>方案描述： </td>
+                                <td>
+                                    <textarea class="form-control" name="slnDesc" placeholder="方案描述" rows="5"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>项目文件：</td>
+                                <td><input type="file" id="exampleInputFile" multiple="multiple"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="projectId" value="@Model.ID"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                        <button type="submit" class="btn btn-primary"> 确定领取 </button>
+                    </div>
+                }
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
