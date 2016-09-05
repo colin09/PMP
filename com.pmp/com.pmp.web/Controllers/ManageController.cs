@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace com.pmp.web.Controllers
 {
-    public class ManageController : BaseController
+    public class ManageController : WebBaseController
     {
 
         private readonly MgUserService _userService;

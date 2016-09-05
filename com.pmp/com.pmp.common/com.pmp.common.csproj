@@ -55,6 +55,7 @@
     <Compile Include="Config\BaseConfig.cs" />
     <Compile Include="Config\ElasticSearchConfig.cs" />
     <Compile Include="Config\MongodbConfig.cs" />
+    <Compile Include="Config\Public_const_enum.cs" />
     <Compile Include="helper\CryptoHelper.cs" />
     <Compile Include="helper\ExpandMethod.cs" />
     <Compile Include="helper\HttpHelper.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="logger\Logger.cs" />
     <Compile Include="mvc\attribute\ErrorFilterAttribute.cs" />
     <Compile Include="mvc\attribute\UserAuthorizeAttribute.cs" />
+    <Compile Include="mvc\ctl\AuthorizeUrl.cs" />
     <Compile Include="mvc\ctl\BaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

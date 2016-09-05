@@ -9,17 +9,13 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <input type="hidden"  id="userLevel" value="@ViewBag.level" />
     <div class="container">
         <ul class="taskTop">
             <li class="logoTitle">
                 <a href="http://#"><img src="~/images/pmp.png" class="logoTask" /> [PMP] 任务服务平台 </a>
             </li>
             <li class="taskTopCenter">
-                @*<a href="#" target="_blank" rel="nofollow">
-                        <span class="phoneapp">&nbsp;</span>
-                        <span>手机APP</span>
-                        <u> | </u>
-                    </a>*@
                 <a href="#" target="_blank" rel="nofollow">
                     <span class="weibo">&nbsp;</span>
                     <span>关注公众号</span>
@@ -49,24 +45,6 @@
                         <span>{{body.title}}</span>
                     </div>
                     <ul>
-                        @*<li>
-                            <a href="/Account/AccountDetail"><ic>&nbsp; </ic> 我的信息</a>
-                            <a href="/Account/AccountPersonal"> <dt>> 基本资料</dt></a>
-                            <a href="/Account/AccountP_Approve"><dt>> 实名认证</dt></a>
-                            <a href="/Account/AccountCompany_Approve"><dt>> 公司认证</dt></a>
-                        </li>
-                        <li>
-                            <a href=""><ic>&nbsp; </ic> 员工管理</a>
-                            <a href="#"> <dt>> 添加员工</dt></a>
-                            <a href="#"> <dt>> 员工列表</dt></a>
-                        </li>
-                        <li>
-                            <a href="#"><ic>&nbsp; </ic> 用户管理</a>
-                            <a href="/Account/AccountAudit"> <dt>> 会员审核</dt></a>
-                            <a href="#"> <dt>> 公司管理</dt></a>
-                            <a href="#"> <dt>> 会员管理</dt></a>
-                        </li>*@
-                     
                         <li ng-repeat="el in body.menu">
                             <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
                             <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
@@ -79,10 +57,8 @@
                 </li>
             </ul>
         </div>
-
         <div class="clear"></div>
     </div>
-
     <footer class="container">
         <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
     </footer>

@@ -24,8 +24,6 @@ namespace com.pmp.mongo.data
         public MgPersonInfo PersonInfo { set; get; }
 
         public MgPersonReal PersonReal { get; set; }
-
-        //public MgCompanyReal CompanyReal { get; set; }
         //公司ID
         public int CompanyReal_ID { get; set; }
 
@@ -33,9 +31,7 @@ namespace com.pmp.mongo.data
         /// 默认1启用，0禁用
         /// </summary>
         public int Status { set; get; }
-
-        //注册类型
-        public UserLevel AccountType { set; get; }
+        
 
     }
 
@@ -52,5 +48,15 @@ namespace com.pmp.mongo.data
         CompanyAdmin = 2,
         ProjectManager = 3,
         CompanyUser = 4,
+    }
+    /// <summary>
+    /// 登录信息
+    /// </summary>
+    public class LoginUser
+    {
+        public string NickName { get; set; }
+        public int UserId { get; set; }
+        public string Phone { get; set; }
+        public UserLevel UserLevel { get; set; }
     }
 }

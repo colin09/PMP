@@ -1,4 +1,5 @@
-﻿using com.pmp.common.helper;
+﻿using com.pmp.common.Config;
+using com.pmp.common.helper;
 using com.pmp.common.mvc.ctl;
 using com.pmp.mongo.data;
 using com.pmp.mongo.service;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace com.pmp.web.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : WebBaseController
     {
         // GET: Account
         public ActionResult Index()
@@ -128,6 +129,7 @@ namespace com.pmp.web.Controllers
         /// 系统管理员审核
         /// </summary>
         /// <returns></returns>
+        [AuthorizationAttribute]
         public ActionResult AccountAudit()
         {
             ViewBag.level = this._Longin_UserLevel;
@@ -149,7 +151,6 @@ namespace com.pmp.web.Controllers
                 res = new MgUserService().UpdateAudit(int.Parse(accountId), int.Parse(resAudit), notpassstr);
             else
             {
-                //List <MgUser>  list = new MgUserService().SearchById(int.Parse(accountId));
                 res = new MgCompanyRealService().UpdateAudit(int.Parse(accountId), int.Parse(resAudit), notpassstr);
             }
             return res.ToString();
@@ -175,16 +176,11 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountDetail()
         {
-
             long uid = 0;
             if (!string.IsNullOrWhiteSpace(Request["uid"]))
-            {
                 uid = long.Parse(Request["uid"]);
-            }
             else
-            {
                 uid = long.Parse(_Longin_UserId.ToString());
-            }
 
             MgCompanyReal mgCompanyReal = new MgCompanyReal();
             MgUser mgUser = new MgUser() { PersonInfo = new MgPersonInfo(), PersonReal = new MgPersonReal() };
@@ -220,7 +216,16 @@ namespace com.pmp.web.Controllers
                         message = "登录失败,密码错误！";
                     }
                     else
-                        RecordUserLogonStatus(HttpHelper.ObjectToJson(info[0]));
+                    {
+                        LoginUser ui = new LoginUser()
+                        {
+                            NickName = info[0].PersonInfo.RealName,
+                            Phone = info[0].Phone,
+                            UserId = info[0].ID,
+                            UserLevel = (UserLevel)info[0].Level
+                        };
+                        RecordUserLogonStatus(HttpHelper.ObjectToJson(ui));
+                    }
                 }
                 else
                 {
@@ -237,13 +242,15 @@ namespace com.pmp.web.Controllers
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}";
         }
 
+
+
         public string AcconutRegistered()
         {
             bool IsSuccess = true;
             string message = "注册成功！";
             var name = Request["code"];
             var password = Request["password"];
-            var type = Request["type"];
+            var tempType = int.Parse(Request["type"]);
             try
             {
                 MgUserService mgUserService = new MgUserService();
@@ -253,7 +260,15 @@ namespace com.pmp.web.Controllers
                     message = "失败,手机号已注册！";
                 }
                 else
-                    mgUserService.CreateUser(name.Trim(), password.Trim(), int.Parse(type));
+                {
+                    UserLevel ul = UserLevel.Default;
+                    if (tempType == 1)
+                        ul = UserLevel.Person;
+                    else if (tempType == 2)
+                        ul = UserLevel.CompanyAdmin;
+
+                    mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
+                }
             }
             catch (Exception ex)
             {
@@ -267,8 +282,8 @@ namespace com.pmp.web.Controllers
 
         public void RecordUserLogonStatus(string value)
         {
-            HttpHelper.WriteCookie("COOKIE_MANAGER_INFO", value, 14400);
+            new HttpHelper().SetSession(Public_const_enum.LonginCookieName, value);
         }
-
     }
 }
+

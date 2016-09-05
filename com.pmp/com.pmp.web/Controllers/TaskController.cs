@@ -155,15 +155,45 @@ namespace com.pmp.web.Controllers
                     UserId = this._Longin_UserId,
                 };
             }
-            catch
+            catch (Exception ex) { }
+        }
+
+        public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
+        {
+            if (files == null)
+                return Content("没有选择文件", "text/plain");
+
+            try
+            {
+                foreach (var file in files)
+                {
+                    var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
+                    file.SaveAs(savePath);
+
+                    var sln = new MgSolution()
+                    {
+                        ID = _projectService.GetNewId(),
+                        ProjectId = projectId,
+                        SlnDesc = desc,
+                        FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
+                        UserId = this._Longin_UserId,
+                    };
+                }
+            }
+            catch (Exception ex)
+>>>>>>> 3d3df5a6038e76de6b84ae6074560fed2fc16eec
             {
                 return Content("上传异常 ！", "text/plain");
             }
 
 
+<<<<<<< HEAD
             return View();
+=======
+            return RedirectToAction("");
+>>>>>>> 3d3df5a6038e76de6b84ae6074560fed2fc16eec
         }
 
 
+        }
     }
-}
