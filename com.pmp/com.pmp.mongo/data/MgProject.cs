@@ -18,9 +18,9 @@ namespace com.pmp.mongo.data
 
         public MgProject()
         {
-            FlieList = new List<ProjectFlieList>();
+            FlieList = new List<ProjectFlie>();
 
-            ProcessDesc = new List<ProjectProcessDesc>();
+            ProcessDesc = new List<ProjectProcess>();
         }
         /// <summary>
         /// 主键
@@ -110,11 +110,11 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 项目文件
         /// </summary>
-        public List<ProjectFlieList> FlieList { get; set; }
+        public List<ProjectFlie> FlieList { get; set; }
         /// <summary>
         /// 项目进度
         /// </summary>
-        public List<ProjectProcessDesc> ProcessDesc { get; set; }
+        public List<ProjectProcess> ProcessDesc { get; set; }
         /// <summary>
         /// 项目评价
         /// </summary>
@@ -127,7 +127,7 @@ namespace com.pmp.mongo.data
     /// <summary>
     /// 项目进度
     /// </summary>
-    public class ProjectProcessDesc
+    public class ProjectProcess
     {
         /// <summary>
         /// 描述
@@ -148,7 +148,7 @@ namespace com.pmp.mongo.data
     /// <summary>
     /// 项目文件
     /// </summary>
-    public class ProjectFlieList
+    public class ProjectFlie
     {
         /// <summary>
         /// 项目文件评价（立项说明、方案文件）
@@ -156,7 +156,9 @@ namespace com.pmp.mongo.data
         /// </summary>
         public int FileType { get; set; }
 
-        public string FileUrl { get; set; }
+        public string Name { get; set; }
+
+        public string Path { get; set; }
     }
 
 
