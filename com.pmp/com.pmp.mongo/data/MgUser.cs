@@ -30,12 +30,14 @@ namespace com.pmp.mongo.data
         //公司ID
         public int CompanyReal_ID { get; set; }
 
+        //公司Name
+        public string CompanyReal_Name { get; set; }
+
         /// <summary>
         /// 默认1启用，0禁用
         /// </summary>
         public int Status { set; get; }
         
-
     }
 
     public class UserRole

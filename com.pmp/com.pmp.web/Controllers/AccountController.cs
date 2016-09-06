@@ -60,10 +60,6 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountP_Approve()
         {
-            //var model = new MgUserService().SearchLogin(Phone);
-            //if (model[0].PersonReal == null)
-            //    model[0].PersonReal = new MgPersonReal();
-            //return View(model[0].PersonReal);
             ViewBag.phone = _Longin_Phone;
             ViewBag.level = this._Longin_UserLevel;
             return View();
@@ -129,7 +125,7 @@ namespace com.pmp.web.Controllers
         /// 系统管理员审核
         /// </summary>
         /// <returns></returns>
-        [AuthorizationAttribute]
+       // [AuthorizationAttribute]
         public ActionResult AccountAudit()
         {
             ViewBag.level = this._Longin_UserLevel;
@@ -196,6 +192,64 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
+
+
+        public ActionResult UserList()
+        {
+            var type = Request.QueryString["type"];
+            var sel_type = Request.Form["sel_type"];
+            var name = Request.Form["name"];
+            List<MgUser> list = new List<MgUser>();
+            if (type == "1")
+            {
+                if (sel_type == "1")
+                    list = new MgUserService().SearchWhere(name, "");
+                else if (sel_type == "2")
+                    list = new MgUserService().SearchWhere("", name);
+                else
+                    list = new MgUserService().SearchWhere("", "");
+            }
+            else
+            {
+                var companyID = Request["companyID"];
+                if (sel_type == "1")
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "");
+                else if (sel_type == "2")
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", name);
+                else
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", "");
+            }
+            ViewBag.accountType = int.Parse(type);
+            ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
+            ViewBag.name = name;
+            return View(list);
+        }
+
+
+        //public string UserListSeach()
+        //{
+        //    var accountType = Request["accountType"];
+        //    var name = Request["accountType"];
+        //    var phone = Request["phone"];
+        //    if (accountType == "1")
+        //    {
+        //        var userList = new MgUserService().SearchAll();
+        //    }
+        //    else if (accountType == "2")
+        //    {
+        //        var userList = new MgCompanyReal().();
+
+        //        var companyName = Request["companyName"];
+        //    }
+        //    return "";
+        //}
+
+        public ActionResult UserDetail()
+        {
+            return View();
+        }
+
+
         public string SignIn()
         {
             bool IsSuccess = true;
@@ -240,8 +294,6 @@ namespace com.pmp.web.Controllers
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}";
         }
 
-
-
         public string AcconutRegistered()
         {
             bool IsSuccess = true;
@@ -276,7 +328,6 @@ namespace com.pmp.web.Controllers
             }
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}";
         }
-
 
         public void RecordUserLogonStatus(string value)
         {

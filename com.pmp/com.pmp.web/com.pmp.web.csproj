@@ -233,6 +233,7 @@
     <Content Include="Images\train.png" />
     <Content Include="Images\user.png" />
     <Content Include="Scripts\Footer.js" />
+    <Content Include="Scripts\general.js" />
     <Content Include="Scripts\Header.js" />
     <Content Include="Scripts\layer\layer.js" />
     <Content Include="Scripts\layer\skin\default\icon-ext.png" />
@@ -298,6 +299,8 @@
     <Content Include="Views\Task\AuditList.cshtml" />
     <Content Include="Views\Task\AuditDetail.cshtml" />
     <Content Include="Views\Account\AccountDetail.cshtml" />
+    <Content Include="Views\Account\UserList.cshtml" />
+    <Content Include="Views\Account\UserDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

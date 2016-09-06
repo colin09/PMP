@@ -23,6 +23,18 @@ namespace com.pmp.mongo.service
 
 
         /// <summary>
+        /// 查询公司信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<MgCompanyReal> SearchByName(int name)
+        {
+            var filter = Builders<MgCompanyReal>.Filter.Eq("Name", name);
+            return Search(filter);
+        }
+
+        
+        /// <summary>
         /// 查询所有公司
         /// </summary>
         /// <returns></returns>
@@ -50,7 +62,7 @@ namespace com.pmp.mongo.service
         }
 
 
-        public bool UpdateAudit(int Id,int auditType,string notpassstr)
+        public bool UpdateAudit(int Id, int auditType, string notpassstr)
         {
             var filter = Builders<MgCompanyReal>.Filter.Eq("ID", Id);
             var update = Builders<MgCompanyReal>.Update.Set(u => u.IsApprove, auditType).

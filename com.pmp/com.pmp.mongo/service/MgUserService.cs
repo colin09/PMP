@@ -28,6 +28,7 @@ namespace com.pmp.mongo.service
         public List<MgUser> SearchLogin(string code)
         {
             var filter = Builders<MgUser>.Filter.Eq("Phone", code);
+
             return Search(filter);
         }
 
@@ -38,6 +39,52 @@ namespace com.pmp.mongo.service
         public List<MgUser> SearchAll()
         {
             return Search();
+        }
+        /// <summary>
+        /// 多条件查询
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public List<MgUser> SearchWhere(string name, string phone)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", 0);
+            List<MgUser> list = Search(filter);
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                list = list.FindAll(t => t.PersonInfo.RealName == name);
+            }
+            if (!string.IsNullOrWhiteSpace(phone))
+            {
+                list = list.FindAll(t => t.Phone == phone);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 根据公司ID获取员工
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<MgUser> SearchuSserByCompanyId(int companyId, string name, string phone)
+        {
+            List<MgUser> userList = new List<data.MgUser>();
+            List<MgCompanyReal> companyList = new MgCompanyRealService().SearchById(companyId);
+            if (companyList != null && companyList.Count > 0)
+            {
+                var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
+                userList = Search(filter);
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    userList = userList.FindAll(t => t.PersonInfo.RealName == name);
+                }
+                if (!string.IsNullOrWhiteSpace(phone))
+                {
+                    userList = userList.FindAll(t => t.Phone == phone);
+                }
+            }
+            return userList;
         }
 
 
@@ -80,7 +127,7 @@ namespace com.pmp.mongo.service
         /// <param name="Id"></param>
         /// <param name="accountType"></param>
         /// <returns></returns>
-        public bool UpdateAudit(int Id, int auditType,string notpassstr)
+        public bool UpdateAudit(int Id, int auditType, string notpassstr)
         {
             var filter = Builders<MgUser>.Filter.Eq("ID", Id);
             var update = Builders<MgUser>.Update.Set(u => u.PersonReal.IsApprove, auditType).
@@ -125,17 +172,20 @@ namespace com.pmp.mongo.service
 
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var update = Builders<MgUser>.Update.Set(u => u.CompanyReal_ID, companyID)
+                .Set(u => u.CompanyReal_Name, mp.Name)
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
 
         public void CreateUser(string phone, string pwd, int userLevel)
         {
-            MgPersonReal mp =null;
+            MgPersonReal mp = null;
+            MgPersonInfo mi = null;
             if ((UserLevel)userLevel == UserLevel.Person)
             {
                 mp = new MgPersonReal();
                 mp.IsApprove = 0;
+                mi = new data.MgPersonInfo();
             }
 
             Insert(new MgUser()
@@ -147,7 +197,8 @@ namespace com.pmp.mongo.service
                 Level = (UserLevel)userLevel,
                 CTime = DateTime.Now,
                 UTime = DateTime.Now,
-                PersonReal = mp
+                PersonReal = mp,
+                PersonInfo= mi
             });
         }
 
