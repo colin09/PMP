@@ -15,6 +15,8 @@ using System.Web.Mvc;
 
 namespace com.pmp.web.Controllers
 {
+
+
     public class TaskController : BaseController
     {
 
@@ -96,7 +98,6 @@ namespace com.pmp.web.Controllers
 
             var slns = _solutionService.GetListByProId(id);
             ViewBag.slns = slns;
-            log.Info(slns.ToJson());
 
             return View(project);
         }
@@ -204,5 +205,5 @@ namespace com.pmp.web.Controllers
     }
 
 
-    
+
 }
