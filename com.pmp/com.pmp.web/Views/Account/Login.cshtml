@@ -1,13 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>2016-派单</title>
+    <title>登录</title>
     <link href="~/Css/Index.css" rel="stylesheet" />
     <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
     <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
@@ -15,8 +14,8 @@
 </head>
 <body>
     <div class="container login">
-        <h1 class="pt35">here is the title ...</h1>
-        <div class="form">
+        <h1 class="pt35">给我起个名字</h1>
+        <div class="form" style="width:50%;float:right">
             @*<h3> Sign In </h3>*@
             <div class="sign-in">
                 <input type="text" class="name" name="username" placeholder="手机号" required="">
@@ -46,7 +45,7 @@
                         <span>我要赚钱</span>
 
                         <input name="type" type="radio" value="2">
-                        <span>我要程序员</span>
+                        <span>我是雇主</span>
 
                         <input type="submit" id="btn_registered" value="注册">
                     </div>

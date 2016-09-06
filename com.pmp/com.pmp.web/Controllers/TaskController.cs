@@ -1,4 +1,5 @@
-﻿using com.pmp.common.mvc.attribute;
+﻿using com.pmp.common.helper;
+using com.pmp.common.mvc.attribute;
 using com.pmp.common.mvc.ctl;
 using com.pmp.model.enums;
 using com.pmp.model.request;
@@ -95,6 +96,7 @@ namespace com.pmp.web.Controllers
 
             var slns = _solutionService.GetListByProId(id);
             ViewBag.slns = slns;
+            log.Info(slns.ToJson());
 
             return View(project);
         }
@@ -200,4 +202,7 @@ namespace com.pmp.web.Controllers
 
 
     }
+
+
+    
 }

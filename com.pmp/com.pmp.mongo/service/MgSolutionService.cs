@@ -32,10 +32,10 @@ namespace com.pmp.mongo.service
 
 
 
-        public MgSolution GetListByProId(int projectId)
+        public List<MgSolution> GetListByProId(int projectId)
         {
             var filter = Builders<MgSolution>.Filter.Eq("ProjectId", projectId);
-            return Search(filter).FirstOrDefault();
+            return Search(filter);
         }
 
     }

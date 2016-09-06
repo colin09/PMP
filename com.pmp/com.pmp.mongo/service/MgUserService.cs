@@ -145,7 +145,6 @@ namespace com.pmp.mongo.service
                 Phone = phone,
                 Password = pwd,
                 Level = (UserLevel)userLevel,
-                AccountType = (UserLevel)userLevel,
                 CTime = DateTime.Now,
                 UTime = DateTime.Now,
                 PersonReal = mp
