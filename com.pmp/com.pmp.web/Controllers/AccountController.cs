@@ -289,7 +289,7 @@ namespace com.pmp.web.Controllers
             {
                 IsSuccess = false;
                 message = "失败,程序异常！";
-                log.Info($"注册失败 == name> {name }");
+                log.Info($"注册失败 == name> {name },{ex}");
             }
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"message\":\"" + message + "\"}";
         }
