@@ -66,22 +66,6 @@ namespace com.pmp.web.Controllers
                 AuditStatus = AuditStatus.Default,
                 CreateTime = DateTime.Now.ToOADate()
             };
-            var fileIndex = 1;
-            foreach (var file in files)
-            {
-                var pFile = new ProjectFlie();
-                pFile.Name = Path.GetFileName(file.FileName);
-                pFile.FileType = 1;
-                pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
-
-                var savePath = pFile.Path;
-                file.SaveAs(savePath);
-
-                project.FlieList.Add(pFile);
-                fileIndex += 1;
-            }
-
-            project.ProcessDesc.Add(new ProjectProcess() { ProcessDesc = "发布项目。", UserID = this._Longin_UserId, CreateTime = DateTime.Now.ToOADate() });
 
             _projectService.Create(project);
             return RedirectToAction("AuditList");
@@ -92,9 +76,6 @@ namespace com.pmp.web.Controllers
         public ActionResult Detail(int id)
         {
             var project = _projectService.GetOneById(id);
-
-            var slns = _solutionService.GetListByProId(id);
-            ViewBag.slns = slns;
 
             return View(project);
         }
@@ -111,8 +92,6 @@ namespace com.pmp.web.Controllers
 
             return View(list);
         }
-
-
         public ActionResult AuditDetail(int id)
         {
             var project = _projectService.GetOneById(id);
@@ -157,78 +136,37 @@ namespace com.pmp.web.Controllers
         }
 
 
-        public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase file)
-        {
-            if (file == null)
-                return Content("没有选择文件", "text/plain");
-
-            var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
-            try
-            {
-                file.SaveAs(savePath);
-
-                var sln = new MgSolution()
-                {
-                    ID = _projectService.GetNewId(),
-                    ProjectId = projectId,
-                    SlnDesc = desc,
-                    FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
-                    UserId = this._Longin_UserId,
-                };
-            }
-            catch (Exception ex) { }
-        }
-
         public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
             if (files == null)
                 return Content("没有选择文件", "text/plain");
-
+            
             try
             {
-                var sln = new MgSolution()
-                {
-                    ID = _projectService.GetNewId(),
-                    ProjectId = projectId,
-                    SlnDesc = desc,
-                    //FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
-                    UserId = this._Longin_UserId,
-                };
-
-                var fileIndex = 1;
                 foreach (var file in files)
                 {
-                    var pFile = new ProjectFlie();
-                    pFile.Name = Path.GetFileName(file.FileName);
-                    pFile.FileType = 1;
-                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
-
-                    var savePath = pFile.Path;
+                    var savePath = Path.Combine(Request.MapPath("~/Upload"), Path.GetFileName(file.FileName));
                     file.SaveAs(savePath);
 
-                    sln.FileList.Add(pFile);
-                    fileIndex += 1;
+                    var sln = new MgSolution()
+                    {
+                        ID = _projectService.GetNewId(),
+                        ProjectId = projectId,
+                        SlnDesc = desc,
+                        FileList = new List<string>() { "../upload/" + Path.GetFileName(file.FileName) },
+                        UserId = this._Longin_UserId,
+                    };
                 }
-                _solutionService.Insert(sln);
             }
             catch (Exception ex)
->>>>>>> 3d3df5a6038e76de6b84ae6074560fed2fc16eec
             {
-                log.Info(ex);
+                return Content("上传异常 ！", "text/plain");
             }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            return View();
-=======
             return RedirectToAction("");
->>>>>>> 3d3df5a6038e76de6b84ae6074560fed2fc16eec
-=======
-            return RedirectToAction("Detail", new { id = projectId });
->>>>>>> 80a14c994b33807822c8511be6e3ea3efef70c14
         }
 
 
-        }
     }
+}

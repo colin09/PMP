@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace com.pmp.mongo.data
         /// </summary>
         public double Level { get; set; }
 
-        public double CTime { set; get; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CTime { set; get; }
     }
 }
