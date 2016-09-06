@@ -13,12 +13,15 @@ namespace com.pmp.mongo.data
         public string Phone { set; get; }
         public string Password { set; get; }
         public string CodePwd { set; get; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CodePwdTime { set; get; }
 
         public UserRole Role { set; get; }
         public UserLevel Level { set; get; }
 
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CTime { set; get; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UTime { set; get; }
 
         public MgPersonInfo PersonInfo { set; get; }

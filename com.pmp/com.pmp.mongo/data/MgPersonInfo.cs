@@ -30,7 +30,10 @@ namespace com.pmp.mongo.data
         /// </summary>
         public string Skill { set; get; }
 
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CTime { set; get; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UTime { set; get; }
 
         //public MgPersonReal PersonReal { get; set; }
