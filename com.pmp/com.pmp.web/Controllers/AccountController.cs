@@ -196,8 +196,6 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
-
-
         public string SignIn()
         {
             bool IsSuccess = true;
