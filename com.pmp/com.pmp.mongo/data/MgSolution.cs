@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,11 @@ namespace com.pmp.mongo.data
 
         public int UserId { set; get; }
 
-        public double CTime { set; get; } = DateTime.Now.ToOADate();
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CTime { set; get; } = DateTime.Now;
 
-        public double UTime { set; get; } = DateTime.Now.ToOADate();
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime UTime { set; get; } = DateTime.Now;
 
         public int Result { set; get; } = 0;
 

@@ -4,10 +4,12 @@ obj/
 obj/Debug/
 Debug/
 tests/
+log/
 *.suo
 *ReSharper*
 *.zip
 *.nupkg
+*.log
 packages/
 
 
@@ -64,10 +66,4 @@ packages/
 
 .vs/config/applicationhost.config
 *.cache
-com.pmp/com.pmp.web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-com.pmp/com.pmp.mongo/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-com.pmp/.vs/com.pmp/v14/.suo
-com.pmp/com.pmp.web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-com.pmp/.vs/com.pmp/v14/.suo
-*.cache
-com.pmp/com.pmp.web/Log/LogInfo/20160904.htm
+*.suo
