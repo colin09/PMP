@@ -47,7 +47,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 项目经理
         /// </summary>
-        public int Manager { get; set; }
+        public string Manager { get; set; }
         /// <summary>
         /// 联系人
         /// </summary>
@@ -106,7 +106,7 @@ namespace com.pmp.mongo.data
         /// </summary>
         public int IsEvaluate_I { get; set; }
 
-
+        public double Budget { set; get; }
 
 
 

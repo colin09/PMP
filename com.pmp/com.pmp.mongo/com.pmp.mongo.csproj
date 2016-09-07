@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="service\BaseService.cs" />
     <Compile Include="service\MgCompanyRealService.cs" />
+    <Compile Include="service\MgEvaluationService.cs" />
     <Compile Include="service\MgProjectService.cs" />
     <Compile Include="service\MgSolutionService.cs" />
     <Compile Include="service\MgUserService.cs" />

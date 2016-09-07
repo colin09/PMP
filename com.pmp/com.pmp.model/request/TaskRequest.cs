@@ -35,7 +35,7 @@ namespace com.pmp.model.request
         /// <summary>
         /// 项目经理
         /// </summary>
-        public int Manager { get; set; }
+        public string Manager { get; set; }
         /// <summary>
         /// 联系人
         /// </summary>
@@ -55,11 +55,16 @@ namespace com.pmp.model.request
         /// <summary>
         /// 项目开始时间
         /// </summary>
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         /// <summary>
         /// 项目结束时间
         /// </summary>
-        public string EndTime { get; set; }
+        public DateTime EndTime { get; set; }
+
+        /// <summary>
+        /// 项目预算
+        /// </summary>
+        public double Budget { set; get; }
     }
 
 
