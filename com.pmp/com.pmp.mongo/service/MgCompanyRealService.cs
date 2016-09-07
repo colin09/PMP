@@ -33,7 +33,7 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
-        
+
         /// <summary>
         /// 查询所有公司
         /// </summary>
@@ -41,6 +41,22 @@ namespace com.pmp.mongo.service
         public List<MgCompanyReal> SearchAll()
         {
             return Search();
+        }
+
+        /// <summary>
+        /// 查询所有公司
+        /// </summary>
+        /// <returns></returns>
+        public List<MgCompanyReal> SearchWhere(string phone, string contactsName, string companyName)
+        {
+            List<MgCompanyReal> mgCompanyReal = Search();
+            if (!string.IsNullOrWhiteSpace(phone))
+                mgCompanyReal.FindAll(t => t.Phone == phone);
+            if (!string.IsNullOrWhiteSpace(contactsName))
+                mgCompanyReal.FindAll(t => t.ContactsName == contactsName);
+            if (!string.IsNullOrWhiteSpace(companyName))
+                mgCompanyReal.FindAll(t => t.Name == companyName);
+            return mgCompanyReal;
         }
 
         /// <summary>

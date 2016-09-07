@@ -18,10 +18,24 @@ namespace com.pmp.mongo.data
         public int ID { set; get; }
         public string Name { set; get; }
         public string Address { set; get; }
+
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string Phone { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        public string ContactsName { get; set; }
         /// <summary>
         /// 公司地址
         /// </summary>
         public string CompanyAddress { set; get; }
+
+        /// <summary>
+        /// 公司城市
+        /// </summary>
+        public string CompayCity { get; set; }
         /// <summary>
         /// 营业执照注册号
         /// </summary>
@@ -43,6 +57,7 @@ namespace com.pmp.mongo.data
         /// 营业执照副本扫描件
         /// </summary>
         public string CompanyAgainstImg { set; get; }
+
 
         public string CTime { set; get; }
 
