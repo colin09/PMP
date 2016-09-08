@@ -187,6 +187,7 @@
     <Content Include="Css\public.css" />
     <Content Include="Content\main.css" />
     <Content Include="Css\style.default.css" />
+    <Content Include="Css\zbj.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -209,6 +210,7 @@
     <Content Include="Images\1.jpg" />
     <Content Include="Images\body.jpg" />
     <Content Include="Images\default\arrow-active.png" />
+    <Content Include="Images\default\avatar.png" />
     <Content Include="Images\default\bghover.png" />
     <Content Include="Images\default\headerbg.png" />
     <Content Include="Images\default\icons_sprite.png" />
@@ -302,6 +304,7 @@
     <Content Include="Views\Account\UserList.cshtml" />
     <Content Include="Views\Account\UserDetail.cshtml" />
     <Content Include="Views\Account\CompanyUserList.cshtml" />
+    <Content Include="Views\Shared\tempLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
