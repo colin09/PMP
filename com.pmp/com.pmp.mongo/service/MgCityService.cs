@@ -1,4 +1,5 @@
 ﻿using com.pmp.mongo.data;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace com.pmp.mongo.service
 
         public List<MgCity> GetListByParentId(int parentId)
         {
-            //var filter = bl
-            return null;
+            var filter = Builders<MgCity>.Filter.Eq("ParentId", parentId);
+            return Search(filter);
         }
 
 

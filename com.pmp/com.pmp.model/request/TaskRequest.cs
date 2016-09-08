@@ -65,6 +65,9 @@ namespace com.pmp.model.request
         /// 项目预算
         /// </summary>
         public double Budget { set; get; }
+
+        public int Province { set; get; }
+        public int City { set; get; }
     }
 
 
