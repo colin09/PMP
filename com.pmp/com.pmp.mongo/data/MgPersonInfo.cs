@@ -14,7 +14,7 @@ namespace com.pmp.mongo.data
         public string Birthday { set; get; }
         public string Gender { set; get; }
         //public string Age { set; get; }
-        //public string Email { set; get; }
+        public string Email { set; get; }
         public string Address { set; get; }
         //public string CardID { set; get; }
         /// <summary>

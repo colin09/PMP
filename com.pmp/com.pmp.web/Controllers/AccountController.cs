@@ -31,7 +31,12 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountPersonal()
         {
-            var model = new MgUserService().SearchLogin(_Longin_Phone);
+            var userId = _Longin_UserId;
+            if (!string.IsNullOrWhiteSpace(Request["userId"]))
+            {
+                userId = int.Parse(Request["userId"]);
+            }
+            var model = new MgUserService().SearchById(userId);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
 
@@ -49,6 +54,7 @@ namespace com.pmp.web.Controllers
             model.Gender = Request.Form["radiossex"];
             model.Skill = Request.Form["txtskll"];
             model.Introduction = Request.Form["txtintro"];
+            model.Email = Request.Form["txtEmail"];
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
             Response.Redirect("/Account/AccountPersonal");
             return View();
@@ -245,7 +251,8 @@ namespace com.pmp.web.Controllers
                 list = new MgCompanyRealService().SearchWhere("", "", name);
             else
                 list = new MgCompanyRealService().SearchWhere("", "", "");
-
+            ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
+            ViewBag.name = name;
             return View(list);
         }
 
