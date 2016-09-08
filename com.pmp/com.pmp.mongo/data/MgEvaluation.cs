@@ -19,21 +19,23 @@ namespace com.pmp.mongo.data
         public int EvaluateType { get; set; }
 
         /// <summary>
-        /// 评价描述
+        /// 评分级别【1-5】
         /// </summary>
-        public string Desc { get; set; }
+        public int Grade { get; set; }
 
         /// <summary>
         /// 项目评分
         /// </summary>
-        public double Grade { get; set; }
-
+        public int Score { get; set; }
+        
         /// <summary>
-        /// 评分级别【1-5】
+        /// 评价描述
         /// </summary>
-        public double Level { get; set; }
+        public string Desc { get; set; }
+        
+        public int UserId { set; get; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime CTime { set; get; }
+        public DateTime CTime { set; get; } = DateTime.Now;
     }
 }

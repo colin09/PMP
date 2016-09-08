@@ -67,3 +67,4 @@ packages/
 .vs/config/applicationhost.config
 *.cache
 *.suo
+*.cache
