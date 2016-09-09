@@ -109,6 +109,9 @@ namespace com.pmp.mongo.data
 
         public double Budget { set; get; }
 
+        public int ProvinceId { set; get; }
+        public int CityId { set; get; }
+
 
 
         /// <summary>

@@ -25,6 +25,7 @@ namespace com.pmp.web.Controllers
         private readonly MgSolutionService _solutionService;
         private readonly MgEvaluationService _evaluationService;
         private readonly MgCityService _cityService;
+        private readonly MgUserService _userService;
 
 
         public TaskController()
@@ -33,15 +34,20 @@ namespace com.pmp.web.Controllers
             _solutionService = new MgSolutionService();
             _evaluationService = new MgEvaluationService();
             _cityService = new MgCityService();
+            _userService = new MgUserService();
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0, int city = 0, DateTime? date = null)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, page, out total);
+            var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, city, date, page, out total);
 
+            var userIds = list.Select(l => l.CreatesUserID).ToList();
+            var userList = _userService.GetUserListByIds(userIds);
+
+            ViewBag.users = userList;
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
 
@@ -218,7 +224,7 @@ namespace com.pmp.web.Controllers
 
         #region  -   评价相关  -
 
-        public ActionResult GiveEvaluate(int projectId, int graed, int score,string desc)
+        public ActionResult GiveEvaluate(int projectId, int graed, int score, string desc)
         {
             var m = new MgEvaluation()
             {
@@ -242,7 +248,7 @@ namespace com.pmp.web.Controllers
         public ActionResult GetCityList(int parentId)
         {
             var list = _cityService.GetListByParentId(parentId);
-            return Json(list,JsonRequestBehavior.AllowGet);
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
 

@@ -6,8 +6,8 @@
 
 <form method="post">
     <div class="row mt25">
-        <div class="col-sm-4 pt5">
-            <select class="w320 pt5" id="proType" name="type">
+        <div class="col-sm-2 pt5">
+            <select class="w180 pt5" id="proType" name="type">
                 <option value="1">有线</option>
                 <option value="2">无线</option>
                 <option value="3">服务器</option>
@@ -15,8 +15,8 @@
                 <option value="5">出差</option>
             </select>
         </div>
-        <div class="col-sm-4 pt5">
-            <select class="w320 pt5 " id="proState" name="state">
+        <div class="col-sm-2 pt5">
+            <select class="w180 pt5 " id="proState" name="state">
                 <option value="0">所有项目</option>
                 <option value="2">待领取的项目</option>
                 <option value="3">进行中的项目</option>
@@ -25,19 +25,19 @@
             </select>
         </div>
         <div class="col-sm-4 pt5" ng-app="cityApp">
-            <div class="col-sm-10" ng-controller="cityCtl">
-                <select id="slcProv" name="Province" ng-change="change()">
+            <div ng-controller="cityCtl">
+                <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="x">
                     <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
                 </select>
-                <select name="City">
+                <select class="w140 pt5" id="sltCity" name="City">
                     <option ng-repeat="city in citys" ng-value="city.ID">{{city.Name}}</option>
                 </select>
             </div>
         </div>
-        <div class="col-sm-4 pt5">
+        <div class="col-sm-2 pt5">
             <input type="date" id="proDate" name="date"/>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <button type="submit" class="btn btn-default btn-sm w100">
                 <span class="glyphicon glyphicon-search"></span> 搜 索
             </button>
@@ -72,6 +72,8 @@
                             </div>
                         </td>
                         <td>
+
+                            <br />
                             @item.StartTime ~ @item.EndTime
 
                         </td>
@@ -97,9 +99,34 @@
                 var pageindex = $(this).data("page");
                 var type = $("#proType").val();
                 var state = $("#proState").val();
+                var city = $("#sltCity").val();
+                var date = $("#proDate").val();
 
-                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state;
+                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state + '&city=' + city + '&date=' + date;
             });
         });
+
+
+        angular.module('cityApp', [])
+         .controller("cityCtl", function ($scope, $http) {
+             $http.get("/Task/GetCityList?parentId=0")
+                 .success(function (json) {
+                     if (json.length > 0) {
+                         $scope.provinces = json;
+                     }
+                 });
+             $scope.change = function (x) {
+                 console.log(x);
+                 var proId = $("#sltProv").val();
+
+                 $http.get("/Task/GetCityList?parentId=" + proId)
+                 .success(function (json) {
+                     if (json.length > 0) {
+                         $scope.citys = json;
+                     }
+                 });
+             };
+         })
+
     </script>
 }

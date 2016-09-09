@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using com.pmp.mongo.data;
+using com.pmp.model.response;
 
 namespace com.pmp.mongo.service
 {
@@ -87,6 +88,16 @@ namespace com.pmp.mongo.service
             return userList;
         }
 
+
+        public List<SimpleUserRes> GetUserListByIds(List<int> list)
+        {
+            var filter = Builders<MgUser>.Filter.All("ID",list);
+            return Search(filter).Select(m=>new SimpleUserRes()
+            {
+                Id=m.ID,Name=m.PersonInfo.RealName
+            }).ToList();
+
+        }
 
         #region 用户审核相关
         /// <summary>

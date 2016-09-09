@@ -53,6 +53,7 @@
     <Compile Include="response\PageInfo.cs" />
     <Compile Include="request\TaskRequest.cs" />
     <Compile Include="response\TaskResponse.cs" />
+    <Compile Include="response\UserResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

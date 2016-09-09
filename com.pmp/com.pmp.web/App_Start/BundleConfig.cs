@@ -36,7 +36,7 @@ namespace com.pmp.web
                      "~/Scripts/js/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     // "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/main.css"));
 

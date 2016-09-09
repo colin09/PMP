@@ -304,7 +304,6 @@
     <Content Include="Views\Account\UserList.cshtml" />
     <Content Include="Views\Account\UserDetail.cshtml" />
     <Content Include="Views\Account\CompanyUserList.cshtml" />
-    <Content Include="Views\Shared\tempLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
