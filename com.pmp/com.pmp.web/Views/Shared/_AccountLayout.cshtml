@@ -7,9 +7,15 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Css/style.default.css" rel="stylesheet" />
+    <link href="~/Css/style.default.css" rel="stylesheet" />
+    <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+
 </head>
 <body>
-    <input type="hidden"  id="userLevel" value="@ViewBag.level" />
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
     <div class="container">
         <ul class="taskTop">
             <li class="logoTitle">
@@ -53,7 +59,7 @@
                     </ul>
                 </li>
                 <li class="accountRight">
-                        @RenderBody()
+                    @RenderBody()
                 </li>
             </ul>
         </div>
