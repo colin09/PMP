@@ -8,19 +8,16 @@
     <span>我的信息->基本信息</span>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
-@*    <div>
-        <h5 style="color: #333;float: left; font-family:'微软雅黑',Microsoft YaHei; font-size 16px;">基本信息</h5>
-    </div>*@
 <div style="padding:15px">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountPersonalInfoSumbit">
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">真实姓名：</label>
+            <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="@Model.RealName" placeholder="请输入真实名字" required="">
+                <input type="text" class="form-control" id="txtname" name="txtname" value="@Model.RealName" placeholder="请输入真实名字" required="">
             </div>
         </div>
         <div class="form-group">
-            <label for="lastname" class="col-sm-2 control-label">性别：</label>
+            <label  class="col-sm-2 control-label">性别：</label>
             <div class="col-sm-10">
 
                 @if (Model.Gender == "1")
@@ -44,33 +41,40 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">生日：</label>
+            <label for="txtbirthday" class="col-sm-2 control-label">生日：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtbirthday" value="@Model.Birthday" placeholder="请选择生日">
+                <input type="text" class="form-control" id="txtbirthday" name="txtbirthday" value="@Model.Birthday" placeholder="请选择生日">
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">邮箱：</label>
+            <label for="txtEmail" class="col-sm-2 control-label">邮箱：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtEmail" value="@Model.Email" placeholder="邮箱">
+                <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="@Model.Email" placeholder="邮箱">
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">居住地址：</label>
+            <label for="txtaddress" class="col-sm-2 control-label">居住地址：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtaddress" value="@Model.Address" placeholder="居住地址">
+                <input type="text" class="form-control" id="txtaddress" name="txtaddress" value="@Model.Address" placeholder="居住地址">
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">技术领域：</label>
+            <label for="txtposition" class="col-sm-2 control-label">职位：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtskll" value="@Model.Skill" placeholder="技术领域">
+                <input type="text" class="form-control" id="txtposition" name="txtposition" value="@Model.Position" placeholder="职位">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtskll" class="col-sm-2 control-label">技术领域：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtskll" name="txtskll" value="@Model.Skill" placeholder="技术领域">
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">个人简介：</label>
+            <label for="txtintro" class="col-sm-2 control-label">个人简介：</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" name="txtintro" placeholder="个人简介">@Model.Introduction</textarea>
+                <textarea class="form-control" rows="3" id="txtintro" name="txtintro" placeholder="个人简介">@Model.Introduction</textarea>
             </div>
         </div>
         <div class="form-group">

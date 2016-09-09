@@ -55,6 +55,7 @@ namespace com.pmp.web.Controllers
             model.Skill = Request.Form["txtskll"];
             model.Introduction = Request.Form["txtintro"];
             model.Email = Request.Form["txtEmail"];
+            model.Position = Request.Form["txtposition"];
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
             Response.Redirect("/Account/AccountPersonal");
             return View();

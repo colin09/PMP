@@ -16,11 +16,7 @@ namespace com.pmp.mongo.data
         //public string Age { set; get; }
         public string Email { set; get; }
         public string Address { set; get; }
-        //public string CardID { set; get; }
-        /// <summary>
-        /// 证件照
-        /// </summary>
-       // public List<string> Credentials { set; get; }
+        public string Position { set; get; }
         /// <summary>
         /// 简介
         /// </summary>
@@ -35,8 +31,6 @@ namespace com.pmp.mongo.data
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UTime { set; get; }
-
-        //public MgPersonReal PersonReal { get; set; }
 
     }
 }
