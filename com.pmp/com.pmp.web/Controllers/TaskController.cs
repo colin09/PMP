@@ -23,6 +23,7 @@ namespace com.pmp.web.Controllers
         private readonly MgProjectService _projectService;
         private readonly MgSolutionService _solutionService;
         private readonly MgEvaluationService _evaluationService;
+        private readonly MgCityService _cityService;
 
 
         public TaskController()
@@ -30,6 +31,7 @@ namespace com.pmp.web.Controllers
             _projectService = new MgProjectService();
             _solutionService = new MgSolutionService();
             _evaluationService = new MgEvaluationService();
+            _cityService = new MgCityService();
         }
 
         // GET: Task
@@ -44,6 +46,8 @@ namespace com.pmp.web.Controllers
 
             return View(list);
         }
+
+
         public ActionResult Create()
         {
             return View();
@@ -93,7 +97,6 @@ namespace com.pmp.web.Controllers
         }
 
 
-
         public ActionResult Detail(int id)
         {
             var project = _projectService.GetOneById(id);
@@ -106,6 +109,7 @@ namespace com.pmp.web.Controllers
 
             return View(project);
         }
+
 
         public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
@@ -128,14 +132,14 @@ namespace com.pmp.web.Controllers
 
             return View(project);
         }
+
+
         public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
         {
             log.Info($"state:{auditState}, desc:{auditDesc}");
             _projectService.AuditProject(id, auditState, auditDesc);
             return RedirectToAction("AuditList");
         }
-
-
 
 
         public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
@@ -234,7 +238,11 @@ namespace com.pmp.web.Controllers
         #endregion
 
 
-
+        public ActionResult GetCityList(int parentId)
+        {
+            var list = _cityService.GetListByParentId(parentId);
+            return Json(list,JsonRequestBehavior.AllowGet);
+        }
 
 
 

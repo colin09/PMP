@@ -181,17 +181,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\pmp_tip.css" />
+    <Content Include="Content\pmp_pub.css" />
+    <Content Include="Content\pmp_common.css" />
     <Content Include="Css\Index.css" />
     <Content Include="Css\IndexFonts.css" />
     <Content Include="Css\IndexFonts2.css" />
-    <Content Include="Css\left.css" />
-    <Content Include="Css\public.css" />
-    <Content Include="Content\main.css" />
     <Content Include="Css\style.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRcITWGgmQvtcmgaGakhz0f4.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRfZL2QQ6ZygscP6wIFo8mp8.woff2" />
     <Content Include="Css\Fonts\We_iSDqttE3etzfdfhuPRQqftcMOL_w0yR9WY4zwDNA.woff2" />
@@ -207,32 +206,22 @@
     <Content Include="Css\Fonts\xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
-    <Content Include="Images\1.jpg" />
     <Content Include="Images\body.jpg" />
-    <Content Include="Images\default\arrow-active.png" />
-    <Content Include="Images\default\avatar.png" />
-    <Content Include="Images\default\bghover.png" />
-    <Content Include="Images\default\headerbg.png" />
-    <Content Include="Images\default\icons_sprite.png" />
-    <Content Include="Images\default\icons_sprite2.png" />
-    <Content Include="Images\default\menuarrow.png" />
-    <Content Include="Images\default\noise.white.png" />
-    <Content Include="Images\default\notibg.png" />
-    <Content Include="Images\default\searchbutton.png" />
-    <Content Include="Images\default\searchcancel.png" />
-    <Content Include="Images\default\topheaderbg.png" />
-    <Content Include="Images\default\userinfoarrow.png" />
-    <Content Include="Images\headtop.gif" />
     <Content Include="Images\img-sprite.png" />
+    <Content Include="Images\Index\headPic.png" />
+    <Content Include="Images\Index\headtop.gif" />
+    <Content Include="Images\Index\mainProNavIcon.png" />
+    <Content Include="Images\Index\ofcard_bg.png" />
+    <Content Include="Images\Index\ofcard_logo.png" />
+    <Content Include="Images\Index\pro_down.png" />
+    <Content Include="Images\Index\pro_left.png" />
     <Content Include="Images\location.png" />
     <Content Include="Images\mail.png" />
     <Content Include="Images\noise.white.png" />
     <Content Include="Images\password.png" />
     <Content Include="Images\phone.png" />
-    <Content Include="Images\pmp.ico" />
     <Content Include="Images\pmp.png" />
     <Content Include="Images\tick.png" />
-    <Content Include="Images\train.png" />
     <Content Include="Images\user.png" />
     <Content Include="Scripts\Footer.js" />
     <Content Include="Scripts\general.js" />
@@ -245,6 +234,7 @@
     <Content Include="Scripts\layer\skin\default\loading-2.gif" />
     <Content Include="Scripts\layer\skin\layer.css" />
     <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\MenuData.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
@@ -285,7 +275,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_TaskLayout.cshtml" />
     <Content Include="Views\Account\index.cshtml" />
-    <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Shared\_AccountLayouttemp.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Account\AccountPersonal.cshtml" />
     <Content Include="Views\Account\AccountP_Approve.cshtml" />
@@ -304,6 +294,7 @@
     <Content Include="Views\Account\UserList.cshtml" />
     <Content Include="Views\Account\UserDetail.cshtml" />
     <Content Include="Views\Account\CompanyUserList.cshtml" />
+    <Content Include="Views\Shared\_AccountLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

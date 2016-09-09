@@ -48,7 +48,7 @@ namespace com.pmp.mongo.data
 
     public enum UserLevel
     {
-        Default = 0,
+        Administrator = 0,
         Person = 1,
         CompanyAdmin = 2,
         ProjectManager = 3,

@@ -23,7 +23,7 @@
 	img{max-width:100%;}
 /*-- //Reset-Code --*/
 body {
-    background: url('../images/1.jpg') no-repeat 0px 0px;
+    background: url('../images/body.jpg') no-repeat 0px 0px;
     background-size: cover;
     background-attachment: fixed;
 }

@@ -21,14 +21,14 @@ namespace com.pmp.web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/js/bootstrap.js"
-                      //,"~/Scripts/respond.js"
+                      , "~/Scripts/respond.js"
                       ));
-            
+
             bundles.Add(new ScriptBundle("~/bundles/jq-bs-ng").Include(
                      "~/Scripts/js/jquery-1.10.2.min.js",
-                     //"~/Scripts/jquery.cxscroll.min.js",
-                    // "~/Scripts/jquery.lazyload.min.js",
-                     //"~/Scripts/js/jquery.cxscroll.min.js",
+                     "~/Scripts/jquery.cxscroll.min.js",
+                     "~/Scripts/jquery.lazyload.min.js",
+                     "~/Scripts/js/jquery.cxscroll.min.js",
                      "~/Scripts/js/jquery.lazyload.min.js",
                      "~/Scripts/js/angular.min.js",
                      "~/Scripts/js/angular-sanitize.min.js",
@@ -36,11 +36,11 @@ namespace com.pmp.web
                      "~/Scripts/js/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     // "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/main.css"));
-
-
+                      "~/Content/bootstrap.css",
+                      "~/Content/pmp_common.css",
+                      "~/Content/pmp_pub.css",
+                       "~/Content/pmp_tip.css"
+                      ));
         }
     }
 }

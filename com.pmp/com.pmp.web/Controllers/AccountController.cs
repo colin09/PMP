@@ -323,7 +323,7 @@ namespace com.pmp.web.Controllers
                 }
                 else
                 {
-                    UserLevel ul = UserLevel.Default;
+                    UserLevel ul = UserLevel.Administrator;
                     if (tempType == 1)
                         ul = UserLevel.Person;
                     else if (tempType == 2)

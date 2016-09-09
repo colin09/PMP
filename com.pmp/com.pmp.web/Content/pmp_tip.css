@@ -1,0 +1,38 @@
+﻿body{font: 12px/1.5 Tahoma,Helvetica,Arial,Simsun,sans-serif;color:#484848; width:100%;height:100%}
+/* header */
+.sline {margin: 0 auto;width: 1000px;}
+.topM {margin: 18px auto 30px;_margin: 26px auto 30px;}
+.header .OfcardLogo {float:left;padding-left: 20px;}
+.header .searchBar {float:right;}
+.header .searchBar .searchVInput {border: 3px solid #d3d3d3;width: 364px;height: 40px;}
+.header .searchBar #cardname {margin:0;vertical-align:middle;padding-left: 8px;width: 310px;height: 38px;line-height: 40px;border: 0;font-size: 18px;font-family: verdana,Tahoma,Arial,Hei,"Microsoft Yahei",SimHei;}
+.header .searchBar .cardnameV {background:url(../Images/index/headPic.png) 10px -228px no-repeat;}
+.header .searchBar .searchVInput a {float: right;width: 40px;height: 40px;background:url(../Images/index/headPic.png) left -153px no-repeat;text-indent: -9999px;}
+.header .searchBar .searchVInput a:hover {background-position: -60px -153px}
+.header .searchBar .searchVInput a:active {background-position: -116px -153px}
+.header .navigationBar {display:block;height: 42px;background:#f60;}
+.header .navigationBar .navigationBarInnel{display:block;margin: 0 auto;width: 1000px;}
+.header .navigationBar tt  {display:block;position:relative;float:left;margin: -10px 0;width: 200px;height: 62px;background:url(../Images/index/headPic.png) left -76px no-repeat;}
+.header .navigationBar tt .mainProNavArea {position: absolute;top: 62px;}
+.header .navigationBar tt.slideOpenNAV .mainProNavArea {display:none;}
+.header .navigationBar tt.slideOpenNAV {height: 56px;}
+.header .navigationBar .mainMenuV {float:left;padding-left: 5px;}
+.header .navigationBar .mainMenuV a {float:left;margin: 0 2px; padding: 0 25px;height: 42px;line-height: 42px;font-size: 14px;color: #fff;font-family: verdana,Tahoma,Arial,Hei,"Microsoft Yahei",SimHei;* font-weight: bold;}
+.header .navigationBar .mainMenuV a:hover {color: #000;background:#bc6022;}
+.header .navigationBar .mainMenuV a:active {color: #ccc;background:#999999;}
+
+/* 搜索弹出窗口 */
+#KsmanDisp {position:absolute;z-index:9999!important;margin:0!important;padding:0!important;border: 3px solid #d3d3d3!important;background:#fff!important;width: 364px!important;text-align:left;transition:display 0.2s linear 0s;box-shadow:0px 5px 5px #999;}
+#KsmanDisp div {margin: 1px;padding: 2px 10px;line-height: 26px;cursor: default;}
+#KsmanDisp b {color: #5bbc39;}
+#KsmanDisp .sman_selectedStyle {background:#82d864!important;color: #fff;transition:background 0.2s linear 0s;}
+#KsmanDisp .sman_selectedStyle b {color: #fefc56;}
+#producttype {display:none;}
+
+/* 主导航模块 */  
+ .menu_list {width: 190px;margin: 0 auto;}
+.menu_head {height: 47px;line-height: 47px;padding-left: 38px;font-size: 14px;color: #525252;cursor: pointer; border-left: 1px solid #e1e1e1;  border-right: 1px solid #e1e1e1;border-bottom: 1px solid #e1e1e1; border-top: 1px solid #F1F1F1;position: relative;margin: 0px;font-weight: bold;background: #f1f1f1 url(../images/index/pro_left.png) center right no-repeat;}
+.menu_list .current {background: #f1f1f1 url(../images/index/pro_down.png) center right no-repeat;}
+.menu_body {line-height: 38px; border-left: 1px solid #e1e1e1;backguound: #fff; border-right: 1px solid #e1e1e1;}
+.menu_body a {display: block;height: 38px;line-height: 38px;padding-left: 38px;color: #777777;background: #fff;text-decoration: none; border-bottom: 1px solid #e1e1e1;}
+.menu_body a:hover {text-decoration: none;}

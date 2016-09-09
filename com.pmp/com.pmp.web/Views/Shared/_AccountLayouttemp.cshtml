@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Css/style.default.css" rel="stylesheet" />
+    <link href="~/Css/style.default.css" rel="stylesheet" />
+    <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+
+</head>
+<body>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+    <div class="container">
+        <ul class="taskTop">
+            <li class="logoTitle">
+                <a href="http://#"><img src="~/images/pmp.png" class="logoTask" /> [PMP] 任务服务平台 </a>
+            </li>
+            <li class="taskTopCenter">
+                <a href="#" target="_blank" rel="nofollow">
+                    <span class="weibo">&nbsp;</span>
+                    <span>关注公众号</span>
+                    <u> | </u>
+                </a>
+                <span>客服电话:</span> <red>400-123-4567</red>
+                </a>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="container-full taskNav">
+        <div class="container">
+            <ul>
+                <li><a href="/Task/Index">首页</a></li>
+                <li><a href="/Task/Index">任务中心</a></li>
+                <li><a href="/Account/Index">会员中心</a></li>
+                <li><a href="/Task/Create">发布任务</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container accountBody">
+        <div ng-app="userMenuApp">
+            <ul ng-controller="MenuItemCtl1">
+                <li class="accountLeft">
+                    <div class="top">
+                        <span>{{body.title}}</span>
+                    </div>
+                    <ul>
+                        <li ng-repeat="el in body.menu">
+                            <a ng-href="{{el.url}}"><ic>&nbsp; </ic> {{el.title}}</a>
+                            <dt ng-if="el.subMenu" ng-repeat="sub in el.subMenu"><a ng-href="{{sub.url}}">> {{sub.title}}</a></dt>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="accountRight">
+                    @RenderBody()
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <footer class="container">
+        <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/menu.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
