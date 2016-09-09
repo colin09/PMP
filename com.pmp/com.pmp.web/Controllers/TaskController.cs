@@ -122,7 +122,7 @@ namespace com.pmp.web.Controllers
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, (int)audit, page, out total);
+            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, (int)audit, 0, null, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
@@ -166,7 +166,7 @@ namespace com.pmp.web.Controllers
             }
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(cUser, rUser, type, state, auditState, page, out total);
+            var list = _projectService.GetAll(cUser, rUser, type, state, auditState, 0, null, page, out total);
 
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
