@@ -18,11 +18,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-<<<<<<< HEAD
-          <StartPageUrl>Views/Account/Login.cshtml</StartPageUrl>
-=======
           <StartPageUrl>Views/Account/AccountAudit.cshtml</StartPageUrl>
->>>>>>> d4d5c2200c109667314fc9985f166f797b5b20ca
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>False</SilverlightDebugging>

@@ -1,6 +1,7 @@
 ﻿using com.pmp.common.helper;
 using com.pmp.common.mvc.attribute;
 using com.pmp.common.mvc.ctl;
+using com.pmp.model.data;
 using com.pmp.model.enums;
 using com.pmp.model.request;
 using com.pmp.model.response;
