@@ -294,7 +294,10 @@
     <Content Include="Views\Account\UserList.cshtml" />
     <Content Include="Views\Account\UserDetail.cshtml" />
     <Content Include="Views\Account\CompanyUserList.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
+=======
+>>>>>>> 2c85cfb8d9fb026297d6b7a7275995ddf5b9d4c3
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

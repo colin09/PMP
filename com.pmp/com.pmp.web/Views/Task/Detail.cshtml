@@ -1,4 +1,5 @@
 ﻿@using com.pmp.common.helper;
+@using com.pmp.model.data;
 @using com.pmp.mongo.data;
 @model com.pmp.mongo.data.MgProject
 @{
@@ -58,7 +59,7 @@
     <tr>
         <td class="t-r">项目文件：</td>
         <td>
-            @if (Model.FlieList.Any())
+            @if (Model.FlieList != null && Model.FlieList.Count > 0)
             {
                 foreach (var file in Model.FlieList)
                 {
@@ -71,7 +72,7 @@
     <tr>
         <td class="t-r">项目进度：</td>
         <td>
-            @if (Model.ProcessDesc.Any())
+            @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
@@ -93,7 +94,7 @@
                     <div>
                         <div>
                             @sln.UserId @sln.CTime
-                            @if (sln.FileList.Any())
+                            @if (sln.FileList != null && sln.FileList.Count > 0)
                             {
                                 <span>[含附件]</span>
                             }

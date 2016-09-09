@@ -31,7 +31,7 @@ namespace com.pmp.mongo.service
 
             return SearchByPage(filter, order => order.CreateTime, false, pageIndex, pageSize, out total);
         }
-        public List<MgProject> GetAll(int cUser,int gUser, int type, int state, int audit, PageInfo page, out long total)
+        public List<MgProject> GetAll(int cUser, int gUser, int type, int state, int audit, int city, DateTime? date, PageInfo page, out long total)
         {
             var filter = Builders<MgProject>.Filter.Gt("Status", -6);
             if (audit > -2)
@@ -44,7 +44,13 @@ namespace com.pmp.mongo.service
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.Category, (ProjectCategroy)type);
             if (state > 0)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.Status, (ProjectStatus)state);
-
+            if (city > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.CityId, city);
+            if (date != null)
+            {
+                var endDate = date.Value.AddDays(1).Date;
+                filter = filter & Builders<MgProject>.Filter.Gte(p => p.CreateTime, date) & Builders<MgProject>.Filter.Lt(p => p.CreateTime, endDate);
+            }
             total = 0L;
             return SearchByPage(filter, order => order.CreateTime, false, page.PageIndex, page.PageSize, out total);
         }

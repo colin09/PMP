@@ -1,4 +1,5 @@
-﻿using com.pmp.model.enums;
+﻿using com.pmp.model.data;
+using com.pmp.model.enums;
 using com.pmp.mongo.data;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -108,6 +109,9 @@ namespace com.pmp.mongo.data
 
         public double Budget { set; get; }
 
+        public int ProvinceId { set; get; }
+        public int CityId { set; get; }
+
 
 
         /// <summary>
@@ -118,52 +122,10 @@ namespace com.pmp.mongo.data
         /// 项目进度
         /// </summary>
         public List<ProjectProcess> ProcessDesc { get; set; }
-        /// <summary>
-        /// 项目评价
-        /// </summary>
-        //public List<Model_Project_Evaluate> Project_EvaluateList { get; set; }
     }
 
 
 
-
-    /// <summary>
-    /// 项目进度
-    /// </summary>
-    public class ProjectProcess
-    {
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string ProcessDesc { get; set; }
-        /// <summary>
-        /// 操作人
-        /// </summary>
-        public int UserID { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime CreateTime { get; set; }
-    }
-
-
-
-    /// <summary>
-    /// 项目文件
-    /// </summary>
-    public class ProjectFlie
-    {
-        /// <summary>
-        /// 项目文件评价（立项说明、方案文件）
-        /// [1.立项说明][2.方案文件]
-        /// </summary>
-        public int FileType { get; set; }
-
-        public string Name { get; set; }
-
-        public string Path { get; set; }
-    }
 
 
 
