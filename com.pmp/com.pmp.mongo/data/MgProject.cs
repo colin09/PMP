@@ -47,7 +47,7 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 项目经理
         /// </summary>
-        public int Manager { get; set; }
+        public string Manager { get; set; }
         /// <summary>
         /// 联系人
         /// </summary>
@@ -67,11 +67,13 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 项目开始时间
         /// </summary>
-        public string StartTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime StartTime { get; set; }
         /// <summary>
         /// 项目结束时间
         /// </summary>
-        public string EndTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime EndTime { get; set; }
 
         /// <summary>
         /// 审核状态
@@ -89,7 +91,8 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 创建时间
         /// </summary>
-        public double CreateTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 雇主是否评价
@@ -103,7 +106,7 @@ namespace com.pmp.mongo.data
         /// </summary>
         public int IsEvaluate_I { get; set; }
 
-
+        public double Budget { set; get; }
 
 
 
@@ -140,7 +143,8 @@ namespace com.pmp.mongo.data
         /// <summary>
         /// 创建时间
         /// </summary>
-        public double CreateTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CreateTime { get; set; }
     }
 
 

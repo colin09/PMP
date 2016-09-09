@@ -31,7 +31,12 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public ActionResult AccountPersonal()
         {
-            var model = new MgUserService().SearchLogin(_Longin_Phone);
+            var userId = _Longin_UserId;
+            if (!string.IsNullOrWhiteSpace(Request["userId"]))
+            {
+                userId = int.Parse(Request["userId"]);
+            }
+            var model = new MgUserService().SearchById(userId);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
 
@@ -49,6 +54,7 @@ namespace com.pmp.web.Controllers
             model.Gender = Request.Form["radiossex"];
             model.Skill = Request.Form["txtskll"];
             model.Introduction = Request.Form["txtintro"];
+            model.Email = Request.Form["txtEmail"];
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
             Response.Redirect("/Account/AccountPersonal");
             return View();
@@ -108,11 +114,14 @@ namespace com.pmp.web.Controllers
             mr.Name = Request.Form["txtname"];
             mr.RegistrID = Request.Form["txtcode"];
             mr.CompanyAddress = Request.Form["txtcompanyaddress"];
+            mr.CompayCity = Request.Form["txtcity"];
             mr.BuinessScope = Request.Form["txtrange"];
             mr.OrganizationCode = Request.Form["txtzzjgcode"];
             mr.CompanyJustImg = Request.Form["txtzzjgimg"];
             mr.Address = Request.Form["txtaddress"];
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
+            mr.Phone = Request.Form["txtPhone"];
+            mr.ContactsName = Request.Form["txtlxrName"];
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
             mr.CTime = DateTime.Now.ToString();
@@ -125,7 +134,7 @@ namespace com.pmp.web.Controllers
         /// 系统管理员审核
         /// </summary>
         /// <returns></returns>
-       // [AuthorizationAttribute]
+        [AuthorizationAttribute]
         public ActionResult AccountAudit()
         {
             ViewBag.level = this._Longin_UserLevel;
@@ -225,30 +234,32 @@ namespace com.pmp.web.Controllers
             return View(list);
         }
 
-
-        //public string UserListSeach()
-        //{
-        //    var accountType = Request["accountType"];
-        //    var name = Request["accountType"];
-        //    var phone = Request["phone"];
-        //    if (accountType == "1")
-        //    {
-        //        var userList = new MgUserService().SearchAll();
-        //    }
-        //    else if (accountType == "2")
-        //    {
-        //        var userList = new MgCompanyReal().();
-
-        //        var companyName = Request["companyName"];
-        //    }
-        //    return "";
-        //}
+        /// <summary>
+        /// 公司列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CompanyUserList()
+        {
+            var sel_type = Request.Form["sel_type"];
+            var name = Request.Form["name"];
+            List<MgCompanyReal> list = new List<MgCompanyReal>();
+            if (sel_type == "1")
+                list = new MgCompanyRealService().SearchWhere("", name, "");
+            else if (sel_type == "2")
+                list = new MgCompanyRealService().SearchWhere(name, "", "");
+            else if (sel_type == "3")
+                list = new MgCompanyRealService().SearchWhere("", "", name);
+            else
+                list = new MgCompanyRealService().SearchWhere("", "", "");
+            ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
+            ViewBag.name = name;
+            return View(list);
+        }
 
         public ActionResult UserDetail()
         {
             return View();
         }
-
 
         public string SignIn()
         {

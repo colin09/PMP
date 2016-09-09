@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "CompanyUserList";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+<link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+<script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/layer/layer.js"></script>
+<link href="~/Css/style.default.css" rel="stylesheet" />
+<script src="~/Scripts/general.js"></script>
+<style>
+    input[type="text"] {
+        background: #fcfcfc none repeat scroll 0 0;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px #ddd inset;
+        color: #666;
+        padding: 4px 5px;
+        width: 150px;
+    }
+
+    button {
+        background: #fb9337 none repeat scroll 0 0;
+        border: 1px solid #f0882c;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 7px 10px;
+    }
+</style>
+<div>导航</div>
+<form method="post" action="/Account/CompanyUserList">
+    <div class="tableoptions">
+        <select class="basicform" style="width:150px" name="sel_type">
+            <option value="3">公司名称</option>
+            <option value="1">联系人</option>
+            <option value="2">联系电话</option>
+        </select> &nbsp;
+        <input class="smallinput" type="text" value="@ViewBag.name" name="name">
+        <button class="radius3">搜索</button>
+        <button class="radius3">添加员工</button>
+    </div>
+
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+        <colgroup>
+            <col class="con0">
+            <col class="con1">
+            <col class="con0">
+            <col class="con1">
+            <col class="con0">
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="head0">公司名称</th>
+                <th class="head1">联系人</th>
+                <th class="head0">联系电话</th>
+                <th class="head0">城市</th>
+                <th class="head0">经营范围</th>
+                <th class="head0">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>公司名称</td>
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].ContactsName</td>
+                        <td>@Model[i].Phone</td>
+                        <td class="center">@Model[i].CompayCity</td>
+                        <td class="center">@Model[i].BuinessScope</td>
+                        <td class="center">
+                            <button class="radius3">查看员工</button>
+                            <button class="radius3">停用</button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr><td colspan="6">暂无信息</td></tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+<script type="text/javascript">
+
+    $(function () {
+        if ($("#seach_type").val() != "") {
+            $("select").val($("#seach_type").val());
+        }
+    })
+
+    jQuery('.hornav a').click(function () {
+
+        //this is only applicable when window size below 450px
+        if (jQuery(this).parents('.more').length == 0)
+            jQuery('.hornav li.more ul').hide();
+
+        //remove current menu
+        jQuery('.hornav li').each(function () {
+            jQuery(this).removeClass('current');
+        });
+
+        jQuery(this).parent().addClass('current');	// set as current menu
+
+        var url = jQuery(this).attr('href');
+        if (jQuery(url).length > 0) {
+            jQuery('.contentwrapper .subcontent').hide();
+            jQuery(url).show();
+        } else {
+            jQuery.post(url, function (data) {
+                jQuery('#contentwrapper').html(data);
+                jQuery('.stdtable input:checkbox').uniform();	//restyling checkbox
+            });
+        }
+        return false;
+    });
+
+
+</script>
+
+

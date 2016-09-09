@@ -22,13 +22,16 @@ namespace com.pmp.web.Controllers
 
         private readonly MgProjectService _projectService;
         private readonly MgSolutionService _solutionService;
+        private readonly MgEvaluationService _evaluationService;
+        private readonly MgCityService _cityService;
 
 
         public TaskController()
         {
             _projectService = new MgProjectService();
             _solutionService = new MgSolutionService();
-
+            _evaluationService = new MgEvaluationService();
+            _cityService = new MgCityService();
         }
 
         // GET: Task
@@ -43,6 +46,8 @@ namespace com.pmp.web.Controllers
 
             return View(list);
         }
+
+
         public ActionResult Create()
         {
             return View();
@@ -67,7 +72,8 @@ namespace com.pmp.web.Controllers
                 StartTime = task.StartTime,
                 EndTime = task.EndTime,
                 AuditStatus = AuditStatus.Default,
-                CreateTime = DateTime.Now.ToOADate()
+                Budget = task.Budget,
+                CreateTime = DateTime.Now
             };
             var fileIndex = 1;
             foreach (var file in files)
@@ -84,12 +90,11 @@ namespace com.pmp.web.Controllers
                 fileIndex += 1;
             }
 
-            project.ProcessDesc.Add(new ProjectProcess() { ProcessDesc = "发布项目。", UserID = this._Longin_UserId, CreateTime = DateTime.Now.ToOADate() });
+            project.ProcessDesc.Add(new ProjectProcess() { ProcessDesc = "发布项目。", UserID = this._Longin_UserId, CreateTime = DateTime.Now });
 
             _projectService.Create(project);
             return RedirectToAction("AuditList");
         }
-
 
 
         public ActionResult Detail(int id)
@@ -99,8 +104,12 @@ namespace com.pmp.web.Controllers
             var slns = _solutionService.GetListByProId(id);
             ViewBag.slns = slns;
 
+            var evas = _evaluationService.GetListByProId(id);
+            ViewBag.evas = evas;
+
             return View(project);
         }
+
 
         public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
@@ -123,14 +132,14 @@ namespace com.pmp.web.Controllers
 
             return View(project);
         }
+
+
         public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
         {
             log.Info($"state:{auditState}, desc:{auditDesc}");
             _projectService.AuditProject(id, auditState, auditDesc);
             return RedirectToAction("AuditList");
         }
-
-
 
 
         public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
@@ -200,6 +209,42 @@ namespace com.pmp.web.Controllers
 
             return RedirectToAction("Detail", new { id = projectId });
         }
+
+
+
+
+
+
+        #region  -   评价相关  -
+
+        public ActionResult GiveEvaluate(int projectId, int graed, int score,string desc)
+        {
+            var m = new MgEvaluation()
+            {
+                ProjectId = projectId,
+                EvaluateType = this._Longin_UserLevel == (int)UserLevel.CompanyAdmin ? 1 : 2,
+                Grade = graed,
+                Score = score,
+                Desc = desc,
+                UserId = this._Longin_UserId
+            };
+            _evaluationService.Insert(m);
+
+            return RedirectToAction("Detail", new { id = projectId });
+        }
+
+
+
+        #endregion
+
+
+        public ActionResult GetCityList(int parentId)
+        {
+            var list = _cityService.GetListByParentId(parentId);
+            return Json(list,JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
     }

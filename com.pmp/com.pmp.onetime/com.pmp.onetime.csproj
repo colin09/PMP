@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{41A26944-482B-46C3-B9DC-F23D8987006C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A1EC58B0-9A75-4972-8E6A-26670AD02D59}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.pmp.mongo</RootNamespace>
-    <AssemblyName>com.pmp.mongo</AssemblyName>
+    <RootNamespace>com.pmp.onetime</RootNamespace>
+    <AssemblyName>com.pmp.onetime</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,16 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.2.4\lib\net45\MongoDB.Bson.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.2.4\lib\net45\MongoDB.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.2.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    <Reference Include="CLAP, Version=4.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CLAP.4.6\lib\net35\CLAP.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,37 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="client\MgClient.cs" />
-    <Compile Include="data\MgBaseModel.cs" />
-    <Compile Include="data\MgCity.cs" />
-    <Compile Include="data\MgCompanyReal.cs" />
-    <Compile Include="data\MgEvaluation.cs" />
-    <Compile Include="data\MgPersonInfo.cs" />
-    <Compile Include="data\MgPersonReal.cs" />
-    <Compile Include="data\MgSolution.cs" />
-    <Compile Include="data\MgUser.cs" />
-    <Compile Include="data\MgProject.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="service\BaseService.cs" />
-    <Compile Include="service\MgCityService.cs" />
-    <Compile Include="service\MgCompanyRealService.cs" />
-    <Compile Include="service\MgEvaluationService.cs" />
-    <Compile Include="service\MgProjectService.cs" />
-    <Compile Include="service\MgSolutionService.cs" />
-    <Compile Include="service\MgUserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\com.pmp.common\com.pmp.common.csproj">
-      <Project>{48053b2f-c8a4-4b64-8f8f-6c4fdd72c32c}</Project>
-      <Name>com.pmp.common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\com.pmp.model\com.pmp.model.csproj">
-      <Project>{247e1b2d-af38-400f-9f28-ccb058e34a43}</Project>
-      <Name>com.pmp.model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

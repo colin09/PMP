@@ -28,6 +28,10 @@
         <td>@Model.StartTime - @Model.EndTime</td>
     </tr>
     <tr>
+        <td class="t-r">项目预算：</td>
+        <td>@Model.Budget</td>
+    </tr>
+    <tr>
         <td class="t-r">项目描述：</td>
         <td>@Model.Desc</td>
     </tr>
@@ -72,7 +76,7 @@
                 foreach (var proc in Model.ProcessDesc)
                 {
                     <div>
-                        @proc.UserID @proc.CreateTime.ToDate()
+                        @proc.UserID @proc.CreateTime
                         <p>@proc.ProcessDesc</p>
                     </div>
                 }
@@ -88,7 +92,7 @@
                 {
                     <div>
                         <div>
-                            @sln.UserId @sln.CTime.ToDate()
+                            @sln.UserId @sln.CTime
                             @if (sln.FileList.Any())
                             {
                                 <span>[含附件]</span>
@@ -101,7 +105,25 @@
 
         </td>
     </tr>
+    <tr>
+        <td class="t-r">项目评价：</td>
+        <td>
+            @if (ViewBag.evas != null)
+            {
+                foreach (var eval in (ViewBag.evas as List<MgEvaluation>))
+                {
+                    <div>
+                        <div>
+                            @eval.UserId @eval.CTime
+                            [@eval.Grade] @eval.Score
 
+                            <p>@eval.Desc</p>
+                        </div>
+                    </div>
+                }
+            }
+        </td>
+    </tr>
     <tr>
         <td></td>
         <td>
