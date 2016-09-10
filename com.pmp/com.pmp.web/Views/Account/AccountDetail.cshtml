@@ -3,169 +3,168 @@
     ViewBag.Title = "个人信息详情";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<div style="height:30px">
-    <ol class="breadcrumb">
-        <li><a href="#"></a></li>
-        <li><a href="#">审核</a></li>
-        <li class="active">会员信息</li>
-    </ol>
+<div class="nav_title">
+    <span>我的信息->个人详情</span>
 </div>
-
-<div style="padding:15px">
-    <div class="contenttitle2">
-        <h3>基本信息</h3>
+<div class="pmp_content">
+    <div class="content_title">
+        <h4>基本信息</h4>
     </div>
-    <form action="" class="stdform pageheader notab">
-        <p>
-            <label>登录名:</label>
-            <span class="field">
-                <small class="smallinput">@((string.IsNullOrWhiteSpace(ViewBag.mgUser.Phone) ? "暂未填写":ViewBag.mgUser.Phone))</small>
-            </span>
-        </p>
-        <p>
-            <label>真实姓名:</label>
-            <span class="field">
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.RealName) ? "暂未填写":ViewBag.mgUser.PersonInfo.RealName)</small>
-            </span>
-        </p>
-        <p>
-            <label>性别:</label>
-            <span class="field">
-                <small class="smallinput">@ViewBag.mgUser.PersonInfo.Gender )</small>
-            </span>
-        </p>
-        <p>
-            <label>生日:</label>
-            <span class="field">
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Birthday) ? "暂未填写":ViewBag.mgUser.PersonInfo.Birthday)</small>
-            </span>
-        </p>
-        <p>
-            <label>技能介绍:</label>
-            <span class="field">
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Skill) ? "暂未填写":ViewBag.mgUser.PersonInfo.Skill)</small>
-            </span>
-        <p>
-            <label>个人简介:</label>
-            <span class="field">
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Introduction) ? "暂未填写":ViewBag.mgUser.PersonInfo.Introduction)</small>
-            </span>
-        </p>
-        <p>
-            <label>居住地址:</label>
-            <span class="field">
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Address) ? "暂未填写":ViewBag.mgUser.PersonInfo.Address)</small>
-            </span>
-        </p>
-    </form>
-    @if (ViewBag.mgUser.AccountType == com.pmp.mongo.data.UserLevel.Person)
-    {
-        <div class="contenttitle2">
-            <h3>个人认证</h3>
-        </div>
-        <form action="" class="stdform pageheader">
-            <p>
+    <table cellpadding="0" cellspacing="0" class="ta_detail">
+        <tr>
+            <td style="width:50%">
+                <label>登录名:</label>
+                <small class="smallinput">@((string.IsNullOrWhiteSpace(ViewBag.mgUser.Phone) ? "暂未填写" : ViewBag.mgUser.Phone))</small>
+            </td>
+            <td style="width:50%" rowspan="4">
+                <img src="~/Images/person.png" class="img" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
                 <label>真实姓名:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.RealName) ? "暂未填写":ViewBag.mgUser.PersonReal.RealName)</small>
-                </span>
-            </p>
-            <p>
-                <label>身份证号:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardId) ? "暂未填写":ViewBag.mgUser.PersonReal.CardId)</small>
-                </span>
-            </p>
-            <p>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.RealName) ? "暂未填写" : ViewBag.mgUser.PersonInfo.RealName)</small>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
                 <label>性别:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.Gender) ? "暂未填写":ViewBag.mgUser.PersonReal.Gender)</small>
-                </span>
-            </p>
-            <p>
-                <label>身份证正面照:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardJustImg) ? "暂未填写":ViewBag.mgUser.PersonReal.CardJustImg)</small>
-                </span>
-            </p>
-            <p>
-                <label>身份证背面照:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardAgainstImg) ? "暂未填写":ViewBag.mgUser.PersonReal.CardAgainstImg)</small>
-                </span>
-            </p>
-            <p>
-                <label>职业:</label>
-                <span class="field">
-                    <small class="smallinput">@ViewBag.mgUser.PersonReal.Profession)</small>
-                </span>
-            </p>
-            <p>
-                <label>家庭或居住地址:</label>
-                <span class="field">
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.Address) ? "暂未填写":ViewBag.mgUser.PersonReal.Address)</small>
-                </span>
-            </p>
-        </form>
-    }
-    @if (ViewBag.mgUser.AccountType == com.pmp.mongo.data.UserLevel.CompanyAdmin)
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Gender) ? "暂未填写" : (ViewBag.mgUser.PersonInfo.Gender == "1") ? "男" : "女")  </small>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <label>生日:</label>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Birthday) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Birthday)</small>
+            </td>
+            <td style="width:50%"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:50%">
+                <label>居住地址:</label>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Address) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Address)</small>
+            </td>
+
+        <tr>
+            <td colspan="2" style="width:50%">
+                <label>技能介绍:</label>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Skill) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Skill)</small>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:50%">
+                <label>个人简介:</label>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Introduction) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Introduction)</small>
+            </td>
+
+        </tr>
+    </table>
+
+    @if (ViewBag.mgUser.Level == com.pmp.mongo.data.UserLevel.Person)
     {
-        
-        <div class="contenttitle2">
-            <h3>企业认证</h3>
+        <div class="content_title">
+            <h4>个人认证</h4>
         </div>
-        <form action="" class="stdform pageheader">
-            <p>
-                <label>企业名称:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal==null ? "暂未填写":ViewBag.CompanyReal.Name)</small>
-                </span>
-            </p>
-            <p>
-                <label>营业执照注册号:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.RegistrID)</small>
-                </span>
-            </p>
-            <p>
-                <label>营业执照所在地:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.CompanyAddress)</small>
-                </span>
-            </p>
-            <p>
-                <label>常用地址:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.Address)</small>
-                </span>
-            </p>
+        <table cellpadding="0" cellspacing="0" class="ta_detail">
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>真实姓名:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.RealName) ? "暂未填写" : ViewBag.mgUser.PersonReal.RealName)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>身份证号:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardId) ? "暂未填写" : ViewBag.mgUser.PersonReal.CardId)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>性别:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.Gender) ? "暂未填写" : (ViewBag.mgUser.PersonReal.Gender == "1") ? "男" : "女")</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>职业:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.Profession) ? "暂未填写" : ViewBag.mgUser.PersonReal.Profession)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>家庭或居住地址:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.Address) ? "暂未填写" : ViewBag.mgUser.PersonReal.Address)</small>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>身份证正面照:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardJustImg) ? "暂未填写" : ViewBag.mgUser.PersonReal.CardJustImg)</small>
+                </td>
+                <td>
+                    <label>身份证背面照:</label>
+                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardAgainstImg) ? "暂未填写" : ViewBag.mgUser.PersonReal.CardAgainstImg)</small>
+                </td>
+            </tr>
+        </table>
+    }
+    @if (ViewBag.mgUser.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin)
+            {
 
-            <p>
-                <label>经营范围:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.BuinessScope)</small>
-                </span>
-            </p>
-            <p>
-                <label>组织机构代码证号:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.OrganizationCode)</small>
-                </span>
-            </p>
-            <p>
-                <label>组织机构代码证扫描件:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.CompanyJustImg)</small>
-                </span>
-            </p>
+        <div class="content_title">
+            <h4>企业认证</h4>
+        </div>
+        <table cellpadding="0" cellspacing="0" class="ta_detail">
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>企业名称:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.Name)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>营业执照注册号:</label>
+                    <span class="field">
+                        <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.RegistrID)</small>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>营业执照所在地:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyAddress)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>所在城市:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompayCity)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>经营范围:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.BuinessScope)</small>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>组织机构代码证号:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.OrganizationCode)</small>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:50%">
+                    <label>组织机构代码证扫描件:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyJustImg)</small>
+                </td>
+                <td style="width:50%">
+                    <label>营业执照副本扫描件:</label>
+                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyAgainstImg)</small>
+                </td>
+            </tr>
 
-            <p>
-                <label>营业执照副本扫描件:</label>
-                <span class="field">
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写":ViewBag.CompanyReal.CompanyAgainstImg)</small>
-                </span>
-            </p>
-        </form>
+        </table>
     }
 
 </div>

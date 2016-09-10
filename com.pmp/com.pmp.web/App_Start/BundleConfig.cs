@@ -37,17 +37,11 @@ namespace com.pmp.web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-<<<<<<< HEAD
                       "~/Content/pmp_common.css",
                       "~/Content/pmp_pub.css",
-                       "~/Content/pmp_tip.css"
+                       "~/Content/pmp_tip.css",
+                       "~/Content/pmp_cntent.css"
                       ));
-=======
-                      "~/Content/site.css",
-                      "~/Content/main.css"));
-
-
->>>>>>> 2c85cfb8d9fb026297d6b7a7275995ddf5b9d4c3
         }
     }
 }

@@ -1,5 +1,5 @@
 /*整体居中，宽度1000*/
-.of_whole{width:80%;margin:0 auto;}
+.of_whole{width:80%;margin:0 auto; height:700px;padding:10px}
 /*顶部*/
 #of_top{width:100%;height:28px;line-height:29px;background:url(../Images/index/ofcard_bg.png) repeat-x 0 0; overflow:hidden;}
 #of_topNav a{margin:0 5px; padding:2px;}
@@ -24,8 +24,8 @@
 #of_s_keyword input{ border:0; background-color:transparent;width:300px;height:26px; line-height:26px; margin-left:40px;}
 #of_submit input{ border:0; background-color:transparent; width:95px; height:30px; float:left;cursor:pointer;}
 /*导航和站点栏*/
-#of_mainBody{height:400px;overflow:hidden; float:left;width:18%;margin-left:40px}
-#of_mainBody_rg{height:700px;overflow:hidden; float:right;width:76%;padding:10px}
+#of_mainBody{height:700px;overflow:hidden; float:left;width:18%;margin-left:30px;border: 1px solid #e1e1e1;}
+#of_mainBody_rg{height:700px;overflow:hidden; float:right;width:79%; border: 1px solid #e1e1e1;}
 /*导航和站点栏*/
 #of_NavSets{width:100%;height:32px; }
 .of_nav{z-index:-1;}
@@ -47,3 +47,7 @@ of_setMenu li,.of_setMenu_click li{border:none;height:20px;line-height:20px;back
 #navLine{height:3px;border:1px solid #f90;border-left:none;border-right:none;background:#fc9;_margin-top:-5px;}
 .of_new {position:relative;}
 .of_new span {background:url("images/new.gif") no-repeat left top;display:inline-block;height:14px;position:absolute;right:-10px;top:0;width:26px;}
+
+.nav_title {height:30px; padding: 5px; background:url("../images/noise.white.png");}
+.nav_title span { padding:10px ; }
+.pmp_content {margin:10px }

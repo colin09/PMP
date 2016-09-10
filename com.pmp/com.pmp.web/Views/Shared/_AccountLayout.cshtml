@@ -8,6 +8,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/MenuData.js"></script>
+    <script src="~/Scripts/menu.js"></script>
+    @Scripts.Render("~/bundles/jq-bs-ng")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/layer/layer.js"></script>
+
 </head>
 <body>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
@@ -40,27 +45,11 @@
         </div><!-- navigationBar end -->
     </div><!-- header end -->
     <div class="of_whole">
-        <div id="of_mainBody" class="push_t">
+        <div id="of_mainBody">
             <!--左侧栏开始-->
             <div class="side_small tag_line float_l">
                 <div id="firstpane" class="menu_list">
-                    @*<h3 class="menu_head current">我的账号</h3>
-                    <div style="display:block" class="menu_body">
-                        <a href="">基本资料</a>
-                        <a href="">实名认证</a>
-                    </div>
-                    <h3 class="menu_head">公司认证</h3>
-                    <div style="display:none" class="menu_body">
-                        <a href="">公司认证</a>
-                    </div>
-                    <h3 class="menu_head">我的任务</h3>
-                    <div style="display:none" class="menu_body">
-                        <a href="#">我的任务</a>
-                    </div>
-                    <h3 class="menu_head">我的评价</h3>
-                    <div style="display:none" class="menu_body">
-                        <a href="#">评价管理</a>
-                    </div>*@
+
                 </div>
             </div>
         </div>
@@ -72,14 +61,8 @@
         <p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
         <p>来源：<a href="#" target="_blank">PMP版权所有</a></p>
     </div>
-    @Scripts.Render("~/bundles/jq-bs-ng")
-    <script src="~/Scripts/menu.js"></script>
-    @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        $(document).ready(function () {
-          
-        });
 
+    <script type="text/javascript">
         $(function () {
             var level = $("#userLevel").val();
             $.each(_Menu, function (i, item) {
@@ -93,9 +76,11 @@
                             html.push(" <h3 class=\"menu_head\">" + menu.title + "</h3>");
                             html.push("  <div style=\"display:none\" class=\"menu_body\">")
                         }
-                        $.each(menu.subMenu, function (j, sub) {
-                            html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
-                        });
+                        if (menu.subMenu != undefined) {
+                            $.each(menu.subMenu, function (j, sub) {
+                                html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
+                            });
+                        }
                         html.push("</div>");
                     });
                     $("#firstpane").append(html.join(""));

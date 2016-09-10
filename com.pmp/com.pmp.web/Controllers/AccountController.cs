@@ -57,8 +57,7 @@ namespace com.pmp.web.Controllers
             model.Email = Request.Form["txtEmail"];
             model.Position = Request.Form["txtposition"];
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
-            Response.Redirect("/Account/AccountPersonal");
-            return View();
+            return Redirect("/Account/AccountPersonal");
         }
 
         /// <summary>
@@ -85,13 +84,12 @@ namespace com.pmp.web.Controllers
             mgPersonReal.CardJustImg = Request.Form["txtcardImg1"];
             mgPersonReal.CardAgainstImg = Request.Form["txtcardImg2"];
             if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
-                mgPersonReal.Profession = int.Parse(Request.Form["seloccupation"]);
+                mgPersonReal.Profession = Request.Form["seloccupation"];
             mgPersonReal.Address = Request.Form["txtaddress"];
             mgPersonReal.IsApprove = 1;
             mgPersonReal.CreatesTime = DateTime.Now.ToString();
             new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
-            Response.Redirect("/Account/AccountP_Approve");
-            return View();
+            return Redirect("/Account/AccountDetail");
         }
 
         /// <summary>
@@ -119,16 +117,14 @@ namespace com.pmp.web.Controllers
             mr.BuinessScope = Request.Form["txtrange"];
             mr.OrganizationCode = Request.Form["txtzzjgcode"];
             mr.CompanyJustImg = Request.Form["txtzzjgimg"];
-            mr.Address = Request.Form["txtaddress"];
             mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
             mr.Phone = Request.Form["txtPhone"];
             mr.ContactsName = Request.Form["txtlxrName"];
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
             mr.CTime = DateTime.Now.ToString();
-            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr);
-            Response.Redirect("/Account/AccountP_Approve");
-            return View();
+            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr,_Login_CompanyReal_ID);
+            return Redirect("/Account/AccountDetail");
         }
 
         /// <summary>
@@ -203,12 +199,18 @@ namespace com.pmp.web.Controllers
         }
 
 
+        public ActionResult AccountApprove()
+        {
+            return View();
+        }
+
 
         public ActionResult UserList()
         {
             var type = Request.QueryString["type"];
             var sel_type = Request.Form["sel_type"];
             var name = Request.Form["name"];
+            var companyID = Request["companyID"];
             List<MgUser> list = new List<MgUser>();
             if (type == "1")
             {
@@ -221,7 +223,6 @@ namespace com.pmp.web.Controllers
             }
             else
             {
-                var companyID = Request["companyID"];
                 if (sel_type == "1")
                     list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "");
                 else if (sel_type == "2")
@@ -232,6 +233,7 @@ namespace com.pmp.web.Controllers
             ViewBag.accountType = int.Parse(type);
             ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
             ViewBag.name = name;
+            ViewBag.companyId = companyID;
             return View(list);
         }
 

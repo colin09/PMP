@@ -3,42 +3,32 @@
     ViewBag.Title = "用户审核";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<<<<<<< HEAD
-<link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
-<script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/layer/layer.js"></script>
-<link href="~/Css/style.default.css" rel="stylesheet" />
-
-=======
->>>>>>> de0fde8ab9b37073211a0b5a288792c155d2cc63
-<div style="height:30px">
-    <span>我的信息->用户审核列表</span>
-    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+<div class="nav_title">
+    <span>会员审核->认证审核</span>
 </div>
-<div>
-    <h5 style="color: #333;font-size: 16px;">用户审核</h5>
-</div>
+<div class="pmp_content">
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding:10px;font-weight:400">注册类型：</td>
+            <td style="padding:10px">
+                <select class="form-control" style="width:150px" id="accountType">
+                    <option value="1" selected="selected">个人用户</option>
+                    <option value="2">企业用户</option>
+                </select>
+            </td>
 
-<div class="form-group">
-    <label for="firstname" class="col-sm-2 control-label">注册类型：</label>
-    <div class="col-sm-10" style="width:150px">
-        <select class="form-control" id="accountType">
-            <option value="1">个人用户</option>
-            <option value="2">企业用户</option>
-
-        </select>
+            <td style="padding:10px;font-weight:400">注册类型：</td>
+            <td style="padding:10px">
+                <select class="form-control" style="width:150px" id="auditType">
+                    <option value="1" selected="selected">未审核</option>
+                    <option value="2">审核通过</option>
+                    <option value="3">审核未通过</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div style="padding:15px" id="auditList">
     </div>
-    <label for="firstname" class="col-sm-2 control-label">审核状态：</label>
-    <div class="col-sm-10" style="width:150px">
-        <select class="form-control" id="auditType">
-            <option value="1">未审核</option>
-            <option value="2">审核通过</option>
-            <option value="3">审核未通过</option>
-        </select>
-    </div>
-</div>
-
-<div style="padding:15px" id="auditList">
 </div>
 <script type="text/javascript">
 
@@ -61,19 +51,16 @@
         var data = { AuditType: auditType, AccountType: accountType };
         $.get("/Account/GetAccountAuditList", data, function (res) {
             var html = [];
-            html.push('<table class="table table-striped">' +
-                           '<thead>' +
-                               '<tr>' +
+            html.push('<table cellpadding="0" cellspacing="0" class="table_list">' +
+                               ' <tr class="tr_title">' +
                                    '<th>注册类型</th>' +
                                    '<th>注册人</th>' +
                                    '<th>联系方式</th>' +
-                                   '<th>技术领域</th>' +
+                                   '<th>领域</th>' +
                                    '<th>提交时间</th>' +
                                    '<th>状态</th>' +
                                    '<th>操作</th>' +
-                              ' </tr>' +
-                           '</thead>' +
-                           '<tbody>');
+                              ' </tr>');
 
             var tempAuditType = "";
             var tempId = "";
@@ -94,19 +81,30 @@
                         '<td>' + tempAuditType + '</td>' +
                         '<td>' + res[i].PersonInfo.RealName + '</td>' +
                         '<td>' + res[i].Phone + '</td>' +
-                        '<td>' + res[i].PersonInfo.Skill + '</td>' +
-                        '<td>' + res[i].PersonReal.CreatesTime + '</td>');
+                        '<td>' + res[i].PersonInfo.Skill + '</td>');
+
+                if (accountType == 1) {
+                    html.push('<td>' + res[i].PersonReal.CreatesTime + '</td>');
+                }
+                else if (accountType == 2) {
+                    html.push('<td>' + "2016-01-01" + '</td>');
+                }
+
                 if (auditType == 1) {
+
                     html.push('<td>未审核</td>');
-                    html.push('<td><button type="button" class="btn_Pass btn btn-success">通过</button>' + '&nbsp' +
-                            '<button type="button" class="btn_NotPass btn btn-danger">未通过</button></td>');
+
+                    html.push('<td> <button type="button" class="btn_see btn btn_blue">查看</button>' +
+                        '&nbsp  <button type="button" class="btn_Pass btn btn_blue">通过</button>' + '&nbsp' +
+                            '<button type="button" class="btn_NotPass btn btn_red">未通过</button></td>');
                 }
                 else if (auditType == 2) {
+
                     html.push('<td>审核通过</td>');
-                    html.push('<td><button type="button" class="btn_see btn btn-primary">查看</button></td>');
+                    html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
                 } else if (auditType == 3) {
                     html.push('<td>审核未通过</td>');
-                    html.push('<td><button type="button" class="btn_see btn btn-primary">查看</button></td>');
+                    html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
                 }
                 html.push("</tr>");
             }
@@ -115,7 +113,7 @@
                 html.push('<td colspan="7" style="text-align:center;vertical-align:middle;">暂无数据</td>');
                 html.push('</tr>');
             }
-            html.push('</tbody>' + '</table>');
+            html.push('</table>');
             $("#auditList").empty();
             $("#auditList").append(html.join(""));
             BindEvent();
@@ -127,7 +125,7 @@
             item.onclick = function () {
                 var type = $(item).parents("tr").find("td").eq(0).text();
                 var id = $(item).parents("tr").find("td").eq(1).text();
-                audit(2, type, id, "审核通过","");
+                audit(2, type, id, "审核通过", "");
             };
         });
 
@@ -186,6 +184,8 @@
             } else {
                 layer.msg("出现异常", { time: 2000, icon: 1 });
             }
+            window.location.href = "/Account/AccountAudit";
+
         })
     }
 </script>

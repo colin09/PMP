@@ -51,11 +51,11 @@ namespace com.pmp.mongo.service
         {
             List<MgCompanyReal> mgCompanyReal = Search();
             if (!string.IsNullOrWhiteSpace(phone))
-                mgCompanyReal.FindAll(t => t.Phone == phone);
+                mgCompanyReal = mgCompanyReal.FindAll(t => t.Phone == phone);
             if (!string.IsNullOrWhiteSpace(contactsName))
-                mgCompanyReal.FindAll(t => t.ContactsName == contactsName);
+                mgCompanyReal = mgCompanyReal.FindAll(t => t.ContactsName == contactsName);
             if (!string.IsNullOrWhiteSpace(companyName))
-                mgCompanyReal.FindAll(t => t.Name == companyName);
+                mgCompanyReal = mgCompanyReal.FindAll(t => t.Name == companyName);
             return mgCompanyReal;
         }
 
@@ -86,6 +86,28 @@ namespace com.pmp.mongo.service
                 .Set(u => u.ATime, DateTime.Now.ToString());
             return Update(filter, update) > 0;
         }
+
+        public bool UpdateCompany(int companyID, MgCompanyReal mr)
+        {
+            var filter = Builders<MgCompanyReal>.Filter.Eq("ID", companyID);
+            var update = Builders<MgCompanyReal>.Update.Set(u => u.IsApprove, mr.IsApprove).
+                 Set(u => u.Name, mr.Name).
+                 Set(u => u.Phone, mr.Phone).
+                 Set(u => u.ContactsName, mr.Phone).
+                 Set(u => u.CompanyAddress, mr.CompanyAddress).
+                 Set(u => u.CompayCity, mr.CompayCity).
+                 Set(u => u.RegistrID, mr.RegistrID).
+                 Set(u => u.BuinessScope, mr.BuinessScope).
+                 Set(u => u.OrganizationCode, mr.OrganizationCode).
+                 Set(u => u.CompanyJustImg, mr.CompanyJustImg).
+                 Set(u => u.CompanyAgainstImg, mr.CompanyAgainstImg).
+                 Set(u => u.CUserID, mr.CUserID).
+                 Set(u => u.IsApprove, mr.IsApprove).
+                 Set(u => u.NotPassReason, mr.NotPassReason)
+                .Set(u => u.ATime, DateTime.Now.ToString());
+            return Update(filter, update) > 0;
+        }
+
         /// <summary>
         /// 添加认证
         /// </summary>
@@ -96,10 +118,12 @@ namespace com.pmp.mongo.service
             Insert(new MgCompanyReal()
             {
                 ID = id,
-                Address = mc.Address,
                 BuinessScope = mc.BuinessScope,
                 CompanyAddress = mc.CompanyAddress,
                 CompanyAgainstImg = mc.CompanyAgainstImg,
+                CompayCity = mc.CompayCity,
+                ContactsName = mc.ContactsName,
+                Phone = mc.Phone,
                 CompanyJustImg = mc.CompanyJustImg,
                 CTime = mc.CTime,
                 CUserID = mc.CUserID,

@@ -179,14 +179,20 @@ namespace com.pmp.mongo.service
         }
 
         //提交企业认证并且增加公司
-        public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mp)
+        public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mr, int loginCompanyID)
         {
             int companyID = 0;
-            new MgCompanyRealService().CreateCompanyReal(mp, ref companyID);
-
+            if (loginCompanyID > 0)
+            {
+                return new MgCompanyRealService().UpdateCompany(loginCompanyID, mr);
+            }
+            else
+            {
+                new MgCompanyRealService().CreateCompanyReal(mr, ref companyID);
+            }
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var update = Builders<MgUser>.Update.Set(u => u.CompanyReal_ID, companyID)
-                .Set(u => u.CompanyReal_Name, mp.Name)
+                .Set(u => u.CompanyReal_Name, mr.Name)
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
@@ -194,12 +200,11 @@ namespace com.pmp.mongo.service
         public void CreateUser(string phone, string pwd, int userLevel)
         {
             MgPersonReal mp = null;
-            MgPersonInfo mi = null;
+            MgPersonInfo mi = new data.MgPersonInfo();
             if ((UserLevel)userLevel == UserLevel.Person)
             {
                 mp = new MgPersonReal();
                 mp.IsApprove = 0;
-                mi = new data.MgPersonInfo();
             }
 
             Insert(new MgUser()

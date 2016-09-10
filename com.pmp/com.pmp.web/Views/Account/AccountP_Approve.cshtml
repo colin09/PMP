@@ -3,25 +3,22 @@
     ViewBag.Title = "个人身份认证";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<div style="height:30px">
+
+<div class="nav_title">
     <span>我的信息->个人身份认证</span>
-    <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
-<div>
-    <h5 style="color: #333;font-size: 16px;">个人认证</h5>
-</div>
-<div style="padding:15px">
+<div class="pmp_content">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountP_ApproveSumbit">
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">真实姓名：</label>
+            <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtname" value="" placeholder="请输入真实名字" required="">
+                <input type="text" class="form-control" name="txtname" id="txtname" value="" placeholder="请输入真实名字" required="required">
             </div>
         </div>
         <div class="form-group">
-            <label for="lastname" class="col-sm-2 control-label">身份证号：</label>
+            <label for="txtcardID" class="col-sm-2 control-label">身份证号：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtcardID" value="" placeholder="身份证号" required="">
+                <input type="text" class="form-control" name="txtcardID" id="txtcardID" value="" placeholder="身份证号" required="required">
             </div>
         </div>
         <div class="form-group">
@@ -37,23 +34,23 @@
         </div>
 
         <div class="form-group">
-            <label for="lastname" class="col-sm-2 control-label">身份证正面照：</label>
+            <label for="txtcardImg1" class="col-sm-2 control-label">身份证正面照：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtcardImg1" value="" placeholder="身份证正面照片" style="width:250px;float:left;" required="">
+                <input type="text" class="form-control" name="txtcardImg1" id="txtcardImg1" placeholder="身份证正面照片" style="width:250px;float:left;" required="required">
                 <input type="file" id="inputfile" style="float:left;margin-left:15px">
             </div>
         </div>
         <div class="form-group">
-            <label for="lastname" class="col-sm-2 control-label">身份证背面照：</label>
+            <label for="txtcardImg2" class="col-sm-2 control-label">身份证背面照：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtcardImg2" value="" placeholder="身份证背面照片" style="width:250px;float:left;" required="">
+                <input type="text" class="form-control" name="txtcardImg2" id="txtcardImg2" value="" placeholder="身份证背面照片" style="width:250px;float:left;" required="required">
                 <input type="file" id="inputfile" style="float:left;margin-left:15px">
             </div>
         </div>
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">职业：</label>
+            <label for="seloccupation" class="col-sm-2 control-label">职业：</label>
             <div class="col-sm-10">
-                <select class="form-control" name="seloccupation">
+                <select class="form-control" id="seloccupation" name="seloccupation">
                     <option value="-1">请选择您的职业</option>
                     <option value="计算机/互联网/通信/电子">计算机/互联网/通信/电子</option>
                     <option value="销售/客服/技术支持">销售/客服/技术支持</option>
@@ -77,14 +74,14 @@
         </div>
 
         <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">家庭或居住地址：</label>
+            <label for="txtaddress" class="col-sm-2 control-label">家庭或居住地址：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtaddress" value="" placeholder="居住地址" required="">
+                <input type="text" class="form-control" name="txtaddress" id="txtaddress" placeholder="居住地址" required="required">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">提交审核</button>
+                <button type="submit" class="btn btn_blue">提交审核</button>
             </div>
         </div>
     </form>

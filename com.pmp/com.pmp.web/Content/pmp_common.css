@@ -86,3 +86,15 @@ input{vertical-align:middle;}
 /*链接样式3-----------默认蓝色，悬停红色---------*/
 .a_blue{color:#1292cd;}
 .a_blue:hover{color:#f00;}
+
+/*按钮样式*/
+.btn {color:#FFFFFF ;cursor: pointer;padding: 3px 10px;}
+.btn_red { background: #fb9337 none repeat scroll 0 0;border: 1px solid #f0882c;}
+.btn_blue {  background: #68CCFD none repeat scroll 0 0;border: 1px solid #68CCFD;}
+
+ .table_list{  line-height:25px; width:100%;height:100%}
+ .table_list tr{ line-height:30px}
+ .table_list .tr_title{ line-height:20px ;background-color:#f7f7f7}
+ .table_list th{ border:1px solid #ddd; text-align:center;padding:3px 10px}
+ .table_list td{  text-align:center;border:1px solid #ddd;padding:3px 10px} 
+ .table_list tr:hover{ background-color:#fcfcfc}

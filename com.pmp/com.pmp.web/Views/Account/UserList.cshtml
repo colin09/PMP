@@ -2,263 +2,124 @@
     ViewBag.Title = "用户中心";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
-<script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/layer/layer.js"></script>
-<link href="~/Css/style.default.css" rel="stylesheet" />
-<script src="~/Scripts/general.js"></script>
-<style>
-    input[type="text"] {
-        background: #fcfcfc none repeat scroll 0 0;
-        border: 1px solid #ccc;
-        border-radius: 2px;
-        box-shadow: 0 1px 3px #ddd inset;
-        color: #666;
-        padding: 4px 5px;
-        width: 150px;
-    }
-
-    button {
-        background: #fb9337 none repeat scroll 0 0;
-        border: 1px solid #f0882c;
-        color: #fff;
-        cursor: pointer;
-        font-weight: bold;
-        padding: 7px 10px;
-    }
-</style>
-<div>导航</div>
-<input type="hidden" id="seach_type" value="@ViewBag.sel_type" />
-<form method="post" action="/Account/UserList?type=@ViewBag.accountType">
+<div class="nav_title">
 
     @if (ViewBag.accountType == 1)
     {
-        <div class="tableoptions">
-            <select class="basicform" style="width:150px" name="sel_type">
-                <option value="1">姓名</option>
-                <option value="2">电话</option>
-            </select> &nbsp;
-            <input class="smallinput" type="text" value="@ViewBag.name" name="name">
-            <button class="radius3">搜索</button>
-        </div>
+        <span>用户中心->个人用户列表</span>
     }
     else
     {
-        <div class="tableoptions">
-            <select class="basicform" style="width:150px" name="sel_type">
-                <option value="3">公司名称</option>
-                <option value="1">姓名</option>
-                <option value="2">电话</option>
-            </select> &nbsp;
-            <input class="smallinput" type="text" value="@ViewBag.name" name="name">
-            <button class="radius3">搜索</button>
-            <button class="radius3">添加</button>
-        </div>
+        <span>用户中心->公司用户列表</span>
     }
-    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
-        <colgroup>
-            <col class="con0">
-            <col class="con1">
-            <col class="con0">
-            <col class="con1">
-            <col class="con0">
-        </colgroup>
-        <thead>
-            <tr>
-                @if (ViewBag.accountType == 1)
-                {
-                    <th class="head0">账户类型</th>
-                }
-                else
-                {
-                    <th class="head0">公司名称</th>
-                }
-                <th class="head1">姓名</th>
-                <th class="head0">电话</th>
-                @if (ViewBag.accountType == 2)
-                {
-                    <th class="head1">部门</th>
-                }
-                <th class="head0">居住地址</th>
-                <th class="head0">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Count > 0)
+
+</div>
+<div class="pmp_content">
+    @{var par = "type" + ViewBag.accountType;
+        if (!string.IsNullOrWhiteSpace(ViewBag.companyId))
+        {
+            par += "&companyID=" + ViewBag.companyId;
+        }
+    }
+    <form method="post" action="/Account/UserList?@par">
+        @if (ViewBag.accountType == 1)
+        {
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="padding:10px;font-weight:400">查询：</td>
+                    <td style="padding:10px">
+                        <select class="form-control" style="width:150px" name="sel_type">
+                            <option value="1" selected="selected">姓名</option>
+                            <option value="2">电话</option>
+                        </select>
+                    </td>
+                    <td style="padding:10px"><input class="form-control" type="text" value="@ViewBag.name" name="name"></td>
+                    <td style="padding:10px"><button class="btn btn_blue">搜索</button></td>
+                </tr>
+            </table>
+        }
+        else
+        {
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="padding:10px;font-weight:400">查询：</td>
+                    <td style="padding:10px">
+                        <select class="form-control" style="width:150px" name="sel_type">
+                            <option value="1" selected="selected">姓名</option>
+                            <option value="2">电话</option>
+                        </select>
+                    </td>
+                    <td style="padding:10px"><input class="form-control" type="text" value="@ViewBag.name" name="name"></td>
+                    <td style="padding:10px"><button class="btn btn_blue">搜索</button> &nbsp<button class="btn btn_blue">添加</button></td>
+                </tr>
+            </table>
+        }
+    </form>
+
+    <table cellpadding="0" cellspacing="0" class="table_list">
+        <tr class="tr_title">
+            @if (ViewBag.accountType == 1)
             {
-                for (int i = 0; i < Model.Count; i++)
-                {
-                    <tr>
-                        @if (ViewBag.accountType == 1)
-                        {
-                            <td>个人账户</td>
-                        }
-                        else
-                        {
-                            <td>@Model[i].CompanyReal_Name</td>
-                        }
-                        <td>@Model[i].PersonInfo.RealName</td>
-                        <td>@Model[i].Phone</td>
-                        @if (ViewBag.accountType == 2)
-                        {
-                            <td class="center">技术一部</td>
-                        }
-                        <td class="center">@Model[i].PersonInfo.Address</td>
-                        <td class="center">
-                            <button class="radius3">查看</button>
-                            <button class="radius3">停用</button>
-                        </td>
-                    </tr>
-                }
+                <th>账户类型</th>
             }
             else
             {
-                <tr><td colspan="6">暂无信息</td></tr>
+                <th>公司名称</th>
             }
-        </tbody>
+            <th>姓名</th>
+            <th>电话</th>
+            @if (ViewBag.accountType == 2)
+            {
+                <th>部门</th>
+            }
+            <th>职位</th>
+            <th>居住地址</th>
+            <th>操作</th>
+        </tr>
+
+        @if (Model != null && Model.Count > 0)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                <tr>
+                    <td style="display:none"> <input type="hidden" value="@Model[i].ID" /></td>
+                    @if (ViewBag.accountType == 1)
+                    {
+                        <td>个人账户</td>
+                    }
+                    else
+                    {
+                        <td>@Model[i].CompanyReal_Name</td>
+                    }
+                    <td>@Model[i].PersonInfo.RealName</td>
+                    <td>@Model[i].Phone</td>
+                    @if (ViewBag.accountType == 2)
+                    {
+                        <td>技术一部</td>
+                    }
+                    <td>@Model[i].PersonInfo.Position</td>
+                    <td>@Model[i].PersonInfo.Address</td>
+                    <td>
+                        <button class="btn btn_blue btn_see">查看</button>
+                        <button class="btn btn_red btn_stop">停用</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="6">暂无信息</td></tr>
+        }
     </table>
-</form>
 
-@*<div class="bodywrapper">
-        <div class="pageheader">
-            <ul class="hornav">
-                <li class="current"><a href="#basicform">个人用户</a></li>
-                <li class=""><a href="#validation">企业用户</a></li>
-            </ul>
-        </div><!--pageheader-->
-        <div class="contentwrapper" id="contentwrapper">
-            <div class="subcontent" id="basicform" style="display: block;">
-                <div class="tableoptions">
-                    <select class="basicform" style="width:150px">
-                        <option value="">姓名</option>
-                        <option value="">电话</option>
-                    </select> &nbsp;
-                    <input class="smallinput" type="text" name="input1">
-                    <button class="radius3">搜索</button>
-                </div>
-                <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
-                    <colgroup>
-                        <col class="con0">
-                        <col class="con1">
-                        <col class="con0">
-                        <col class="con1">
-                        <col class="con0">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th class="head0">账户类型</th>
-                            <th class="head1">姓名</th>
-                            <th class="head0">电话</th>
-                            <th class="head1">部门</th>
-                            <th class="head0">居住地址</th>
-                            <th class="head0">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>个人账户</td>
-                            <td>张三</td>
-                            <td>110</td>
-                            <td class="center">技术一部</td>
-                            <td class="center">北京大兴</td>
-                            <td class="center">
-                                <button class="radius3">修改</button>
-                                <button class="radius3">删除</button>
-                                <button class="radius3">停用</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div style="display: none;" class="subcontent" id="validation">
-                <div class="tableoptions">
-                    <select class="basicform" style="width:150px">
-                        <option value="">公司名称</option>
-                        <option value="">姓名</option>
-                        <option value="">电话</option>
-                    </select> &nbsp;
-                    <input class="smallinput" type="text" name="input1">
-                    <button class="radius3">搜索</button>
-                    <button class="radius3">添加</button>
-                </div>
-                <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
-                    <colgroup>
-                        <col class="con0">
-                        <col class="con1">
-                        <col class="con0">
-                        <col class="con1">
-                        <col class="con0">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th class="head0">公司名称</th>
-                            <th class="head1">姓名</th>
-                            <th class="head0">电话</th>
-                            <th class="head1">部门</th>
-                            <th class="head0">居住地址</th>
-                            <th class="head0">操作</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>个人账户</td>
-                            <td>张三</td>
-                            <td>110</td>
-                            <td class="center">技术一部</td>
-                            <td class="center">北京大兴</td>
-                            <td class="center">
-                                <button class="radius3">修改</button>
-                                <button class="radius3">删除</button>
-                                <button class="radius3">停用</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div><!--subcontent-->
-        </div><!--subcontent-->
-    </div><!--contentwrapper-->*@
-
-<script type="text/javascript">
-
-    $(function () {
-        if ($("#seach_type").val() != "") {
-            $("select").val($("#seach_type").val());
-        }
-    })
-    //jQuery('.hornav a').click(function () {
-
-    //    var date = {}
-    //    $.get("", date, function () { }, "json")
-
-    //});
-
-
-    jQuery('.hornav a').click(function () {
-
-        //this is only applicable when window size below 450px
-        if (jQuery(this).parents('.more').length == 0)
-            jQuery('.hornav li.more ul').hide();
-
-        //remove current menu
-        jQuery('.hornav li').each(function () {
-            jQuery(this).removeClass('current');
-        });
-
-        jQuery(this).parent().addClass('current');	// set as current menu
-
-        var url = jQuery(this).attr('href');
-        if (jQuery(url).length > 0) {
-            jQuery('.contentwrapper .subcontent').hide();
-            jQuery(url).show();
-        } else {
-            jQuery.post(url, function (data) {
-                jQuery('#contentwrapper').html(data);
-                jQuery('.stdtable input:checkbox').uniform();	//restyling checkbox
-            });
-        }
-        return false;
+</div>
+<script>
+    $(".btn_see").click(function () {
+        var id = $(this).parents(".table_list").find("[type='hidden']").val();
+        window.location.href = "/Account/AccountDetail?uid=" + id;
     });
-
-
+    $(".btn_stop").click(function () {
+        alert("停用")
+        window.location.href = "/Account/AccountDetail?uid=" + id;
+    });
 </script>
