@@ -93,7 +93,7 @@ namespace com.pmp.mongo.service
         {
             if (list == null || list.Count < 1)
                 return null;
-            var filter = Builders<MgUser>.Filter.All("ID", list);
+            var filter = Builders<MgUser>.Filter.In("ID", list);
             return Search(filter).Select(m => new SimpleUserRes()
             {
                 Id = m.ID,

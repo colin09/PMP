@@ -44,14 +44,38 @@ namespace com.pmp.web.Controllers
             var total = 0L;
             var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, city, date, page, out total);
 
-            var userIds = list.Select(l => l.CreatesUserID).ToList();
-            var userList = _userService.GetUserListByIds(userIds);
+            var cUserIds = list.Select(l => l.CreatesUserID).ToList();
+            var rUserIds = list.Select(l => l.ReceiveUserId).ToList();
+            cUserIds.AddRange(rUserIds);
+            var userList = _userService.GetUserListByIds(cUserIds);
 
-            ViewBag.users = userList;
+            var cityIds = list.Select(l => l.CityId).ToList();
+            var provIds = list.Select(l => l.ProvinceId).ToList();
+            cityIds.AddRange(provIds);
+            var cityList = _cityService.GetListByIds(cityIds);
+
+            var result = list.Select(l => new TaskInfoRes
+            {
+                ID = l.ID, CategoryId = (int)l.Category, CategoryName = l.Category.GetName(),
+                Code = l.Code, ContractCode = l.ContractCode, Status = (int)l.Status, StatusDesc = l.Status.GetName(),
+                Name = l.Name, Manager = l.Manager, Linkman = l.Linkman, Mobile = l.Mobile,
+                Desc = l.Desc, CUserID = l.CreatesUserID, 
+                StartTime = l.StartTime, EndTime = l.EndTime, AuditStatus = (int)l.AuditStatus, AuditStatusDesc = l.AuditStatus.GetName(),
+                RUserId = l.ReceiveUserId,
+                CUserName = userList.FirstOrDefault(u => u.Id == l.CreatesUserID)?.Name,
+                RUserName = userList.FirstOrDefault(u => u.Id == l.ReceiveUserId)?.Name,
+                CityName = cityList.FirstOrDefault(c => c.ID == l.CityId)?.Name,
+                ProvinceName = cityList.FirstOrDefault(c => c.ID == l.ProvinceId)?.Name,
+                CEvaluate =l.IsEvaluate_E,PEvaluate=l.IsEvaluate_I,
+                FlieList = l.FlieList,ProcessDesc=l.ProcessDesc
+            }).ToList();
+
+
+
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
 
-            return View(list);
+            return View(result);
         }
 
 
@@ -80,22 +104,27 @@ namespace com.pmp.web.Controllers
                 EndTime = task.EndTime,
                 AuditStatus = AuditStatus.Default,
                 Budget = task.Budget,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+
+                ProvinceId = task.Province,
+                CityId = task.City,
             };
             var fileIndex = 1;
-            foreach (var file in files)
-            {
-                var pFile = new ProjectFlie();
-                pFile.Name = Path.GetFileName(file.FileName);
-                pFile.FileType = 1;
-                pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
 
-                var savePath = pFile.Path;
-                file.SaveAs(savePath);
+            if (files != null)
+                foreach (var file in files)
+                {
+                    var pFile = new ProjectFlie();
+                    pFile.Name = Path.GetFileName(file.FileName);
+                    pFile.FileType = 1;
+                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
 
-                project.FlieList.Add(pFile);
-                fileIndex += 1;
-            }
+                    var savePath = pFile.Path;
+                    file.SaveAs(savePath);
+
+                    project.FlieList.Add(pFile);
+                    fileIndex += 1;
+                }
 
             project.ProcessDesc.Add(new ProjectProcess() { ProcessDesc = "发布项目。", UserID = this._Longin_UserId, CreateTime = DateTime.Now });
 

@@ -19,6 +19,11 @@ namespace com.pmp.mongo.service
         }
 
 
+        public List<MgCity> GetListByIds(List<int> ids)
+        {
+            var filter = Builders<MgCity>.Filter.In("ID", ids);
+            return Search(filter);
+        }
 
 
 
@@ -40,7 +45,9 @@ namespace com.pmp.mongo.service
 
 
 
-        
+
+
+
 
     }
 
