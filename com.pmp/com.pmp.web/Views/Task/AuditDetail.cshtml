@@ -3,14 +3,19 @@
     ViewBag.Title = "AuditDetail";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<h5>会员中心 > 任务中心 > 任务审核 > 审核</h5>
-<h3 class="mc10">审核</h3>
-<input type="hidden" id="userLevel" value="@ViewBag.level" />
+
+<div class="ptb10 bb">
+    <span>会员中心 > 任务审核 > 审核</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">审核</h3>
+</div>
 
 <table class="table noborder">
     <tr>
         <td class="t-r w220">项目类别： </td>
-        <td>@Model.Category</td>
+        <td>@Model.CategoryName</td>
     </tr>
     <tr>
         <td class="t-r">项目编号： </td>
@@ -22,7 +27,7 @@
     </tr>
     <tr>
         <td class="t-r">预计工期： </td>
-        <td>@Model.StartTime - @Model.EndTime</td>
+        <td>@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
     </tr>
     <tr>
         <td class="t-r">项目预算：</td>
@@ -34,11 +39,11 @@
     </tr>
     <tr>
         <td class="t-r">审核状态： </td>
-        <td>@Model.AuditStatus</td>
+        <td>@Model.AuditStatusDesc</td>
     </tr>
     <tr>
         <td class="t-r">项目阶段： </td>
-        <td>@Model.Status</td>
+        <td>@Model.StatusDesc</td>
     </tr>
     <tr>
         <td class="t-r">项目经理： </td>
@@ -50,11 +55,19 @@
     </tr>
     <tr>
         <td class="t-r">发布时间： </td>
-        <td>@Model.CreateTime</td>
+        <td>@Model.CTime</td>
     </tr>
     <tr>
         <td class="t-r">项目文件： </td>
-        <td>@Model.FlieList</td>
+        <td>
+            @if (Model.FlieList != null && Model.FlieList.Count > 0)
+            {
+                foreach (var file in Model.FlieList)
+                {
+                    <div>@file.Name</div>
+                }
+            }
+        </td>
     </tr>
     <tr>
         <td class="t-r">审核此任务： </td>
@@ -77,7 +90,7 @@
     <tr>
         <td class="t-r">指派此任务：</td>
         <td>
-            <button type="button" class="btn btn-default"> 选择执行人 </button>
+            <button type="button" class="btn btn-default" id="btnChoosePerson"> 选择执行人 </button>
             <span id="spnReceiveName"> -- </span>
             <input type="hidden" name="id" value="@Model.ID" />
             <input type="hidden" name="ReceiveId" value="0" />
@@ -87,3 +100,49 @@
 </table>
 
 
+
+
+<div class="modal fade" id="getModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">选择任务执行人</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divPersonList">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                    <button type="submit" class="btn btn-primary"> 确定指派 </button>
+                </div>
+            }
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btnChoosePerson").click(function () {
+                $('#getModel').modal('show');
+                $.getJSON("/Account/GetCompanyUsers")
+                .done(function (data) {
+                    if (data.length > 0) {
+                        var layout = "";
+                        $.each(data, function (key, item) {
+                            layout += "<label><input name='userId' value='" + item.Id + "' /> " + item.Name + " </label>";
+                        });
+                        $("#divPersonList").empty().append(layout);
+                    }
+                });
+            });
+        });
+    </script>
+}

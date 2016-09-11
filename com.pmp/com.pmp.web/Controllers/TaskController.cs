@@ -56,18 +56,32 @@ namespace com.pmp.web.Controllers
 
             var result = list.Select(l => new TaskInfoRes
             {
-                ID = l.ID, CategoryId = (int)l.Category, CategoryName = l.Category.GetName(),
-                Code = l.Code, ContractCode = l.ContractCode, Status = (int)l.Status, StatusDesc = l.Status.GetName(),
-                Name = l.Name, Manager = l.Manager, Linkman = l.Linkman, Mobile = l.Mobile,
-                Desc = l.Desc, CUserID = l.CreatesUserID, 
-                StartTime = l.StartTime, EndTime = l.EndTime, AuditStatus = (int)l.AuditStatus, AuditStatusDesc = l.AuditStatus.GetName(),
+                ID = l.ID,
+                CategoryId = (int)l.Category,
+                CategoryName = l.Category.GetName(),
+                Code = l.Code,
+                ContractCode = l.ContractCode,
+                Status = (int)l.Status,
+                StatusDesc = l.Status.GetName(),
+                Name = l.Name,
+                Manager = l.Manager,
+                Linkman = l.Linkman,
+                Mobile = l.Mobile,
+                Desc = l.Desc,
+                CUserID = l.CreatesUserID,
+                StartTime = l.StartTime,
+                EndTime = l.EndTime,
+                AuditStatus = (int)l.AuditStatus,
+                AuditStatusDesc = l.AuditStatus.GetName(),
                 RUserId = l.ReceiveUserId,
                 CUserName = userList.FirstOrDefault(u => u.Id == l.CreatesUserID)?.Name,
                 RUserName = userList.FirstOrDefault(u => u.Id == l.ReceiveUserId)?.Name,
                 CityName = cityList.FirstOrDefault(c => c.ID == l.CityId)?.Name,
                 ProvinceName = cityList.FirstOrDefault(c => c.ID == l.ProvinceId)?.Name,
-                CEvaluate =l.IsEvaluate_E,PEvaluate=l.IsEvaluate_I,
-                FlieList = l.FlieList,ProcessDesc=l.ProcessDesc
+                CEvaluate = l.IsEvaluate_E,
+                PEvaluate = l.IsEvaluate_I,
+                FlieList = l.FlieList,
+                ProcessDesc = l.ProcessDesc
             }).ToList();
 
 
@@ -78,7 +92,7 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult Create()
         {
             return View();
@@ -86,12 +100,12 @@ namespace com.pmp.web.Controllers
 
 
 
-        //[UserAuthorize]
+        [Authorization]
         public ActionResult CreateSubmint(TaskInfoReq task, HttpPostedFileBase[] files)
         {
             var project = new MgProject()
             {
-                Category=(ProjectCategroy)task.Catetory,
+                Category = (ProjectCategroy)task.Catetory,
                 Code = task.Code,
                 Name = task.Name,
                 ContractCode = task.ContractCode,
@@ -143,7 +157,7 @@ namespace com.pmp.web.Controllers
             var evaIds = evas.Select(e => e.UserId).ToList();
 
             var userIds = new List<int> { project.CreatesUserID, project.ReceiveUserId };
-            var procs = project.ProcessDesc.Select(p => p.UserID).ToList();           
+            var procs = project.ProcessDesc.Select(p => p.UserID).ToList();
             var slns = _solutionService.GetListByProId(id);
             var slnIds = slns.Select(s => s.UserId).ToList();
 
@@ -151,43 +165,66 @@ namespace com.pmp.web.Controllers
             userIds.AddRange(slnIds);
             userIds.AddRange(evaIds);
             var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
-            var cityList = _cityService.GetListByIds(new List<int> { project.CityId,project.ProvinceId});
+            var cityList = _cityService.GetListByIds(new List<int> { project.CityId, project.ProvinceId });
 
-            project.ProcessDesc.ForEach(p => {
+            project.ProcessDesc.ForEach(p =>
+            {
                 p.UserName = userList.FirstOrDefault(u => u.Id == p.UserID)?.Name;
             });
 
             var result = new TaskInfoRes()
             {
-                ID = project.ID, CategoryId = (int)project.Category, CategoryName = project.Category.GetName(),
-                Code = project.Code, ContractCode = project.ContractCode, Status = (int)project.Status, StatusDesc = project.Status.GetName(),
-                Name = project.Name, Manager = project.Manager, Linkman = project.Linkman, Mobile = project.Mobile,
-                Desc = project.Desc, CUserID = project.CreatesUserID, Budget = project.Budget,
-                StartTime = project.StartTime, EndTime = project.EndTime, AuditStatus = (int)project.AuditStatus, AuditStatusDesc = project.AuditStatus.GetName(),
+                ID = project.ID,
+                CategoryId = (int)project.Category,
+                CategoryName = project.Category.GetName(),
+                Code = project.Code,
+                ContractCode = project.ContractCode,
+                Status = (int)project.Status,
+                StatusDesc = project.Status.GetName(),
+                Name = project.Name,
+                Manager = project.Manager,
+                Linkman = project.Linkman,
+                Mobile = project.Mobile,
+                Desc = project.Desc,
+                CUserID = project.CreatesUserID,
+                Budget = project.Budget,
+                StartTime = project.StartTime,
+                EndTime = project.EndTime,
+                AuditStatus = (int)project.AuditStatus,
+                AuditStatusDesc = project.AuditStatus.GetName(),
                 RUserId = project.ReceiveUserId,
                 CUserName = userList.FirstOrDefault(u => u.Id == project.CreatesUserID)?.Name,
                 RUserName = userList.FirstOrDefault(u => u.Id == project.ReceiveUserId)?.Name,
                 CityName = cityList.FirstOrDefault(c => c.ID == project.CityId)?.Name,
                 ProvinceName = cityList.FirstOrDefault(c => c.ID == project.ProvinceId)?.Name,
-                CEvaluate = project.IsEvaluate_E,PEvaluate = project.IsEvaluate_I,
-                FlieList = project.FlieList,ProcessDesc = project.ProcessDesc,
-                CTime = project.CreateTime,UTime=project.UpdateTime,
+                CEvaluate = project.IsEvaluate_E,
+                PEvaluate = project.IsEvaluate_I,
+                FlieList = project.FlieList,
+                ProcessDesc = project.ProcessDesc,
+                CTime = project.CreateTime,
+                UTime = project.UpdateTime,
             };
 
-            ViewBag.slns = slns.Select(s=>new TaskSlnRes {
-                SlnDesc = s.SlnDesc,FileList=s.FileList,
+            ViewBag.slns = slns.Select(s => new TaskSlnRes
+            {
+                SlnDesc = s.SlnDesc,
+                FileList = s.FileList,
                 UserName = userList.FirstOrDefault(u => u.Id == s.UserId)?.Name,
-                CTime = s.CTime,UTime = s.UTime
+                CTime = s.CTime,
+                UTime = s.UTime
             }).ToList();
-            ViewBag.evas = evas.Select(e => new TaskEvaRes {
-                Grade = e.Grade,Score=e.Score,Desc=e.Desc,
+            ViewBag.evas = evas.Select(e => new TaskEvaRes
+            {
+                Grade = e.Grade,
+                Score = e.Score,
+                Desc = e.Desc,
                 UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
             }).ToList();
 
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
@@ -201,16 +238,56 @@ namespace com.pmp.web.Controllers
             return View(list);
         }
 
-
+        [Authorization]
         public ActionResult AuditDetail(int id)
         {
-            var project = _projectService.GetOneById(id);
             ViewBag.level = this._Longin_UserLevel;
 
-            return View(project);
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return View();
+
+            var userIds = new List<int> { project.CreatesUserID, project.ReceiveUserId };
+
+            var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+            var cityList = _cityService.GetListByIds(new List<int> { project.CityId, project.ProvinceId });
+
+            var result = new TaskInfoRes()
+            {
+                ID = project.ID,
+                CategoryId = (int)project.Category,
+                CategoryName = project.Category.GetName(),
+                Code = project.Code,
+                ContractCode = project.ContractCode,
+                Status = (int)project.Status,
+                StatusDesc = project.Status.GetName(),
+                Name = project.Name,
+                Manager = project.Manager,
+                Linkman = project.Linkman,
+                Mobile = project.Mobile,
+                Desc = project.Desc,
+                CUserID = project.CreatesUserID,
+                Budget = project.Budget,
+                StartTime = project.StartTime,
+                EndTime = project.EndTime,
+                AuditStatus = (int)project.AuditStatus,
+                AuditStatusDesc = project.AuditStatus.GetName(),
+                RUserId = project.ReceiveUserId,
+                CUserName = userList.FirstOrDefault(u => u.Id == project.CreatesUserID)?.Name,
+                RUserName = userList.FirstOrDefault(u => u.Id == project.ReceiveUserId)?.Name,
+                CityName = cityList.FirstOrDefault(c => c.ID == project.CityId)?.Name,
+                ProvinceName = cityList.FirstOrDefault(c => c.ID == project.ProvinceId)?.Name,
+                CEvaluate = project.IsEvaluate_E,
+                PEvaluate = project.IsEvaluate_I,
+                FlieList = project.FlieList,
+                ProcessDesc = project.ProcessDesc,
+                CTime = project.CreateTime,
+                UTime = project.UpdateTime,
+            };
+            return View(result);
         }
 
-
+        [Authorization]
         public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
         {
             log.Info($"state:{auditState}, desc:{auditDesc}");
@@ -218,7 +295,7 @@ namespace com.pmp.web.Controllers
             return RedirectToAction("AuditList");
         }
 
-
+        [Authorization]
         public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
             var cUser = 0;
@@ -245,7 +322,7 @@ namespace com.pmp.web.Controllers
             return View(list);
         }
 
-
+        [Authorization]
         public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
             if (files == null)
@@ -287,8 +364,13 @@ namespace com.pmp.web.Controllers
             return RedirectToAction("Detail", new { id = projectId });
         }
 
-
-
+        [Authorization]
+        public ActionResult GiveProject(int id, int userId, string desc = "")
+        {
+            if (userId > 0)
+                _projectService.GiveProject(id, userId, desc);
+            return RedirectToAction("AuditList");
+        }
 
 
 

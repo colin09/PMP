@@ -3,12 +3,26 @@
     ViewBag.Title = "AccountPersonal";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+<<<<<<< HEAD
 
 <div class="nav_title">
     <span>我的信息->基本资料</span>
 </div>
 <div  class="pmp_content">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountPersonalInfoSumbit" style="margin:10px">
+=======
+<div class="ptb10 bb">
+    <span>会员中心 > 基本信息</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">基本信息</h3>
+</div>
+
+
+<div style="padding:15px">
+    <form class="form-horizontal" role="form" method="post" action="/Account/AccountPersonalInfoSumbit">
+>>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
         <div class="form-group">
            <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">

@@ -3,6 +3,7 @@
     ViewBag.Title = "个人信息详情";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+<<<<<<< HEAD
 <div class="nav_title">
     <span>我的信息->个人详情</span>
 </div>
@@ -22,6 +23,69 @@
         </tr>
         <tr>
             <td style="width:50%">
+=======
+
+<div class="ptb10 bb">
+    <span>会员中心 > 基本信息</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">基本信息</h3>
+</div>
+
+
+<div style="padding:15px">
+    <form action="" class="stdform pageheader notab">
+        <p>
+            <label>登录名:</label>
+            <span class="field">
+                <small class="smallinput">@((string.IsNullOrWhiteSpace(ViewBag.mgUser.Phone) ? "暂未填写":ViewBag.mgUser.Phone))</small>
+            </span>
+        </p>
+        <p>
+            <label>真实姓名:</label>
+            <span class="field">
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.RealName) ? "暂未填写":ViewBag.mgUser.PersonInfo.RealName)</small>
+            </span>
+        </p>
+        <p>
+            <label>性别:</label>
+            <span class="field">
+                <small class="smallinput">@ViewBag.mgUser.PersonInfo.Gender )</small>
+            </span>
+        </p>
+        <p>
+            <label>生日:</label>
+            <span class="field">
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Birthday) ? "暂未填写":ViewBag.mgUser.PersonInfo.Birthday)</small>
+            </span>
+        </p>
+        <p>
+            <label>技能介绍:</label>
+            <span class="field">
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Skill) ? "暂未填写":ViewBag.mgUser.PersonInfo.Skill)</small>
+            </span>
+        <p>
+            <label>个人简介:</label>
+            <span class="field">
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Introduction) ? "暂未填写":ViewBag.mgUser.PersonInfo.Introduction)</small>
+            </span>
+        </p>
+        <p>
+            <label>居住地址:</label>
+            <span class="field">
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Address) ? "暂未填写":ViewBag.mgUser.PersonInfo.Address)</small>
+            </span>
+        </p>
+    </form>
+    @if (ViewBag.mgUser.AccountType == com.pmp.mongo.data.UserLevel.Person)
+    {
+        <div class="contenttitle2">
+            <h3>个人认证</h3>
+        </div>
+        <form action="" class="stdform pageheader">
+            <p>
+>>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
                 <label>真实姓名:</label>
                 <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.RealName) ? "暂未填写" : ViewBag.mgUser.PersonInfo.RealName)</small>
             </td>

@@ -19,10 +19,10 @@
     <div class="header">
         <div class="topM sline clearfix">
             <div class="OfcardLogo">
-                <img style="width:100px;height:100px" src="/images/pmp.png">
+                <img style="height:60px" src="/images/pmp.png">
             </div>
-            <h3 style="float:left">任务管理系统</h3>
-            <div class="searchBar">
+            <h2 style="float:left" class="mt10">任务管理系统</h2>
+            <div class="searchBar mt10">
                 <div class="searchVInput">
                     <form action="#" method="post" name="fo" id="fo" target="_blank">
                         <a href="javascript:document.getElementById('fo').submit()">搜索</a>
@@ -32,6 +32,7 @@
                 <input name="producttype" id="producttype" value="0" type="hidden" />
             </div><!-- searchBar end -->
         </div><!-- sline end -->
+
         <div class="navigationBar">
             <div class="navigationBarInnel">
                 <tt title="我是顾客"></tt>
@@ -43,6 +44,7 @@
                 </div><!-- mainMenuV end -->
             </div><!-- mainMenudl end -->
         </div><!-- navigationBar end -->
+<<<<<<< HEAD
     </div><!-- header end -->
     <div class="of_whole">
         <div id="of_mainBody">
@@ -50,6 +52,31 @@
             <div class="side_small tag_line float_l">
                 <div id="firstpane" class="menu_list">
 
+=======
+    </div>
+    <div class="container mt25">
+        <div id="of_mainBody" class="push_t">
+            <!--左侧栏开始-->
+            <div class="side_small tag_line float_l">
+                <div id="firstpane" class="menu_list">
+                    @*<h3 class="menu_head current">我的账号</h3>
+                        <div style="display:block" class="menu_body">
+                            <a href="">基本资料</a>
+                            <a href="">实名认证</a>
+                        </div>
+                        <h3 class="menu_head">公司认证</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="">公司认证</a>
+                        </div>
+                        <h3 class="menu_head">我的任务</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="#">我的任务</a>
+                        </div>
+                        <h3 class="menu_head">我的评价</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="#">评价管理</a>
+                        </div>*@
+>>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
                 </div>
             </div>
         </div>
@@ -61,6 +88,16 @@
         <p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
         <p>来源：<a href="#" target="_blank">PMP版权所有</a></p>
     </div>
+<<<<<<< HEAD
+=======
+    @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/menu.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+>>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
 
     <script type="text/javascript">
         $(function () {
@@ -74,19 +111,26 @@
                             html.push("  <div style=\"display:block\" class=\"menu_body\">")
                         } else {
                             html.push(" <h3 class=\"menu_head\">" + menu.title + "</h3>");
-                            html.push("  <div style=\"display:none\" class=\"menu_body\">")
+                            html.push("  <div style=\"display:block\" class=\"menu_body\">")
                         }
+<<<<<<< HEAD
                         if (menu.subMenu != undefined) {
                             $.each(menu.subMenu, function (j, sub) {
                                 html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
                             });
                         }
+=======
+                        if (menu.subMenu != undefined)
+                            $.each(menu.subMenu, function (j, sub) {
+                                html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
+                            });
+>>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
                         html.push("</div>");
                     });
                     $("#firstpane").append(html.join(""));
                 }
             });
-
+            /*
             $("#firstpane .menu_body:eq(0)").show();
             $("#firstpane h3.menu_head").click(function () {
                 $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
@@ -97,6 +141,7 @@
                 $(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
                 $(this).siblings().removeClass("current");
             });
+            */
         })
     </script>
 </body>

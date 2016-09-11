@@ -53,10 +53,13 @@ div,ul,li,p,span,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {padding: 
 
 .pt5{ padding-top: 5px;}
 .pt10{ padding-top: 10px;}
+.pb10{ padding-bottom: 10px;}
 .pt25{ padding-top: 25px;}
 .pt35{ padding-top: 35px;}
 .pl10{ padding-left: 10px;}
+.pl25{ padding-left: 25px;}
 .plt10{ padding-top: 10px;padding-left: 10px;}
+.ptb10{ padding-top: 10px;padding-bottom: 10px;}
 .ptb25{ padding-top: 25px;padding-bottom: 25px;}
 .pb15{ padding-bottom: 15px;}
 .mt10{ margin-top: 10px;}
@@ -78,8 +81,11 @@ red{color:#fe0200;}
 .bc-y{ background: #febb36;}
 .bc-g{ background: #f2f3f0;}
 
+.bb{border-bottom:1px solid #999;}
+
 .w50{width:50px;}
 .w100{width:100px;}
+.w120{width:120px;}
 .w140{width:140px;}
 .w180{width:180px;}
 .w320{width:320px;}

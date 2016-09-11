@@ -73,7 +73,14 @@ namespace com.pmp.mongo.service
 
             return Update(filter, update) > 0;
         }
+        public bool GiveProject(int id, int userId, string desc)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", id);
+            var update = Builders<MgProject>.Update.Set(p => p.ReceiveUserId, userId)
+                .Set(p => p.Status, ProjectStatus.Action);
 
+            return Update(filter, update) > 0;
+        }
 
 
     }
