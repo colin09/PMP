@@ -445,7 +445,7 @@ namespace com.pmp.web.Controllers
                 else
                 {
                     IsSuccess = false;
-                    message = "登录失败,账号为注册！";
+                    message = "登录失败,账号未注册！";
                 }
             }
             catch (Exception ex)
