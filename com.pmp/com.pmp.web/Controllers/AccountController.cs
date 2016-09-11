@@ -30,6 +30,7 @@ namespace com.pmp.web.Controllers
         /// 个人基本信息页面
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountPersonal()
         {
             var userId = _Longin_UserId;
@@ -46,6 +47,7 @@ namespace com.pmp.web.Controllers
         }
 
         //提交个人信息
+        [Authorization]
         public ActionResult AccountPersonalInfoSumbit()
         {
             MgPersonInfo model = new MgPersonInfo();
@@ -66,6 +68,7 @@ namespace com.pmp.web.Controllers
         /// 个人认证
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountP_Approve()
         {
             ViewBag.phone = _Longin_Phone;
@@ -77,6 +80,7 @@ namespace com.pmp.web.Controllers
         /// 个人认证提交
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountP_ApproveSumbit()
         {
             MgPersonReal mgPersonReal = new MgPersonReal();
@@ -99,6 +103,7 @@ namespace com.pmp.web.Controllers
         /// 公司认证
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountCompany_Approve()
         {
             ViewBag.phone = _Longin_Phone;
@@ -110,6 +115,7 @@ namespace com.pmp.web.Controllers
         /// 提交公司认证
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountCompany_ApproveSumbit()
         {
             MgCompanyReal mr = new MgCompanyReal();
@@ -147,6 +153,7 @@ namespace com.pmp.web.Controllers
         /// 系统管理员审核
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public string AccountAuditRes()
         {
             var accountType = Request["type"];
@@ -168,6 +175,7 @@ namespace com.pmp.web.Controllers
         /// 获取审核列表
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public string GetAccountAuditList()
         {
             var auditType = int.Parse(Request["AuditType"]);
@@ -181,6 +189,7 @@ namespace com.pmp.web.Controllers
         /// 个人详细信息
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult AccountDetail()
         {
             long uid = 0;
@@ -205,6 +214,7 @@ namespace com.pmp.web.Controllers
 
 
 
+        [Authorization]
         public ActionResult UserList()
         {
             var type = Request.QueryString["type"];
@@ -240,6 +250,7 @@ namespace com.pmp.web.Controllers
         /// 公司列表
         /// </summary>
         /// <returns></returns>
+        [Authorization]
         public ActionResult CompanyUserList()
         {
             var sel_type = Request.Form["sel_type"];
@@ -347,6 +358,7 @@ namespace com.pmp.web.Controllers
             new HttpHelper().SetSession(Public_const_enum.LonginCookieName, value);
         }
 
+        [Authorization]
         public ActionResult GetCompanyUsers()
         {
             var service = new MgUserService();

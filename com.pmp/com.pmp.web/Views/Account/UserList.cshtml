@@ -27,7 +27,16 @@
         padding: 7px 10px;
     }
 </style>
-<div>导航</div>
+
+<div class="ptb10 bb">
+    <span>会员中心 > 会员列表</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">用户列表</h3>
+</div>
+
+
 <input type="hidden" id="seach_type" value="@ViewBag.sel_type" />
 <form method="post" action="/Account/UserList?type=@ViewBag.accountType">
 

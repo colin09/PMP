@@ -28,7 +28,17 @@
         padding: 7px 10px;
     }
 </style>
-<div>导航</div>
+
+
+<div class="ptb10 bb">
+    <span>会员信息 > 员工管理</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">员工管理</h3>
+</div>
+
+
 <form method="post" action="/Account/CompanyUserList">
     <div class="tableoptions">
         <select class="basicform" style="width:150px" name="sel_type">

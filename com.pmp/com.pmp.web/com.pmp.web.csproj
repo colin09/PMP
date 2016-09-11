@@ -184,6 +184,7 @@
     <Content Include="Content\pmp_tip.css" />
     <Content Include="Content\pmp_pub.css" />
     <Content Include="Content\pmp_common.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Css\Index.css" />
     <Content Include="Css\IndexFonts.css" />
     <Content Include="Css\IndexFonts2.css" />

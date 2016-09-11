@@ -3,19 +3,19 @@
     ViewBag.Title = "企业认证";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<div style="height:30px">
+<div class="ptb10 bb">
     <span>我的信息->企业实名认证</span>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
-    <h5 style="color: #333;font-size: 16px;">企业实名认证</h5>
+    <h3 class="ptb10" >企业实名认证</h3>
 </div>
-<div>
-    <ul class="certify-meta-ul unstyled">
+<red>
+    <ul class="certify-meta-ul unstyled pl25">
         <li>请确保您是具有法人资格的商户，您需提供可证明您依法设立、依法经营，开展社会活动的执照，证件等（如营业执照副本)</li>
         <li>证件有效期在3个月内的商户，请找工商部门更新资料后再行提交</li>
     </ul>
-</div>
+</red>
 
 <div style="padding:15px">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountCompany_ApproveSumbit">

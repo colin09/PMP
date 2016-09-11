@@ -41,8 +41,9 @@ namespace com.pmp.web
                       "~/Content/pmp_pub.css",
                        "~/Content/pmp_tip.css",
 
-                      "~/Content/site.css",
-                      "~/Content/main.css"));
+                      "~/Content/site.css"
+                      //"~/Content/main.css"
+                      ));
 
 
         }

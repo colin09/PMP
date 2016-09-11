@@ -3,9 +3,14 @@
     ViewBag.Title = "AuditDetail";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<h5>会员中心 > 任务中心 > 任务审核 > 审核</h5>
-<h3 class="mc10">审核</h3>
-<input type="hidden" id="userLevel" value="@ViewBag.level" />
+
+<div class="ptb10 bb">
+    <span>会员中心 > 任务审核 > 审核</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">审核</h3>
+</div>
 
 <table class="table noborder">
     <tr>

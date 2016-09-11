@@ -1,13 +1,15 @@
-﻿
+﻿@using com.pmp.common.helper;
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-
-
-<h5>会员中心 > 任务中心 > 任务审核</h5>
-<h3 class="mc10">我的任务</h3>
-<input type="hidden" id="userLevel" value="@ViewBag.level" />
+<div class="ptb10 bb">
+    <span>会员中心 > 所有任务 </span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">我的所有任务</h3>
+</div>
 
 <ul class="taskAuditList">
     @{ if (ViewBag.total > 0)
@@ -16,10 +18,10 @@
             {
                 <li>
                     <div class="line1">
-                        <a href="/Task/AuditDetail?id=@item.ID">[@item.Status]</a>   @item.Code | @item.ContractCode | @item.Name |
+                        <a href="/Task/AuditDetail?id=@item.ID">[@item.Status.GetName()]</a>   @item.Code | @item.ContractCode | @item.Name
                     </div>
                     <div class="line2">@item.Desc</div>
-                    <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime - @item.EndTime</div>
+                    <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
                 </li>
             }
         }

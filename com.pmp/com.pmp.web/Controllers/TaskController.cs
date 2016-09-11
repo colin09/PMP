@@ -92,7 +92,7 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult Create()
         {
             return View();
@@ -100,7 +100,7 @@ namespace com.pmp.web.Controllers
 
 
 
-        //[UserAuthorize]
+        [Authorization]
         public ActionResult CreateSubmint(TaskInfoReq task, HttpPostedFileBase[] files)
         {
             var project = new MgProject()
@@ -224,7 +224,7 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
@@ -238,7 +238,7 @@ namespace com.pmp.web.Controllers
             return View(list);
         }
 
-
+        [Authorization]
         public ActionResult AuditDetail(int id)
         {
             ViewBag.level = this._Longin_UserLevel;
@@ -287,7 +287,7 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
         {
             log.Info($"state:{auditState}, desc:{auditDesc}");
@@ -295,7 +295,7 @@ namespace com.pmp.web.Controllers
             return RedirectToAction("AuditList");
         }
 
-
+        [Authorization]
         public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
         {
             var cUser = 0;
@@ -322,7 +322,7 @@ namespace com.pmp.web.Controllers
             return View(list);
         }
 
-
+        [Authorization]
         public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
             if (files == null)
@@ -364,7 +364,7 @@ namespace com.pmp.web.Controllers
             return RedirectToAction("Detail", new { id = projectId });
         }
 
-
+        [Authorization]
         public ActionResult GiveProject(int id, int userId, string desc = "")
         {
             if (userId > 0)
