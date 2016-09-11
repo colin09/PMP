@@ -26,6 +26,7 @@ namespace com.pmp.model.response
         public string Mobile { get; set; }
         public string CityName { set; get; }
         public string ProvinceName { set; get; }
+        public string Budget { set; get; }
         public string Desc { get; set; }
         public int CUserID { get; set; }
         public string CUserName { set; get; }
@@ -35,13 +36,42 @@ namespace com.pmp.model.response
         public string AuditStatusDesc { get; set; }
         public int RUserId { set; get; }
         public string RUserName { set; get; }
-        public DateTime CreateTime { get; set; }
-        public int CEvaluate{ get; set; }
+        public DateTime CTime { get; set; }
+        public DateTime UTime { get; set; }
+        public int CEvaluate { get; set; }
         public int PEvaluate { get; set; }
         public List<ProjectFlie> FlieList { get; set; }
-        public List<ProjectProcess> ProcessDesc { get; set; }
+        public List<ProjectProcess> ProcessDesc { get; set; } = new List<ProjectProcess>();
     }
 
+
+    public class TaskSlnRes
+    {
+        public int ID { set; get; }
+        public int ProjectId { set; get; }
+        public string ProjectName { get; set; }
+        public string SlnDesc { set; get; }
+        public List<ProjectFlie> FileList { set; get; }
+        public int UserId { set; get; }
+        public string UserName { set; get; }
+        public DateTime CTime { set; get; }
+        public DateTime UTime { set; get; }
+        public int Result { set; get; }
+    }
+
+
+    public class TaskEvaRes
+    {
+        public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
+        public int EvaluateType { get; set; }
+        public int Grade { get; set; }
+        public int Score { get; set; }
+        public string Desc { get; set; }
+        public int UserId { set; get; }
+        public string UserName { set; get; }
+        public DateTime CTime { set; get; }
+    }
 
 
 }

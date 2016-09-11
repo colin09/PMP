@@ -68,7 +68,8 @@ namespace com.pmp.mongo.service
         public bool AuditProject(int id, AuditStatus auditState, string desc)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
-            var update = Builders<MgProject>.Update.Set(p => p.AuditStatus, auditState);
+            var update = Builders<MgProject>.Update.Set(p => p.AuditStatus, auditState)
+                .Set(p=>p.Status,ProjectStatus.Wait);
 
             return Update(filter, update) > 0;
         }

@@ -1,7 +1,7 @@
 ﻿@using com.pmp.common.helper;
 @using com.pmp.model.data;
-@using com.pmp.mongo.data;
-@model com.pmp.mongo.data.MgProject
+@using com.pmp.model.response;
+@model com.pmp.model.response.TaskInfoRes
 @{
     ViewBag.Title = "详细";
     Layout = "~/Views/Shared/_TaskLayout.cshtml";
@@ -15,7 +15,7 @@
 <table class="table noborder">
     <tr>
         <td class="t-r w220">项目类别：</td>
-        <td>@Model.Category </td>
+        <td>@Model.CategoryName </td>
     </tr>
     <tr>
         <td class="t-r">项目编号：</td>
@@ -27,7 +27,7 @@
     </tr>
     <tr>
         <td class="t-r">预计工期：</td>
-        <td>@Model.StartTime - @Model.EndTime</td>
+        <td>@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
     </tr>
     <tr>
         <td class="t-r">项目预算：</td>
@@ -39,11 +39,11 @@
     </tr>
     <tr>
         <td class="t-r">审核状态：</td>
-        <td>@Model.AuditStatus</td>
+        <td>@Model.AuditStatusDesc</td>
     </tr>
     <tr>
         <td class="t-r">项目阶段：</td>
-        <td>@Model.Status</td>
+        <td>@Model.StatusDesc</td>
     </tr>
     <tr>
         <td class="t-r">项目经理：</td>
@@ -55,8 +55,11 @@
     </tr>
     <tr>
         <td class="t-r">发布时间：</td>
-        <td>@Model.CreateTime</td>
-    </tr>
+        <td>@Model.CTime</td>
+    </tr><tr>
+    <td class="t-r">最后一次修改时间：</td>
+    <td>@Model.UTime</td>
+</tr>
     <tr>
         <td class="t-r">项目文件：</td>
         <td>
@@ -78,7 +81,7 @@
                 foreach (var proc in Model.ProcessDesc)
                 {
                     <div>
-                        @proc.UserID @proc.CreateTime
+                        @proc.UserName @proc.CreateTime
                         <p>@proc.ProcessDesc</p>
                     </div>
                 }
@@ -90,11 +93,11 @@
         <td>
             @if (ViewBag.slns != null)
             {
-                foreach (var sln in (ViewBag.slns as List<MgSolution>))
+                foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
                 {
                     <div>
                         <div>
-                            @sln.UserId @sln.CTime
+                            @sln.UserName @sln.CTime
                             @if (sln.FileList != null && sln.FileList.Count > 0)
                             {
                                 <span>[含附件]</span>
@@ -110,13 +113,13 @@
     <tr>
         <td class="t-r">项目评价：</td>
         <td>
-            @if (ViewBag.evas != null)
+            @if (ViewBag.evas != null )
             {
-                foreach (var eval in (ViewBag.evas as List<MgEvaluation>))
+                foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
                     <div>
                         <div>
-                            @eval.UserId @eval.CTime
+                            @eval.UserName @eval.CTime
                             [@eval.Grade] @eval.Score
 
                             <p>@eval.Desc</p>
@@ -152,7 +155,7 @@
                         <tr>
                             <td>方案描述： </td>
                             <td>
-                                <textarea class="form-control" name="slnDesc" placeholder="方案描述" rows="5"></textarea>
+                                <textarea class="form-control" name="desc" placeholder="方案描述" rows="5"></textarea>
                             </td>
                         </tr>
                         <tr>

@@ -20,6 +20,7 @@ namespace com.pmp.model.data
         /// 操作人
         /// </summary>
         public int UserID { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

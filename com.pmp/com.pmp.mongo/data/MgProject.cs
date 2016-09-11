@@ -95,6 +95,9 @@ namespace com.pmp.mongo.data
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreateTime { get; set; }
 
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime UpdateTime { get; set; }
+
         /// <summary>
         /// 雇主是否评价
         ///[0.未评价][1.已评价]
@@ -107,7 +110,7 @@ namespace com.pmp.mongo.data
         /// </summary>
         public int IsEvaluate_I { get; set; }
 
-        public double Budget { set; get; }
+        public string Budget { set; get; }
 
         public int ProvinceId { set; get; }
         public int CityId { set; get; }

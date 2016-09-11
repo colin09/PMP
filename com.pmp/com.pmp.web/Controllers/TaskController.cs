@@ -91,6 +91,7 @@ namespace com.pmp.web.Controllers
         {
             var project = new MgProject()
             {
+                Category=(ProjectCategroy)task.Catetory,
                 Code = task.Code,
                 Name = task.Name,
                 ContractCode = task.ContractCode,
@@ -111,8 +112,8 @@ namespace com.pmp.web.Controllers
             };
             var fileIndex = 1;
 
-            if (files != null)
-                foreach (var file in files)
+            if (task.files != null)
+                foreach (var file in task.files)
                 {
                     var pFile = new ProjectFlie();
                     pFile.Name = Path.GetFileName(file.FileName);
@@ -136,14 +137,54 @@ namespace com.pmp.web.Controllers
         public ActionResult Detail(int id)
         {
             var project = _projectService.GetOneById(id);
-
-            var slns = _solutionService.GetListByProId(id);
-            ViewBag.slns = slns;
-
+            if (project == null)
+                return View();
             var evas = _evaluationService.GetListByProId(id);
-            ViewBag.evas = evas;
+            var evaIds = evas.Select(e => e.UserId).ToList();
 
-            return View(project);
+            var userIds = new List<int> { project.CreatesUserID, project.ReceiveUserId };
+            var procs = project.ProcessDesc.Select(p => p.UserID).ToList();           
+            var slns = _solutionService.GetListByProId(id);
+            var slnIds = slns.Select(s => s.UserId).ToList();
+
+            userIds.AddRange(procs);
+            userIds.AddRange(slnIds);
+            userIds.AddRange(evaIds);
+            var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+            var cityList = _cityService.GetListByIds(new List<int> { project.CityId,project.ProvinceId});
+
+            project.ProcessDesc.ForEach(p => {
+                p.UserName = userList.FirstOrDefault(u => u.Id == p.UserID)?.Name;
+            });
+
+            var result = new TaskInfoRes()
+            {
+                ID = project.ID, CategoryId = (int)project.Category, CategoryName = project.Category.GetName(),
+                Code = project.Code, ContractCode = project.ContractCode, Status = (int)project.Status, StatusDesc = project.Status.GetName(),
+                Name = project.Name, Manager = project.Manager, Linkman = project.Linkman, Mobile = project.Mobile,
+                Desc = project.Desc, CUserID = project.CreatesUserID, Budget = project.Budget,
+                StartTime = project.StartTime, EndTime = project.EndTime, AuditStatus = (int)project.AuditStatus, AuditStatusDesc = project.AuditStatus.GetName(),
+                RUserId = project.ReceiveUserId,
+                CUserName = userList.FirstOrDefault(u => u.Id == project.CreatesUserID)?.Name,
+                RUserName = userList.FirstOrDefault(u => u.Id == project.ReceiveUserId)?.Name,
+                CityName = cityList.FirstOrDefault(c => c.ID == project.CityId)?.Name,
+                ProvinceName = cityList.FirstOrDefault(c => c.ID == project.ProvinceId)?.Name,
+                CEvaluate = project.IsEvaluate_E,PEvaluate = project.IsEvaluate_I,
+                FlieList = project.FlieList,ProcessDesc = project.ProcessDesc,
+                CTime = project.CreateTime,UTime=project.UpdateTime,
+            };
+
+            ViewBag.slns = slns.Select(s=>new TaskSlnRes {
+                SlnDesc = s.SlnDesc,FileList=s.FileList,
+                UserName = userList.FirstOrDefault(u => u.Id == s.UserId)?.Name,
+                CTime = s.CTime,UTime = s.UTime
+            }).ToList();
+            ViewBag.evas = evas.Select(e => new TaskEvaRes {
+                Grade = e.Grade,Score=e.Score,Desc=e.Desc,
+                UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+            }).ToList();
+
+            return View(result);
         }
 
 
