@@ -71,7 +71,7 @@ namespace com.pmp.model.request
         public int Province { set; get; }
         public int City { set; get; }
 
-        public HttpPostedFileBase[] files { set; get; }
+        //public HttpPostedFileBase[] files { set; get; }
     }
 
 

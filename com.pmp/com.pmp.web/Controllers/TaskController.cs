@@ -126,8 +126,8 @@ namespace com.pmp.web.Controllers
             };
             var fileIndex = 1;
 
-            if (task.files != null)
-                foreach (var file in task.files)
+            if (files != null)
+                foreach (var file in files)
                 {
                     var pFile = new ProjectFlie();
                     pFile.Name = Path.GetFileName(file.FileName);

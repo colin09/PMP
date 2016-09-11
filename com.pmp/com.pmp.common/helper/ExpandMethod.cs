@@ -44,6 +44,19 @@ namespace com.pmp.common.helper
 
 
 
+        public static string TakeString(this string str, int length)
+        {
+            if (string.IsNullOrEmpty(str))
+                return str;
+            var tem = System.Text.RegularExpressions.Regex.Replace(str, "<[^>]+>", "");
+            if (!string.IsNullOrEmpty(tem.Trim()) && tem.Length > length)
+                return tem.Substring(0, length);
+            return tem;
+        }
+
+
+
+
         public static string GetName(this ProjectCategroy category)
         {
             var name = "-";

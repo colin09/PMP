@@ -35,7 +35,7 @@
     </tr>
     <tr>
         <td class="t-r">项目描述： </td>
-        <td>@Model.Desc</td>
+        <td> @Html.Raw(Model.Desc)</td>
     </tr>
     <tr>
         <td class="t-r">审核状态： </td>
@@ -94,7 +94,6 @@
             <span id="spnReceiveName"> -- </span>
             <input type="hidden" name="id" value="@Model.ID" />
             <input type="hidden" name="ReceiveId" value="0" />
-            <button type="submit" class="btn btn-default"> 确定指派 </button>
         </td>
     </tr>
 </table>

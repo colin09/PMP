@@ -1,4 +1,5 @@
 ﻿@using com.pmp.model;
+@using com.pmp.common.helper;
 @model List<com.pmp.model.response.TaskInfoRes>
 @{
     ViewBag.Title = "全部任务";
@@ -69,7 +70,7 @@
                         </td>
                         <td>
                             <div class="descDiv3">
-                                @item.Desc
+                                @item.Desc.TakeString(100)
                             </div>
                         </td>
                         <td>

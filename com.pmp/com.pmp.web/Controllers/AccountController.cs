@@ -16,6 +16,7 @@ namespace com.pmp.web.Controllers
     public class AccountController : WebBaseController
     {
         // GET: Account
+        [Authorization]
         public ActionResult Index()
         {
             ViewBag.level = this._Longin_UserLevel;

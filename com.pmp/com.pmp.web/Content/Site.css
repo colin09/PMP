@@ -97,3 +97,20 @@ red{color:#fe0200;}
 .t-l{text-align:left;}
 .t-c{text-align:center;}
 .t-r{text-align:right;}
+
+
+
+
+
+
+
+
+
+
+
+
+.taskAuditList{}
+.taskAuditList li{border-bottom:solid 1px grey;}
+.taskAuditList li .line1{font-weight:600;}
+.taskAuditList li .line2{color:#666;}
+.taskAuditList li .line3{text-align:right;}

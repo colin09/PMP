@@ -1,5 +1,5 @@
 /*整体居中，宽度1000*/
-.of_whole{width:80%;margin:0 auto; height:700px;padding:10px}
+.of_whole{width:80%;margin:0 auto; padding:10px}
 /*顶部*/
 #of_top{width:100%;height:28px;line-height:29px;background:url(../Images/index/ofcard_bg.png) repeat-x 0 0; overflow:hidden;}
 #of_topNav a{margin:0 5px; padding:2px;}
@@ -24,13 +24,9 @@
 #of_s_keyword input{ border:0; background-color:transparent;width:300px;height:26px; line-height:26px; margin-left:40px;}
 #of_submit input{ border:0; background-color:transparent; width:95px; height:30px; float:left;cursor:pointer;}
 /*导航和站点栏*/
-<<<<<<< HEAD
-#of_mainBody{height:700px;overflow:hidden; float:left;width:18%;margin-left:30px;border: 1px solid #e1e1e1;}
-#of_mainBody_rg{height:700px;overflow:hidden; float:right;width:79%; border: 1px solid #e1e1e1;overflow:auto}
-=======
+
 #of_mainBody{min-height:700px;overflow:hidden; float:left;width:18%;}
 #of_mainBody_rg{min-height:700px;overflow:hidden; float:right;width:930px;padding:10px}
->>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
 /*导航和站点栏*/
 #of_NavSets{width:100%;height:32px; }
 .of_nav{z-index:-1;}

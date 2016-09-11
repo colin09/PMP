@@ -7,11 +7,6 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/MenuData.js"></script>
-    <script src="~/Scripts/menu.js"></script>
-    @Scripts.Render("~/bundles/jq-bs-ng")
-    @RenderSection("scripts", required: false)
-    <script src="~/Scripts/layer/layer.js"></script>
 
 </head>
 <body>
@@ -45,43 +40,34 @@
             </div><!-- mainMenudl end -->
         </div><!-- navigationBar end -->
     </div><!-- header end -->
-    <div class="of_whole">
-        <div id="of_mainBody">
-            <!--左侧栏开始-->
-            @*<div class="side_small tag_line float_l">
-                <div id="firstpane" class="menu_list">
 
-                    =======
-                </div>*@
-            <div class="container mt25">
-                <div id="of_mainBody" class="push_t">
-                    <!--左侧栏开始-->
-                    <div class="side_small tag_line float_l">
-                        <div id="firstpane" class="menu_list">
-                            @*<h3 class="menu_head current">我的账号</h3>
-                                <div style="display:block" class="menu_body">
-                                    <a href="">基本资料</a>
-                                    <a href="">实名认证</a>
-                                </div>
-                                <h3 class="menu_head">公司认证</h3>
-                                <div style="display:none" class="menu_body">
-                                    <a href="">公司认证</a>
-                                </div>
-                                <h3 class="menu_head">我的任务</h3>
-                                <div style="display:none" class="menu_body">
-                                    <a href="#">我的任务</a>
-                                </div>
-                                <h3 class="menu_head">我的评价</h3>
-                                <div style="display:none" class="menu_body">
-                                    <a href="#">评价管理</a>
-                                </div>*@
+    <div class="container mt25">
+        <div id="of_mainBody" class="push_t">
+            <!--左侧栏开始-->
+            <div class="side_small tag_line float_l">
+                <div id="firstpane" class="menu_list">
+                    @*<h3 class="menu_head current">我的账号</h3>
+                        <div style="display:block" class="menu_body">
+                            <a href="">基本资料</a>
+                            <a href="">实名认证</a>
                         </div>
-                    </div>
-                </div>
-                <div id="of_mainBody_rg">
-                    @RenderBody()
+                        <h3 class="menu_head">公司认证</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="">公司认证</a>
+                        </div>
+                        <h3 class="menu_head">我的任务</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="#">我的任务</a>
+                        </div>
+                        <h3 class="menu_head">我的评价</h3>
+                        <div style="display:none" class="menu_body">
+                            <a href="#">评价管理</a>
+                        </div>*@
                 </div>
             </div>
+        </div>
+        <div id="of_mainBody_rg">
+            @RenderBody()
         </div>
     </div>
     <div style="clear: both;color: #777777;padding-top: 35px;text-align: center;">
@@ -89,45 +75,48 @@
         <p>来源：<a href="#" target="_blank">PMP版权所有</a></p>
     </div>
     @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/MenuData.js"></script>
+    <script src="~/Scripts/menu.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
     <script src="~/Scripts/menu.js"></script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
-                    $(function () {
-                        var level = $("#userLevel").val();
-                        $.each(_Menu, function (i, item) {
-                            if (item.userLevel.indexOf(level) > -1) {
-                                var html = [];
-                                $.each(item.menu, function (j, menu) {
-                                    if (j == 0) {
-                                        html.push(" <h3 class=\"menu_head current\">" + menu.title + "</h3>");
-                                        html.push("  <div style=\"display:block\" class=\"menu_body\">")
-                                    } else {
-                                        html.push(" <h3 class=\"menu_head\">" + menu.title + "</h3>");
-                                        html.push("  <div style=\"display:block\" class=\"menu_body\">")
-                                    }
-                                    if (menu.subMenu != undefined) {
-                                        $.each(menu.subMenu, function (j, sub) {
-                                            html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
-                                        });
-                                    }
-                                    html.push("</div>");
-                                });
-                                $("#firstpane").append(html.join(""));
-                            }
-                        });
-                        /*
-                        $("#firstpane .menu_body:eq(0)").show();
-                        $("#firstpane h3.menu_head").click(function () {
-                            $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
-                            $(this).siblings().removeClass("current");
-                        });
-                        $("#secondpane .menu_body:eq(0)").show();
-                        $("#secondpane h3.menu_head").mouseover(function () {
-                            $(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
-                            $(this).siblings().removeClass("current");
-                        });
-                        */
-                    })
+        $(function () {
+            var level = $("#userLevel").val();
+            $.each(_Menu, function (i, item) {
+                if (item.userLevel.indexOf(level) > -1) {
+                    var html = [];
+                    $.each(item.menu, function (j, menu) {
+                        if (j == 0) {
+                            html.push(" <h3 class=\"menu_head current\">" + menu.title + "</h3>");
+                            html.push("  <div style=\"display:block\" class=\"menu_body\">")
+                        } else {
+                            html.push(" <h3 class=\"menu_head\">" + menu.title + "</h3>");
+                            html.push("  <div style=\"display:block\" class=\"menu_body\">")
+                        }
+                        if (menu.subMenu != undefined) {
+                            $.each(menu.subMenu, function (j, sub) {
+                                html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
+                            });
+                        }
+                        html.push("</div>");
+                    });
+                    $("#firstpane").append(html.join(""));
+                }
+            });
+            /*
+            $("#firstpane .menu_body:eq(0)").show();
+            $("#firstpane h3.menu_head").click(function () {
+                $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+                $(this).siblings().removeClass("current");
+            });
+            $("#secondpane .menu_body:eq(0)").show();
+            $("#secondpane h3.menu_head").mouseover(function () {
+                $(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
+                $(this).siblings().removeClass("current");
+            });
+            */
+        })
     </script>
 </body>
 </html>
