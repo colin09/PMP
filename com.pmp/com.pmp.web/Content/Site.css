@@ -114,3 +114,7 @@ red{color:#fe0200;}
 .taskAuditList li .line1{font-weight:600;}
 .taskAuditList li .line2{color:#666;}
 .taskAuditList li .line3{text-align:right;}
+
+
+
+table.noborder tr td{border:0;}
