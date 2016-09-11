@@ -2,53 +2,24 @@
     ViewBag.Title = "用户中心";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-
-<<<<<<< HEAD
-<div class="nav_title">
-=======
-    button {
-        background: #fb9337 none repeat scroll 0 0;
-        border: 1px solid #f0882c;
-        color: #fff;
-        cursor: pointer;
-        font-weight: bold;
-        padding: 7px 10px;
-    }
-</style>
-
 <div class="ptb10 bb">
     <span>会员中心 > 会员列表</span>
-    <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
     <h3 class="ptb10">用户列表</h3>
 </div>
 
-
 <input type="hidden" id="seach_type" value="@ViewBag.sel_type" />
-<form method="post" action="/Account/UserList?type=@ViewBag.accountType">
->>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
-
-    @if (ViewBag.accountType == 1)
-    {
-        <span>用户中心->个人用户列表</span>
-    }
-    else
-    {
-        <span>用户中心->公司用户列表</span>
-    }
-
-</div>
 <div class="pmp_content">
     @{var par = "type" + ViewBag.accountType;
-        if (!string.IsNullOrWhiteSpace(ViewBag.companyId))
-        {
-            par += "&companyID=" + ViewBag.companyId;
-        }
+            if (!string.IsNullOrWhiteSpace(ViewBag.companyId))
+            {
+                par += "&companyID=" + ViewBag.companyId;
+            }
     }
     <form method="post" action="/Account/UserList?@par">
         @if (ViewBag.accountType == 1)
-        {
+            {
             <table cellpadding="0" cellspacing="0">
                 <tr>
                     <td style="padding:10px;font-weight:400">查询：</td>

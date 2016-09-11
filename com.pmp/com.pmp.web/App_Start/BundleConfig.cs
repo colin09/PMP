@@ -40,16 +40,11 @@ namespace com.pmp.web
                       "~/Content/pmp_common.css",
                       "~/Content/pmp_pub.css",
                        "~/Content/pmp_tip.css",
-<<<<<<< HEAD
                        "~/Content/pmp_cntent.css"));
-=======
-
-                      "~/Content/site.css"
-                      //"~/Content/main.css"
-                      ));
+            //"~/Content/site.css"
+            //));
 
 
->>>>>>> 59f0cc52535110a8810359dc8348979dca35afd2
         }
     }
 }
