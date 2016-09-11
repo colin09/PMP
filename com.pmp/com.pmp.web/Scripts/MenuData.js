@@ -182,11 +182,6 @@
               "style": "",
               "url": "/Account/CompanyUserList",
           },
-           {
-               "title": "企业用户",
-               "style": "",
-               "url": "/Account/UserList?type=2",
-           },
           {
               "title": "个人用户",
               "style": "",

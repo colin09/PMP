@@ -188,7 +188,6 @@
     <Content Include="Css\Index.css" />
     <Content Include="Css\IndexFonts.css" />
     <Content Include="Css\IndexFonts2.css" />
-    <Content Include="Css\style.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
