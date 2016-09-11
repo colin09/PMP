@@ -1,6 +1,7 @@
 ﻿using com.pmp.common.Config;
 using com.pmp.common.helper;
 using com.pmp.common.mvc.ctl;
+using com.pmp.model.response;
 using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
@@ -344,6 +345,20 @@ namespace com.pmp.web.Controllers
         public void RecordUserLogonStatus(string value)
         {
             new HttpHelper().SetSession(Public_const_enum.LonginCookieName, value);
+        }
+
+        public ActionResult GetCompanyUsers()
+        {
+            var service = new MgUserService();
+
+            var cUser = service.SearchById(this._Longin_UserId).FirstOrDefault();
+          var  list = service.SearchuSserByCompanyId(cUser.CompanyReal_ID, "", "")
+                .Select(u=>new SimpleUserRes
+                {
+                    Id=u.ID,Name=u.PersonInfo.RealName
+                });
+            return Json(list, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
