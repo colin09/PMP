@@ -2,6 +2,7 @@
     ViewBag.Title = "用户中心";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+
 <div class="nav_title">
 
     @if (ViewBag.accountType == 1)
@@ -33,7 +34,9 @@
                             <option value="2">电话</option>
                         </select>
                     </td>
-                    <td style="padding:10px"><input class="form-control" type="text" value="@ViewBag.name" name="name"></td>
+                    <td style="padding:10px">
+                        <input class="form-control" type="text" value="@ViewBag.name" name="name">
+                    </td>
                     <td style="padding:10px"><button class="btn btn_blue">搜索</button></td>
                 </tr>
             </table>
@@ -50,7 +53,10 @@
                         </select>
                     </td>
                     <td style="padding:10px"><input class="form-control" type="text" value="@ViewBag.name" name="name"></td>
-                    <td style="padding:10px"><button class="btn btn_blue">搜索</button> &nbsp<button class="btn btn_blue">添加</button></td>
+                    <td style="padding:10px">
+                        <button class="btn btn_blue">搜索</button> &nbsp
+                        <input class="btn_add btn btn_blue" type="button" value="添加" />
+                    </td>
                 </tr>
             </table>
         }
@@ -70,10 +76,11 @@
             <th>电话</th>
             @if (ViewBag.accountType == 2)
             {
-                <th>部门</th>
+                //   <th>部门</th>
             }
             <th>职位</th>
             <th>居住地址</th>
+            <th>审核状态</th>
             <th>操作</th>
         </tr>
 
@@ -95,10 +102,45 @@
                     <td>@Model[i].Phone</td>
                     @if (ViewBag.accountType == 2)
                     {
-                        <td>技术一部</td>
+                        // <td>技术一部</td>
                     }
                     <td>@Model[i].PersonInfo.Position</td>
                     <td>@Model[i].PersonInfo.Address</td>
+
+                    @if (Model[i].Level == com.pmp.mongo.data.UserLevel.CompanyAdmin || Model[i].Level == com.pmp.mongo.data.UserLevel.CompanyUser)
+                    {
+                        if (ViewBag._Longin_CompanyReal_IsApprove == 0)
+                        {
+                            <td>未提交</td>
+                        }
+                        else if (ViewBag._Longin_CompanyReal_IsApprove == 1)
+                        {
+                            <td>审核中</td>
+                        }
+                        else if (ViewBag._Longin_CompanyReal_IsApprove == 2)
+                        {
+                            <td>审核通过</td>
+                        }
+                        else if (ViewBag._Longin_CompanyReal_IsApprove == 3)
+                        {
+                            <td>审核未通过</td>}
+
+                    }
+                    else
+                    {
+                        if (Model[i].PersonReal.IsApprove == 1)
+                        {
+                            <td>待审核</td>
+                        }
+                        else if (Model[i].PersonReal.IsApprove == 2)
+                        {
+                            <td>通过</td>
+                        }
+                        else if (Model[i].PersonReal.IsApprove == 3)
+                        {
+                            <td>未通过</td>
+                        }
+                    }
                     <td>
                         <button class="btn btn_blue btn_see">查看</button>
                         <button class="btn btn_red btn_stop">停用</button>
@@ -113,7 +155,7 @@
     </table>
 
 </div>
-<script>
+<script type="text/javascript">
     $(".btn_see").click(function () {
         var id = $(this).parents(".table_list").find("[type='hidden']").val();
         window.location.href = "/Account/AccountDetail?uid=" + id;
@@ -122,4 +164,20 @@
         alert("停用")
         window.location.href = "/Account/AccountDetail?uid=" + id;
     });
+
+    $(".btn_add").click(function () {
+        layer.open({
+            type: 2,
+            title: '添加员工',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['700px', '550px'],
+            content: '/Account/CompandUserAdd'
+        });
+    });
+
+    function url() {
+        window.location.href = "/Account/UserList";
+    }
 </script>

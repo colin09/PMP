@@ -40,8 +40,7 @@ namespace com.pmp.web
                       "~/Content/pmp_common.css",
                       "~/Content/pmp_pub.css",
                        "~/Content/pmp_tip.css",
-                       "~/Content/pmp_cntent.css"
-                      ));
+                       "~/Content/pmp_cntent.css"));
         }
     }
 }

@@ -8,7 +8,7 @@
     <span>我的信息->个人身份认证</span>
 </div>
 <div class="pmp_content">
-    <form class="form-horizontal" role="form" method="post" action="/Account/AccountP_ApproveSumbit">
+    <form class="form-horizontal" role="form" method="post" action="/Account/AccountP_ApproveSumbit" enctype="multipart/form-data" style="margin:10px">
         <div class="form-group">
             <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">
@@ -32,19 +32,18 @@
                 </label>
             </div>
         </div>
-
         <div class="form-group">
             <label for="txtcardImg1" class="col-sm-2 control-label">身份证正面照：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtcardImg1" id="txtcardImg1" placeholder="身份证正面照片" style="width:250px;float:left;" required="required">
-                <input type="file" id="inputfile" style="float:left;margin-left:15px">
+                @*<input type="text" class="form-control" name="txtcardImg1" id="txtcardImg1" placeholder="身份证正面照片" style="width:250px;float:left;" required="required">*@
+                <input type="file" id="cardFile1" name="cardFile1" style="float:left;margin-left:15px" required="required">
             </div>
         </div>
         <div class="form-group">
             <label for="txtcardImg2" class="col-sm-2 control-label">身份证背面照：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="txtcardImg2" id="txtcardImg2" value="" placeholder="身份证背面照片" style="width:250px;float:left;" required="required">
-                <input type="file" id="inputfile" style="float:left;margin-left:15px">
+                @*<input type="text" class="form-control" name="txtcardImg2" id="txtcardImg2" value="" placeholder="身份证背面照片" style="width:250px;float:left;" required="required">*@
+                <input type="file" id="cardFile2" name="cardFile2" style="float:left;margin-left:15px" required="required">
             </div>
         </div>
         <div class="form-group">

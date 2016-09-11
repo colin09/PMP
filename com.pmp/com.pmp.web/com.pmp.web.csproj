@@ -296,9 +296,11 @@
     <Content Include="Views\Account\CompanyUserList.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\AccountApprove.cshtml" />
+    <Content Include="Views\Account\CompandUserAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="CardImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

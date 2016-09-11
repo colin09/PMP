@@ -41,7 +41,7 @@
               {
                   "title": "员工列表",
                   "style": "",
-                  "url": ""
+                  "url": "/Account/UserList"
               }
             ]
         },

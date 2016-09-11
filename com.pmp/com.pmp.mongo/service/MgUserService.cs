@@ -52,6 +52,8 @@ namespace com.pmp.mongo.service
             var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", 0);
             List<MgUser> list = Search(filter);
 
+            list = list.FindAll(t => t.Level != 0);
+
             if (!string.IsNullOrWhiteSpace(name))
             {
                 list = list.FindAll(t => t.PersonInfo.RealName == name);
@@ -76,6 +78,9 @@ namespace com.pmp.mongo.service
             {
                 var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
                 userList = Search(filter);
+                //去除管理员
+                userList = userList.FindAll(t => t.Level != 0);
+
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     userList = userList.FindAll(t => t.PersonInfo.RealName == name);
@@ -93,7 +98,7 @@ namespace com.pmp.mongo.service
         {
             if (list == null || list.Count < 1)
                 return null;
-            var filter = Builders<MgUser>.Filter.All("ID", list);
+            var filter = Builders<MgUser>.Filter.In("ID", list);
             return Search(filter).Select(m => new SimpleUserRes()
             {
                 Id = m.ID,
@@ -184,7 +189,7 @@ namespace com.pmp.mongo.service
             int companyID = 0;
             if (loginCompanyID > 0)
             {
-                return new MgCompanyRealService().UpdateCompany(loginCompanyID, mr);
+                new MgCompanyRealService().UpdateCompany(loginCompanyID, mr);
             }
             else
             {
@@ -196,7 +201,12 @@ namespace com.pmp.mongo.service
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
-
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="pwd"></param>
+        /// <param name="userLevel"></param>
         public void CreateUser(string phone, string pwd, int userLevel)
         {
             MgPersonReal mp = null;
@@ -217,10 +227,39 @@ namespace com.pmp.mongo.service
                 CTime = DateTime.Now,
                 UTime = DateTime.Now,
                 PersonReal = mp,
-                PersonInfo = mi
+                PersonInfo = mi,
+                CompanyReal_ID = -1
             });
         }
 
+
+        /// <summary>
+        /// 增加公司员工
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="pwd"></param>
+        /// <param name="userLevel"></param>
+        public void CreateCompanyUser(MgUser mu, string realName, string positionName, string gender)
+        {
+            MgPersonInfo mi = new data.MgPersonInfo() { CTime = DateTime.Now, Gender = gender, RealName = realName, Position = positionName };
+
+            var company = new MgCompanyRealService().SearchById(mu.CompanyReal_ID);
+
+            Insert(new MgUser()
+            {
+                ID = GetNewId(),
+                Status = 1,
+                Phone = mu.Phone,
+                Password = mu.Password,
+                Level = mu.Level,
+                CTime = DateTime.Now,
+                UTime = DateTime.Now,
+                PersonReal = null,
+                PersonInfo = mi,
+                CompanyReal_ID = mu.CompanyReal_ID,
+                CompanyReal_Name = company[0].Name
+            });
+        }
 
         public MgUser Login(string phone, string pwd, string codePwd)
         {

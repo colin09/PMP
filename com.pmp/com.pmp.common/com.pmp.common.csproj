@@ -74,6 +74,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\com.pmp.model\com.pmp.model.csproj">
+      <Project>{247e1b2d-af38-400f-9f28-ccb058e34a43}</Project>
+      <Name>com.pmp.model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

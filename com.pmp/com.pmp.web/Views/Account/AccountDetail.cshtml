@@ -99,17 +99,36 @@
             <tr>
                 <td>
                     <label>身份证正面照:</label>
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardJustImg) ? "暂未填写" : ViewBag.mgUser.PersonReal.CardJustImg)</small>
+                    <small class="smallinput">
+                        @if (string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardJustImg))
+                        {
+                            <span> 暂未上传</span>
+                        }
+                        else
+                        {
+                            <img style="width:100px; height:150px" src="/CardImages/@ViewBag.mgUser.PersonReal.CardJustImg" />
+                        }
+
+                    </small>
                 </td>
                 <td>
                     <label>身份证背面照:</label>
-                    <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardAgainstImg) ? "暂未填写" : ViewBag.mgUser.PersonReal.CardAgainstImg)</small>
+                    <small class="smallinput">
+                        @if (string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonReal.CardAgainstImg))
+                        {
+                            <span> 暂未上传</span>
+                        }
+                        else
+                        {
+                            <img style="width:100px; height:150px" src="/CardImages/@ViewBag.mgUser.PersonReal.CardAgainstImg" />
+                        }
+                    </small>
                 </td>
             </tr>
         </table>
     }
-    @if (ViewBag.mgUser.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin)
-            {
+    @if (ViewBag.mgUser.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin  || ViewBag.mgUser.Level == com.pmp.mongo.data.UserLevel.CompanyUser)
+    {
 
         <div class="content_title">
             <h4>企业认证</h4>
@@ -118,52 +137,69 @@
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>企业名称:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.Name)</small>
+                    <small class="smallinput">@(ViewBag.CompanyReal.Name == null ? "暂未填写" : ViewBag.CompanyReal.Name)</small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>营业执照注册号:</label>
                     <span class="field">
-                        <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.RegistrID)</small>
+                        <small class="smallinput">@(ViewBag.CompanyReal.RegistrID == null ? "暂未填写" : ViewBag.CompanyReal.RegistrID)</small>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>营业执照所在地:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyAddress)</small>
+                    <small class="smallinput">@(ViewBag.CompanyReal.CompanyAddress == null ? "暂未填写" : ViewBag.CompanyReal.CompanyAddress)</small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>所在城市:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompayCity)</small>
+                    <small class="smallinput">@(ViewBag.CompanyReal.CompayCity == null ? "暂未填写" : ViewBag.CompanyReal.CompayCity)</small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>经营范围:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.BuinessScope)</small>
+                    <small class="smallinput">@(ViewBag.CompanyReal.BuinessScope == null ? "暂未填写" : ViewBag.CompanyReal.BuinessScope)</small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="width:50%">
                     <label>组织机构代码证号:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.OrganizationCode)</small>
+                    <small class="smallinput">@(ViewBag.CompanyReal.OrganizationCode == null ? "暂未填写" : ViewBag.CompanyReal.OrganizationCode)</small>
                 </td>
             </tr>
             <tr>
                 <td style="width:50%">
                     <label>组织机构代码证扫描件:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyJustImg)</small>
+                    <small class="smallinput">
+                        @if (string.IsNullOrWhiteSpace(ViewBag.CompanyReal.CompanyJustImg))
+                        {
+                            <span> 暂未上传</span>
+                        }
+                        else
+                        {
+                            <img style="width:100px; height:150px" src="/CardImages/@ViewBag.CompanyReal.CompanyJustImg" />
+                        }
+                    </small>
                 </td>
                 <td style="width:50%">
                     <label>营业执照副本扫描件:</label>
-                    <small class="smallinput">@(ViewBag.CompanyReal == null ? "暂未填写" : ViewBag.CompanyReal.CompanyAgainstImg)</small>
+                    <small class="smallinput">
+                        @if (string.IsNullOrWhiteSpace(ViewBag.CompanyReal.CompanyAgainstImg))
+                        {
+                            <span> 暂未上传</span>
+                        }
+                        else
+                        {
+                            <img style="width:100px; height:150px" src="/CardImages/@ViewBag.CompanyReal.CompanyAgainstImg" />
+                        }
+                    </small>
                 </td>
             </tr>
-
         </table>
     }
 

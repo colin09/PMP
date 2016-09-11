@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace com.pmp.model.request
 {
@@ -15,6 +16,7 @@ namespace com.pmp.model.request
     public class TaskInfoReq
     {
         public int Id { get; set; }
+        public int Catetory { get; set; }
         /// <summary>
         /// 项目编号
         /// </summary>
@@ -64,10 +66,12 @@ namespace com.pmp.model.request
         /// <summary>
         /// 项目预算
         /// </summary>
-        public double Budget { set; get; }
+        public string Budget { set; get; }
 
         public int Province { set; get; }
         public int City { set; get; }
+
+        public HttpPostedFileBase[] files { set; get; }
     }
 
 

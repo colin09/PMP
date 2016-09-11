@@ -5,6 +5,7 @@ using com.pmp.mongo.data;
 using com.pmp.mongo.service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,10 +33,10 @@ namespace com.pmp.web.Controllers
         public ActionResult AccountPersonal()
         {
             var userId = _Longin_UserId;
-            if (!string.IsNullOrWhiteSpace(Request["userId"]))
-            {
-                userId = int.Parse(Request["userId"]);
-            }
+            //if (!string.IsNullOrWhiteSpace(Request["userId"]))
+            //{
+            //    userId = int.Parse(Request["userId"]);
+            //}
             var model = new MgUserService().SearchById(userId);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
@@ -57,7 +58,7 @@ namespace com.pmp.web.Controllers
             model.Email = Request.Form["txtEmail"];
             model.Position = Request.Form["txtposition"];
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
-            return Redirect("/Account/AccountPersonal");
+            return Redirect("/Account/AccountDetail");
         }
 
         /// <summary>
@@ -81,8 +82,9 @@ namespace com.pmp.web.Controllers
             mgPersonReal.RealName = Request.Form["txtname"];
             mgPersonReal.CardId = Request.Form["txtcardID"];
             mgPersonReal.Gender = Request.Form["radiossex"];
-            mgPersonReal.CardJustImg = Request.Form["txtcardImg1"];
-            mgPersonReal.CardAgainstImg = Request.Form["txtcardImg2"];
+            mgPersonReal.CardJustImg = UploadFiles("cardFile1");
+            mgPersonReal.CardAgainstImg = UploadFiles("cardFile2");
+
             if (!string.IsNullOrWhiteSpace(Request.Form["seloccupation"]))
                 mgPersonReal.Profession = Request.Form["seloccupation"];
             mgPersonReal.Address = Request.Form["txtaddress"];
@@ -90,6 +92,88 @@ namespace com.pmp.web.Controllers
             mgPersonReal.CreatesTime = DateTime.Now.ToString();
             new MgUserService().UpdateAccountApprove(_Longin_Phone, mgPersonReal);
             return Redirect("/Account/AccountDetail");
+        }
+
+
+        /// <summary>
+        /// 验证是否指定的图片格式
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public bool IsImage(string str)
+        {
+            bool isimage = false;
+            string thestr = str.ToLower();
+            thestr = thestr.Substring(thestr.Length - 4, 4);
+            //限定只能上传jpg和gif图片
+            string[] allowExtension = { ".jpg", ".gif", ".bmp", ".png" };
+            //对上传的文件的类型进行一个个匹对
+            for (int i = 0; i < allowExtension.Length; i++)
+            {
+                if (thestr == allowExtension[i])
+                {
+                    isimage = true;
+                    break;
+                }
+            }
+            return isimage;
+        }
+
+
+        private string UploadFiles(string fromfileName)
+        {
+            //接受上传文件
+            HttpPostedFileBase postFile = Request.Files[fromfileName];
+            if (postFile != null)
+            {
+                if (IsImage(postFile.FileName))
+                {
+                    DateTime time = DateTime.Now;
+                    //获取上传目录 转换为物理路径
+                    string uploadPath = Server.MapPath("~/CardImages/");
+                    //文件名
+                    string fileName = time.ToString("yyyyMMddHHmmssfff");
+                    //后缀名称
+                    string filetrype = System.IO.Path.GetExtension(postFile.FileName);
+                    //获取文件大小
+                    long contentLength = postFile.ContentLength;
+                    //文件不能大于2M
+                    if (contentLength <= 1024 * 2048)
+                    {
+                        //如果不存在path目录
+                        if (!Directory.Exists(uploadPath))
+                        {
+                            //那么就创建它
+                            Directory.CreateDirectory(uploadPath);
+                        }
+                        //保存文件的物理路径
+                        string saveFile = uploadPath + fileName + filetrype;
+                        try
+                        {
+                            //保存文件
+                            postFile.SaveAs(saveFile);
+                            return fileName + filetrype;
+                        }
+                        catch
+                        {
+                            //上传失败
+                        }
+                    }
+                    else
+                    {
+                        //"文件大小超过限制要求";
+                    }
+                }
+                else
+                {
+                    //文件大小超过限制要求;
+                }
+            }
+            else
+            {
+                //"请选择文件";
+            }
+            return "";
         }
 
         /// <summary>
@@ -116,15 +200,60 @@ namespace com.pmp.web.Controllers
             mr.CompayCity = Request.Form["txtcity"];
             mr.BuinessScope = Request.Form["txtrange"];
             mr.OrganizationCode = Request.Form["txtzzjgcode"];
-            mr.CompanyJustImg = Request.Form["txtzzjgimg"];
-            mr.CompanyAgainstImg = Request.Form["txt_yyzzfbimg"];
+            mr.CompanyJustImg = UploadFiles("txtzzjgimg");
+            mr.CompanyAgainstImg = UploadFiles("txt_yyzzfbimg");
             mr.Phone = Request.Form["txtPhone"];
             mr.ContactsName = Request.Form["txtlxrName"];
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
             mr.CTime = DateTime.Now.ToString();
-            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr,_Login_CompanyReal_ID);
+            new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr, _Login_CompanyReal_ID);
             return Redirect("/Account/AccountDetail");
+        }
+
+        /// <summary>
+        /// 公司员工添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CompandUserAdd()
+        {
+            var res = false;
+            if (!string.IsNullOrWhiteSpace(Request["txtphone"]))
+            {
+                MgUser mu = new MgUser();
+                mu.Phone = Request["txtphone"];
+                mu.Password = Request["txtphone"];
+                mu.Level = UserLevel.CompanyUser;
+                mu.CompanyReal_ID = _Login_CompanyReal_ID;
+                new MgUserService().CreateCompanyUser(mu, Request["txtname"], Request["txtposition"], Request["radiossex"]);
+                res = true;
+            }
+            ViewBag.IsSessonType = res.ToString();
+            return View("/Account/CompandUserAdd");
+        }
+
+        //public ActionResult C_UserAdd()
+        //{
+        //    MgUser mu = new MgUser();
+        //    mu.Phone = Request["txtphone"];
+        //    mu.Password = Request["txtphone"];
+        //    mu.Level = UserLevel.CompanyUser;
+        //    mu.CompanyReal_ID = _Login_CompanyReal_ID;
+        //    new MgUserService().CreateCompanyUser(mu, Request["txtname"], Request["txtposition"], Request["radiossex"]);
+
+        //    ViewBag.IsSessonType = "true";
+        //    return View("/Account/CompandUserAdd");
+        //}
+
+        public string IsExistPhone()
+        {
+            var phone = Request["phone"];
+            var list = new MgUserService().SearchLogin(phone);
+            if (list != null && list.Count > 0)
+            {
+                return "1";
+            }
+            return "0";
         }
 
         /// <summary>
@@ -198,12 +327,10 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
-
         public ActionResult AccountApprove()
         {
             return View();
         }
-
 
         public ActionResult UserList()
         {
@@ -223,6 +350,12 @@ namespace com.pmp.web.Controllers
             }
             else
             {
+                //公司管理账户菜单连接无参数，默认登录用户公司
+                if (string.IsNullOrWhiteSpace(companyID))
+                {
+                    companyID = _Login_CompanyReal_ID.ToString();
+                    type = "2";
+                }
                 if (sel_type == "1")
                     list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "");
                 else if (sel_type == "2")
