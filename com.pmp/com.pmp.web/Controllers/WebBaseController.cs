@@ -24,7 +24,7 @@ namespace com.pmp.web.Controllers
                 }
                 else if (user[0].Level == UserLevel.CompanyAdmin || user[0].Level == UserLevel.CompanyUser)
                 {
-                    if (user[0].CompanyReal_ID > 0)
+                    if (user[0].CompanyReal_ID > -1)
                     {
                         var comoany = new MgCompanyRealService().SearchById(user[0].CompanyReal_ID);
                         if (comoany != null && comoany.Count > 0)

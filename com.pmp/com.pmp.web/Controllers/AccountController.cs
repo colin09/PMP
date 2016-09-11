@@ -350,6 +350,7 @@ namespace com.pmp.web.Controllers
             var name = Request.Form["name"];
             var companyID = Request["companyID"];
             List<MgUser> list = new List<MgUser>();
+            int companyIsApprove = 0;
             if (type == "1")
             {
                 if (sel_type == "1")
@@ -367,17 +368,19 @@ namespace com.pmp.web.Controllers
                     companyID = _Login_CompanyReal_ID.ToString();
                     type = "2";
                 }
+
                 if (sel_type == "1")
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "");
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "", ref companyIsApprove);
                 else if (sel_type == "2")
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", name);
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", name, ref companyIsApprove);
                 else
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", "");
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", "", ref companyIsApprove);
             }
             ViewBag.accountType = int.Parse(type);
             ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
             ViewBag.name = name;
             ViewBag.companyId = companyID;
+            ViewBag.CompanyIsApprove = companyIsApprove;
             return View(list);
         }
 
@@ -498,12 +501,15 @@ namespace com.pmp.web.Controllers
         {
             var service = new MgUserService();
 
+            int CompanyIsApprove = 0;
+
             var cUser = service.SearchById(this._Longin_UserId).FirstOrDefault();
-          var  list = service.SearchuSserByCompanyId(cUser.CompanyReal_ID, "", "")
-                .Select(u=>new SimpleUserRes
-                {
-                    Id=u.ID,Name=u.PersonInfo.RealName
-                });
+            var list = service.SearchuSserByCompanyId(cUser.CompanyReal_ID, "", "",ref CompanyIsApprove)
+                  .Select(u => new SimpleUserRes
+                  {
+                      Id = u.ID,
+                      Name = u.PersonInfo.RealName
+                  });
             return Json(list, JsonRequestBehavior.AllowGet);
 
         }

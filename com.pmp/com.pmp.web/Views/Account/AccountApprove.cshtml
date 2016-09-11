@@ -65,11 +65,18 @@
                 else if (ViewBag._Longin_CompanyReal_IsApprove == 3)
                 {
                     <span style="color:#f60">审核失败</span>
-                    <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+
+                    if (ViewBag.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin)
+                    {
+                        <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+                    }
                 }
                 else
                 {
-                    <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+                    if (ViewBag.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin)
+                    {
+                        <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+                    }
                 }
             </dd>
         </dl>

@@ -49,7 +49,7 @@ namespace com.pmp.mongo.service
         /// <returns></returns>
         public List<MgUser> SearchWhere(string name, string phone)
         {
-            var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", 0);
+            var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", -1);
             List<MgUser> list = Search(filter);
 
             list = list.FindAll(t => t.Level != 0);
@@ -70,7 +70,7 @@ namespace com.pmp.mongo.service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<MgUser> SearchuSserByCompanyId(int companyId, string name, string phone)
+        public List<MgUser> SearchuSserByCompanyId(int companyId, string name, string phone, ref int companyIsApprove)
         {
             List<MgUser> userList = new List<data.MgUser>();
             List<MgCompanyReal> companyList = new MgCompanyRealService().SearchById(companyId);
@@ -78,6 +78,8 @@ namespace com.pmp.mongo.service
             {
                 var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
                 userList = Search(filter);
+
+                companyIsApprove = companyList[0].IsApprove;
                 //去除管理员
                 userList = userList.FindAll(t => t.Level != 0);
 
@@ -256,7 +258,7 @@ namespace com.pmp.mongo.service
                 UTime = DateTime.Now,
                 PersonReal = null,
                 PersonInfo = mi,
-                CompanyReal_ID = mu.CompanyReal_ID,
+                CompanyReal_ID = company[0].ID,
                 CompanyReal_Name = company[0].Name
             });
         }

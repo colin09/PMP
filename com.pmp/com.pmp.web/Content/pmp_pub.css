@@ -1,5 +1,5 @@
 /*整体居中，宽度1000*/
-.of_whole{width:80%;margin:0 auto; height:700px;padding:10px}
+.of_whole{margin:0 auto; height:700px;padding:10px}
 /*顶部*/
 #of_top{width:100%;height:28px;line-height:29px;background:url(../Images/index/ofcard_bg.png) repeat-x 0 0; overflow:hidden;}
 #of_topNav a{margin:0 5px; padding:2px;}
