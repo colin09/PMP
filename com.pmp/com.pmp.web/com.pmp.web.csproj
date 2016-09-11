@@ -185,6 +185,7 @@
     <Content Include="Content\pmp_pub.css" />
     <Content Include="Content\pmp_common.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\wangEditor.min.css" />
     <Content Include="Css\Index.css" />
     <Content Include="Css\IndexFonts.css" />
     <Content Include="Css\IndexFonts2.css" />
@@ -226,6 +227,7 @@
     <Content Include="Scripts\Footer.js" />
     <Content Include="Scripts\general.js" />
     <Content Include="Scripts\Header.js" />
+    <Content Include="Scripts\js\wangEditor.min.js" />
     <Content Include="Scripts\layer\layer.js" />
     <Content Include="Scripts\layer\skin\default\icon-ext.png" />
     <Content Include="Scripts\layer\skin\default\icon.png" />
@@ -241,6 +243,8 @@
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\Log4Net.config" />
     <Content Include="Project_Readme.html" />
+    <Content Include="fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon.woff" />
     <None Include="Properties\PublishProfiles\pmp.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\js\jquery-1.10.2.js" />
@@ -298,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

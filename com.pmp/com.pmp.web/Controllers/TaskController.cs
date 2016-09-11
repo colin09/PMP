@@ -99,7 +99,7 @@ namespace com.pmp.web.Controllers
         }
 
 
-
+        [ValidateInput(false)]
         [Authorization]
         public ActionResult CreateSubmint(TaskInfoReq task, HttpPostedFileBase[] files)
         {
