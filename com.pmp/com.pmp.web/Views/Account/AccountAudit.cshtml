@@ -30,9 +30,6 @@
         </select>
     </div>
 </div>
-
-<div style="padding:15px" id="auditList">
-</div>
 <script type="text/javascript">
 
     $(function () {
@@ -54,19 +51,16 @@
         var data = { AuditType: auditType, AccountType: accountType };
         $.get("/Account/GetAccountAuditList", data, function (res) {
             var html = [];
-            html.push('<table class="table table-striped">' +
-                           '<thead>' +
-                               '<tr>' +
+            html.push('<table cellpadding="0" cellspacing="0" class="table_list">' +
+                               ' <tr class="tr_title">' +
                                    '<th>注册类型</th>' +
                                    '<th>注册人</th>' +
                                    '<th>联系方式</th>' +
-                                   '<th>技术领域</th>' +
+                                   '<th>领域</th>' +
                                    '<th>提交时间</th>' +
                                    '<th>状态</th>' +
                                    '<th>操作</th>' +
-                              ' </tr>' +
-                           '</thead>' +
-                           '<tbody>');
+                              ' </tr>');
 
             var tempAuditType = "";
             var tempId = "";
@@ -87,19 +81,30 @@
                         '<td>' + tempAuditType + '</td>' +
                         '<td>' + res[i].PersonInfo.RealName + '</td>' +
                         '<td>' + res[i].Phone + '</td>' +
-                        '<td>' + res[i].PersonInfo.Skill + '</td>' +
-                        '<td>' + res[i].PersonReal.CreatesTime + '</td>');
+                        '<td>' + res[i].PersonInfo.Skill + '</td>');
+
+                if (accountType == 1) {
+                    html.push('<td>' + res[i].PersonReal.CreatesTime + '</td>');
+                }
+                else if (accountType == 2) {
+                    html.push('<td>' + "2016-01-01" + '</td>');
+                }
+
                 if (auditType == 1) {
+
                     html.push('<td>未审核</td>');
-                    html.push('<td><button type="button" class="btn_Pass btn btn-success">通过</button>' + '&nbsp' +
-                            '<button type="button" class="btn_NotPass btn btn-danger">未通过</button></td>');
+
+                    html.push('<td> <button type="button" class="btn_see btn btn_blue">查看</button>' +
+                        '&nbsp  <button type="button" class="btn_Pass btn btn_blue">通过</button>' + '&nbsp' +
+                            '<button type="button" class="btn_NotPass btn btn_red">未通过</button></td>');
                 }
                 else if (auditType == 2) {
+
                     html.push('<td>审核通过</td>');
-                    html.push('<td><button type="button" class="btn_see btn btn-primary">查看</button></td>');
+                    html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
                 } else if (auditType == 3) {
                     html.push('<td>审核未通过</td>');
-                    html.push('<td><button type="button" class="btn_see btn btn-primary">查看</button></td>');
+                    html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
                 }
                 html.push("</tr>");
             }
@@ -108,7 +113,7 @@
                 html.push('<td colspan="7" style="text-align:center;vertical-align:middle;">暂无数据</td>');
                 html.push('</tr>');
             }
-            html.push('</tbody>' + '</table>');
+            html.push('</table>');
             $("#auditList").empty();
             $("#auditList").append(html.join(""));
             BindEvent();
@@ -120,7 +125,7 @@
             item.onclick = function () {
                 var type = $(item).parents("tr").find("td").eq(0).text();
                 var id = $(item).parents("tr").find("td").eq(1).text();
-                audit(2, type, id, "审核通过","");
+                audit(2, type, id, "审核通过", "");
             };
         });
 
@@ -179,6 +184,8 @@
             } else {
                 layer.msg("出现异常", { time: 2000, icon: 1 });
             }
+            window.location.href = "/Account/AccountAudit";
+
         })
     }
 </script>

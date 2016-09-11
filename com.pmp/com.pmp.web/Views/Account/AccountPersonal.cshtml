@@ -3,21 +3,20 @@
     ViewBag.Title = "AccountPersonal";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+
 <div class="ptb10 bb">
     <span>会员中心 > 基本信息</span>
-    <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
     <h3 class="ptb10">基本信息</h3>
 </div>
 
-
 <div style="padding:15px">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountPersonalInfoSumbit">
         <div class="form-group">
-            <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
+           <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtname" name="txtname" value="@Model.RealName" placeholder="请输入真实名字" required="">
+                <input type="text" class="form-control" id="txtname" name="txtname" value="@Model.RealName" placeholder="请输入真实名字" required="required">
             </div>
         </div>
         <div class="form-group">
@@ -53,7 +52,7 @@
         <div class="form-group">
             <label for="txtEmail" class="col-sm-2 control-label">邮箱：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="@Model.Email" placeholder="邮箱">
+                <input type="text" class="form-control" id="txtEmail" name="txtEmail" value="@Model.Email" required="required" placeholder="邮箱">
             </div>
         </div>
         <div class="form-group">
@@ -65,14 +64,14 @@
         <div class="form-group">
             <label for="txtposition" class="col-sm-2 control-label">职位：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtposition" name="txtposition" value="@Model.Position" placeholder="职位">
+                <input type="text" class="form-control" id="txtposition" name="txtposition" value="@Model.Position" required="required"  placeholder="职位">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="txtskll" class="col-sm-2 control-label">技术领域：</label>
+              <label for="txtskll" class="col-sm-2 control-label">技术领域：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtskll" name="txtskll" value="@Model.Skill" placeholder="技术领域">
+                <input type="text" class="form-control" id="txtskll" name="txtskll" value="@Model.Skill" required="required" placeholder="技术领域" >
             </div>
         </div>
         <div class="form-group">
@@ -83,7 +82,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">保存</button>
+                <button type="submit" class="btn btn_blue">保存</button>
             </div>
         </div>
     </form>

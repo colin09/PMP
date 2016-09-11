@@ -1,0 +1,11 @@
+﻿
+.content_title {
+    border-bottom: 2px solid #fb9337;
+    display: inline-block;
+    margin: 0 0 10px 10px;
+    padding-right: 20px;
+}
+
+.ta_detail {margin: 10px 100px 0 100px;width:80%;height:100%}
+.ta_detail tr {line-height:30px}
+.ta_detail .img {height:130px;width:100px;border: 2px solid #f1f1f1}

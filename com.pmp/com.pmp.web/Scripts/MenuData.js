@@ -10,21 +10,21 @@
             "sort": 1,
             "subMenu":
                 [{
+                    "title": "个人简介",
+                    "style": "",
+                    "url": "/Account/AccountDetail",
+                    "sort": 1
+                }, {
                     "title": "我的信息",
                     "style": "",
                     "url": "/Account/AccountPersonal"
                 },
                 {
-                    "title": "公司认证",
+                    "title": "实名认证",
                     "style": "",
-                    "url": "/Account/AccountCompany_Approve",
+                    "url": "/Account/AccountApprove",
                     "sort": 1
-                },
-                 {
-                     "title": "公司信息",
-                     "style": "",
-                     "url": "#"
-                 }
+                }
                 ]
         },
         {
@@ -41,7 +41,7 @@
               {
                   "title": "员工列表",
                   "style": "",
-                  "url": ""
+                  "url": "/Account/UserList"
               }
             ]
         },
@@ -84,31 +84,65 @@
             "title": "我的账号",
             "style": "",
             "url": "/Account/AccountPersonal",
-            "sort": 1
-        },
-        {
-            "title": "基本资料",
-            "style": "",
-            "url": "/Account/AccountPersonal",
-            "sort": 1
-        },
-        {
-            "title": "实名认证",
-            "style": "",
-            "url": "/Account/AccountP_Approve",
-            "sort": 1
+            "sort": 1,
+            "subMenu": [
+                 {
+                     "title": "个人简介",
+                     "style": "",
+                     "url": "/Account/AccountDetail",
+                     "sort": 1
+                 },
+            {
+                "title": "基本资料",
+                "style": "",
+                "url": "/Account/AccountPersonal",
+                "sort": 1
+            }, {
+                "title": "实名认证",
+                "style": "",
+                "url": "/Account/AccountApprove",
+                "sort": 1
+            }
+            ]
         },
         {
             "title": "我的任务",
             "style": "",
             "url": "/Task/MyList",
-            "sort": 1
+            "sort": 1,
+            "subMenu": [
+              {
+                  "title": "任务列表",
+                  "style": "",
+                  "url": "/Account/AccountPersonal",
+                  "sort": 1
+              }, {
+                  "title": "我的任务",
+                  "style": "",
+                  "url": "/Account/AccountP_Approve",
+                  "sort": 1
+              }
+            ]
         },
         {
             "title": "评价管理",
             "style": "",
             "url": "",
-            "sort": 1
+            "sort": 1,
+            "subMenu": [
+            {
+                "title": "我的评价",
+                "style": "",
+                "url": "/Account/AccountPersonal",
+                "sort": 1
+            }, {
+                "title": "我的信誉",
+                "style": "",
+                "url": "/Account/AccountP_Approve",
+                "sort": 1
+            }
+            ]
+
         }
       ]
   },
@@ -128,14 +162,14 @@
           }]
       },
       {
-          "title": "注册审核",
+          "title": "会员审核",
           "style": "",
-          "url": "/Account/AccountPersonal",
+          "url": "/Account/AccountAudit",
           "sort": 1,
           "subMenu": [{
               "title": "认证审核",
               "style": "",
-              "url": "/Account/AccountPersonal",
+              "url": "/Account/AccountAudit",
           }]
       },
       {
@@ -146,12 +180,12 @@
           "subMenu": [{
               "title": "公司管理",
               "style": "",
-              "url": "/Account/AccountPersonal",
+              "url": "/Account/CompanyUserList",
           },
           {
-              "title": "用户管理",
+              "title": "个人用户",
               "style": "",
-              "url": "/Account/AccountPersonal",
+              "url": "/Account/UserList?type=1",
           }
           ]
       },

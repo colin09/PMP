@@ -17,7 +17,7 @@ namespace com.pmp.mongo.data
         public string CardJustImg { set; get; }
         public string CardAgainstImg { set; get; }
         //职业
-        public int Profession { set; get; }
+        public string  Profession { set; get; }
         public string Address { set; get; }
 
         /// <summary>

@@ -52,6 +52,8 @@ namespace com.pmp.mongo.service
             var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", 0);
             List<MgUser> list = Search(filter);
 
+            list = list.FindAll(t => t.Level != 0);
+
             if (!string.IsNullOrWhiteSpace(name))
             {
                 list = list.FindAll(t => t.PersonInfo.RealName == name);
@@ -76,6 +78,9 @@ namespace com.pmp.mongo.service
             {
                 var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
                 userList = Search(filter);
+                //去除管理员
+                userList = userList.FindAll(t => t.Level != 0);
+
                 if (!string.IsNullOrWhiteSpace(name))
                 {
                     userList = userList.FindAll(t => t.PersonInfo.RealName == name);
@@ -179,27 +184,37 @@ namespace com.pmp.mongo.service
         }
 
         //提交企业认证并且增加公司
-        public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mp)
+        public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mr, int loginCompanyID)
         {
             int companyID = 0;
-            new MgCompanyRealService().CreateCompanyReal(mp, ref companyID);
-
+            if (loginCompanyID > 0)
+            {
+                new MgCompanyRealService().UpdateCompany(loginCompanyID, mr);
+            }
+            else
+            {
+                new MgCompanyRealService().CreateCompanyReal(mr, ref companyID);
+            }
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var update = Builders<MgUser>.Update.Set(u => u.CompanyReal_ID, companyID)
-                .Set(u => u.CompanyReal_Name, mp.Name)
+                .Set(u => u.CompanyReal_Name, mr.Name)
                 .Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
-
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="pwd"></param>
+        /// <param name="userLevel"></param>
         public void CreateUser(string phone, string pwd, int userLevel)
         {
             MgPersonReal mp = null;
-            MgPersonInfo mi = null;
+            MgPersonInfo mi = new data.MgPersonInfo();
             if ((UserLevel)userLevel == UserLevel.Person)
             {
                 mp = new MgPersonReal();
                 mp.IsApprove = 0;
-                mi = new data.MgPersonInfo();
             }
 
             Insert(new MgUser()
@@ -212,10 +227,39 @@ namespace com.pmp.mongo.service
                 CTime = DateTime.Now,
                 UTime = DateTime.Now,
                 PersonReal = mp,
-                PersonInfo = mi
+                PersonInfo = mi,
+                CompanyReal_ID = -1
             });
         }
 
+
+        /// <summary>
+        /// 增加公司员工
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="pwd"></param>
+        /// <param name="userLevel"></param>
+        public void CreateCompanyUser(MgUser mu, string realName, string positionName, string gender)
+        {
+            MgPersonInfo mi = new data.MgPersonInfo() { CTime = DateTime.Now, Gender = gender, RealName = realName, Position = positionName };
+
+            var company = new MgCompanyRealService().SearchById(mu.CompanyReal_ID);
+
+            Insert(new MgUser()
+            {
+                ID = GetNewId(),
+                Status = 1,
+                Phone = mu.Phone,
+                Password = mu.Password,
+                Level = mu.Level,
+                CTime = DateTime.Now,
+                UTime = DateTime.Now,
+                PersonReal = null,
+                PersonInfo = mi,
+                CompanyReal_ID = mu.CompanyReal_ID,
+                CompanyReal_Name = company[0].Name
+            });
+        }
 
         public MgUser Login(string phone, string pwd, string codePwd)
         {

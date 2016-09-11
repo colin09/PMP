@@ -181,6 +181,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\pmp_cntent.css" />
     <Content Include="Content\pmp_tip.css" />
     <Content Include="Content\pmp_pub.css" />
     <Content Include="Content\pmp_common.css" />
@@ -189,7 +190,6 @@
     <Content Include="Css\Index.css" />
     <Content Include="Css\IndexFonts.css" />
     <Content Include="Css\IndexFonts2.css" />
-    <Content Include="Css\style.default.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -209,6 +209,8 @@
     <Content Include="Css\Fonts\59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Images\body.jpg" />
+    <Content Include="Images\card-01.jpg" />
+    <Content Include="Images\card-02.jpg" />
     <Content Include="Images\Index\headPic.png" />
     <Content Include="Images\Index\headtop.gif" />
     <Content Include="Images\Index\mainProNavIcon.png" />
@@ -220,11 +222,11 @@
     <Content Include="Images\mail.png" />
     <Content Include="Images\noise.white.png" />
     <Content Include="Images\password.png" />
+    <Content Include="Images\person.png" />
     <Content Include="Images\phone.png" />
     <Content Include="Images\pmp.png" />
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />
-    <Content Include="Scripts\Footer.js" />
     <Content Include="Scripts\general.js" />
     <Content Include="Scripts\Header.js" />
     <Content Include="Scripts\js\wangEditor.min.js" />
@@ -299,10 +301,13 @@
     <Content Include="Views\Account\UserDetail.cshtml" />
     <Content Include="Views\Account\CompanyUserList.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
+    <Content Include="Views\Account\AccountApprove.cshtml" />
+    <Content Include="Views\Account\CompandUserAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\" />
+    <Folder Include="CardImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
