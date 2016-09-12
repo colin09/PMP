@@ -67,12 +67,12 @@
              {
                  "title": "我写的评价",
                  "style": "",
-                 "url": "/Task/MyList"
+                 "url": "/Task/Evaluation"
              },
              {
                  "title": "对我的评价",
                  "style": "",
-                 "url": "/Task/MyList"
+                 "url": "/Task/Evaluation"
              }
             ]
         }
