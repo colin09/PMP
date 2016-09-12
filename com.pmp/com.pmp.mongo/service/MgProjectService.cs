@@ -49,7 +49,7 @@ namespace com.pmp.mongo.service
             if (date != null)
             {
                 var endDate = date.Value.AddDays(1).Date;
-                filter = filter & Builders<MgProject>.Filter.Gte(p => p.CreateTime, date) & Builders<MgProject>.Filter.Lt(p => p.CreateTime, endDate);
+                filter = filter & Builders<MgProject>.Filter.Gte(p => p.CreateTime, date.Value) & Builders<MgProject>.Filter.Lt(p => p.CreateTime, endDate);
             }
             total = 0L;
             return SearchByPage(filter, order => order.CreateTime, false, page.PageIndex, page.PageSize, out total);

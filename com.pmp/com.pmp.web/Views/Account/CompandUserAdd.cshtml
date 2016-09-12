@@ -48,24 +48,29 @@
         </div>
     </form>
 </div>
-<script type="text/javascript">
-
-    $("#txtphone").keyup(function () {
-        $.get("/Account/IsExistPhone", { phone: $(this).val() },
-            function (res) {
-                if (res == "1") {
-                    layer.msg("已存在账号！");
-                    $(this).val("");
-                    $("#txtphone").val("");
-                }
-            });
-    });
-
-    $(function () {
-        if ($("#issesson").val() =="True") {
-            window.parent.url();
-        }
-    })
 
 
-</script>
+@section scripts{
+
+    <script type="text/javascript">
+
+        $("#txtphone").keyup(function () {
+            $.get("/Account/IsExistPhone", { phone: $(this).val() },
+                function (res) {
+                    if (res == "1") {
+                        layer.msg("已存在账号！");
+                        $(this).val("");
+                        $("#txtphone").val("");
+                    }
+                });
+        });
+
+        $(function () {
+            if ($("#issesson").val() == "True") {
+                window.parent.url();
+            }
+        })
+
+    </script>
+
+}

@@ -34,11 +34,6 @@
             "sort": 1,
             "subMenu": [
               {
-                  "title": "添加员工",
-                  "style": "",
-                  "url": ""
-              },
-              {
                   "title": "员工列表",
                   "style": "",
                   "url": "/Account/UserList"
@@ -57,11 +52,6 @@
                   "url": "/Task/MyList"
               },
               {
-                  "title": "发布任务",
-                  "style": "",
-                  "url": ""
-              },
-              {
                   "title": "审核任务",
                   "style": "",
                   "url": "/Task/AuditList"
@@ -72,7 +62,19 @@
             "title": "评价管理",
             "style": "",
             "url": "",
-            "sort": 1
+            "sort": 1,
+            "subMenu": [
+             {
+                 "title": "我写的评价",
+                 "style": "",
+                 "url": "/Task/MyList"
+             },
+             {
+                 "title": "对我的评价",
+                 "style": "",
+                 "url": "/Task/MyList"
+             }
+            ]
         }
       ]
   },

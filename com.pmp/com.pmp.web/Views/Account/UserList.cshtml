@@ -154,29 +154,32 @@
     </table>
 
 </div>
-<script type="text/javascript">
-    $(".btn_see").click(function () {
-        var id = $(this).parents(".table_list").find("[type='hidden']").val();
-        window.location.href = "/Account/AccountDetail?uid=" + id;
-    });
-    $(".btn_stop").click(function () {
-        alert("停用")
-        window.location.href = "/Account/AccountDetail?uid=" + id;
-    });
 
-    $(".btn_add").click(function () {
-        layer.open({
-            type: 2,
-            title: '添加员工',
-            shadeClose: true,
-            shade: false,
-            maxmin: true, //开启最大化最小化按钮
-            area: ['700px', '550px'],
-            content: '/Account/CompandUserAdd'
+@section scripts{
+    <script type="text/javascript">
+        $(".btn_see").click(function () {
+            var id = $(this).parents(".table_list").find("[type='hidden']").val();
+            window.location.href = "/Account/AccountDetail?uid=" + id;
         });
-    });
+        $(".btn_stop").click(function () {
+            alert("停用")
+            window.location.href = "/Account/AccountDetail?uid=" + id;
+        });
 
-    function url() {
-        window.location.href = "/Account/UserList";
-    }
-</script>
+        $(".btn_add").click(function () {
+            layer.open({
+                type: 2,
+                title: '添加员工',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['700px', '550px'],
+                content: '/Account/CompandUserAdd'
+            });
+        });
+
+        function url() {
+            window.location.href = "/Account/UserList";
+        }
+    </script>
+}
