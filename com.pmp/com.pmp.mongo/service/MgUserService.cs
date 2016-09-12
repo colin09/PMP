@@ -66,6 +66,24 @@ namespace com.pmp.mongo.service
         }
 
         /// <summary>
+        /// 更新所有公司下员工状态
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public bool SearchByCompanyID(int companyID, int status)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyID);
+            List<MgUser> list = Search(filter);
+
+            foreach (var item in list)
+            {
+                UpdateUserStatus(item.ID, status);
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 根据公司ID获取员工
         /// </summary>
         /// <param name="id"></param>
@@ -200,9 +218,9 @@ namespace com.pmp.mongo.service
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public bool UpdateUserStatus(string phone, int status)
+        public bool UpdateUserStatus(int id, int status)
         {
-            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var filter = Builders<MgUser>.Filter.Eq("ID", id);
             var update = Builders<MgUser>.Update.Set(u => u.Status, status);
             return Update(filter, update) > 0;
         }
@@ -229,7 +247,7 @@ namespace com.pmp.mongo.service
         //提交企业认证并且增加公司
         public bool UpdateAccountCompanyReal(string phone, MgCompanyReal mr, int loginCompanyID)
         {
-            int companyID = 0;
+            int companyID = loginCompanyID;
             if (loginCompanyID > 0)
             {
                 new MgCompanyRealService().UpdateCompany(loginCompanyID, mr);

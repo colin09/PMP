@@ -284,7 +284,7 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public string UpdateUserStatus()
         {
-            string userID = Request["userID"];
+            int userID = int.Parse(Request["userID"].ToString());
             int status = int.Parse(Request["Status"].ToString());
             return new MgUserService().UpdateUserStatus(userID, status).ToString();
         }
@@ -295,9 +295,19 @@ namespace com.pmp.web.Controllers
         /// <returns></returns>
         public string UpdateCompanyStatus()
         {
-            string userID = Request["companyId"];
-            int status = int.Parse(Request["Status"].ToString());
-            return new MgCompanyRealService().UpdateConpanyStatus(userID, status).ToString();
+            try
+            {
+                int companyId = int.Parse(Request["companyId"].ToString());
+                int status = int.Parse(Request["Status"].ToString());
+                var res = new MgCompanyRealService().UpdateConpanyStatus(companyId, status).ToString();
+
+                new MgUserService().SearchByCompanyID(companyId, status);
+            }
+            catch (Exception ex)
+            {
+                return "False";
+            }
+            return "True";
         }
 
         /// <summary>
@@ -454,6 +464,11 @@ namespace com.pmp.web.Controllers
                     {
                         IsSuccess = false;
                         message = "登录失败,密码错误！";
+                    }
+                    else if (info[0].Status == 0)
+                    {
+                        IsSuccess = false;
+                        message = "账号已停用！";
                     }
                     else
                     {

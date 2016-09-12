@@ -71,13 +71,13 @@
                     <td>
                         <button class="btn btn_blue btn_see">查看员工</button>
 
-                        @if (Model[i].Status == 1)
+                        @if (Model[i].status == 1)
                         {
                             <button class="btn btn_red btn_stop">停用</button>
                             <button class="btn btn_red btn_open" style="display:none">启用</button>
                         }
 
-                        @if (Model[i].Status == 0)
+                        @if (Model[i].status == 0)
                         {
                             <button class="btn btn_red btn_stop" style="display:none">停用</button>
                             <button class="btn btn_red btn_open">启用</button>
@@ -93,38 +93,42 @@
     </table>
 </div>
 
-<script type="text/javascript">
-    $(".btn_see").click(function () {
-        var id = $(this).parents(".table_list").find("[type='hidden']").val();
-        window.location.href = "/Account/UserList?type=2&companyID=" + id;
-    });
-    $(".btn_stop").click(function () {
-        var id = $(this).parents(".table_list").find("[type='hidden']").val();
-        var data = { companyId: id, Status: 0 }
-        $.get("/Account/UpdateCompanyStatus", data, function (res) {
-            if (res == "False") {
-                layer.msg("停用失败。");
-            } else {
-                layer.msg("停用成功。");
-                $(".btn_stop").hide();
-                $(".btn_open").show();
-            }
-        })
-    });
+@section scripts{
+    <script type="text/javascript">
+        $(".btn_see").click(function () {
+            var id = $(this).parents(".table_list").find("[type='hidden']").val();
+            window.location.href = "/Account/UserList?type=2&companyID=" + id;
+        });
+        $(".btn_stop").click(function () {
+            $_this = $(this);
+            var id = $(this).parents("tr").find("[type='hidden']").val();
+            var data = { companyId: id, Status: 0 }
+            $.get("/Account/UpdateCompanyStatus", data, function (res) {
+                if (res == "False") {
+                    layer.msg("停用失败。");
+                } else {
+                    layer.msg("停用成功。");
+                    $($_this).parents("td").find(".btn_stop").hide();
+                    $($_this).parents("td").find(".btn_open").show();
+                }
+            })
+        });
 
-    $(".btn_open").click(function () {
-        var id = $(this).parents(".table_list").find("[type='hidden']").val();
-        var data = { companyId: id, Status: 1 }
-        $.get("/Account/UpdateCompanyStatus", data, function (res) {
-            if (res == "False") {
-                layer.msg("开启失败。");
-            } else {
-                layer.msg("开启成功。");
-                $(".btn_open").hide();
-                $(".btn_stop").show();
-            }
-        })
-    });
+        $(".btn_open").click(function () {
+            $_this = $(this);
+            var id = $(this).parents("tr").find("[type='hidden']").val();
+            var data = { companyId: id, Status: 1 }
+            $.get("/Account/UpdateCompanyStatus", data, function (res) {
+                if (res == "False") {
+                    layer.msg("开启失败。");
+                } else {
+                    layer.msg("开启成功。");
+                    $($_this).parents("td").find(".btn_open").hide();
+                    $($_this).parents("td").find(".btn_stop").show();
+                }
+            })
+        });
 
-</script>
+    </script>
 
+}

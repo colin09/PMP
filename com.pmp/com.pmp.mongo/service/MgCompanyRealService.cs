@@ -84,7 +84,7 @@ namespace com.pmp.mongo.service
         /// </summary>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public bool UpdateConpanyStatus(string conpanyID, int status)
+        public bool UpdateConpanyStatus(int conpanyID, int status)
         {
             var filter = Builders<MgCompanyReal>.Filter.Eq("ID", conpanyID);
             var update = Builders<MgCompanyReal>.Update.Set(u => u.status, status);

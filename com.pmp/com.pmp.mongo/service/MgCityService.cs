@@ -25,6 +25,22 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
+ 
+
+
+
+
+
+
+        public void SetDB()
+        {
+
+        }
+
+
+
+
+
 
 
 
