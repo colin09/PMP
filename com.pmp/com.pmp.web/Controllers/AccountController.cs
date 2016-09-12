@@ -36,10 +36,7 @@ namespace com.pmp.web.Controllers
         public ActionResult AccountPersonal()
         {
             var userId = _Longin_UserId;
-            //if (!string.IsNullOrWhiteSpace(Request["userId"]))
-            //{
-            //    userId = int.Parse(Request["userId"]);
-            //}
+
             var model = new MgUserService().SearchById(userId);
             if (model[0].PersonInfo == null)
                 model[0].PersonInfo = new MgPersonInfo();
@@ -214,6 +211,7 @@ namespace com.pmp.web.Controllers
             mr.ContactsName = Request.Form["txtlxrName"];
             mr.CUserID = _Longin_UserId;
             mr.IsApprove = 1;
+            mr.status = 1;
             mr.CTime = DateTime.Now.ToString();
             new MgUserService().UpdateAccountCompanyReal(_Longin_Phone, mr, _Login_CompanyReal_ID);
             return Redirect("/Account/AccountDetail");
@@ -240,19 +238,6 @@ namespace com.pmp.web.Controllers
             return View("/Account/CompandUserAdd");
         }
 
-        //public ActionResult C_UserAdd()
-        //{
-        //    MgUser mu = new MgUser();
-        //    mu.Phone = Request["txtphone"];
-        //    mu.Password = Request["txtphone"];
-        //    mu.Level = UserLevel.CompanyUser;
-        //    mu.CompanyReal_ID = _Login_CompanyReal_ID;
-        //    new MgUserService().CreateCompanyUser(mu, Request["txtname"], Request["txtposition"], Request["radiossex"]);
-
-        //    ViewBag.IsSessonType = "true";
-        //    return View("/Account/CompandUserAdd");
-        //}
-
         public string IsExistPhone()
         {
             var phone = Request["phone"];
@@ -273,6 +258,46 @@ namespace com.pmp.web.Controllers
         {
             ViewBag.level = this._Longin_UserLevel;
             return View();
+        }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdatePwd()
+        {
+            return View("");
+        }
+
+        public string UpdatePassWord()
+        {
+            string oldpassWord = Request["oldpwd"];
+            string newPassWord = Request["newpwd"];
+            string error = "";
+            var res = new MgUserService().UpdatePassWord(_Longin_Phone, oldpassWord, newPassWord, ref error);
+            return "{\"IsSuccess\":\"" + res + "\",\"error\":\"" + error + "\"}"; ;
+        }
+
+        /// <summary>
+        /// 修改个人账户状态【0.停用 1.启用】
+        /// </summary>
+        /// <returns></returns>
+        public string UpdateUserStatus()
+        {
+            string userID = Request["userID"];
+            int status = int.Parse(Request["Status"].ToString());
+            return new MgUserService().UpdateUserStatus(userID, status).ToString();
+        }
+
+        /// <summary>
+        /// 修改公司账户状态【0.停用 1.启用】
+        /// </summary>
+        /// <returns></returns>
+        public string UpdateCompanyStatus()
+        {
+            string userID = Request["companyId"];
+            int status = int.Parse(Request["Status"].ToString());
+            return new MgCompanyRealService().UpdateConpanyStatus(userID, status).ToString();
         }
 
         /// <summary>
@@ -505,7 +530,7 @@ namespace com.pmp.web.Controllers
             int CompanyIsApprove = 0;
 
             var cUser = service.SearchById(this._Longin_UserId).FirstOrDefault();
-            var list = service.SearchuSserByCompanyId(cUser.CompanyReal_ID, "", "",ref CompanyIsApprove)
+            var list = service.SearchuSserByCompanyId(cUser.CompanyReal_ID, "", "", ref CompanyIsApprove)
                   .Select(u => new SimpleUserRes
                   {
                       Id = u.ID,

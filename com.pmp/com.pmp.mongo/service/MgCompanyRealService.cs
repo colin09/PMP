@@ -78,6 +78,20 @@ namespace com.pmp.mongo.service
         }
 
 
+
+        /// <summary>
+        /// 更新公司账号状态
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public bool UpdateConpanyStatus(string conpanyID, int status)
+        {
+            var filter = Builders<MgCompanyReal>.Filter.Eq("ID", conpanyID);
+            var update = Builders<MgCompanyReal>.Update.Set(u => u.status, status);
+            return Update(filter, update) > 0;
+        }
+
+
         public bool UpdateAudit(int Id, int auditType, string notpassstr)
         {
             var filter = Builders<MgCompanyReal>.Filter.Eq("ID", Id);
@@ -103,6 +117,7 @@ namespace com.pmp.mongo.service
                  Set(u => u.CompanyAgainstImg, mr.CompanyAgainstImg).
                  Set(u => u.CUserID, mr.CUserID).
                  Set(u => u.IsApprove, mr.IsApprove).
+                 Set(u => u.status, mr.status).
                  Set(u => u.NotPassReason, mr.NotPassReason)
                 .Set(u => u.ATime, DateTime.Now.ToString());
             return Update(filter, update) > 0;
@@ -127,6 +142,7 @@ namespace com.pmp.mongo.service
                 CompanyJustImg = mc.CompanyJustImg,
                 CTime = mc.CTime,
                 CUserID = mc.CUserID,
+                status = mc.status,
                 IsApprove = mc.IsApprove,
                 Name = mc.Name,
                 OrganizationCode = mc.OrganizationCode,
@@ -134,6 +150,5 @@ namespace com.pmp.mongo.service
                 ATime = mc.ATime
             });
         }
-
     }
 }

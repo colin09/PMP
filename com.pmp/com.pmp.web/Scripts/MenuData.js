@@ -24,6 +24,12 @@
                     "style": "",
                     "url": "/Account/AccountApprove",
                     "sort": 1
+                },
+                {
+                    "title": "修改密码",
+                    "style": "",
+                    "url": "/Account/UpdatePwd",
+                    "sort": 1
                 }
                 ]
         },
@@ -33,11 +39,6 @@
             "url": "",
             "sort": 1,
             "subMenu": [
-              {
-                  "title": "添加员工",
-                  "style": "",
-                  "url": ""
-              },
               {
                   "title": "员工列表",
                   "style": "",
@@ -102,6 +103,12 @@
                 "style": "",
                 "url": "/Account/AccountApprove",
                 "sort": 1
+            },
+            {
+                "title": "修改密码",
+                "style": "",
+                "url": "/Account/UpdatePwd",
+                "sort": 1
             }
             ]
         },
@@ -159,7 +166,14 @@
               "title": "基本信息",
               "style": "",
               "url": "/Account/AccountPersonal",
-          }]
+          },
+          {
+              "title": "修改密码",
+              "style": "",
+              "url": "/Account/UpdatePwd",
+              "sort": 1
+          }
+          ]
       },
       {
           "title": "会员审核",

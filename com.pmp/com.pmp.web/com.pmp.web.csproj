@@ -303,11 +303,12 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\AccountApprove.cshtml" />
     <Content Include="Views\Account\CompandUserAdd.cshtml" />
+    <Content Include="Views\Account\UpdatePwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\fonts\" />
     <Folder Include="CardImages\" />
+    <Folder Include="Content\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

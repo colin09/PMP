@@ -17,7 +17,11 @@ namespace com.pmp.mongo.data
 
         public int ID { set; get; }
         public string Name { set; get; }
-        //public string Address { set; get; }
+
+        /// <summary>
+        /// 公司状态
+        /// </summary>
+        public int status { set; get; }
 
         /// <summary>
         /// 联系电话

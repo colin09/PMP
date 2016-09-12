@@ -10,7 +10,12 @@
     <h3 class="ptb10">身份认证</h3>
 </div>
 
+
+
 <div class="pmp_content">
+
+    @if (ViewBag.Level ==(int) com.pmp.mongo.data.UserLevel.Person)
+    {
     <div style="border-bottom: 1px solid #e1e1e1;height:80px; font-size:12px;padding:20px" id="div_person">
         <dl>
             <dt style="float:left">
@@ -24,25 +29,28 @@
             <dd style="float:right">
                 @if (ViewBag._Longin_Person_IsApprove == 2)
                 {
-                    <span style="color:#f60">已通过</span>
+                <span style="color:#f60">已通过</span>
                 }
                 else if (ViewBag._Longin_Person_IsApprove == 1)
                 {
-                    <span style="color:#f60">审核中</span>
+                <span style="color:#f60">审核中</span>
                 }
                 else if (ViewBag._Longin_Person_IsApprove == 3)
                 {
-                    <span style="color:#f60">审核失败</span>
-                    <button class="btn btn_blue" id="btn_person_up">立刻认证</button>
+                <span style="color:#f60">审核失败</span>
+                <button class="btn btn_blue" id="btn_person_up">立刻认证</button>
                 }
                 else
                 {
-                    <button class="btn btn_blue" id="btn_person_up">立刻认证</button>
+                <button class="btn btn_blue" id="btn_person_up">立刻认证</button>
                 }
             </dd>
         </dl>
     </div>
+    }
 
+    @if (ViewBag.Level ==(int) com.pmp.mongo.data.UserLevel.CompanyUser  ||ViewBag.Level ==(int) com.pmp.mongo.data.UserLevel.CompanyAdmin)
+    {
     <div style="border-bottom: 1px solid #e1e1e1;height:80px; font-size:12px;padding:20px" id="div_company">
         <dl>
             <dt style="float:left">
@@ -56,31 +64,32 @@
             <dd style="float:right">
                 @if (ViewBag._Longin_CompanyReal_IsApprove == 2)
                 {
-                    <span style="color:#f60">已通过</span>
+                <span style="color:#f60">已通过</span>
                 }
                 else if (ViewBag._Longin_CompanyReal_IsApprove == 1)
                 {
-                    <span style="color:#f60">审核中</span>
+                <span style="color:#f60">审核中</span>
                 }
                 else if (ViewBag._Longin_CompanyReal_IsApprove == 3)
                 {
-                    <span style="color:#f60">审核失败</span>
+                <span style="color:#f60">审核失败</span>
 
-                    if (ViewBag.Level == com.pmp.mongo.data.UserLevel.CompanyAdmin)
+                    if (ViewBag.Level ==(int) com.pmp.mongo.data.UserLevel.CompanyAdmin)
                     {
-                        <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+                <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
                     }
                 }
                 else
                 {
                     if (ViewBag.Level == (int)com.pmp.mongo.data.UserLevel.CompanyAdmin)
                     {
-                        <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
+                <button class="btn btn_blue" id="btn_company_up">立刻认证</button>
                     }
                 }
             </dd>
         </dl>
     </div>
+    }
 </div>
 <script>
     $(function () {

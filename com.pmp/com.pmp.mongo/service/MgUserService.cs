@@ -167,6 +167,47 @@ namespace com.pmp.mongo.service
             var update = Builders<MgUser>.Update.Set(u => u.CodePwd, "").Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
+
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public bool UpdatePassWord(string phone, string oldWordPass, string newWordPass, ref string error)
+        {
+            List<MgUser> mguserList = SearchLogin(phone);
+            if (mguserList == null && mguserList.Count == 0)
+            {
+                error = "未发现账号";
+                return false;
+            }
+            else
+            {
+                if (mguserList[0].Password != oldWordPass)
+                {
+                    error = "原始密码验证失败，请重新输入";
+                    return false;
+                }
+            }
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.Password, newWordPass).Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
+
+        /// <summary>
+        /// 更新账号状态
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public bool UpdateUserStatus(string phone, int status)
+        {
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.Status, status);
+            return Update(filter, update) > 0;
+        }
+
+
         //修改个人信息
         public bool UpdateAccountInfo(string phone, MgPersonInfo mp)
         {
