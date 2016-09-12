@@ -1,4 +1,5 @@
 ﻿@using com.pmp.common.helper;
+@model List<com.pmp.mongo.data.MgProject>
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
@@ -16,11 +17,11 @@
         {
             foreach (var item in Model)
             {
-                <li>
+                <li class="bb">
                     <div class="line1">
                         <a href="/Task/AuditDetail?id=@item.ID">[@item.Status.GetName()]</a>   @item.Code | @item.ContractCode | @item.Name
                     </div>
-                    <div class="line2">@item.Desc</div>
+                    <div class="line2">@item.Desc.TakeString(100)</div>
                     <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
                 </li>
             }

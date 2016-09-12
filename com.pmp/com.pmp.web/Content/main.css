@@ -114,11 +114,11 @@ footer {}
 .accountBody .accountRight {float:left; width:84%; margin:0 5px 25px 5px;border:solid 1px #ddd;border-radius:5px; min-height:800px; padding:10px;background: url("../images/noise.white.png") repeat scroll;}
 
 .subTitle{margin:25px auto;}
-form{margin:25px 0;}
+
 
 
 .taskAuditList{}
-.taskAuditList li{border-bottom:solid 1px grey;}
+.taskAuditList li{border-bottom:solid 1px grey;line-height:25px;}
 .taskAuditList li .line1{font-weight:600;}
 .taskAuditList li .line2{color:#666;}
 .taskAuditList li .line3{text-align:right;}

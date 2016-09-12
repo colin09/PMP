@@ -4,9 +4,13 @@
     Layout = "~/Views/Shared/_TaskLayout.cshtml";
 }
 
+@section header{
+    <link href="~/Content/wangEditor.min.css" rel="stylesheet" />
+}
+
 <h2 class="subTitle">发布任务</h2>
 
-<form class="form-horizontal" role="form" method="post" action="/Task/CreateSubmint">
+<form class="form-horizontal" role="form" method="post" action="/Task/CreateSubmint" enctype="multipart/form-data">
     <div class="form-group">
         <label for="exampleInputEmail1" class="col-sm-2 control-label">项目类别</label>
         <div class="col-sm-10">
@@ -48,7 +52,7 @@
         <label class="col-sm-2 control-label">项目地点</label>
         <div class="col-sm-10" ng-controller="cityCtl">
             <select id="slcProv" name="Province" ng-change="change()" ng-model="x">
-                <option ng-repeat="pro in provinces" ng-value="pro.ID" >{{pro.Name}}</option>
+                <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
             </select>
             <select name="City">
                 <option ng-repeat="city in citys" ng-value="city.ID">{{city.Name}}</option>
@@ -76,7 +80,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">项目描述</label>
         <div class="col-sm-10">
-            <textarea class="form-control" name="Desc" placeholder="项目描述" rows="5"></textarea>
+            <textarea class="form-control" name="Desc" id="txtProDesc" placeholder="项目描述" rows="5"></textarea>
         </div>
     </div>
     <div class="form-group">
@@ -94,7 +98,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">项目文件</label>
         <div class="col-sm-10">
-           <input type="file" name="files" multiple="multiple">
+            <input type="file" name="files" multiple="multiple">
         </div>
     </div>
     <div class="form-group">
@@ -113,6 +117,8 @@
 
 
 @section scripts{
+
+    <script type="text/javascript" src="~/Scripts/js/wangEditor.min.js"></script>
     <script>
         angular.module('cityApp', [])
          .controller("cityCtl", function ($scope, $http) {
@@ -129,12 +135,25 @@
                  $http.get("/Task/GetCityList?parentId=" + proId)
                  .success(function (json) {
                      if (json.length > 0) {
-                         $scope.citys =json;
+                         $scope.citys = json;
                      }
                  });
              };
          })
+        $(function () {
 
+            var editor = new wangEditor('txtProDesc');
+            editor.config.menus = [
+                'bold',
+                'underline',
+                'italic',
+                'strikethrough',
+                'eraser',
+                'forecolor',
+                'bgcolor'
+            ];
+            editor.create();
+        });
     </script>
-    
-    }
+
+}
