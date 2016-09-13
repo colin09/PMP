@@ -144,7 +144,7 @@
                     if (data.length > 0) {
                         var layout = "";
                         $.each(data, function (key, item) {
-                            layout += "<label><input name='userId' value='" + item.Id + "' /> " + item.Name + " </label>";
+                            layout += "<label><input type='radio' name='userId' value='" + item.Id + "' /> " + item.Name + " </label>";
                         });
                         $("#divPersonList").empty().append(layout);
                     }
