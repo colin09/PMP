@@ -1,4 +1,5 @@
 ﻿using com.pmp.common.Config;
+using com.pmp.common.helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,8 @@ namespace com.pmp.common.mvc.ctl
 
         private bool isLogin(HttpContextBase httpcontext)
         {
-            if (httpcontext.Session[Public_const_enum.LonginCookieName] != null)
+            // if (httpcontext.Session[Public_const_enum.LonginCookieName] != null)
+            if (HttpHelper.GetCookie(Public_const_enum.LonginCookieName) != null)
                 return true;
             else
                 return false;

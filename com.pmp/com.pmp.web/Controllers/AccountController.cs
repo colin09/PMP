@@ -19,7 +19,7 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult Index()
         {
-            ViewBag.level = this._Longin_UserLevel;
+            //ViewBag.level = this._Longin_UserLevel;
             return View();
         }
         // GET: Account
@@ -534,7 +534,8 @@ namespace com.pmp.web.Controllers
 
         public void RecordUserLogonStatus(string value)
         {
-            new HttpHelper().SetSession(Public_const_enum.LonginCookieName, value);
+            new HttpHelper().WriteCookie(Public_const_enum.LonginCookieName, value);
+            //new HttpHelper().SetSession(Public_const_enum.LonginCookieName, value);
         }
 
         [Authorization]

@@ -61,7 +61,7 @@ namespace com.pmp.common.mvc.ctl
         protected BaseController()
         {
             log = Logger.Current();
-            var cookie = new HttpHelper().GetSession(Public_const_enum.LonginCookieName);
+            var cookie = HttpHelper.GetCookie(Public_const_enum.LonginCookieName);
             log.Info($"base.Init,read cookie ==> {cookie}");
             if (!string.IsNullOrEmpty(cookie))
             {

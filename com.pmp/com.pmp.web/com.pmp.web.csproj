@@ -208,6 +208,8 @@
     <Content Include="Css\Fonts\xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
     <Content Include="Css\Fonts\u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="Images\avatar.png" />
+    <Content Include="Images\avatarbig.png" />
     <Content Include="Images\body.jpg" />
     <Content Include="Images\card-01.jpg" />
     <Content Include="Images\card-02.jpg" />
@@ -227,8 +229,10 @@
     <Content Include="Images\pmp.png" />
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />
+    <Content Include="Images\userinfoarrow.png" />
     <Content Include="Scripts\general.js" />
     <Content Include="Scripts\Header.js" />
+    <Content Include="Scripts\js\jquery.cookie.js" />
     <Content Include="Scripts\js\wangEditor.min.js" />
     <Content Include="Scripts\layer\layer.js" />
     <Content Include="Scripts\layer\skin\default\icon-ext.png" />
