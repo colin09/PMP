@@ -7,10 +7,73 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+   
 
+    <style>
+        .right {
+            /*position: absolute;*/
+            right: 10px;
+            top: 10px;
+            margin-right: 10px;
+            margin-top: 2px;
+            float: right;
+        }
+
+        .userinfo {
+            background: #32415a url("../../Images/userinfoarrow.png") no-repeat scroll right center;
+            border-bottom: 1px solid #445775;
+            border-radius: 2px;
+            box-shadow: 1px 1px 2px #2b384e inset;
+            cursor: pointer;
+            float: left;
+            padding: 6px 18px 6px 6px;
+        }
+
+        .userinfodrop {
+            background: #fff none repeat scroll 0 0;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: none;
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            top: 48px;
+            z-index: 200;
+            width: 200px;
+        }
+
+        .email {
+            color: #999;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .avatar {
+            float: left;
+        }
+
+        .userdata ul li a {
+            background: #f7f7f7 none repeat scroll 0 0;
+            border-radius: 2px;
+            display: block;
+            padding: 5px;
+        }
+
+        .userdata ul li {
+            display: block;
+            margin-bottom: 1px;
+        }
+
+        a {
+            color: #666;
+            outline: medium none;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
+
     <div class="header">
         <div class="topM sline clearfix">
             <div class="OfcardLogo">
@@ -38,6 +101,29 @@
                     <a href="/Task/Create">发布任务</a>
                 </div><!-- mainMenuV end -->
             </div><!-- mainMenudl end -->
+
+            <div class="right">
+                <div class="userinfo">
+                    <span>你好,</span>
+                    <span>@ViewBag._Longin_RealName</span>
+                </div><!--userinfo-->
+
+                <div class="userinfodrop" style="display: none;">
+                    <div class="userdata">
+                        <h4>Juan</h4>
+                        <span class="email">youremail@yourdomain.com</span>
+                        <ul>
+                            <li><a href="/Account/AccountPersonal">编辑资料</a></li>
+                            @*<li><a href="accountsettings.html">账号设置</a></li>*@
+                            @*<li><a href="help.html">帮助</a></li>*@
+                            <li><a href="#" id="clone">退出</a></li>
+                        </ul>
+                    </div><!--userdata-->
+                </div><!--userinfodrop-->
+            </div>
+            @*<div style="width:100%;height:30px; background:#f8f8f8 none repeat scroll 0 0; border-bottom: 1px solid #e7e7e7;">
+                </div>*@
+
         </div><!-- navigationBar end -->
     </div><!-- header end -->
 
@@ -79,7 +165,29 @@
     <script src="~/Scripts/menu.js"></script>
     <script src="~/Scripts/layer/layer.js"></script>
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/js/jquery.cookie.js"></script>
     <script type="text/javascript">
+
+        jQuery('.userinfo').click(function () {
+            if (!jQuery(this).hasClass('active')) {
+                jQuery('.userinfodrop').show();
+                jQuery(this).addClass('active');
+            } else {
+                jQuery('.userinfodrop').hide();
+                jQuery(this).removeClass('active');
+            }
+            //remove notification box if visible
+            jQuery('.notification').removeClass('active');
+            jQuery('.noticontent').remove();
+
+            return false;
+        });
+
+
+        $("#clone").click(function () {
+            $.cookie("COOKIE_MANAGER_INFO", null, { path: '/' });
+            window.location.href = "/Account/Login";
+        });
         $(function () {
             var level = $("#userLevel").val();
             $.each(_Menu, function (i, item) {
