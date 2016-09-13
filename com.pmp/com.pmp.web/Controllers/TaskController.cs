@@ -130,6 +130,9 @@ namespace com.pmp.web.Controllers
             if (files != null)
                 foreach (var file in files)
                 {
+                    if (file.ContentLength > 1024 * 1024 * 2)
+                        return Json("{'error':'文件超大。'}");
+
                     var pFile = new ProjectFlie();
                     pFile.Name = Path.GetFileName(file.FileName);
                     pFile.FileType = 1;
@@ -431,7 +434,31 @@ namespace com.pmp.web.Controllers
 
             return View(result);
         }
+        public ActionResult REvaluation()
+        {
+            var total = 0;
+            var result = new List<TaskEvaRes>();
+            var list = _evaluationService.GetListByRUserId(this._Longin_UserId);
+            if (list != null)
+            {
+                total = list.Count();
 
+                var userIds = list.Select(l => l.UserId);
+                var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+
+                result = list.Select(e => new TaskEvaRes
+                {
+                    Grade = e.Grade,
+                    Score = e.Score,
+                    Desc = e.Desc,
+                    UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                }).ToList();
+            }
+
+            ViewBag.total = total;
+
+            return View("Evaluation", result);
+        }
 
     }
 

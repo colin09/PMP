@@ -14,5 +14,6 @@ namespace com.pmp.model.enums
         ServerMachine = 3,
         DeviceSetup = 4,
         Evection = 5,
+        Other = 20,
     }
 }

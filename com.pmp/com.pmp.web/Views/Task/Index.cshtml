@@ -29,9 +29,11 @@
         <div class="col-sm-4 pt5" ng-app="cityApp">
             <div ng-controller="cityCtl">
                 <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="x">
+                    <option value="0" selected="selected"> - 选择省份 -</option>
                     <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
                 </select>
                 <select class="w140 pt5" id="sltCity" name="City">
+                    <option value="0" selected="selected"> - 选择城市 -</option>
                     <option ng-repeat="city in citys" ng-value="city.ID">{{city.Name}}</option>
                 </select>
             </div>
@@ -49,9 +51,10 @@
 <div class="mt25">
     <table class="table table-hover">
         <tr>
-            <th class="w220">编号/合同号/名称</th>
-            <th class="w120">联系人/电话</th>
+            <th class="w220">@*编号/合同号/*@项目名称</th>
+            @*<th class="w120">联系人/电话</th>*@
             <th>项目说明</th>
+            <th class="w120">预算金额</th>
             <th class="w220">项目时间</th>
             <th class="w100">领取</th>
         </tr>
@@ -61,24 +64,24 @@
                 {
                     <tr>
                         <td>
-                            @item.Code | @item.ContractCode<br />
+                            @*@item.Code | @item.ContractCode<br />*@
                             @item.Name
                         </td>
-                        <td>
+                        @*<td>
                             @item.Manager | @item.Linkman<br />
                             @item.Mobile
-                        </td>
+                        </td>*@
                         <td>
                             <div class="descDiv3">
                                 @item.Desc.TakeString(100)
                             </div>
                         </td>
+                        <td>￥：@item.Budget</td>
                         <td>
-                           ￥：@item.Budget<br />
                           @item.ProvinceName /  @item.CityName
                             <br />
-                            @item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")
-
+                            @item.CTime
+                            @*@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")*@
                         </td>
                         <td>
                             <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span>领取任务</a>
