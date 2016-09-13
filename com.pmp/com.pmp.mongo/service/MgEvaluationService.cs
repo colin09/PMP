@@ -24,5 +24,21 @@ namespace com.pmp.mongo.service
             var filter = Builders<MgEvaluation>.Filter.Eq("CUser", userId);
             return Search(filter);
         }
+
+
+        public List<MgEvaluation> GetListByRUserId(int userId)
+        {
+            var projects = new MgProjectService().GetListByRUser(userId);
+            if (projects == null)
+                return null;
+            var proIds = projects.Select(p => p.ID).ToList();
+
+
+            var filter = Builders<MgEvaluation>.Filter.In("ProjectId", proIds);
+            return Search(filter);
+        }
+
+
+
     }
 }

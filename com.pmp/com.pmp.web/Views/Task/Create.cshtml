@@ -20,6 +20,7 @@
                 <option value="3">服务器</option>
                 <option value="4">设备安装</option>
                 <option value="5">出差</option>
+                <option value="20">其他</option>
             </select>
         </div>
     </div>
@@ -98,16 +99,16 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">项目文件</label>
         <div class="col-sm-10">
-            <input type="file" name="files" multiple="multiple">
+            <input type="file" name="files" multiple="multiple"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>
         </div>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <div class="checkbox col-sm-offset-2 col-sm-10">
             <label>
                 <input type="checkbox"> Check me out
             </label>
         </div>
-    </div>
+    </div>*@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default"> 发布任务 </button>

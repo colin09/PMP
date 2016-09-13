@@ -83,5 +83,11 @@ namespace com.pmp.mongo.service
         }
 
 
+        public IList<MgProject> GetListByRUser(int userId)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ReceiveUserId", userId);
+            return Search(filter);
+        }
+
     }
 }
