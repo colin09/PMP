@@ -82,7 +82,7 @@ namespace com.pmp.web.Controllers
                 PEvaluate = l.IsEvaluate_I,
                 FlieList = l.FlieList,
                 ProcessDesc = l.ProcessDesc,
-                Budget=l.Budget
+                Budget = l.Budget
             }).ToList();
 
 
@@ -405,6 +405,32 @@ namespace com.pmp.web.Controllers
         }
 
 
+
+        public ActionResult Evaluation()
+        {
+            var total = 0;
+            var result = new List<TaskEvaRes>();
+            var list = _evaluationService.GetListByUserId(this._Longin_UserId);
+            if (list != null)
+            {
+                total = list.Count();
+
+                var userIds = list.Select(l => l.UserId);
+                var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+
+                result = list.Select(e => new TaskEvaRes
+                {
+                    Grade = e.Grade,
+                    Score = e.Score,
+                    Desc = e.Desc,
+                    UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                }).ToList();
+            }
+
+            ViewBag.total = total;
+
+            return View(result);
+        }
 
 
     }
