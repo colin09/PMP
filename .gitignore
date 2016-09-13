@@ -11,8 +11,9 @@ log/
 *.nupkg
 *.log
 packages/
-
-
+CardImages/
+.vs/
+obj/
 
 ############
 ## Windows
