@@ -126,14 +126,9 @@
             "sort": 1,
             "subMenu": [
               {
-                  "title": "任务列表",
-                  "style": "",
-                  "url": "/Account/AccountPersonal",
-                  "sort": 1
-              }, {
                   "title": "我的任务",
                   "style": "",
-                  "url": "/Account/AccountP_Approve",
+                  "url": "/Task/MyList",
                   "sort": 1
               }
             ]
