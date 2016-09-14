@@ -346,6 +346,8 @@ namespace com.pmp.web.Controllers
                 var fileIndex = 1;
                 foreach (var file in files)
                 {
+                    if(file== null)
+                        continue;
                     var pFile = new ProjectFlie();
                     pFile.Name = Path.GetFileName(file.FileName);
                     pFile.FileType = 1;
