@@ -82,7 +82,8 @@ namespace com.pmp.web.Controllers
                 PEvaluate = l.IsEvaluate_I,
                 FlieList = l.FlieList,
                 ProcessDesc = l.ProcessDesc,
-                Budget = l.Budget
+                Budget = l.Budget,
+                CTime=l.CreateTime
             }).ToList();
 
 

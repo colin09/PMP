@@ -26,6 +26,7 @@ namespace com.pmp.mongo.data
         /// </summary>
         public string Skill { set; get; }
 
+        public int WorkYears { set; get; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CTime { set; get; }
 

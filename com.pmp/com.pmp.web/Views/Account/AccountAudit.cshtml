@@ -13,7 +13,7 @@
 </div>
 <div class="pmp_content">
 
-    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable table">
         <tr>
             <td style="padding:10px;font-weight:400">注册类型：</td>
             <td style="padding:10px">
@@ -60,7 +60,7 @@
             var data = { AuditType: auditType, AccountType: accountType };
             $.get("/Account/GetAccountAuditList", data, function (res) {
                 var html = [];
-                html.push('<table cellpadding="0" cellspacing="0" class="table_list">' +
+                html.push('<table cellpadding="0" cellspacing="0" class="table_list table">' +
                                    ' <tr class="tr_title">' +
                                        '<th>注册类型</th>' +
                                        '<th>注册人</th>' +

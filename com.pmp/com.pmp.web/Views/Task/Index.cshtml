@@ -15,6 +15,7 @@
                 <option value="3">服务器</option>
                 <option value="4">设备安装</option>
                 <option value="5">出差</option>
+                <option value="20">其他</option>
             </select>
         </div>
         <div class="col-sm-2 pt5">
@@ -28,7 +29,7 @@
         </div>
         <div class="col-sm-4 pt5" ng-app="cityApp">
             <div ng-controller="cityCtl">
-                <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="x">
+                <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="defulatProvince" ng-init="defulatProvince='0'">
                     <option value="0" selected="selected"> - 选择省份 -</option>
                     <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
                 </select>
@@ -115,6 +116,8 @@
 
         angular.module('cityApp', [])
          .controller("cityCtl", function ($scope, $http) {
+             $scope.defulatProvince = 0;
+             $scope.defulatCity = 0;
              $http.get("/Task/GetCityList?parentId=0")
                  .success(function (json) {
                      if (json.length > 0) {

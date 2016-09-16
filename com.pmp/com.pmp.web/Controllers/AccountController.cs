@@ -58,6 +58,7 @@ namespace com.pmp.web.Controllers
             model.Introduction = Request.Form["txtintro"];
             model.Email = Request.Form["txtEmail"];
             model.Position = Request.Form["txtposition"];
+            model.WorkYears = Convert.ToInt32(Request.Form["workyear"]);
             new MgUserService().UpdateAccountInfo(_Longin_Phone, model);
             return Redirect("/Account/AccountDetail");
         }
