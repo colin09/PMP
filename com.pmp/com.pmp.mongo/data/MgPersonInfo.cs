@@ -22,9 +22,9 @@ namespace com.pmp.mongo.data
         /// </summary>
         public string Introduction { set; get; }
         /// <summary>
-        /// 技能
+        /// 工作年限
         /// </summary>
-        public string Skill { set; get; }
+        public string WorkYear { set; get; }
 
         public int WorkYears { set; get; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]

@@ -58,6 +58,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -166,8 +168,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\sms.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AMController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\WebBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -176,6 +180,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\sms\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +252,7 @@
     <Content Include="Scripts\layer\skin\layer.css" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\MenuData.js" />
+    <Content Include="Scripts\Public.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
@@ -266,6 +276,63 @@
     <Content Include="Scripts\js\respond.js" />
     <Content Include="Scripts\js\respond.min.js" />
     <Content Include="Scripts\js\_references.js" />
+    <Content Include="Service References\sms\com.pmp.web.sms.cancelMOForwardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.chargeUpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.getBalanceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.getEachFeeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.getMOResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.getReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.getVersionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.logoutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.mo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.registDetailInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.registExResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.sendSMSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.sendVoiceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.serialPwdUpdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.setMOForwardExResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.setMOForwardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\sms\com.pmp.web.sms.statusReport.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\sms\configuration91.svcinfo" />
+    <None Include="Service References\sms\configuration.svcinfo" />
+    <None Include="Service References\sms\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -309,6 +376,13 @@
     <Content Include="Views\Account\CompandUserAdd.cshtml" />
     <Content Include="Views\Account\UpdatePwd.cshtml" />
     <Content Include="Views\Task\Evaluation.cshtml" />
+    <Content Include="Views\Account\RetrievePwd.cshtml" />
+    <Content Include="Views\Account\AddAdministrator.cshtml" />
+    <Content Include="Views\AM\Add.cshtml" />
+    <None Include="Service References\sms\SDKService.wsdl" />
+    <None Include="Service References\sms\SDKService.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,6 +409,16 @@
       <Project>{41a26944-482b-46c3-b9dc-f23d8987006c}</Project>
       <Name>com.pmp.mongo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\com.pmp.onetime\com.pmp.onetime.csproj">
+      <Project>{a1ec58b0-9a75-4972-8e6a-26670ad02d59}</Project>
+      <Name>com.pmp.onetime</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\sms\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -45,6 +45,15 @@ namespace com.pmp.web.Controllers
             return View(model[0].PersonInfo);
         }
 
+        /// <summary>
+        /// 找回密码
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RetrievePwd()
+        {
+            return View();
+        }
+
         //提交个人信息
         [Authorization]
         public ActionResult AccountPersonalInfoSumbit()
@@ -54,7 +63,7 @@ namespace com.pmp.web.Controllers
             model.Address = Request.Form["txtaddress"];
             model.Birthday = Request.Form["txtbirthday"];
             model.Gender = Request.Form["radiossex"];
-            model.Skill = Request.Form["txtskll"];
+            model.WorkYear = Request.Form["workyear"];
             model.Introduction = Request.Form["txtintro"];
             model.Email = Request.Form["txtEmail"];
             model.Position = Request.Form["txtposition"];

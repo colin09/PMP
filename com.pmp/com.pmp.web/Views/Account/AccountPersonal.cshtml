@@ -14,13 +14,13 @@
 <div style="padding:15px">
     <form class="form-horizontal" role="form" method="post" action="/Account/AccountPersonalInfoSumbit">
         <div class="form-group">
-           <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
+            <label for="txtname" class="col-sm-2 control-label">真实姓名：</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="txtname" name="txtname" value="@Model.RealName" placeholder="请输入真实名字" required="required">
             </div>
         </div>
         <div class="form-group">
-            <label  class="col-sm-2 control-label">性别：</label>
+            <label class="col-sm-2 control-label">性别：</label>
             <div class="col-sm-10">
 
                 @if (Model.Gender == "1")
@@ -64,16 +64,10 @@
         <div class="form-group">
             <label for="txtposition" class="col-sm-2 control-label">职位：</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtposition" name="txtposition" value="@Model.Position" required="required"  placeholder="职位">
+                <input type="text" class="form-control" id="txtposition" name="txtposition" value="@Model.Position" required="required" placeholder="职位">
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="txtskll" class="col-sm-2 control-label">技术领域：</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="txtskll" name="txtskll" value="@Model.Skill" required="required" placeholder="技术领域">
-            </div>
-        </div>
         <div class="form-group">
             <label for="txtskll" class="col-sm-2 control-label">工作年限：</label>
             <div class="col-sm-10">

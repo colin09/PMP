@@ -18,13 +18,14 @@
         <div class="form" style="width:50%;margin: 25px auto;">
             @*<h3> Sign In </h3>*@
             <div class="sign-in">
-                <input type="text" class="name" name="username" placeholder="手机号" required="">
-                <input type="password" class="password" name="password" placeholder="密码" required="">
+                <input type="text" class="name" name="username" placeholder="手机号" required="required">
+                <input type="password" class="password" name="password" placeholder="密码" required="required">
                 <ul>
                     <li>
                         <input type="checkbox" id="brand1" value="">
                         <label for="brand1"><span></span>记住我</label>
                         <a href="javascript::" id="a_registered">注册</a>
+                        <a href="javascript::" id="a_retrieve">找回密码？</a>
                     </li>
                 </ul>
                 <input type="submit" id="login" value="登陆">
@@ -37,9 +38,9 @@
             <div class="layui-layer-content" id="Pop_layer_Content">
                 <div style="width:410px;height:450px">
                     <div class="register agileits">
-                        <input type="text" class="name" id="username" placeholder="账号" required="">
-                        <input type="password" class="password" id="password" placeholder="密码" required="">
-                        <input type="password" class="password" id="checkpassword" placeholder="确认密码" required="">
+                        <input type="text" class="name" id="username" placeholder="账号" required="required">
+                        <input type="password" class="password" id="password" placeholder="密码" required="required">
+                        <input type="password" class="password" id="checkpassword" placeholder="确认密码" required="required">
 
                         <input name="type" type="radio" checked="checked" value="1">
                         <span>我要赚钱</span>
@@ -72,18 +73,23 @@
             $("#Pop_layer").show();
         });
 
+
+        $("#a_retrieve").click(function () {
+            window.location.href = "/Account/RetrievePwd";
+        });
+
         $("#btn_registered").click(function () {
-            if ($("#username").val() == "") {
-                layer.msg("请输入账号！"); return;
-            }
+            //if ($("#username").val() == "") {
+            //    layer.msg("请输入账号！"); return;
+            //}
 
-            if ($("#password").val() == "") {
-                layer.msg("请输入密码！"); return;
-            }
+            //if ($("#password").val() == "") {
+            //    layer.msg("请输入密码！"); return;
+            //}
 
-            if ($("#checkpassword").val() == "") {
-                layer.msg("请确认密码！"); return;
-            }
+            //if ($("#checkpassword").val() == "") {
+            //    layer.msg("请确认密码！"); return;
+            //}
 
             if ($("#password").val() == $("#checkpassword").val()) {
                 var data = {
@@ -106,13 +112,13 @@
 
 
         $("#login").click(function () {
-            if ($("input[name='username']").val() == "") {
-                layer.msg("请输入账号！"); return;
-            }
+            //if ($("input[name='username']").val() == "") {
+            //    layer.msg("请输入账号！"); return;
+            //}
 
-            if ($("input[name='password']").val() == "") {
-                layer.msg("请输入密码！"); return;
-            }
+            //if ($("input[name='password']").val() == "") {
+            //    layer.msg("请输入密码！"); return;
+            //}
 
             var data = {
                 code: $("input[name='username']").val(),
