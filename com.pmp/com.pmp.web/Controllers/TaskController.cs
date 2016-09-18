@@ -372,10 +372,10 @@ namespace com.pmp.web.Controllers
         }
 
         [Authorization]
-        public ActionResult GiveProject(int id, int userId, string desc = "")
+        public ActionResult GiveProject(int projectId, int userId, string desc = "")
         {
             if (userId > 0)
-                _projectService.GiveProject(id, userId, desc);
+                _projectService.GiveProject(projectId, userId, desc);
             return RedirectToAction("AuditList");
         }
 

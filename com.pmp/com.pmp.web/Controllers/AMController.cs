@@ -62,17 +62,17 @@ namespace com.pmp.web.Controllers
                     }
                     else
                     {
-                        var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
-                        if (code == Codes)
-                        {
+                        //var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
+                        //if (code == Codes)
+                        //{
                             UserLevel ul = UserLevel.Administrator;
                             mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
-                        }
-                        else
-                        {
-                            IsSuccess = false;
-                            message = "验证码错误！";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    IsSuccess = false;
+                        //    message = "验证码错误！";
+                        //}
                     }
                 }
             }

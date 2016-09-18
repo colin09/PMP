@@ -271,7 +271,7 @@ namespace com.pmp.web.Controllers
         }
 
         public string IsExistPhone()
-        {
+       {
             var phone = Request["phone"];
             var list = new MgUserService().SearchLogin(phone);
             if (list != null && list.Count > 0)
