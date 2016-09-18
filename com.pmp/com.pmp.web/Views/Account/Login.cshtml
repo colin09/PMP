@@ -11,6 +11,27 @@
     <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
     <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/layer/layer.js"></script>
+    <script src="~/Scripts/Public.js"></script>
+    <style>
+        .msgs {
+            display: inline-block;
+            width: 104px;
+            color: #fff;
+            font-size: 12px;
+            border: 1px solid #0697DA;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            background: #0697DA;
+            cursor: pointer;
+        }
+
+        msgs1 {
+            background: #E6E6E6;
+            color: #818080;
+            border: 1px solid #CCCCCC;
+        }
+    </style>
 </head>
 <body>
     <div class="container login">
@@ -36,12 +57,13 @@
         <div class="layui-layer layui-layer-page layui-layer-rim " id="Pop_layer" style="display:none">
             <div style="cursor: move;" class="layui-layer-title" id="Pop_layer_Title">注册</div>
             <div class="layui-layer-content" id="Pop_layer_Content">
-                <div style="width:410px;height:450px">
+                <div style="width:410px;height:500px">
                     <div class="register agileits">
                         <input type="text" class="name" id="username" placeholder="账号" required="required">
                         <input type="password" class="password" id="password" placeholder="密码" required="required">
                         <input type="password" class="password" id="checkpassword" placeholder="确认密码" required="required">
-
+                        <input type="text" class="password" style="width:150px" id="codes" placeholder="验证码" required="required">
+                        <button class="msgs" id="btn_codes">获取验证码</button>
                         <input name="type" type="radio" checked="checked" value="1">
                         <span>我要赚钱</span>
 
@@ -59,6 +81,48 @@
     </div>
 
     <script type="text/javascript">
+
+        $("#username").blur(function () {
+            if (!Public.IsMobile($("#username").val())) {
+                $("#username").val("");
+                layer.msg("账号格式错误！"); return;
+            }
+        });
+        //获取短信验证码
+        var validCode = true;
+        $(".msgs").click(function () {
+            var time = 60;
+            var code = $(this);
+            if (validCode) {
+                validCode = false;
+                code.addClass("msgs1");
+                var t = setInterval(function () {
+                    time--;
+                    code.html(time + "秒");
+                    if (time == 0) {
+                        clearInterval(t);
+                        code.html("重新获取");
+                        validCode = true;
+                        code.removeClass("msgs1");
+                    }
+                }, 1000)
+            }
+        })
+
+        $("#btn_codes").click(function () {
+            var data = {
+                user: $("#username").val()
+            };
+            $.get("/AM/CreateCode", data, function (res) {
+                if (res == "True") {
+                    layer.msg("发送成功!");
+                } else {
+                    layer.msg("发送失败!");
+                }
+            })
+
+        });
+
         $(function () {
             var iTop = (window.screen.height / 2) - 100 - ($("#Pop_layer_Content div").height() / 2); //获得窗口的垂直位置;
             var iLeft = (window.screen.width / 2) - 200 - ($("#Pop_layer_Content").width() / 2); //获得窗口的水平位置;
@@ -79,23 +143,26 @@
         });
 
         $("#btn_registered").click(function () {
-            //if ($("#username").val() == "") {
-            //    layer.msg("请输入账号！"); return;
-            //}
 
-            //if ($("#password").val() == "") {
-            //    layer.msg("请输入密码！"); return;
-            //}
-
-            //if ($("#checkpassword").val() == "") {
-            //    layer.msg("请确认密码！"); return;
-            //}
+            if ($("#username").val() == "") {
+                layer.msg("账号不能为空"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请填写密码"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请确认密码"); return;
+            }
+            if ($("#codes").val() == "") {
+                layer.msg("请填写验证码"); return;
+            }
 
             if ($("#password").val() == $("#checkpassword").val()) {
                 var data = {
                     code: $("#username").val(),
                     password: $("#password").val(),
-                    type: $("input[name='type']:checked").val()
+                    type: $("input[name='type']:checked").val(),
+                    codes: $("#codes").val()
                 };
                 $.get("/Account/AcconutRegistered", data, function (res) {
                     if (res.IsSuccess == "True") {
@@ -112,14 +179,14 @@
 
 
         $("#login").click(function () {
-            //if ($("input[name='username']").val() == "") {
-            //    layer.msg("请输入账号！"); return;
-            //}
 
-            //if ($("input[name='password']").val() == "") {
-            //    layer.msg("请输入密码！"); return;
-            //}
 
+            if ($("input[name='username']").val() == "") {
+                layer.msg("账号不能为空"); return;
+            }
+            if ($("input[name='password']").val() == "") {
+                layer.msg("请填写密码"); return;
+            }
             var data = {
                 code: $("input[name='username']").val(),
                 password: $("input[name='password']").val(),
@@ -127,7 +194,7 @@
             };
             $.get("/Account/SignIn", data, function (res) {
                 if (res.IsSuccess == "True") {
-                    window.location.href = "/Account/Index";
+                    window.location.href = "/Account/AccountDetail";
                 } else {
                     layer.msg(res.message);
                 }

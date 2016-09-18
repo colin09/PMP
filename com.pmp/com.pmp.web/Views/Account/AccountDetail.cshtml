@@ -40,11 +40,16 @@
                 <label>居住地址:</label>
                 <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Address) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Address)</small>
             </td>
-
         <tr>
             <td colspan="2" style="width:50%">
                 <label>工作年限:</label>
-                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.WorkYear) ? "暂未填写" : ViewBag.mgUser.PersonInfo.WorkYear)</small>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.WorkYear) ? "暂未填写" : ViewBag.mgUser.PersonInfo.WorkYear + "年")</small>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:50%">
+                <label>职位:</label>
+                <small class="smallinput">@(string.IsNullOrWhiteSpace(ViewBag.mgUser.PersonInfo.Position) ? "暂未填写" : ViewBag.mgUser.PersonInfo.Position )</small>
             </td>
         </tr>
         <tr>

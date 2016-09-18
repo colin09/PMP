@@ -21,19 +21,19 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
-        public string _Sesson_Code = "_Registered_Code";
+       
 
         public string CreateCode()
         {
-            string phone = Request["password"];
+            string user = Request["user"];
             var code = "";
             Random rd = new Random();
             for (int i = 0; i <= 5; i++)
             {
                 code += rd.Next(0, 9).ToString();
             }
-            new HttpHelper().SetSession(_Sesson_Code, code);
-            return com.pmp.web.App_Start.sms.SendSms(phone, code).ToString();
+            new HttpHelper().SetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code, code);
+            return com.pmp.web.App_Start.sms.SendSms(user, code).ToString();
         }
 
         public string AddAdmin()
@@ -43,6 +43,7 @@ namespace com.pmp.web.Controllers
             var name = Request["code"];
             var password = Request["password"];
             var key = Request["key"];
+            var Codes = Request["Codes"];
 
             try
             {
@@ -61,17 +62,17 @@ namespace com.pmp.web.Controllers
                     }
                     else
                     {
-                        //var code = new HttpHelper().GetSession(_Sesson_Code);
-                        //if (code == key)
-                        //{
-                        UserLevel ul = UserLevel.Administrator;
-                        mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
-                        //}
-                        //else
-                        //{
-                        //    IsSuccess = false;
-                        //    message = "验证码错误！";
-                        //}
+                        var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
+                        if (code == Codes)
+                        {
+                            UserLevel ul = UserLevel.Administrator;
+                            mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
+                        }
+                        else
+                        {
+                            IsSuccess = false;
+                            message = "验证码错误！";
+                        }
                     }
                 }
             }

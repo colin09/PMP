@@ -20,5 +20,9 @@ namespace com.pmp.web.Controllers
         {
             return View();
         }
+        public ActionResult NoAudit()
+        {
+            return View();
+        }
     }
 }

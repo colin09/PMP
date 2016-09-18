@@ -96,7 +96,7 @@
 
         $("#btn_codes").click(function () {
             var data = {
-                password: $("#user").val()
+                user: $("#user").val()
             };
             $.get("/AM/CreateCode", data, function (res) {
                 if (res == "True") {
@@ -105,7 +105,6 @@
                     alert("发送失败!");
                 }
             })
-
         });
 
         $(".btn_blue").click(function () {
@@ -125,6 +124,7 @@
                 code: $("#user").val(),
                 password: $("#newpwd").val(),
                 key: $("#key").val(),
+                Codes: $("#Codes").val()
             };
             $.get("/AM/AddAdmin", data, function (res) {
                 if (res.IsSuccess == "False") {

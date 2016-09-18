@@ -464,6 +464,7 @@ namespace com.pmp.web.Controllers
             string message = "登录成功！";
             var name = Request["code"];
             var password = Request["password"];
+
             try
             {
                 MgUserService mgUserService = new MgUserService();
@@ -514,6 +515,7 @@ namespace com.pmp.web.Controllers
             var name = Request["code"];
             var password = Request["password"];
             var tempType = int.Parse(Request["type"]);
+            var codes = Request["codes"];
             try
             {
                 MgUserService mgUserService = new MgUserService();
@@ -524,13 +526,21 @@ namespace com.pmp.web.Controllers
                 }
                 else
                 {
-                    UserLevel ul = UserLevel.Administrator;
-                    if (tempType == 1)
-                        ul = UserLevel.Person;
-                    else if (tempType == 2)
-                        ul = UserLevel.CompanyAdmin;
-
-                    mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
+                    var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
+                    if (code == codes)
+                    {
+                        UserLevel ul = UserLevel.Administrator;
+                        if (tempType == 1)
+                            ul = UserLevel.Person;
+                        else if (tempType == 2)
+                            ul = UserLevel.CompanyAdmin;
+                        mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
+                    }
+                    else
+                    {
+                        IsSuccess = false;
+                        message = "验证码错误！";
+                    }
                 }
             }
             catch (Exception ex)

@@ -24,12 +24,6 @@
                     "style": "",
                     "url": "/Account/AccountApprove",
                     "sort": 1
-                },
-                {
-                    "title": "修改密码",
-                    "style": "",
-                    "url": "/Account/UpdatePwd",
-                    "sort": 1
                 }
                 ]
         },
@@ -110,12 +104,6 @@
                 "style": "",
                 "url": "/Account/AccountApprove",
                 "sort": 1
-            },
-            {
-                "title": "修改密码",
-                "style": "",
-                "url": "/Account/UpdatePwd",
-                "sort": 1
             }
             ]
         },
@@ -164,17 +152,17 @@
           "style": "",
           "url": "/Account/AccountPersonal",
           "sort": 1,
-          "subMenu": [{
-              "title": "基本信息",
-              "style": "",
-              "url": "/Account/AccountPersonal",
-          },
-          {
-              "title": "修改密码",
-              "style": "",
-              "url": "/Account/UpdatePwd",
-              "sort": 1
-          }
+          "subMenu": [
+              {
+                  "title": "个人简介",
+                  "style": "",
+                  "url": "/Account/AccountDetail",
+              },
+              {
+                  "title": "基本信息",
+                  "style": "",
+                  "url": "/Account/AccountPersonal",
+              },
           ]
       },
       {
