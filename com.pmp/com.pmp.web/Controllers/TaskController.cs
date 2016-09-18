@@ -412,6 +412,7 @@ namespace com.pmp.web.Controllers
 
 
 
+        [Authorization]
         public ActionResult Evaluation()
         {
             var total = 0;
@@ -437,6 +438,9 @@ namespace com.pmp.web.Controllers
 
             return View(result);
         }
+
+
+        [Authorization]
         public ActionResult REvaluation()
         {
             var total = 0;
