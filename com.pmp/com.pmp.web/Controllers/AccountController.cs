@@ -548,21 +548,21 @@ namespace com.pmp.web.Controllers
                 }
                 else
                 {
-                    var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
-                    if (code == codes)
-                    {
+                    //var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
+                    //if (code == codes)
+                    //{
                         UserLevel ul = UserLevel.Administrator;
                         if (tempType == 1)
                             ul = UserLevel.Person;
                         else if (tempType == 2)
                             ul = UserLevel.CompanyAdmin;
                         mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
-                    }
-                    else
-                    {
-                        IsSuccess = false;
-                        message = "验证码错误！";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    IsSuccess = false;
+                    //    message = "验证码错误！";
+                    //}
                 }
             }
             catch (Exception ex)
