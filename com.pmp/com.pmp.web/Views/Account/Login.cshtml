@@ -91,11 +91,23 @@
         //获取短信验证码
         var validCode = true;
         $(".msgs").click(function () {
+
+            if ($("#username").val() == "") {
+                layer.msg("请输入账号!"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请输入密码!"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请输入确认密码!"); return;
+            }
+
             var time = 60;
             var code = $(this);
             if (validCode) {
                 validCode = false;
                 code.addClass("msgs1");
+                code.attr("disabled", true);
                 var t = setInterval(function () {
                     time--;
                     code.html(time + "秒");
@@ -104,12 +116,23 @@
                         code.html("重新获取");
                         validCode = true;
                         code.removeClass("msgs1");
+                        code.attr("disabled", false);
                     }
                 }, 1000)
             }
         })
 
         $("#btn_codes").click(function () {
+
+            if ($("#username").val() == "") {
+                layer.msg("请输入账号!"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请输入密码!"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请输入确认密码!"); return;
+            }
             var data = {
                 user: $("#username").val()
             };

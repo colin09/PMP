@@ -54,6 +54,28 @@ namespace com.pmp.web.Controllers
             return View();
         }
 
+
+        public string RetrievePwdSumbit()
+        {
+            string user = Request["user"];
+            string pwd = Request["pwd"];
+            string codes = Request["Codes"];
+            string message = "修改成功";
+            bool IsSuccess = false;
+
+            var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
+            if (code == codes)
+            {
+                IsSuccess = new MgUserService().UpdatePassWord(user, pwd, ref message);
+            }
+            else
+            {
+                IsSuccess = false;
+                message = "验证码错误";
+            }
+            return "{\"IsSuccess\":\"" + IsSuccess + "\",\"error\":\"" + message + "\"}"; ;
+        }
+        
         //提交个人信息
         [Authorization]
         public ActionResult AccountPersonalInfoSumbit()

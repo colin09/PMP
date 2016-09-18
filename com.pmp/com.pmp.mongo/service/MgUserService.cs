@@ -212,6 +212,27 @@ namespace com.pmp.mongo.service
             var update = Builders<MgUser>.Update.Set(u => u.Password, newWordPass).Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;
         }
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <param name="oldWordPass"></param>
+        /// <param name="newWordPass"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool UpdatePassWord(string phone, string pwd,ref string error)
+        {
+            List<MgUser> mguserList = SearchLogin(phone);
+            if (mguserList == null && mguserList.Count == 0)
+            {
+                error = "账号未注册";
+                return false;
+            }
+          
+            var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
+            var update = Builders<MgUser>.Update.Set(u => u.Password, pwd).Set(u => u.CodePwdTime, DateTime.Now);
+            return Update(filter, update) > 0;
+        }
 
         /// <summary>
         /// 更新账号状态
