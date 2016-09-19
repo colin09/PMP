@@ -130,12 +130,12 @@
             {
                 "title": "我的评价",
                 "style": "",
-                "url": "/Account/AccountPersonal",
+                "url": "/Task/Evaluation",
                 "sort": 1
             }, {
                 "title": "我的信誉",
                 "style": "",
-                "url": "/Account/AccountP_Approve",
+                "url": "/Task/REvaluation",
                 "sort": 1
             }
             ]

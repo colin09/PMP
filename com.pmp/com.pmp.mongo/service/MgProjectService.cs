@@ -89,5 +89,14 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
+        public bool AddProcess(MgProject m)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", m.ID);
+            var update = Builders<MgProject>.Update.Set(p => p.ProcessDesc, m.ProcessDesc);
+
+            return Update(filter, update) > 0;
+        }
+
+
     }
 }

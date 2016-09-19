@@ -83,7 +83,7 @@ namespace com.pmp.web.Controllers
                 FlieList = l.FlieList,
                 ProcessDesc = l.ProcessDesc,
                 Budget = l.Budget,
-                CTime=l.CreateTime
+                CTime = l.CreateTime
             }).ToList();
 
 
@@ -152,7 +152,7 @@ namespace com.pmp.web.Controllers
             return RedirectToAction("AuditList");
         }
 
-
+        
         public ActionResult Detail(int id)
         {
             var project = _projectService.GetOneById(id);
@@ -246,16 +246,27 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult AuditDetail(int id)
         {
-            ViewBag.level = this._Longin_UserLevel;
-
             var project = _projectService.GetOneById(id);
             if (project == null)
                 return View();
+            var evas = _evaluationService.GetListByProId(id);
+            var evaIds = evas.Select(e => e.UserId).ToList();
 
             var userIds = new List<int> { project.CreatesUserID, project.ReceiveUserId };
+            var procs = project.ProcessDesc.Select(p => p.UserID).ToList();
+            var slns = _solutionService.GetListByProId(id);
+            var slnIds = slns.Select(s => s.UserId).ToList();
 
+            userIds.AddRange(procs);
+            userIds.AddRange(slnIds);
+            userIds.AddRange(evaIds);
             var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
             var cityList = _cityService.GetListByIds(new List<int> { project.CityId, project.ProvinceId });
+
+            project.ProcessDesc.ForEach(p =>
+            {
+                p.UserName = userList.FirstOrDefault(u => u.Id == p.UserID)?.Name;
+            });
 
             var result = new TaskInfoRes()
             {
@@ -289,6 +300,23 @@ namespace com.pmp.web.Controllers
                 CTime = project.CreateTime,
                 UTime = project.UpdateTime,
             };
+
+            ViewBag.slns = slns.Select(s => new TaskSlnRes
+            {
+                SlnDesc = s.SlnDesc,
+                FileList = s.FileList,
+                UserName = userList.FirstOrDefault(u => u.Id == s.UserId)?.Name,
+                CTime = s.CTime,
+                UTime = s.UTime
+            }).ToList();
+            ViewBag.evas = evas.Select(e => new TaskEvaRes
+            {
+                Grade = e.Grade,
+                Score = e.Score,
+                Desc = e.Desc,
+                UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+            }).ToList();
+
             return View(result);
         }
 
@@ -330,8 +358,8 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
-            if (files == null)
-                return Content("没有选择文件", "text/plain");
+            //if (files == null)
+            //    return Content("没有选择文件", "text/plain");
 
             try
             {
@@ -345,21 +373,22 @@ namespace com.pmp.web.Controllers
                 };
 
                 var fileIndex = 1;
-                foreach (var file in files)
-                {
-                    if(file== null)
-                        continue;
-                    var pFile = new ProjectFlie();
-                    pFile.Name = Path.GetFileName(file.FileName);
-                    pFile.FileType = 1;
-                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
+                if (files != null)
+                    foreach (var file in files)
+                    {
+                        if (file == null)
+                            continue;
+                        var pFile = new ProjectFlie();
+                        pFile.Name = Path.GetFileName(file.FileName);
+                        pFile.FileType = 1;
+                        pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
 
-                    var savePath = pFile.Path;
-                    file.SaveAs(savePath);
+                        var savePath = pFile.Path;
+                        file.SaveAs(savePath);
 
-                    sln.FileList.Add(pFile);
-                    fileIndex += 1;
-                }
+                        sln.FileList.Add(pFile);
+                        fileIndex += 1;
+                    }
                 _solutionService.Insert(sln);
             }
             catch (Exception ex)
@@ -398,18 +427,6 @@ namespace com.pmp.web.Controllers
 
             return RedirectToAction("Detail", new { id = projectId });
         }
-
-
-
-        #endregion
-
-
-        public ActionResult GetCityList(int parentId)
-        {
-            var list = _cityService.GetListByParentId(parentId);
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
 
 
         [Authorization]
@@ -465,6 +482,63 @@ namespace com.pmp.web.Controllers
             ViewBag.total = total;
 
             return View("Evaluation", result);
+        }
+
+
+
+        #endregion
+
+
+        public ActionResult GetCityList(int parentId)
+        {
+            var list = _cityService.GetListByParentId(parentId);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase file)
+        {
+            try
+            {
+                var project = _projectService.GetOneById(projectId);
+                if (project != null)
+                {
+                    var proc = new ProjectProcess()
+                    {
+                        ProcessDesc = desc,
+                        UserID = this._Longin_UserId,
+                        UserName = this._Longin_RealName,
+                        CreateTime = DateTime.Now
+                    };
+
+                    project.ProcessDesc.Add(proc);
+
+                    _projectService.AddProcess(project);
+                }
+
+                /*
+                var fileIndex = 1;
+                if (file != null)
+                {
+                    var pFile = new ProjectFlie();
+                    pFile.Name = Path.GetFileName(file.FileName);
+                    pFile.FileType = 1;
+                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
+
+                    var savePath = pFile.Path;
+                    file.SaveAs(savePath);
+
+                }*/
+            }
+            catch (Exception ex)
+            {
+                log.Info(ex);
+            }
+
+
+
+            return RedirectToAction("Detail", new { id = projectId });
         }
 
     }
