@@ -12,25 +12,49 @@
     <h3 class="ptb10">我的所有任务</h3>
 </div>
 
-<ul class="taskAuditList">
-    @{ if (ViewBag.total > 0)
-        {
-            foreach (var item in Model)
-            {
-                <li class="bb">
-                    <div class="line1">
-                        <a href="/Task/AuditDetail?id=@item.ID">[@item.Status.GetName()]</a>   @item.Code | @item.ContractCode | @item.Name
-                    </div>
-                    <div class="line2">@item.Desc.TakeString(100)</div>
-                    <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
-                </li>
-            }
-        }
-    }
-    <li>
-        @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
-    </li>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#divList" role="tab" data-toggle="tab">待接单</a></li>
+    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待服务</a></li>
+    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">服务中</a></li>
+    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待验收</a></li>
+    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待评价</a></li>
+    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">已完成</a></li>
 </ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="divList">
+        <ul class="taskAuditList">
+            @{ if (ViewBag.total > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <li class="bb">
+                            <div class="line1">
+                                <a href="/Task/AuditDetail?id=@item.ID">[@item.Status.GetName()]</a>   @item.Code | @item.ContractCode | @item.Name
+                            </div>
+                            <div class="line2">@item.Desc.TakeString(100)</div>
+                            <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
+                        </li>
+                    }
+                }
+            }
+            <li>
+                @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 @section scripts{

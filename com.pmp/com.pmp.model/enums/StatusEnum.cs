@@ -20,7 +20,42 @@ namespace com.pmp.model.enums
     }
 
 
+
+
+
     public enum ProjectStatus
+    {
+        Delete = -6,
+
+        /// <summary>
+        /// 待接单
+        /// </summary>
+        Default = 0,
+        /// <summary>
+        /// 待服务，选定用户
+        /// </summary>
+        Wait = 1,
+        /// <summary>
+        /// 服务中，已提交实施方案
+        /// </summary>
+        Action = 2,
+        /// <summary>
+        /// 完成，待验收
+        /// </summary>
+        Audit = 3,
+        /// <summary>
+        /// 验收通过，待评价
+        /// </summary>
+        Evaluation = 4,
+        /// <summary>
+        /// 项目完成
+        /// </summary>
+        Over = 5,
+
+
+    }
+
+    public enum ProjectStatus1
     {
         //[1.待领取][2.待审核][3.进行中][4.待评价][5.已完成]
 

@@ -1,6 +1,7 @@
 ﻿@using com.pmp.common.helper;
 @using com.pmp.model.data;
 @using com.pmp.model.response;
+@using com.pmp.model.enums
 @model com.pmp.model.response.TaskInfoRes
 @{
     ViewBag.Title = "详细";
@@ -42,7 +43,7 @@
         <td>@Model.AuditStatusDesc</td>
     </tr>
     <tr>
-        <td class="t-r">项目阶段：</td>
+        <td class="t-r">项目状态：</td>
         <td>@Model.StatusDesc</td>
     </tr>
     <tr>
@@ -132,7 +133,10 @@
     <tr>
         <td></td>
         <td>
-            <button type="button" id="btnGetProject" class="btn btn-default"> 领取项目 </button>
+            @if (Model.Status == (int)ProjectStatus.Default)
+            {
+                <button type="button" id="btnGetProject" class="btn btn-default"> 领取项目 </button>
+            }
 
         </td>
     </tr>
