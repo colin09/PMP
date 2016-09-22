@@ -115,7 +115,10 @@ namespace com.pmp.mongo.data
         public int ProvinceId { set; get; }
         public int CityId { set; get; }
 
-
+        /// <summary>
+        /// 参与竞标用户
+        /// </summary>
+        public List<BidUser> BidUsers { set; get; }
 
         /// <summary>
         /// 项目文件
@@ -131,7 +134,12 @@ namespace com.pmp.mongo.data
 
 
 
-
+    public class BidUser
+    {
+        public int UserId { set; get; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime CTime { set; get; }
+    }
 
 
 
