@@ -64,7 +64,7 @@ namespace com.pmp.mongo.service
             Insert(m);
         }
 
-
+        /*
         public bool AuditProject(int id, AuditStatus auditState, string desc)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
@@ -72,12 +72,30 @@ namespace com.pmp.mongo.service
                 .Set(p=>p.Status,ProjectStatus.Wait);
 
             return Update(filter, update) > 0;
+        }*/
+
+        public bool ModifyState(int id, ProjectStatus state)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", id);
+            var update = Builders<MgProject>.Update.Set(p => p.Status, state);
+
+            return Update(filter, update) > 0;
         }
+
+        public bool JoinProject(int id,int userId)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", id);
+
+
+
+            return false;
+        }
+
         public bool GiveProject(int id, int userId, string desc)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
             var update = Builders<MgProject>.Update.Set(p => p.ReceiveUserId, userId)
-                .Set(p => p.Status, ProjectStatus.Action);
+                .Set(p => p.Status, ProjectStatus.Wait);
 
             return Update(filter, update) > 0;
         }

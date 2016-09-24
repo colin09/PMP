@@ -75,12 +75,13 @@ namespace com.pmp.common.helper
             var name = "-";
             switch (status)
             {
-                case ProjectStatus.Delete: name = "有线项目"; break;
-                case ProjectStatus.Default: name = "待审核"; break;
-                case ProjectStatus.Wait: name = "审核通过，等待领取"; break;
-                case ProjectStatus.Action: name = "进行中"; break;
-                case ProjectStatus.Over: name = "结束"; break;
+                case ProjectStatus.Delete: name = "无效项目"; break;
+                case ProjectStatus.Default: name = "待接单"; break;
+                case ProjectStatus.Wait: name = "待服务"; break;
+                case ProjectStatus.Action: name = "服务中"; break;
+                case ProjectStatus.Audit: name = "待验收"; break;
                 case ProjectStatus.Evaluation: name = "待评价"; break;
+                case ProjectStatus.Over: name = "项目完成"; break;
             }
             return name;
         }

@@ -47,14 +47,9 @@
             "sort": 1,
             "subMenu": [
               {
-                  "title": "所有任务",
+                  "title": "我的任务",
                   "style": "",
                   "url": "/Task/MyList"
-              },
-              {
-                  "title": "审核任务",
-                  "style": "",
-                  "url": "/Task/AuditList"
               }
             ]
         },
