@@ -187,7 +187,7 @@
                     type: $("input[name='type']:checked").val(),
                     codes: $("#codes").val()
                 };
-                $.get("/Account/AcconutRegistered", data, function (res) {
+                $.post("/Account/AcconutRegistered", data, function (res) {
                     if (res.IsSuccess == "True") {
                         $("#Pop_layer").hide();
                         layer.msg(res.message);
@@ -215,7 +215,7 @@
                 password: $("input[name='password']").val(),
                 Codes: ""
             };
-            $.get("/Account/SignIn", data, function (res) {
+            $.post("/Account/SignIn", data, function (res) {
                 if (res.IsSuccess == "True") {
                     window.location.href = "/Account/AccountDetail";
                 } else {
