@@ -48,11 +48,21 @@ namespace com.pmp.mongo.data
 
     public enum UserLevel
     {
+        /*
         Administrator = 0,
         Person = 1,
         CompanyAdmin = 2,
         ProjectManager = 3,
         CompanyUser = 4,
+        */
+
+
+        Administrator = 1,
+        CompanyAdmin = 2,
+        ProjectManager = 3,
+
+        Person = 21,
+        CompanyUser = 22,
     }
     /// <summary>
     /// 登录信息

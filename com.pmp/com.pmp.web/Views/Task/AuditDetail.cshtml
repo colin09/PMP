@@ -9,10 +9,14 @@
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
-    <h3 class="ptb10">审核</h3>
+    <h3 class="ptb10">任务详细</h3>
 </div>
 
 <table class="table noborder">
+    <tr>
+        <td class="t-r w220">项目名称： </td>
+        <td>@Model.Name</td>
+    </tr>
     <tr>
         <td class="t-r w220">项目类别： </td>
         <td>@Model.CategoryName</td>
@@ -97,48 +101,33 @@
                 }
             </td>
         </tr>*@
-    @if (Model.RUserId > 0)
-    {
-        <tr>
-            <td class="t-r">任务执行人：</td>
-            <td>
-                @Model.RUserName
-            </td>
-        </tr>
-    }
-    else if (ViewBag.level == 2)
-    {
-        <tr>
-            <td class="t-r">项目竞标：</td>
-            <td>
-                @if (ViewBag.slns != null)
+
+    <tr>
+        <td class="t-r">项目接单：</td>
+        <td>
+            @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
+            {
+                foreach (var bid in Model.BidUsers)
                 {
-                    foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
-                    {
+                    <form method="post" action="/Task/GiveProject">
                         <div>
-                            <div>
-                                @sln.UserName @sln.CTime
-                                @if (sln.FileList != null && sln.FileList.Count > 0)
-                                {
-                                    <span>[含附件]</span>
-                                }
-                                <p>@sln.SlnDesc</p>
-                                @if (Model.RUserId < 1)
-                                {
-                                    <form method="post" action="/Task/GiveProject">
-                                        <input type="hidden" name="userId" value="@sln.UserId" />
-                                        <input type="hidden" name="projectId" value="@Model.ID" />
-                                        <button type="submit" class="btn btn-primary">同意领取</button>
-                                    </form>
-                                }
-                            </div>
+                            @bid.UserName 在 @bid.CTime 进行了接单。
+
+                            @if (Model.RUserId < 1 && ViewBag.level == 2)
+                            {
+                                <input type="hidden" name="userId" value="@bid.UserId" />
+                                <input type="hidden" name="projectId" value="@Model.ID" />
+                                <button type="submit" class="btn btn-primary">同意接单</button>
+                            }
                         </div>
-                    }
+                    </form>
                 }
+            }
+        </td>
+    </tr>
 
-            </td>
-        </tr>
-
+    @if (ViewBag.level < 20 && Model.RUserId < 1)
+    {
         <tr>
             <td class="t-r">指派此任务：</td>
             <td>
@@ -148,8 +137,48 @@
                 <input type="hidden" name="ReceiveId" value="0" />
             </td>
         </tr>
-    }
 
+    }
+    else if (Model.RUserId > 0)
+    {
+        <tr>
+            <td class="t-r">任务执行人：</td>
+            <td>
+                @Model.RUserName
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="t-r">执行方案：</td>
+        <td>
+            @if (ViewBag.slns != null && ((List<TaskSlnRes>)ViewBag.slns).Count > 0)
+            {
+                foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
+                {
+                    <div>
+                        <div>
+                            <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
+                            @if (sln.FileList != null && sln.FileList.Count > 0)
+                            {
+                                <p>
+                                    <span>附件：</span>
+                                    @foreach (var file in sln.FileList)
+                                    {
+                                        <span><a href="@file.Path"> @file.Name </a></span>
+                                    }
+                                </p>
+                            }
+                            <p>说明：@sln.SlnDesc</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <button type="button" id="btnCreateSln">提交项目执行方案</button>
+            }
+        </td>
+    </tr>
 
     <tr>
         <td class="t-r">项目进度：</td>
@@ -170,13 +199,13 @@
     @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2)
     {
         <tr>
-            <td>提交项目进度：</td>
+            <td class="t-r">提交项目进度：</td>
             <td>
                 <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
-                    <textarea name="processDesc" rows="5"> </textarea>
+                    <textarea name="desc" rows="5"> </textarea>
                     @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
-
+                    <br />
                     <input type="checkbox" name="overState" /> 完成项目
                     <button type="submit" class="btn btn-default"> 提 交 </button>
                 </form>
@@ -251,9 +280,48 @@
 </div><!-- /.modal -->
 
 
+<div class="modal fade" id="GiveSln">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">提交方案说明</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table noborder">
+                        <tr>
+                            <td>方案描述： </td>
+                            <td>
+                                <textarea class="form-control" name="desc" placeholder="方案描述" rows="5"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>项目文件：</td>
+                            <td><input type="file" id="exampleInputFile" name="files" multiple="multiple"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                    <button type="submit" class="btn btn-primary"> 确定提交 </button>
+                </div>
+            }
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 @section scripts{
     <script>
         $(function () {
+            $("#btnCreateSln").click(function () {
+                $('#GiveSln').modal('show');
+            });
+
             $("#btnChoosePerson").click(function () {
                 $('#getModel').modal('show');
                 $.getJSON("/Account/GetCompanyUsers")

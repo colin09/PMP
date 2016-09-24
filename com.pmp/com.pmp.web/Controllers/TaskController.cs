@@ -411,6 +411,8 @@ namespace com.pmp.web.Controllers
                         fileIndex += 1;
                     }
                 _solutionService.Insert(sln);
+
+                _projectService.ModifyState(projectId, ProjectStatus.Action);
             }
             catch (Exception ex)
             {
@@ -430,10 +432,10 @@ namespace com.pmp.web.Controllers
 
 
         [Authorization]
-        public ActionResult AddProcess(long projectId, string desc, int isOver, HttpPostedFileBase[] files)
+        public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase[] files, int overState=0)
         {
             WriteProcess(projectId, desc, files);
-            if (isOver > 0)
+            if (overState > 0)
                 _projectService.ModifyState(projectId, ProjectStatus.Audit);
 
             return RedirectToAction("AuditDetail", new { id = projectId });

@@ -74,7 +74,7 @@
       ]
   },
   {
-      "userLevel": "1,4,",
+      "userLevel": "21,22,",
       "title": "寻找项目",
       "menu": [
         {
@@ -139,7 +139,7 @@
       ]
   },
 {
-    "userLevel": "0,",
+    "userLevel": "1,",
     "title": "超级管理员",
     "menu": [
       {

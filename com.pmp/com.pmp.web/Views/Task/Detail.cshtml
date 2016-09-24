@@ -99,7 +99,6 @@
                 {
                     <div>
                         @bid.UserName 在 @bid.CTime 进行了接单。
-                        <button type="button">交付任务</button>
                     </div>
                 }
             }
@@ -127,6 +126,26 @@
 
             </td>
         </tr>*@
+
+    <tr>
+        <td class="t-r">接单</td>
+        <td>
+            @if (Model.BidUsers != null && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Any())
+            {
+                <p>已接单</p>
+            }
+            else if (Model.Status == (int)ProjectStatus.Default)
+            {
+                <form method="post" action="/Task/JoinProject">
+
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+
+                    <button type="submit" id="btnGetProject" class="btn btn-default"> 接单 </button>
+                </form>
+            }
+
+        </td>
+    </tr>
     <tr>
         <td class="t-r">项目评价：</td>
         <td>
@@ -146,25 +165,7 @@
             }
         </td>
     </tr>
-    <tr>
-        <td class="t-r">接单</td>
-        <td>
-            @if (Model.BidUsers!= null  && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Any())
-            {
-                <p>已接单</p>
-            }
-           else if (Model.Status == (int)ProjectStatus.Default)
-            {
-                <form method="post" action="/Task/JoinProject">
 
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-
-                    <button type="submit" id="btnGetProject" class="btn btn-default"> 接单 </button>
-                </form>
-            }
-
-        </td>
-    </tr>
 </table>
 
 
