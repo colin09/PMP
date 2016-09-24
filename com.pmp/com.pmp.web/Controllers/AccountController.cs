@@ -75,7 +75,7 @@ namespace com.pmp.web.Controllers
             }
             return "{\"IsSuccess\":\"" + IsSuccess + "\",\"error\":\"" + message + "\"}"; ;
         }
-        
+
         //提交个人信息
         [Authorization]
         public ActionResult AccountPersonalInfoSumbit()
@@ -271,7 +271,7 @@ namespace com.pmp.web.Controllers
         }
 
         public string IsExistPhone()
-       {
+        {
             var phone = Request["phone"];
             var list = new MgUserService().SearchLogin(phone);
             if (list != null && list.Count > 0)
