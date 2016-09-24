@@ -42,7 +42,7 @@ namespace com.pmp.web.Controllers
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(0, 0, type, state, (int)AuditStatus.Pass, city, date, page, out total);
+            var list = _projectService.GetAll(0, 0, type, state, city, date, page, out total);
 
             var cUserIds = list.Select(l => l.CreatesUserID).ToList();
             var rUserIds = list.Select(l => l.ReceiveUserId).ToList();
@@ -134,12 +134,13 @@ namespace com.pmp.web.Controllers
                     if (file.ContentLength > 1024 * 1024 * 2)
                         return Json("{'error':'文件超大。'}");
 
+                    var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
                     var pFile = new ProjectFlie();
                     pFile.Name = Path.GetFileName(file.FileName);
                     pFile.FileType = 1;
-                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
+                    pFile.Path = $"../Upload/{saveName}";
 
-                    var savePath = pFile.Path;
+                    var savePath = Path.Combine(Request.MapPath("~/Upload"), saveName);
                     file.SaveAs(savePath);
 
                     project.FlieList.Add(pFile);
@@ -149,10 +150,10 @@ namespace com.pmp.web.Controllers
             project.ProcessDesc.Add(new ProjectProcess() { ProcessDesc = "发布项目。", UserID = this._Longin_UserId, CreateTime = DateTime.Now });
 
             _projectService.Create(project);
-            return RedirectToAction("AuditList");
+            return RedirectToAction("MyList");
         }
 
-        
+
         public ActionResult Detail(int id)
         {
             var project = _projectService.GetOneById(id);
@@ -165,10 +166,14 @@ namespace com.pmp.web.Controllers
             var procs = project.ProcessDesc.Select(p => p.UserID).ToList();
             var slns = _solutionService.GetListByProId(id);
             var slnIds = slns.Select(s => s.UserId).ToList();
+            var joinIds = project.BidUsers?.Select(b => b.UserId).ToList();
+
 
             userIds.AddRange(procs);
             userIds.AddRange(slnIds);
             userIds.AddRange(evaIds);
+            if (joinIds != null)
+                userIds.AddRange(joinIds);
             var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
             var cityList = _cityService.GetListByIds(new List<int> { project.CityId, project.ProvinceId });
 
@@ -208,6 +213,13 @@ namespace com.pmp.web.Controllers
                 ProcessDesc = project.ProcessDesc,
                 CTime = project.CreateTime,
                 UTime = project.UpdateTime,
+                BidUsers = project.BidUsers?.Select(b => new TaskJoinRes()
+                {
+                    UserId = b.UserId,
+                    CTime = b.CTime,
+                    State = b.Status,
+                    UserName = userList.FirstOrDefault(u => u.Id == b.UserId)?.Name,
+                }).ToList()
             };
 
             ViewBag.slns = slns.Select(s => new TaskSlnRes
@@ -232,25 +244,21 @@ namespace com.pmp.web.Controllers
 
 
         [Authorization]
-        public ActionResult MyList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
+        public ActionResult MyList(int pageIndex = 1, int type = 0, int state = 0)
         {
             var cUser = 0;
             var rUser = 0;
-            var auditState = (int)audit;
+
             if (this._Longin_UserLevel == (int)UserLevel.CompanyAdmin)
-            {
                 cUser = this._Longin_UserId;
-                auditState = -99;
-            }
             else
-            {
                 rUser = this._Longin_UserId;
-                auditState = (int)AuditStatus.Pass;
-            }
+
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(cUser, rUser, type, state, auditState, 0, null, page, out total);
+            var list = _projectService.GetAll(cUser, rUser, type, state, 0, null, page, out total);
 
+            ViewBag.state = state;
             ViewBag.pageIndex = pageIndex;
             ViewBag.total = total;
             ViewBag.level = this._Longin_UserLevel;
@@ -272,10 +280,13 @@ namespace com.pmp.web.Controllers
             var procs = project.ProcessDesc.Select(p => p.UserID).ToList();
             var slns = _solutionService.GetListByProId(id);
             var slnIds = slns.Select(s => s.UserId).ToList();
+            var joinIds = project.BidUsers?.Select(b => b.UserId).ToList();
 
             userIds.AddRange(procs);
             userIds.AddRange(slnIds);
             userIds.AddRange(evaIds);
+            if (joinIds != null)
+                userIds.AddRange(joinIds);
             var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
             var cityList = _cityService.GetListByIds(new List<int> { project.CityId, project.ProvinceId });
 
@@ -315,6 +326,13 @@ namespace com.pmp.web.Controllers
                 ProcessDesc = project.ProcessDesc,
                 CTime = project.CreateTime,
                 UTime = project.UpdateTime,
+                BidUsers = project.BidUsers?.Select(b => new TaskJoinRes()
+                {
+                    UserId = b.UserId,
+                    CTime = b.CTime,
+                    State = b.Status,
+                    UserName = userList.FirstOrDefault(u => u.Id == b.UserId)?.Name,
+                }).ToList()
             };
 
             ViewBag.slns = slns.Select(s => new TaskSlnRes
@@ -336,41 +354,33 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-        /*
-        [Authorization]
-        public ActionResult AuditList(AuditStatus audit = AuditStatus.Default, int pageIndex = 1, int type = 0, int state = 0)
-        {
-            var page = new PageInfo() { PageIndex = pageIndex };
-            var total = 0L;
-            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, (int)audit, 0, null, page, out total);
-
-            ViewBag.pageIndex = pageIndex;
-            ViewBag.total = total;
-            ViewBag.level = this._Longin_UserLevel;
-
-            return View(list);
-        }
-
-        [Authorization]
-        public ActionResult AuditSubmit(int id, AuditStatus auditState, string auditDesc)
-        {
-            log.Info($"state:{auditState}, desc:{auditDesc}");
-            _projectService.AuditProject(id, auditState, auditDesc);
-            return RedirectToAction("AuditList");
-        }*/
-
 
         public ActionResult JoinProject(int projectId)
         {
-            return Json("", JsonRequestBehavior.AllowGet);
+            _projectService.JoinProject(projectId, new BidUser()
+            {
+                UserId = this._Longin_UserId,
+                CTime = DateTime.Now,
+                Status = DataStatus.Normal
+            });
+
+            return RedirectToAction("Detail", new { id = projectId });
+        }
+
+        [Authorization]
+        public ActionResult GiveProject(int projectId, int userId, string desc = "")
+        {
+            if (userId > 0)
+                _projectService.GiveProject(projectId, userId, desc);
+            return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
 
         [Authorization]
         public ActionResult CreateSln(int projectId, string desc, HttpPostedFileBase[] files)
         {
-            //if (files == null)
-            //    return Content("没有选择文件", "text/plain");
+            if (files == null)
+                return Json(new MsgRes(500, "请选择方案文件。"), JsonRequestBehavior.AllowGet);
 
             try
             {
@@ -389,13 +399,13 @@ namespace com.pmp.web.Controllers
                     {
                         if (file == null)
                             continue;
+                        var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
                         var pFile = new ProjectFlie();
                         pFile.Name = Path.GetFileName(file.FileName);
                         pFile.FileType = 1;
-                        pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
+                        pFile.Path = $"../Upload/{saveName}";
 
-                        var savePath = pFile.Path;
-                        file.SaveAs(savePath);
+                        file.SaveAs(Path.Combine(Request.MapPath("~/Upload"), saveName));
 
                         sln.FileList.Add(pFile);
                         fileIndex += 1;
@@ -408,17 +418,117 @@ namespace com.pmp.web.Controllers
             }
 
 
-            return RedirectToAction("Detail", new { id = projectId });
-        }
-
-        [Authorization]
-        public ActionResult GiveProject(int projectId, int userId, string desc = "")
-        {
-            if (userId > 0)
-                _projectService.GiveProject(projectId, userId, desc);
             return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
+
+        public ActionResult GetCityList(int parentId)
+        {
+            var list = _cityService.GetListByParentId(parentId);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Authorization]
+        public ActionResult AddProcess(long projectId, string desc, int isOver, HttpPostedFileBase[] files)
+        {
+            WriteProcess(projectId, desc, files);
+            if (isOver > 0)
+                _projectService.ModifyState(projectId, ProjectStatus.Audit);
+
+            return RedirectToAction("AuditDetail", new { id = projectId });
+        }
+
+
+
+        public bool WriteProcess(long projectId, string desc, HttpPostedFileBase[] files)
+        {
+            try
+            {
+                var project = _projectService.GetOneById(projectId);
+                if (project != null)
+                {
+                    var proc = new ProjectProcess()
+                    {
+                        ProcessDesc = desc,
+                        UserID = this._Longin_UserId,
+                        UserName = this._Longin_RealName,
+                        CreateTime = DateTime.Now
+
+                    };
+
+                    var fileIndex = 1;
+                    if (files != null)
+                    {
+                        foreach (var file in files)
+                        {
+                            if (file != null)
+                            {
+                                var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
+                                var pFile = new ProjectFlie();
+                                pFile.Name = Path.GetFileName(file.FileName);
+                                pFile.FileType = 1;
+                                pFile.Path = $"../Upload/{saveName}";
+
+                                file.SaveAs(Path.Combine(Request.MapPath("~/Upload/"), saveName));
+
+                                proc.FlieList.Add(pFile);
+                            }
+                        }
+                    }
+                    project.ProcessDesc.Add(proc);
+
+                    _projectService.AddProcess(project);
+                }
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                log.Info(ex);
+            }
+            return false;
+        }
+
+
+
+
+        /*
+        [Authorization]
+        public ActionResult AuditList(int pageIndex = 1, int type = 0, int state = 0)
+        {
+            var page = new PageInfo() { PageIndex = pageIndex };
+            var total = 0L;
+            var list = _projectService.GetAll(this._Longin_UserId, 0, type, state, 0, null, page, out total);
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
+
+            return View(list);
+        }*/
+
+        [Authorization]
+        public ActionResult AuditSubmit(int projectId, int isPass, string desc)
+        {
+            var state = ProjectStatus.Evaluation;
+            var r = "验收通过";
+            if (isPass < 1)
+            {
+                state = ProjectStatus.Action;
+                r = "验收不通过";
+            }
+
+            _projectService.ModifyState(projectId, ProjectStatus.Audit);
+
+            return RedirectToAction("AddProcess", new
+            {
+                id = projectId,
+                desc = $"[{r}]{desc}",
+                files = new HttpPostedFileBase[0]
+            });
+        }
 
 
         #region  -   评价相关  -
@@ -500,57 +610,8 @@ namespace com.pmp.web.Controllers
         #endregion
 
 
-        public ActionResult GetCityList(int parentId)
-        {
-            var list = _cityService.GetListByParentId(parentId);
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
 
 
-
-        public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase file)
-        {
-            try
-            {
-                var project = _projectService.GetOneById(projectId);
-                if (project != null)
-                {
-                    var proc = new ProjectProcess()
-                    {
-                        ProcessDesc = desc,
-                        UserID = this._Longin_UserId,
-                        UserName = this._Longin_RealName,
-                        CreateTime = DateTime.Now
-                    };
-
-                    project.ProcessDesc.Add(proc);
-
-                    _projectService.AddProcess(project);
-                }
-
-                /*
-                var fileIndex = 1;
-                if (file != null)
-                {
-                    var pFile = new ProjectFlie();
-                    pFile.Name = Path.GetFileName(file.FileName);
-                    pFile.FileType = 1;
-                    pFile.Path = Path.Combine(Request.MapPath("~/Upload"), $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}");
-
-                    var savePath = pFile.Path;
-                    file.SaveAs(savePath);
-
-                }*/
-            }
-            catch (Exception ex)
-            {
-                log.Info(ex);
-            }
-
-
-
-            return RedirectToAction("Detail", new { id = projectId });
-        }
 
     }
 

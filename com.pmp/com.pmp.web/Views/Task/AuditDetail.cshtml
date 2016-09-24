@@ -1,11 +1,11 @@
 ﻿@using com.pmp.model.response;
 @{
-    ViewBag.Title = "AuditDetail";
+    ViewBag.Title = "任务详细";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 <div class="ptb10 bb">
-    <span>会员中心 > 任务审核 > 审核</span>
+    <span>会员中心 > 我的任务 > 任务详细</span>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
@@ -37,10 +37,10 @@
         <td class="t-r">项目描述： </td>
         <td> @Html.Raw(Model.Desc)</td>
     </tr>
-    <tr>
-        <td class="t-r">审核状态： </td>
-        <td>@Model.AuditStatusDesc</td>
-    </tr>
+    @*<tr>
+            <td class="t-r">审核状态： </td>
+            <td>@Model.AuditStatusDesc</td>
+        </tr>*@
     <tr>
         <td class="t-r">项目阶段： </td>
         <td>@Model.StatusDesc</td>
@@ -64,41 +64,43 @@
             {
                 foreach (var file in Model.FlieList)
                 {
-                    <div>@file.Name</div>
+                    <div>
+                        <a href="@file.Path">@file.Name</a>
+                    </div>
                 }
             }
         </td>
     </tr>
-    <tr>
-        <td class="t-r">审核此任务： </td>
-        <td>
+    @*<tr>
+            <td class="t-r">审核此任务： </td>
+            <td>
 
-            @if (Model.AuditStatus != 0)
-            {
-                @Model.AuditStatusDesc
-            }
-            else
-            {
-                <form method="post" action="/Task/AuditSubmit">
-                    <label class="radio-inline">
-                        <input type="radio" name="auditState" value="1"> 通过
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="auditState" value="-1"> 不通过
-                    </label>
+                @if (Model.AuditStatus != 0)
+                {
+                    @Model.AuditStatusDesc
+                }
+                else
+                {
+                    <form method="post" action="/Task/AuditSubmit">
+                        <label class="radio-inline">
+                            <input type="radio" name="auditState" value="1"> 通过
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="auditState" value="-1"> 不通过
+                        </label>
 
-                    <input type="text" class="form-control" name="auditDesc" placeholder="审核说明">
+                        <input type="text" class="form-control" name="auditDesc" placeholder="审核说明">
 
-                    <input type="hidden" name="id" value="@Model.ID" />
-                    <button type="submit" class="btn btn-default"> 提 交 </button>
-                </form>
-            }
-        </td>
-    </tr>
+                        <input type="hidden" name="id" value="@Model.ID" />
+                        <button type="submit" class="btn btn-default"> 提 交 </button>
+                    </form>
+                }
+            </td>
+        </tr>*@
     @if (Model.RUserId > 0)
     {
         <tr>
-            <td>任务执行人：</td>
+            <td class="t-r">任务执行人：</td>
             <td>
                 @Model.RUserName
             </td>
@@ -175,7 +177,7 @@
                     <textarea name="processDesc" rows="5"> </textarea>
                     @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
 
-                    <input type="checkbox" name="overState"/> 完成项目
+                    <input type="checkbox" name="overState" /> 完成项目
                     <button type="submit" class="btn btn-default"> 提 交 </button>
                 </form>
             </td>
@@ -207,9 +209,9 @@
             <td>评价：</td>
             <td>
                 <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
-                    <input type="hidden" name="projectId" value="@Model.ID"/>
+                    <input type="hidden" name="projectId" value="@Model.ID" />
 
-                    <input type="text" name="score" value="100"/>(0-100)
+                    <input type="text" name="score" value="100" />(0-100)
                     <textarea name="processDesc" rows="5"> </textarea>
 
                     <button type="submit" class="btn btn-default"> 提 交 </button>

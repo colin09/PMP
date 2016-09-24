@@ -31,11 +31,34 @@ namespace com.pmp.mongo.service
 
             return SearchByPage(filter, order => order.CreateTime, false, pageIndex, pageSize, out total);
         }
-        public List<MgProject> GetAll(int cUser, int gUser, int type, int state, int audit, int city, DateTime? date, PageInfo page, out long total)
+        public List<MgProject> GetAll0(int cUser, int gUser, int type, int state, int audit, int city, DateTime? date, PageInfo page, out long total)
         {
             var filter = Builders<MgProject>.Filter.Gt("Status", -6);
             if (audit > -2)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.AuditStatus, (AuditStatus)audit);
+            if (cUser > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.CreatesUserID, cUser);
+            if (gUser > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.ReceiveUserId, gUser);
+            if (type > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.Category, (ProjectCategroy)type);
+            if (state > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.Status, (ProjectStatus)state);
+            if (city > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.CityId, city);
+            if (date != null)
+            {
+                var endDate = date.Value.AddDays(1).Date;
+                filter = filter & Builders<MgProject>.Filter.Gte(p => p.CreateTime, date.Value) & Builders<MgProject>.Filter.Lt(p => p.CreateTime, endDate);
+            }
+            total = 0L;
+            return SearchByPage(filter, order => order.CreateTime, false, page.PageIndex, page.PageSize, out total);
+        }
+
+
+        public List<MgProject> GetAll(int cUser, int gUser, int type, int state, int city, DateTime? date, PageInfo page, out long total)
+        {
+            var filter = Builders<MgProject>.Filter.Gt("Status", -6);
             if (cUser > 0)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.CreatesUserID, cUser);
             if (gUser > 0)
@@ -74,7 +97,7 @@ namespace com.pmp.mongo.service
             return Update(filter, update) > 0;
         }*/
 
-        public bool ModifyState(int id, ProjectStatus state)
+        public bool ModifyState(long id, ProjectStatus state)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
             var update = Builders<MgProject>.Update.Set(p => p.Status, state);
@@ -82,13 +105,20 @@ namespace com.pmp.mongo.service
             return Update(filter, update) > 0;
         }
 
-        public bool JoinProject(int id,int userId)
+        public bool JoinProject(int id,BidUser user)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
+            var project = GetOneById(id);
+            if (project == null)
+                return false;
+            var list = project.BidUsers;
+            if (list == null)
+                list = new List<BidUser>();
+            list.Add(user);
 
-
-
-            return false;
+            var update = Builders<MgProject>.Update.Set(p => p.BidUsers, list);
+            
+            return Update(filter, update) > 0;
         }
 
         public bool GiveProject(int id, int userId, string desc)

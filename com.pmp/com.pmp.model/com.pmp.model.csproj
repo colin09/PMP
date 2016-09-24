@@ -51,6 +51,7 @@
     <Compile Include="enums\ProjectCategroy.cs" />
     <Compile Include="enums\StatusEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="response\MessageResponse.cs" />
     <Compile Include="response\PageInfo.cs" />
     <Compile Include="request\TaskRequest.cs" />
     <Compile Include="response\TaskResponse.cs" />

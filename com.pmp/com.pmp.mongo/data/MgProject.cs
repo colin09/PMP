@@ -139,6 +139,7 @@ namespace com.pmp.mongo.data
         public int UserId { set; get; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CTime { set; get; }
+        public DataStatus Status { set; get; }
     }
 
 

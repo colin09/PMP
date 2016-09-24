@@ -1,7 +1,7 @@
 ﻿@using com.pmp.common.helper;
 @model List<com.pmp.mongo.data.MgProject>
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "我的任务";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 <div class="ptb10 bb">
@@ -13,17 +13,21 @@
 </div>
 
 <!-- Nav tabs -->
+<input type="hidden" id="projectState" value="@ViewBag.state" />
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#divList" role="tab" data-toggle="tab">待接单</a></li>
-    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待服务</a></li>
-    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">服务中</a></li>
-    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待验收</a></li>
-    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">待评价</a></li>
-    <li role="presentation"><a href="#divList" role="tab" data-toggle="tab">已完成</a></li>
+    @if (ViewBag.level == 2)
+    {
+        <li role="presentation" data-state="0" class="@ViewBag.state==0?'active':''"><a href="#divList" role="tab" data-toggle="tab">待接单</a></li>
+    }
+    <li role="presentation" data-state="1" class="@ViewBag.state==1?'active':''"><a href="#divList" role="tab" data-toggle="tab">待服务</a></li>
+    <li role="presentation" data-state="2" class="@ViewBag.state==2?'active':''"><a href="#divList" role="tab" data-toggle="tab">服务中</a></li>
+    <li role="presentation" data-state="3" class="@ViewBag.state==3?'active':''"><a href="#divList" role="tab" data-toggle="tab">待验收</a></li>
+    <li role="presentation" data-state="4" class="@ViewBag.state==4?'active':''"><a href="#divList" role="tab" data-toggle="tab">待评价</a></li>
+    <li role="presentation" data-state="5" class="@ViewBag.state==5?'active':''"><a href="#divList" role="tab" data-toggle="tab">已完成</a></li>
 </ul>
 
 <!-- Tab panes -->
-<div class="tab-content">
+<div class="tab-content mt25">
     <div role="tabpanel" class="tab-pane active" id="divList">
         <ul class="taskAuditList">
             @{ if (ViewBag.total > 0)
@@ -31,11 +35,14 @@
                     foreach (var item in Model)
                     {
                         <li class="bb">
-                            <div class="line1">
-                                <a href="/Task/AuditDetail?id=@item.ID">[@item.Status.GetName()]</a>   @item.Code | @item.ContractCode | @item.Name
-                            </div>
-                            <div class="line2">@item.Desc.TakeString(100)</div>
-                            <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
+                            <a href="/Task/AuditDetail?id=@item.ID">
+                                <div class="line1">
+                                    [@item.Status.GetName()]
+                                    @item.Code | @item.ContractCode | @item.Name
+                                </div>
+                                <div class="line2">@item.Desc.TakeString(100)</div>
+                                <div class="line3">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
+                            </a>
                         </li>
                     }
                 }
@@ -60,12 +67,19 @@
 @section scripts{
     <script>
         $(function () {
+            $(".nav li").click(function () {
+                var type = $("#proType").val();
+                var state = $(this).data("state");
+
+                window.location.href = 'MyList?pageIndex=1&type=0&state=' + state;
+            });
+
             $(".pagination li").click(function () {
                 var pageindex = $(this).data("page");
                 var type = $("#proType").val();
-                var state = $("#proState").val();
+                var state = $("#projectState").val();
 
-                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state;
+                window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
             });
         });
     </script>

@@ -1,4 +1,5 @@
 ﻿using com.pmp.model.data;
+using com.pmp.model.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,8 @@ namespace com.pmp.model.response
         public int CEvaluate { get; set; }
         public int PEvaluate { get; set; }
         public List<ProjectFlie> FlieList { get; set; }
+        public List<TaskJoinRes> BidUsers { set; get; }
+
         public List<ProjectProcess> ProcessDesc { get; set; } = new List<ProjectProcess>();
     }
 
@@ -74,4 +77,13 @@ namespace com.pmp.model.response
     }
 
 
+
+    public class TaskJoinRes
+    {
+        public int UserId { set; get; }
+        public string UserName { set; get; }
+        public DateTime CTime { set; get; }
+        public DataStatus State { set; get; }
+
+    }
 }

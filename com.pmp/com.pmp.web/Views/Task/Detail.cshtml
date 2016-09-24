@@ -38,10 +38,10 @@
         <td class="t-r">项目描述：</td>
         <td>@Html.Raw(Model.Desc)</td>
     </tr>
-    <tr>
-        <td class="t-r">审核状态：</td>
-        <td>@Model.AuditStatusDesc</td>
-    </tr>
+    @*<tr>
+            <td class="t-r">审核状态：</td>
+            <td>@Model.AuditStatusDesc</td>
+        </tr>*@
     <tr>
         <td class="t-r">项目状态：</td>
         <td>@Model.StatusDesc</td>
@@ -57,10 +57,11 @@
     <tr>
         <td class="t-r">发布时间：</td>
         <td>@Model.CTime</td>
-    </tr><tr>
-    <td class="t-r">最后一次修改时间：</td>
-    <td>@Model.UTime</td>
-</tr>
+    </tr>
+    <tr>
+        <td class="t-r">最后一次修改时间：</td>
+        <td>@Model.UTime</td>
+    </tr>
     <tr>
         <td class="t-r">项目文件：</td>
         <td>
@@ -68,7 +69,7 @@
             {
                 foreach (var file in Model.FlieList)
                 {
-                    <div>@file.Name</div>
+                    <div> <a href="@file.Path">@file.Name</a></div>
                 }
             }
 
@@ -90,31 +91,46 @@
         </td>
     </tr>
     <tr>
-        <td class="t-r">项目竞标：</td>
+        <td class="t-r">项目接单：</td>
         <td>
-            @if (ViewBag.slns != null)
+            @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
             {
-                foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
+                foreach (var bid in Model.BidUsers)
                 {
                     <div>
-                        <div>
-                            @sln.UserName @sln.CTime
-                            @if (sln.FileList != null && sln.FileList.Count > 0)
-                            {
-                                <span>[含附件]</span>
-                            }
-                            <p>@sln.SlnDesc</p>
-                        </div>
+                        @bid.UserName 在 @bid.CTime 进行了接单。
+                        <button type="button">交付任务</button>
                     </div>
                 }
             }
-
         </td>
     </tr>
+    @*<tr>
+            <td class="t-r">项目竞标：</td>
+            <td>
+                @if (ViewBag.slns != null)
+                {
+                    foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
+                    {
+                        <div>
+                            <div>
+                                @sln.UserName @sln.CTime
+                                @if (sln.FileList != null && sln.FileList.Count > 0)
+                                {
+                                    <span>[含附件]</span>
+                                }
+                                <p>@sln.SlnDesc</p>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </td>
+        </tr>*@
     <tr>
         <td class="t-r">项目评价：</td>
         <td>
-            @if (ViewBag.evas != null )
+            @if (ViewBag.evas != null)
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
@@ -131,11 +147,20 @@
         </td>
     </tr>
     <tr>
-        <td></td>
+        <td class="t-r">接单</td>
         <td>
-            @if (Model.Status == (int)ProjectStatus.Default)
+            @if (Model.BidUsers!= null  && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Any())
             {
-                <button type="button" id="btnGetProject" class="btn btn-default"> 领取项目 </button>
+                <p>已接单</p>
+            }
+           else if (Model.Status == (int)ProjectStatus.Default)
+            {
+                <form method="post" action="/Task/JoinProject">
+
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+
+                    <button type="submit" id="btnGetProject" class="btn btn-default"> 接单 </button>
+                </form>
             }
 
         </td>
@@ -185,7 +210,7 @@
     <script>
         $(function () {
             $("#btnGetProject").click(function () {
-                $('#getModel').modal('show');
+                //$('#getModel').modal('show');
             });
         });
     </script>

@@ -21,6 +21,9 @@ namespace com.pmp.model.data
         /// </summary>
         public int UserID { get; set; }
         public string UserName { get; set; }
+
+
+        public List<ProjectFlie> FlieList { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

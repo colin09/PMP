@@ -18,6 +18,12 @@ namespace com.pmp.model.enums
         Default = 0,
         Pass = 1
     }
+    public enum DataStatus
+    {
+        Delete = -1,
+        Default = 0,
+        Normal = 1
+    }
 
 
 
