@@ -584,7 +584,11 @@ namespace com.pmp.web.Controllers
         {
             var total = 0;
             var result = new List<TaskEvaRes>();
-            var list = _evaluationService.GetListByRUserId(this._Longin_UserId);
+            var list = new List<MgEvaluation>();
+            if (this._Longin_UserLevel == 2)
+                list = _evaluationService.GetListByComUserId(this._Longin_UserId);
+            else
+                list = _evaluationService.GetListByRUserId(this._Longin_UserId);
             if (list != null)
             {
                 total = list.Count();
@@ -606,7 +610,7 @@ namespace com.pmp.web.Controllers
 
             return View("Evaluation", result);
         }
-        
+
 
         #endregion
 

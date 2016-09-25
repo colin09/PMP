@@ -136,6 +136,11 @@ namespace com.pmp.mongo.service
             var filter = Builders<MgProject>.Filter.Eq("ReceiveUserId", userId);
             return Search(filter);
         }
+        public IList<MgProject> GetListByCUser(int userId)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("CreatesUserID", userId);
+            return Search(filter);
+        }
 
         public bool AddProcess(MgProject m)
         {
