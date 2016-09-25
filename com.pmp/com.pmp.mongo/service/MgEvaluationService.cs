@@ -33,13 +33,22 @@ namespace com.pmp.mongo.service
                 return null;
             var proIds = projects.Select(p => p.ID).ToList();
 
-
             var filter = Builders<MgEvaluation>.Filter.In("ProjectId", proIds);
             filter = filter & Builders<MgEvaluation>.Filter.Ne("UserId", userId);
             return Search(filter);
         }
 
+        public List<MgEvaluation> GetListByComUserId(int userId)
+        {
+            var projects = new MgProjectService().GetListByCUser(userId);
+            if (projects == null)
+                return null;
+            var proIds = projects.Select(p => p.ID).ToList();
 
+            var filter = Builders<MgEvaluation>.Filter.In("ProjectId", proIds);
+            filter = filter & Builders<MgEvaluation>.Filter.Ne("UserId", userId);
+            return Search(filter);
+        }
 
     }
 }
