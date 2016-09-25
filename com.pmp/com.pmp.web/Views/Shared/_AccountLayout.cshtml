@@ -187,7 +187,7 @@
         $(function () {
             var level = $("#userLevel").val();
             $.each(_Menu, function (i, item) {
-                if (item.userLevel.indexOf(level) > -1) {
+                if (item.userLevel.indexOf(","+level+",") > -1) {
                     var html = [];
                     $.each(item.menu, function (j, menu) {
                         if (j == 0) {

@@ -1,6 +1,6 @@
 ﻿var _Menu = [
   {
-      "userLevel": "2,",
+      "userLevel": ",2,",
       "title": "我是雇主",
       "menu": [
         {
@@ -60,12 +60,12 @@
             "sort": 1,
             "subMenu": [
              {
-                 "title": "我写的评价",
+                 "title": "我的评价",
                  "style": "",
                  "url": "/Task/Evaluation"
              },
              {
-                 "title": "对我的评价",
+                 "title": "我的信誉",
                  "style": "",
                  "url": "/Task/REvaluation"
              }
@@ -74,7 +74,7 @@
       ]
   },
   {
-      "userLevel": "21,22,",
+      "userLevel": ",21,22,",
       "title": "寻找项目",
       "menu": [
         {
@@ -139,7 +139,7 @@
       ]
   },
 {
-    "userLevel": "1,",
+    "userLevel": ",1,",
     "title": "超级管理员",
     "menu": [
       {

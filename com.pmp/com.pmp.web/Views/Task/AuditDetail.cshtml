@@ -187,7 +187,7 @@
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div>
+                    <div class="bb mt10">
                         @proc.UserName @proc.CreateTime
                         <p>@proc.ProcessDesc</p>
                     </div>
@@ -203,15 +203,31 @@
             <td>
                 <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
-                    <textarea name="desc" rows="5"> </textarea>
+                    <textarea name="desc" rows="5" class="w320"> </textarea>
                     @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
                     <br />
-                    <input type="checkbox" name="overState" /> 完成项目
+                    <input type="checkbox" name="overState" value="1" /> 完成项目
                     <button type="submit" class="btn btn-default"> 提 交 </button>
                 </form>
             </td>
         </tr>
     }
+    @if (Model.Status == 3 && ViewBag.level == 2)
+    {
+        <tr>
+            <td class="t-r">项目验收：</td>
+            <td>
+                <form method="post" action="/Task/AuditSubmit">
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+                    <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
+                    <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
+                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
+                    <button type="submit" class="btn btn-default"> 提 交 </button>
+                </form>
+            </td>
+        </tr>
+    }
+
     <tr>
         <td class="t-r">项目评价：</td>
         <td>
@@ -219,29 +235,26 @@
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                    <div>
-                        <div>
-                            @eval.UserName @eval.CTime
-                            [@eval.Grade] @eval.Score
+                    <div class="bb mt10">
+                        @eval.UserName @eval.CTime
+                        [@eval.Grade] @eval.Score
 
-                            <p>@eval.Desc</p>
-                        </div>
+                        <p>@eval.Desc</p>
                     </div>
                 }
             }
         </td>
     </tr>
-
-    @if (Model.Status == 3)
+    @if (Model.Status == 4)
     {
         <tr>
-            <td>评价：</td>
+            <td class="t-r">评价：</td>
             <td>
-                <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
+                <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
-
-                    <input type="text" name="score" value="100" />(0-100)
-                    <textarea name="processDesc" rows="5"> </textarea>
+                    <input type="text" name="graed" value="5" />
+                    <input type="text" name="score" value="100" />(0-100分)<br />
+                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
 
                     <button type="submit" class="btn btn-default"> 提 交 </button>
                 </form>

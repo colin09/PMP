@@ -349,6 +349,7 @@ namespace com.pmp.web.Controllers
                 Score = e.Score,
                 Desc = e.Desc,
                 UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                CTime = e.CTime
             }).ToList();
 
             return View(result);
@@ -432,9 +433,10 @@ namespace com.pmp.web.Controllers
 
 
         [Authorization]
-        public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase[] files, int overState=0)
+        public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase[] files, int overState = 0)
         {
-            WriteProcess(projectId, desc, files);
+            var overMsg = overState > 0 ? " - 完成" : " - 未完";
+            WriteProcess(projectId, $"[进度说明{overMsg}]{desc}", files);
             if (overState > 0)
                 _projectService.ModifyState(projectId, ProjectStatus.Audit);
 
@@ -522,19 +524,16 @@ namespace com.pmp.web.Controllers
                 r = "验收不通过";
             }
 
-            _projectService.ModifyState(projectId, ProjectStatus.Audit);
+            _projectService.ModifyState(projectId, state);
 
-            return RedirectToAction("AddProcess", new
-            {
-                id = projectId,
-                desc = $"[{r}]{desc}",
-                files = new HttpPostedFileBase[0]
-            });
+            WriteProcess((long)projectId, $"[{r}]{desc}", null);
+
+            return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
 
         #region  -   评价相关  -
-
+        [Authorization]
         public ActionResult GiveEvaluate(int projectId, int graed, int score, string desc)
         {
             var m = new MgEvaluation()
@@ -548,7 +547,7 @@ namespace com.pmp.web.Controllers
             };
             _evaluationService.Insert(m);
 
-            return RedirectToAction("Detail", new { id = projectId });
+            return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
 
@@ -603,11 +602,11 @@ namespace com.pmp.web.Controllers
             }
 
             ViewBag.total = total;
+            ViewBag.level = this._Longin_UserLevel;
 
             return View("Evaluation", result);
         }
-
-
+        
 
         #endregion
 

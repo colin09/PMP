@@ -21,7 +21,7 @@ namespace com.pmp.mongo.service
 
         public List<MgEvaluation> GetListByUserId(int userId)
         {
-            var filter = Builders<MgEvaluation>.Filter.Eq("CUser", userId);
+            var filter = Builders<MgEvaluation>.Filter.Eq("UserId", userId);
             return Search(filter);
         }
 
@@ -35,6 +35,7 @@ namespace com.pmp.mongo.service
 
 
             var filter = Builders<MgEvaluation>.Filter.In("ProjectId", proIds);
+            filter = filter & Builders<MgEvaluation>.Filter.Ne("UserId", userId);
             return Search(filter);
         }
 
