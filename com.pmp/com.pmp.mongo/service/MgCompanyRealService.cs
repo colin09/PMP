@@ -1,4 +1,5 @@
-﻿using com.pmp.mongo.data;
+﻿using com.pmp.model.response;
+using com.pmp.mongo.data;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -47,34 +48,52 @@ namespace com.pmp.mongo.service
         /// 查询所有公司
         /// </summary>
         /// <returns></returns>
-        public List<MgCompanyReal> SearchWhere(string phone, string contactsName, string companyName)
+        public List<MgCompanyReal> SearchWhere(string phone, string contactsName, string companyName, PageInfo page, out long total)
         {
-            List<MgCompanyReal> mgCompanyReal = Search();
+            var filter = Builders<MgCompanyReal>.Filter.Gt("status", -6);
             if (!string.IsNullOrWhiteSpace(phone))
-                mgCompanyReal = mgCompanyReal.FindAll(t => t.Phone == phone);
+                filter = filter & Builders<MgCompanyReal>.Filter.Eq(p => p.Phone, phone);
             if (!string.IsNullOrWhiteSpace(contactsName))
-                mgCompanyReal = mgCompanyReal.FindAll(t => t.ContactsName == contactsName);
+                filter = filter & Builders<MgCompanyReal>.Filter.Eq(p => p.ContactsName, contactsName);
             if (!string.IsNullOrWhiteSpace(companyName))
-                mgCompanyReal = mgCompanyReal.FindAll(t => t.Name == companyName);
-            return mgCompanyReal;
+                filter = filter & Builders<MgCompanyReal>.Filter.Eq(p => p.Name, companyName);
+            //List<MgCompanyReal> mgCompanyReal = Search();
+            //if (!string.IsNullOrWhiteSpace(phone))
+            //    mgCompanyReal = mgCompanyReal.FindAll(t => t.Phone == phone);
+            //if (!string.IsNullOrWhiteSpace(contactsName))
+            //    mgCompanyReal = mgCompanyReal.FindAll(t => t.ContactsName == contactsName);
+            //if (!string.IsNullOrWhiteSpace(companyName))
+            //    mgCompanyReal = mgCompanyReal.FindAll(t => t.Name == companyName);
+
+            total = 0L;
+            return SearchByPage(filter, order => order.CTime, false, page.PageIndex, page.PageSize, out total);
+            // return mgCompanyReal;
         }
 
         /// <summary>
         /// 查询所有公司
         /// </summary>
         /// <returns></returns>
-        public List<MgCompanyReal> SearchAllByAudit(int auditType)
+        public List<MgCompanyReal> SearchAllByAudit(int auditType, PageInfo page, out long total)
         {
-            List<MgCompanyReal> mgCompanyReal = new List<MgCompanyReal>();
-            var list = Search();
-            foreach (var item in list)
+            var filter = Builders<MgCompanyReal>.Filter.Gt("status", -6);
+            if (auditType > 0)
             {
-                if (item.IsApprove == auditType)
-                {
-                    mgCompanyReal.Add(item);
-                }
+                filter = filter & Builders<MgCompanyReal>.Filter.Eq(p => p.IsApprove, auditType);
             }
-            return mgCompanyReal;
+            total = 0L;
+            return SearchByPage(filter, order => order.CTime, false, page.PageIndex, page.PageSize, out total);
+
+            // List<MgCompanyReal> mgCompanyReal = new List<MgCompanyReal>();
+            //var list = Search();
+            //foreach (var item in list)
+            //{
+            //    if (item.IsApprove == auditType)
+            //    {
+            //        mgCompanyReal.Add(item);
+            //    }
+            //}
+            //return mgCompanyReal;
         }
 
 

@@ -42,6 +42,7 @@ namespace com.pmp.common.mvc.ctl
             ViewBag._Login_CompanyReal_ID = _Login_CompanyReal_ID;
             ViewBag._Longin_CompanyReal_IsApprove = _Longin_CompanyReal_IsApprove;
             ViewBag._Longin_Person_IsApprove = _Longin_Person_IsApprove;
+            
             return base.View();
         }
         protected ViewResult View(object model)

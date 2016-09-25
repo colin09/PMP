@@ -12,7 +12,8 @@
 .header .searchBar .searchVInput a:active {background-position: -116px -153px}
 .header .navigationBar {display:block;height: 42px;background:#f60;}
 .header .navigationBar .navigationBarInnel{display:block;margin: 0 auto;width: 1140px;}
-.header .navigationBar tt  {display:block;position:relative;float:left;margin: -10px 0;width: 200px;height: 62px;background:url(../Images/index/headPic.png) left -76px no-repeat;}
+/*.header .navigationBar tt  {display:block;position:relative;float:left;margin: -10px 0;width: 200px;height: 62px;background:url(../Images/index/headPic.png) left -76px no-repeat;}*/
+.header .navigationBar tt  {display:block;position:relative;float:left;margin: -10px 0;width: 200px;height: 62px;}
 .header .navigationBar tt .mainProNavArea {position: absolute;top: 62px;}
 .header .navigationBar tt.slideOpenNAV .mainProNavArea {display:none;}
 .header .navigationBar tt.slideOpenNAV {height: 56px;}

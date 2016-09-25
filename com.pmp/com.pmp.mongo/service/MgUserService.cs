@@ -47,22 +47,37 @@ namespace com.pmp.mongo.service
         /// <param name="name"></param>
         /// <param name="phone"></param>
         /// <returns></returns>
-        public List<MgUser> SearchWhere(string name, string phone)
+        public List<MgUser> SearchWhere(string name, string phone, PageInfo page, out long total)
         {
-            var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", -1);
-            List<MgUser> list = Search(filter);
+            var filter = Builders<MgUser>.Filter.Eq("Level", (int)UserLevel.Person);
 
-            list = list.FindAll(t => t.Level != 0);
+            filter = filter & Builders<MgUser>.Filter.Where(t => t.Level != UserLevel.Administrator);
+
+            filter = filter & Builders<MgUser>.Filter.Where(t => t.PersonReal.CardId != null);
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                list = list.FindAll(t => t.PersonInfo.RealName == name);
+                filter = filter & Builders<MgUser>.Filter.Eq(p => p.PersonInfo.RealName, name);
             }
             if (!string.IsNullOrWhiteSpace(phone))
             {
-                list = list.FindAll(t => t.Phone == phone);
+                filter = filter & Builders<MgUser>.Filter.Eq(p => p.Phone, phone);
             }
-            return list;
+
+            return SearchByPage(filter, order => order.CTime, false, page.PageIndex, page.PageSize, out total);
+            //List<MgUser> list = Search(filter);
+
+            //list = list.FindAll(t => t.Level != 0);
+
+            //if (!string.IsNullOrWhiteSpace(name))
+            //{
+            //    list = list.FindAll(t => t.PersonInfo.RealName == name);
+            //}
+            //if (!string.IsNullOrWhiteSpace(phone))
+            //{
+            //    list = list.FindAll(t => t.Phone == phone);
+            //}
+            //return list;
         }
 
         /// <summary>
@@ -82,6 +97,53 @@ namespace com.pmp.mongo.service
             }
             return true;
         }
+
+        /// <summary>
+        /// 根据公司ID获取员工
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<MgUser> SearchuSserByCompanyId(int companyId, string name, string phone, ref int companyIsApprove, PageInfo page, out long total)
+        {
+            List<MgUser> userList = new List<data.MgUser>();
+            List<MgCompanyReal> companyList = new MgCompanyRealService().SearchById(companyId);
+            total = 0;
+            if (companyList != null && companyList.Count > 0)
+            {
+                var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
+
+                filter = filter & Builders<MgUser>.Filter.Where(t => t.Level != UserLevel.Administrator);
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    filter = filter & Builders<MgUser>.Filter.Eq(t => t.PersonInfo.RealName, name);
+                    // userList = userList.FindAll(t => t.PersonInfo.RealName == name);
+                }
+                if (!string.IsNullOrWhiteSpace(phone))
+                {
+                    filter = filter & Builders<MgUser>.Filter.Eq(t => t.Phone, phone);
+                }
+                //var filter = Builders<MgUser>.Filter.Eq("CompanyReal_ID", companyList[0].ID);
+                //userList = Search(filter);
+
+                companyIsApprove = companyList[0].IsApprove;
+                ////去除管理员
+                //userList = userList.FindAll(t => t.Level != 0);
+
+                //if (!string.IsNullOrWhiteSpace(name))
+                //{
+                //    userList = userList.FindAll(t => t.PersonInfo.RealName == name);
+                //}
+                //if (!string.IsNullOrWhiteSpace(phone))
+                //{
+                //    userList = userList.FindAll(t => t.Phone == phone);
+                //}
+                userList = SearchByPage(filter, order => order.CTime, false, page.PageIndex, page.PageSize, out total);
+            }
+            return userList;
+        }
+
+
 
         /// <summary>
         /// 根据公司ID获取员工
@@ -113,7 +175,6 @@ namespace com.pmp.mongo.service
             return userList;
         }
 
-
         public List<SimpleUserRes> GetUserListByIds(List<int> list)
         {
             if (list == null || list.Count < 1)
@@ -132,26 +193,37 @@ namespace com.pmp.mongo.service
         /// 根据审核状态查询所有用户
         /// </summary>
         /// <returns></returns>
-        public List<MgUser> SearchAllByAudit(int auditType, int accountType)
+        public List<MgUser> SearchAllByAudit(int auditType, int accountType, PageInfo page, out long total)
         {
             List<MgUser> mgUser = new List<MgUser>();
             if (accountType == 1)
             {
-                var list = Search();
-                foreach (var item in list)
+                //var list = Search();
+
+                var filter = Builders<MgUser>.Filter.Gt("Status", -6);
+
+                filter = Builders<MgUser>.Filter.Eq(p => p.Level, UserLevel.Person);
+
+                if (auditType > 0)
                 {
-                    if (item.PersonReal != null)
-                    {
-                        if (item.PersonReal.IsApprove == auditType)
-                        {
-                            mgUser.Add(item);
-                        }
-                    }
+                    filter = filter & Builders<MgUser>.Filter.Eq(p => p.PersonReal.IsApprove, auditType);
                 }
+                total = 0L;
+                mgUser = SearchByPage(filter, order => order.CTime, false, page.PageIndex, page.PageSize, out total);
+                //foreach (var item in list)
+                //{
+                //    if (item.PersonReal != null)
+                //    {
+                //        if (item.PersonReal.IsApprove == auditType)
+                //        {
+                //            mgUser.Add(item);
+                //        }
+                //    }
+                //}
             }
             else
             {
-                var list = new MgCompanyRealService().SearchAllByAudit(auditType);
+                var list = new MgCompanyRealService().SearchAllByAudit(auditType, page, out total);
                 foreach (var item in list)
                 {
                     mgUser.AddRange(SearchById(item.CUserID));
@@ -220,7 +292,7 @@ namespace com.pmp.mongo.service
         /// <param name="newWordPass"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public bool UpdatePassWord(string phone, string pwd,ref string error)
+        public bool UpdatePassWord(string phone, string pwd, ref string error)
         {
             List<MgUser> mguserList = SearchLogin(phone);
             if (mguserList == null && mguserList.Count == 0)
@@ -228,7 +300,7 @@ namespace com.pmp.mongo.service
                 error = "账号未注册";
                 return false;
             }
-          
+
             var filter = Builders<MgUser>.Filter.Eq("Phone", phone);
             var update = Builders<MgUser>.Update.Set(u => u.Password, pwd).Set(u => u.CodePwdTime, DateTime.Now);
             return Update(filter, update) > 0;

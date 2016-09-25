@@ -288,8 +288,40 @@ namespace com.pmp.web.Controllers
         [AuthorizationAttribute]
         public ActionResult AccountAudit()
         {
-            ViewBag.level = this._Longin_UserLevel;
-            return View();
+            var auditType = 1;
+            var accountType = 1; ;
+            if (!string.IsNullOrWhiteSpace(Request.Form["AuditType"]))
+            {
+                auditType = int.Parse(Request.Form["AuditType"]);
+            }
+            if (!string.IsNullOrWhiteSpace(Request.Form["AccountType"]))
+            {
+                accountType = int.Parse(Request.Form["AccountType"]);
+            }
+
+            if (!string.IsNullOrWhiteSpace(Request["AuditType"]))
+            {
+                auditType = int.Parse(Request["AuditType"]);
+            }
+            if (!string.IsNullOrWhiteSpace(Request["AccountType"]))
+            {
+                accountType = int.Parse(Request["AccountType"]);
+            }
+
+            var pageIndex = 1;
+            if (!string.IsNullOrWhiteSpace(Request["pageIndex"]))
+            {
+                pageIndex = int.Parse(Request["pageIndex"]);
+            }
+            var page = new PageInfo() { PageIndex = pageIndex, PageSize = 2 };
+            long total = 0L;
+
+            var list = new MgUserService().SearchAllByAudit(auditType, accountType, page, out total);
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.Total = total;
+            ViewBag.accountType = accountType;
+            ViewBag.auditType = auditType;
+            return View(list);
         }
 
         /// <summary>
@@ -371,10 +403,21 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public string GetAccountAuditList()
         {
-            var auditType = int.Parse(Request["AuditType"]);
-            var accountType = int.Parse(Request["AccountType"]);
+            var auditType = int.Parse(Request.Form["AuditType"]);
+            var accountType = int.Parse(Request.Form["AccountType"]);
 
-            return HttpHelper.ObjectToJson(new MgUserService().SearchAllByAudit(auditType, accountType));
+            var pageIndex = 1;
+            if (!string.IsNullOrWhiteSpace(Request["pageIndex"]))
+            {
+                pageIndex = int.Parse(Request["pageIndex"]);
+            }
+            var page = new PageInfo() { PageIndex = pageIndex, PageSize = 2 };
+            long total = 0L;
+
+            var json = HttpHelper.ObjectToJson(new MgUserService().SearchAllByAudit(auditType, accountType, page, out total));
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.Total = total;
+            return json;
         }
 
 
@@ -419,14 +462,23 @@ namespace com.pmp.web.Controllers
             var companyID = Request["companyID"];
             List<MgUser> list = new List<MgUser>();
             int companyIsApprove = 0;
+
+            var pageIndex = 1;
+            if (!string.IsNullOrWhiteSpace(Request["pageIndex"]))
+            {
+                pageIndex = int.Parse(Request["pageIndex"]);
+            }
+            var page = new PageInfo() { PageIndex = pageIndex, PageSize = 2 };
+            long total = 0L;
+
             if (type == "1")
             {
                 if (sel_type == "1")
-                    list = new MgUserService().SearchWhere(name, "");
+                    list = new MgUserService().SearchWhere(name, "", page, out total);
                 else if (sel_type == "2")
-                    list = new MgUserService().SearchWhere("", name);
+                    list = new MgUserService().SearchWhere("", name, page, out total);
                 else
-                    list = new MgUserService().SearchWhere("", "");
+                    list = new MgUserService().SearchWhere("", "", page, out total);
             }
             else
             {
@@ -438,17 +490,21 @@ namespace com.pmp.web.Controllers
                 }
 
                 if (sel_type == "1")
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "", ref companyIsApprove);
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), name, "", ref companyIsApprove, page, out total);
                 else if (sel_type == "2")
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", name, ref companyIsApprove);
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", name, ref companyIsApprove, page, out total);
                 else
-                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", "", ref companyIsApprove);
+                    list = new MgUserService().SearchuSserByCompanyId(int.Parse(companyID), "", "", ref companyIsApprove, page, out total);
             }
             ViewBag.accountType = int.Parse(type);
             ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
             ViewBag.name = name;
             ViewBag.companyId = companyID;
             ViewBag.CompanyIsApprove = companyIsApprove;
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+
             return View(list);
         }
 
@@ -459,19 +515,42 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult CompanyUserList()
         {
-            var sel_type = Request.Form["sel_type"];
-            var name = Request.Form["name"];
+            var sel_type = "";
+            var name = "";
+            if (!string.IsNullOrWhiteSpace(Request.Form["sel_type"]))
+            {
+                sel_type = Request.Form["sel_type"];
+                name = Request.Form["name"];
+            }
+            else
+            {
+                sel_type = Request["sel_type"];
+                name = Request["name"];
+            }
+
+            var pageIndex = 1;
+            if (!string.IsNullOrWhiteSpace(Request["pageIndex"]))
+            {
+                pageIndex = int.Parse(Request["pageIndex"]);
+            }
+            var page = new PageInfo() { PageIndex = pageIndex, PageSize = 2 };
+            long total = 0L;
+
             List<MgCompanyReal> list = new List<MgCompanyReal>();
             if (sel_type == "1")
-                list = new MgCompanyRealService().SearchWhere("", name, "");
+                list = new MgCompanyRealService().SearchWhere("", name, "", page, out total);
             else if (sel_type == "2")
-                list = new MgCompanyRealService().SearchWhere(name, "", "");
+                list = new MgCompanyRealService().SearchWhere(name, "", "", page, out total);
             else if (sel_type == "3")
-                list = new MgCompanyRealService().SearchWhere("", "", name);
+                list = new MgCompanyRealService().SearchWhere("", "", name, page, out total);
             else
-                list = new MgCompanyRealService().SearchWhere("", "", "");
+                list = new MgCompanyRealService().SearchWhere("", "", "", page, out total);
             ViewBag.sel_type = string.IsNullOrWhiteSpace(Request.Form["sel_type"]) ? 2 : int.Parse(Request.Form["sel_type"]);
             ViewBag.name = name;
+
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.total = total;
+
             return View(list);
         }
 
@@ -551,12 +630,12 @@ namespace com.pmp.web.Controllers
                     //var code = new HttpHelper().GetSession(com.pmp.common.Config.Public_const_enum._Sesson_Code);
                     //if (code == codes)
                     //{
-                        UserLevel ul = UserLevel.Administrator;
-                        if (tempType == 1)
-                            ul = UserLevel.Person;
-                        else if (tempType == 2)
-                            ul = UserLevel.CompanyAdmin;
-                        mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
+                    UserLevel ul = UserLevel.Administrator;
+                    if (tempType == 1)
+                        ul = UserLevel.Person;
+                    else if (tempType == 2)
+                        ul = UserLevel.CompanyAdmin;
+                    mgUserService.CreateUser(name.Trim(), password.Trim(), (int)ul);
                     //}
                     //else
                     //{
