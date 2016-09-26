@@ -244,7 +244,7 @@ namespace com.pmp.web.Controllers
 
 
         [Authorization]
-        public ActionResult MyList(int pageIndex = 1, int type = 0, int state = 0)
+        public ActionResult MyList(int pageIndex = 1, int type = 0, int state = -1)
         {
             var cUser = 0;
             var rUser = 0;
@@ -547,6 +547,20 @@ namespace com.pmp.web.Controllers
             };
             _evaluationService.Insert(m);
 
+            var project = _projectService.GetOneById(projectId);
+            if(project!= null)
+            {
+                if (project.CreatesUserID == this._Longin_UserId)
+                    project.IsEvaluate_E = 1;
+                else if (project.ReceiveUserId == this._Longin_UserId)
+                    project.IsEvaluate_I = 1;
+
+                if (project.IsEvaluate_I > 0 && project.IsEvaluate_E > 0)
+                    project.Status = ProjectStatus.Over;
+
+                _projectService.UpdateEva_State(project);
+            }
+
             return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
@@ -602,6 +616,7 @@ namespace com.pmp.web.Controllers
                     Score = e.Score,
                     Desc = e.Desc,
                     UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                    CTime = e.CTime
                 }).ToList();
             }
 

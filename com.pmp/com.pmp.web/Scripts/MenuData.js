@@ -111,7 +111,7 @@
               {
                   "title": "我的任务",
                   "style": "",
-                  "url": "/Task/MyList",
+                  "url": "/Task/MyList?state=1",
                   "sort": 1
               }
             ]

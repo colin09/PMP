@@ -65,7 +65,7 @@ namespace com.pmp.mongo.service
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.ReceiveUserId, gUser);
             if (type > 0)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.Category, (ProjectCategroy)type);
-            if (state > 0)
+            if (state > -1)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.Status, (ProjectStatus)state);
             if (city > 0)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.CityId, city);
@@ -150,6 +150,15 @@ namespace com.pmp.mongo.service
             return Update(filter, update) > 0;
         }
 
+
+        public bool UpdateEva_State(MgProject m)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", m.ID);
+            var update = Builders<MgProject>.Update.Set(p => p.IsEvaluate_E, m.IsEvaluate_E)
+                .Set(p=>p.IsEvaluate_I,m.IsEvaluate_I).Set(p=>p.Status,m.Status);
+
+            return Update(filter, update) > 0;
+        }
 
     }
 }

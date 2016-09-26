@@ -37,22 +37,27 @@ namespace com.pmp.model.enums
         /// 待接单
         /// </summary>
         Default = 0,
+
         /// <summary>
         /// 待服务，选定用户
         /// </summary>
         Wait = 1,
+
         /// <summary>
         /// 服务中，已提交实施方案
         /// </summary>
         Action = 2,
+
         /// <summary>
         /// 完成，待验收
         /// </summary>
         Audit = 3,
+
         /// <summary>
         /// 验收通过，待评价
         /// </summary>
         Evaluation = 4,
+
         /// <summary>
         /// 项目完成
         /// </summary>
