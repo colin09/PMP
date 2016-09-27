@@ -37,11 +37,11 @@ namespace com.pmp.web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                       "~/Content/site.css",
                       "~/Content/pmp_common.css",
                       "~/Content/pmp_pub.css",
                        "~/Content/pmp_tip.css",
-                       "~/Content/pmp_cntent.css",
-                       "~/Content/site.css"
+                       "~/Content/pmp_cntent.css"
                       ));
 
 

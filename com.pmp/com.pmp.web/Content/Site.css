@@ -6,8 +6,8 @@
 }
 
 
-a:link,a:visited,a:active{color:#000;}
-a:hover{color:#045499;}
+a:link,a:visited,a:active{color:#000;text-decoration:underline;}
+a:hover{color:#f00;font-weight:500;}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -20,7 +20,7 @@ input,select,textarea {/*max-width: 280px;*/}
 
 
 li {list-style-type: none;}
-a ,a:hover,a:focus{text-decoration: none;}
+/*a ,a:hover,a:focus{text-decoration: none;}*/
 
 div,ul,li,p,span,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {padding: 0;margin: 0;font-family: Yanone Kaffeesatz, sans-serif;}
 
@@ -63,6 +63,7 @@ div,ul,li,p,span,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {padding: 
 .ptb25{ padding-top: 25px;padding-bottom: 25px;}
 .pb15{ padding-bottom: 15px;}
 .mt10{ margin-top: 10px;}
+.mtb10{ margin-top: 10px;margin-bottom:10px;}
 .mc10{ margin: 10px auto; text-align:center;}
 .mt25{ margin-top: 25px;}
 
@@ -81,7 +82,7 @@ red{color:#fe0200;}
 .bc-y{ background: #febb36;}
 .bc-g{ background: #f2f3f0;}
 
-.bb{border-bottom:1px solid #999;}
+.bb{border-bottom:1px dashed #999;}
 
 .w50{width:50px;}
 .w100{width:100px;}

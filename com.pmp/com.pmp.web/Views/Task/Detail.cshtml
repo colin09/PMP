@@ -82,9 +82,9 @@
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div>
-                        @proc.UserName @proc.CreateTime
-                        <p>@proc.ProcessDesc</p>
+                    <div class="bb mtb10 lh25">
+                        <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
+                        <p class="pl25">@proc.ProcessDesc</p>
                     </div>
                 }
             }
@@ -127,25 +127,25 @@
             </td>
         </tr>*@
 
-    <tr>
-        <td class="t-r">接单</td>
-        <td>
-            @if (Model.BidUsers != null && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Any())
-            {
-                <p>已接单</p>
-            }
-            else if (Model.Status == (int)ProjectStatus.Default)
-            {
+    @if (Model.BidUsers != null && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Any())
+    {
+        @*<p>已接单</p>*@
+    }
+    else if (Model.Status == (int)ProjectStatus.Default)
+    {
+        <tr>
+            <td class="t-r">接单</td>
+            <td>
                 <form method="post" action="/Task/JoinProject">
 
                     <input type="hidden" name="projectId" value="@Model.ID" />
 
-                    <button type="submit" id="btnGetProject" class="btn btn-default"> 接单 </button>
+                    <button type="submit" id="btnGetProject" class="btn btn-primary"> 接单 </button>
                 </form>
-            }
 
-        </td>
-    </tr>
+            </td>
+        </tr>
+    }
     <tr>
         <td class="t-r">项目评价：</td>
         <td>

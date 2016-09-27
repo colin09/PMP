@@ -45,7 +45,7 @@
             <input type="date" id="proDate" name="date"/>
         </div>
         <div class="col-sm-2">
-            <button type="submit" class="btn btn-default btn-sm w100">
+            <button type="submit" class="btn btn-primary btn-sm w100">
                 <span class="glyphicon glyphicon-search"></span> 搜 索
             </button>
         </div>
@@ -87,7 +87,7 @@
                             @*@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")*@
                         </td>
                         <td>
-                            <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span>领取任务</a>
+                            <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span><red> @item.StatusDesc</red></a>
 
                         </td>
                     </tr>

@@ -131,7 +131,7 @@
         <tr>
             <td class="t-r">指派此任务：</td>
             <td>
-                <button type="button" class="btn btn-default" id="btnChoosePerson"> 选择执行人 </button>
+                <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
                 <span id="spnReceiveName"> -- </span>
                 <input type="hidden" name="id" value="@Model.ID" />
                 <input type="hidden" name="ReceiveId" value="0" />
@@ -173,9 +173,9 @@
                     </div>
                 }
             }
-            else
+            else if(Model.RUserId == ViewBag._Longin_UserId)
             {
-                <button type="button" id="btnCreateSln">提交项目执行方案</button>
+                <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
             }
         </td>
     </tr>
@@ -187,9 +187,9 @@
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div class="bb mt10">
-                        @proc.UserName @proc.CreateTime
-                        <p>@proc.ProcessDesc</p>
+                    <div class="bb mtb10 lh25">
+                       <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
+                        <p class="pl25">@proc.ProcessDesc</p>
                     </div>
                 }
             }
@@ -207,7 +207,7 @@
                     @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
                     <br />
                     <input type="checkbox" name="overState" value="1" /> 完成项目
-                    <button type="submit" class="btn btn-default"> 提 交 </button>
+                    <button type="submit" class="btn btn-primary"> 提 交 </button>
                 </form>
             </td>
         </tr>
@@ -222,7 +222,7 @@
                     <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
                     <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
                     <textarea name="desc" rows="5" class="w320"> </textarea><br />
-                    <button type="submit" class="btn btn-default"> 提 交 </button>
+                    <button type="submit" class="btn btn-primary"> 提 交 </button>
                 </form>
             </td>
         </tr>
@@ -256,7 +256,7 @@
                     <input type="text" name="score" value="100" />(0-100分)<br />
                     <textarea name="desc" rows="5" class="w320"> </textarea><br />
 
-                    <button type="submit" class="btn btn-default"> 提 交 </button>
+                    <button type="submit" class="btn btn-primary"> 提 交 </button>
                 </form>
             </td>
         </tr>
@@ -284,7 +284,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="projectId" value="@Model.ID" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
                     <button type="submit" class="btn btn-primary"> 确定指派 </button>
                 </div>
             }
@@ -319,7 +319,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="projectId" value="@Model.ID" />
                     <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
-                    <button type="submit" class="btn btn-primary"> 确定提交 </button>
+                    <button type="submit" id="btnSaveRUser" class="btn btn-primary"> 确定提交 </button>
                 </div>
             }
         </div><!-- /.modal-content -->
@@ -337,6 +337,7 @@
 
             $("#btnChoosePerson").click(function () {
                 $('#getModel').modal('show');
+                $("#btnSaveRUser").hide();
                 $.getJSON("/Account/GetCompanyUsers")
                 .done(function (data) {
                     if (data.length > 0) {
@@ -345,6 +346,7 @@
                             layout += "<label><input type='radio' name='userId' value='" + item.Id + "' /> " + item.Name + " </label>";
                         });
                         $("#divPersonList").empty().append(layout);
+                        $("#btnSaveRUser").show();
                     }
                 });
             });

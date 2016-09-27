@@ -236,6 +236,7 @@ namespace com.pmp.web.Controllers
                 Score = e.Score,
                 Desc = e.Desc,
                 UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                CTime = e.CTime,
             }).ToList();
 
             return View(result);
@@ -575,6 +576,9 @@ namespace com.pmp.web.Controllers
             {
                 total = list.Count();
 
+                var proIds = list.Select(e => e.ProjectId).ToList();
+                var prolist = _projectService.GetListByIds(proIds);
+
                 var userIds = list.Select(l => l.UserId);
                 var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
 
@@ -584,6 +588,8 @@ namespace com.pmp.web.Controllers
                     Score = e.Score,
                     Desc = e.Desc,
                     UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                    ProjectName = prolist.FirstOrDefault(p => p.ID == e.ProjectId)?.Name ?? "--",
+                    CTime = e.CTime
                 }).ToList();
             }
 
@@ -607,6 +613,9 @@ namespace com.pmp.web.Controllers
             {
                 total = list.Count();
 
+                var proIds = list.Select(e => e.ProjectId).ToList();
+                var prolist = _projectService.GetListByIds(proIds);
+
                 var userIds = list.Select(l => l.UserId);
                 var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
 
@@ -616,6 +625,7 @@ namespace com.pmp.web.Controllers
                     Score = e.Score,
                     Desc = e.Desc,
                     UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
+                    ProjectName = prolist.FirstOrDefault(p => p.ID == e.ProjectId)?.Name ?? "--",
                     CTime = e.CTime
                 }).ToList();
             }
