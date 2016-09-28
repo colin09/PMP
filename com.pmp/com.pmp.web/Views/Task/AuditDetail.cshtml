@@ -155,25 +155,23 @@
             {
                 foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
                 {
-                    <div>
-                        <div>
-                            <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
-                            @if (sln.FileList != null && sln.FileList.Count > 0)
-                            {
-                                <p>
-                                    <span>附件：</span>
-                                    @foreach (var file in sln.FileList)
-                                    {
-                                        <span><a href="@file.Path"> @file.Name </a></span>
-                                    }
-                                </p>
-                            }
-                            <p>说明：@sln.SlnDesc</p>
-                        </div>
+                    <div class="w600">
+                        <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
+                        @if (sln.FileList != null && sln.FileList.Count > 0)
+                        {
+                            <p>
+                                <span>附件：</span>
+                                @foreach (var file in sln.FileList)
+                                {
+                                    <span><a href="@file.Path"> @file.Name </a></span>
+                                }
+                            </p>
+                        }
+                        <p>说明：@sln.SlnDesc</p>
                     </div>
                 }
             }
-            else if(Model.RUserId == ViewBag._Longin_UserId)
+            else if (Model.RUserId == ViewBag._Longin_UserId)
             {
                 <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
             }
@@ -187,8 +185,8 @@
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div class="bb mtb10 lh25">
-                       <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
+                    <div class="bb mtb10 lh25 w600">
+                        <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
                         <p class="pl25">@proc.ProcessDesc</p>
                     </div>
                 }
@@ -235,25 +233,38 @@
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                    <div class="bb mt10">
-                        @eval.UserName @eval.CTime
-                        [@eval.Grade] @eval.Score
+                    <div class="bb mt10 lh25 w600">
+                        <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
+                        @for (var i = 0; i < eval.Grade; i++)
+                        {
+                            <img src="~/images/start_red.png" />
+                        }
+                        @*@eval.Score*@
 
-                        <p>@eval.Desc</p>
+                        <p class="pl25">@eval.Desc</p>
                     </div>
                 }
             }
         </td>
     </tr>
-    @if (Model.Status == 4)
+    @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate<1)|| (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
     {
         <tr>
             <td class="t-r">评价：</td>
             <td>
                 <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
-                    <input type="text" name="graed" value="5" />
-                    <input type="text" name="score" value="100" />(0-100分)<br />
+                    <input type="hidden" id="hdgrade" name="grade" value="5" />
+                    <div id="divGrade">
+                        <img src="../../images/start_red.png" />
+                        <img src="~/images/start_red.png" />
+                        <img src="~/images/start_red.png" />
+                        <img src="~/images/start_red.png" />
+                        <img src="~/images/start_red.png" />
+                        <span></span>
+                    </div>
+
+                    <input type="hidden" name="score" value="100" /><br />
                     <textarea name="desc" rows="5" class="w320"> </textarea><br />
 
                     <button type="submit" class="btn btn-primary"> 提 交 </button>
@@ -350,6 +361,24 @@
                     }
                 });
             });
+
+            $('#divGrade img').each(function (index) {
+                var star = '../../images/start.png';	//普通灰色星星图片的存储路径
+                var starRed = '../../images/start_red.png';		//红色星星图片存储路径
+                var prompt = ['很差', '比较差', '一般', '比较好', '非常好'];	//评价提示语
+                this.id = index;		//遍历img元素，设置单独的id
+                $(this).on("mouseover click", function () {	//设置鼠标滑动和点击都会触发事件
+                    $('#divGrade img').attr('src', star);//当“回滚”、“改变主意”时，先复位所有图片为木有打星的图片颜色
+                    $(this).attr('src', starRed);		//设置鼠标当前所在图片为打星颜色图
+                    $(this).prevAll().attr('src', starRed);	//设置鼠标当前的前面星星图片为打星颜色图
+                    $(this).siblings('span').text(prompt[this.id]);		//根据id的索引值作为数组的索引值
+                    $("#hdgrade").val(parseInt(this.id) + 1);
+                });
+            });
+
+
+
+
         });
     </script>
 }

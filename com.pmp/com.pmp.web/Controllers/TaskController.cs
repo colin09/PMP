@@ -535,21 +535,21 @@ namespace com.pmp.web.Controllers
 
         #region  -   评价相关  -
         [Authorization]
-        public ActionResult GiveEvaluate(int projectId, int graed, int score, string desc)
+        public ActionResult GiveEvaluate(int projectId, int grade, int score, string desc)
         {
             var m = new MgEvaluation()
             {
                 ProjectId = projectId,
                 EvaluateType = this._Longin_UserLevel == (int)UserLevel.CompanyAdmin ? 1 : 2,
-                Grade = graed,
-                Score = score,
+                Grade = grade,
+                Score = grade * 10,
                 Desc = desc,
                 UserId = this._Longin_UserId
             };
             _evaluationService.Insert(m);
 
             var project = _projectService.GetOneById(projectId);
-            if(project!= null)
+            if (project != null)
             {
                 if (project.CreatesUserID == this._Longin_UserId)
                     project.IsEvaluate_E = 1;

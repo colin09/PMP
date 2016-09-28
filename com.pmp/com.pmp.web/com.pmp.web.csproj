@@ -190,6 +190,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\icomoon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\pmp_cntent.css" />
     <Content Include="Content\pmp_tip.css" />
     <Content Include="Content\pmp_pub.css" />
@@ -236,6 +239,8 @@
     <Content Include="Images\person.png" />
     <Content Include="Images\phone.png" />
     <Content Include="Images\pmp.png" />
+    <Content Include="Images\start.png" />
+    <Content Include="Images\start_red.png" />
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\userinfoarrow.png" />
@@ -261,6 +266,15 @@
     <Content Include="Project_Readme.html" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <Content Include="Content\fonts\icomoon.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\icomoon.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fonts\icomoon.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\pmp.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\js\jquery-1.10.2.js" />
@@ -388,7 +402,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CardImages\" />
-    <Folder Include="Content\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

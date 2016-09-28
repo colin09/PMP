@@ -82,7 +82,7 @@
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div class="bb mtb10 lh25">
+                    <div class="bb mtb10 lh25 w900">
                         <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
                         <p class="pl25">@proc.ProcessDesc</p>
                     </div>
@@ -153,13 +153,15 @@
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                    <div>
-                        <div>
-                            @eval.UserName @eval.CTime
-                            [@eval.Grade] @eval.Score
+                    <div class="bb mt10 lh25 w900">
+                        <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
+                        @for (var i = 0; i < eval.Grade; i++)
+                        {
+                            <img src="~/images/start_red.png" />
+                        }
+                        @*@eval.Score*@
 
-                            <p>@eval.Desc</p>
-                        </div>
+                        <p class="pl25">@eval.Desc</p>
                     </div>
                 }
             }
