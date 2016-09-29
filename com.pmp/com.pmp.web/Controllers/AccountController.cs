@@ -434,6 +434,10 @@ namespace com.pmp.web.Controllers
             else
                 uid = long.Parse(_Longin_UserId.ToString());
 
+            var audittype = Request["audittype"];
+            var soucre = Request["source"];
+            var auditId = Request["auditId"];
+
             MgCompanyReal mgCompanyReal = new MgCompanyReal();
             MgUser mgUser = new MgUser() { PersonInfo = new MgPersonInfo(), PersonReal = new MgPersonReal() };
 
@@ -445,6 +449,9 @@ namespace com.pmp.web.Controllers
             ViewBag.CompanyReal = mgCompanyReal;
             ViewBag.mgUser = mgUser;
             ViewBag.level = this._Longin_UserLevel;
+            ViewBag.audittype = audittype;
+            ViewBag.soucre = soucre;
+            ViewBag.auditId = auditId;
             return View();
         }
 

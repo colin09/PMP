@@ -107,11 +107,11 @@
                                     {
                                         <td>2016-01-01</td>
                                     }
-
                                     @if (ViewBag.auditType == 1)
                                     {
                                         <td>未审核</td>
                                         <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
                                             <button type="button" class="btn_see btn btn_blue">查看</button>
                                             <button type="button" class="btn_Pass btn btn_blue">通过</button>&nbsp
                                             <button type="button" class="btn_NotPass btn btn_red">未通过</button>
@@ -120,12 +120,18 @@
                                     else if (ViewBag.auditType == 2)
                                     {
                                         <td>审核通过</td>
-                                        <td><button type="button" class="btn_see btn btn_blue">查看</button></td>
+                                        <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
+                                            <button type="button" class="btn_see btn btn_blue">查看</button>
+                                        </td>
                                     }
                                     else if (ViewBag.auditType == 3)
                                     {
                                         <td>审核未通过</td>
-                                        <td><button type="button" class="btn_see btn btn_blue">查看</button></td>
+                                        <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
+                                            <button type="button" class="btn_see btn btn_blue">查看</button>
+                                        </td>
                                     }
                                 </tr>
                             }
@@ -156,92 +162,6 @@
             window.location.href = 'AccountAudit?pageIndex=' + pageindex + '&AccountType=' + accountType + '&AuditType=' + auditType;
         });
 
-        //$(function () {
-        //    bindList();
-        //})
-
-        //$("#accountType").change(function () {
-        //    bindList();
-        //});
-        //$("#auditType").change(function () {
-        //    bindList();
-        //});
-
-        //function bindList() {
-
-        //    var accountType = $('#accountType option:selected').val();
-        //    var auditType = $('#auditType option:selected').val();
-
-        //    var data = { AuditType: auditType, AccountType: accountType };
-        //    $.get("/Account/GetAccountAuditList", data, function (res) {
-        //        var html = [];
-        //        html.push('<table cellpadding="0" cellspacing="0" class="table_list table">' +
-        //                           ' <tr class="tr_title">' +
-        //                               '<th>注册类型</th>' +
-        //                               '<th>注册人</th>' +
-        //                               '<th>联系方式</th>' +
-
-        //                               '<th>提交时间</th>' +
-        //                               '<th>状态</th>' +
-        //                               '<th>操作</th>' +
-        //                          ' </tr>');
-
-        //        var tempAuditType = "";
-        //        var tempId = "";
-
-        //        for (var i = 0; i < res.length; i++) {
-        //            if (accountType == 1) {
-        //                tempId = res[i].ID;
-        //                tempAuditType = "个人";
-        //            } else {
-        //                tempId = res[i].CompanyReal_ID;
-        //                tempAuditType = "企业";
-        //            }
-
-        //            html.push('<tr>' +
-        //                    '<td style="display:none">' + accountType + '</td>' + //账户类型
-        //                    '<td style="display:none">' + tempId + '</td>' + //如果是个人账户 赋值用户ID，公司账户赋值公司ID
-        //                    '<td style="display:none">' + res[i].ID + '</td>' + //如果是个人ID
-        //                    '<td>' + tempAuditType + '</td>' +
-        //                    '<td>' + res[i].PersonInfo.RealName + '</td>' +
-        //                    '<td>' + res[i].Phone + '</td>');
-
-        //            if (accountType == 1) {
-        //                html.push('<td>' + res[i].PersonReal.CreatesTime + '</td>');
-        //            }
-        //            else if (accountType == 2) {
-        //                html.push('<td>' + "2016-01-01" + '</td>');
-        //            }
-
-        //            if (auditType == 1) {
-
-        //                html.push('<td>未审核</td>');
-
-        //                html.push('<td> <button type="button" class="btn_see btn btn_blue">查看</button>' +
-        //                    '&nbsp  <button type="button" class="btn_Pass btn btn_blue">通过</button>' + '&nbsp' +
-        //                        '<button type="button" class="btn_NotPass btn btn_red">未通过</button></td>');
-        //            }
-        //            else if (auditType == 2) {
-
-        //                html.push('<td>审核通过</td>');
-        //                html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
-        //            } else if (auditType == 3) {
-        //                html.push('<td>审核未通过</td>');
-        //                html.push('<td><button type="button" class="btn_see btn btn_blue">查看</button></td>');
-        //            }
-        //            html.push("</tr>");
-        //        }
-        //        if (res.length == 0) {
-        //            html.push('<tr>');
-        //            html.push('<td colspan="7" style="text-align:center;vertical-align:middle;">暂无数据</td>');
-        //            html.push('</tr>');
-        //        }
-        //        html.push('</table>');
-        //        $("#auditList").empty();
-        //        $("#auditList").append(html.join(""));
-        //        BindEvent();
-        //    }, "json");
-        //}
         $(function () {
             Array.prototype.slice.call($(".btn_Pass")).forEach(function (item) {
                 item.onclick = function () {
@@ -254,7 +174,11 @@
             Array.prototype.slice.call($(".btn_see")).forEach(function (item) {
                 item.onclick = function () {
                     var id = $(item).parents("tr").find("td").eq(2).text();
-                    window.open("/Account/AccountDetail?uid=" + id);
+                    var auditId = $(item).parents("tr").find("td").eq(1).text();
+                    var source = $(this).prev().attr("accountType");
+                    var auditType = $(this).prev().attr("auditType");
+
+                    window.open("/Account/AccountDetail?auditId=" + auditId + "&auditType=" + auditType + "&source=" + source + "&uid=" + id);
                 };
             });
 
@@ -306,7 +230,7 @@
                 } else {
                     layer.msg("出现异常", { time: 2000, icon: 1 });
                 }
-              
+
             })
         }
     </script>

@@ -6,12 +6,32 @@
 <div class="ptb10 bb">
     <span>会员中心 > 基本信息</span>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
+
+    <input type="hidden" id="auditId" value="@ViewBag.auditId" />
+    <input type="hidden" id="type" value="@ViewBag.soucre" />
 </div>
 
 <div class="pmp_content">
-    <div class="content_title">
-        <h4>基本信息</h4>
-    </div>
+
+
+    @if (ViewBag.audittype == "1")
+    {
+        <div class="content_title">
+            <div style="float:left">
+                <h4>基本信息</h4>
+            </div>
+            <div style="float:right">
+                <button class="btn btn_blue">通过</button>
+                <button class="btn btn_red" style="margin-left:50px">不通过</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="content_title">
+            <h4>基本信息</h4>
+        </div>
+    }
     <table cellpadding="0" cellspacing="0" class="ta_detail">
         <tr>
             <td style="width:50%">
@@ -208,3 +228,62 @@
         </table>
     }
 </div>
+@section scripts{
+    <script type="text/javascript">
+
+        $(".btn_blue").click(function () {
+            var id = $("#auditId").val();
+            var type = $("#type").val();
+
+            audit(2, type, id, "审核通过", "");
+        });
+
+        $(".btn_red").click(function () {
+            var id = $("#auditId").val();
+            var type = $("#type").val();
+
+            var html =
+                '<div class="contentwrapper"> ' +
+                    ' <form class="stdform" method="post">' +
+                         '<div>' +
+                           '<span>' +
+                           '      <textarea class="longinput" rows="4" placeholder="未通过原因" cols="80" style="width: 100%"></textarea>' +
+                            '</span>' +
+                           '<span>' +
+                       '      <button class="btn_NotPass btn btn-danger" style="margin: 20px 20px " type="button">提交</button>' +
+                       '</span>' +
+                    ' </div>' +
+                  '  </form>' +
+                '</div>';
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['500px', '290px'], //宽高
+                content: html
+            });
+            $(".layui-layer-title").text("请填写未通过原因");
+            Array.prototype.slice.call($(".btn_NotPass")).forEach(function (item) {
+                item.onclick = function () {
+                    if ($(".longinput").val() == "") {
+                        layer.msg("原因不能为空"); return;
+                    }
+                    audit(3, type, id, "审核成功", $(".longinput").val())
+                };
+            });
+        });
+
+        function audit(res, type, id, message, notpassstr) {
+            var data = { res: res, type: type, id: id, notpassstr: notpassstr };
+            $.get("/Account/AccountAuditRes", data, function (res) {
+                if (res == "True") {
+                    $("#layui-layer1").hide();
+                    $("#layui-layer-shade3").hide()
+                    layer.msg(message, { time: 2000, icon: 1 });
+                    window.location.href = "/Account/AccountAudit";
+                } else {
+                    layer.msg("出现异常", { time: 2000, icon: 1 });
+                }
+            })
+        }
+    </script>
+}
