@@ -12,58 +12,62 @@
     <h3 class="ptb10">任务详细</h3>
 </div>
 
-<table class="table noborder">
+<table class="table">
     <tr>
         <td class="t-r w220">项目名称： </td>
-        <td>@Model.Name</td>
+        <td colspan="7">@Model.Name</td>
+    </tr>
+    <tr>
+        <td class="t-r">项目描述： </td>
+        <td colspan="7"> @Html.Raw(Model.Desc)</td>
     </tr>
     <tr>
         <td class="t-r w220">项目类别： </td>
         <td>@Model.CategoryName</td>
-    </tr>
-    <tr>
+
         <td class="t-r">项目编号： </td>
         <td>@Model.Code</td>
-    </tr>
-    <tr>
+
         <td class="t-r">合同号： </td>
         <td>@Model.ContractCode</td>
-    </tr>
-    <tr>
-        <td class="t-r">预计工期： </td>
-        <td>@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
-    </tr>
-    <tr>
+
         <td class="t-r">项目预算：</td>
         <td>@Model.Budget</td>
     </tr>
     <tr>
-        <td class="t-r">项目描述： </td>
-        <td> @Html.Raw(Model.Desc)</td>
-    </tr>
-    @*<tr>
-            <td class="t-r">审核状态： </td>
-            <td>@Model.AuditStatusDesc</td>
-        </tr>*@
-    <tr>
-        <td class="t-r">项目阶段： </td>
-        <td>@Model.StatusDesc</td>
-    </tr>
-    <tr>
+        <td class="t-r">审核地点： </td>
+        <td> </td>
+
         <td class="t-r">项目经理： </td>
         <td>@Model.Manager</td>
+
+
+        <td class="t-r">处理人： </td>
+        <td>@Model.RUserName </td>
+
+        <td class="t-r">手机号： </td>
+        <td> </td>
     </tr>
-    <tr>
-        <td class="t-r">联系方式： </td>
-        <td>@Model.Linkman [ @Model.Mobile ]</td>
-    </tr>
+
+
+
     <tr>
         <td class="t-r">发布时间： </td>
         <td>@Model.CTime</td>
+
+        <td class="t-r">项目阶段： </td>
+        <td>@Model.StatusDesc</td>
+
+        <td class="t-r">预计工期： </td>
+        <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
     </tr>
+    @*<tr>
+            <td class="t-r">联系方式： </td>
+            <td>@Model.Linkman [ @Model.Mobile ]</td>
+        </tr>*@
     <tr>
         <td class="t-r">项目文件： </td>
-        <td>
+        <td colspan="7">
             @if (Model.FlieList != null && Model.FlieList.Count > 0)
             {
                 foreach (var file in Model.FlieList)
@@ -75,32 +79,6 @@
             }
         </td>
     </tr>
-    @*<tr>
-            <td class="t-r">审核此任务： </td>
-            <td>
-
-                @if (Model.AuditStatus != 0)
-                {
-                    @Model.AuditStatusDesc
-                }
-                else
-                {
-                    <form method="post" action="/Task/AuditSubmit">
-                        <label class="radio-inline">
-                            <input type="radio" name="auditState" value="1"> 通过
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="auditState" value="-1"> 不通过
-                        </label>
-
-                        <input type="text" class="form-control" name="auditDesc" placeholder="审核说明">
-
-                        <input type="hidden" name="id" value="@Model.ID" />
-                        <button type="submit" class="btn btn-default"> 提 交 </button>
-                    </form>
-                }
-            </td>
-        </tr>*@
 
     <tr>
         <td class="t-r">项目接单：</td>
@@ -137,17 +115,8 @@
                 <input type="hidden" name="ReceiveId" value="0" />
             </td>
         </tr>
+    }
 
-    }
-    else if (Model.RUserId > 0)
-    {
-        <tr>
-            <td class="t-r">任务执行人：</td>
-            <td>
-                @Model.RUserName
-            </td>
-        </tr>
-    }
     <tr>
         <td class="t-r">执行方案：</td>
         <td>
@@ -178,21 +147,34 @@
         </td>
     </tr>
 
+
+
     <tr>
-        <td class="t-r">项目进度：</td>
-        <td>
-            @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
+        <td colspan="8">项目进度</td>
+    </tr>
+    <tr>
+        <td>工作日期</td>
+        <td>处理人</td>
+        <td colspan="4">工作内容</td>
+        <td>工作时间</td>
+        <td>在途时间</td>
+    </tr>
+
+    @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
             {
                 foreach (var proc in Model.ProcessDesc)
                 {
-                    <div class="bb mtb10 lh25 w600">
-                        <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
-                        <p class="pl25">@proc.ProcessDesc</p>
-                    </div>
-                }
-            }
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @proc.CreateTime
+                </td>
+                <td>@proc.UserName </td>
+                <td>@proc.ProcessDesc</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        }
+    }
 
     @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2)
     {
@@ -247,7 +229,7 @@
             }
         </td>
     </tr>
-    @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate<1)|| (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
+    @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate < 1) || (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
     {
         <tr>
             <td class="t-r">评价：</td>
@@ -272,10 +254,66 @@
             </td>
         </tr>
     }
-
-
 </table>
 
+<div class="modal fade" id="addProcess">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("AddProcess", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">新增工作内容</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>出发地点：</td>
+                            <td><input type="text" /> </td>
+                            <td>服务地点：</td>
+                            <td><<input type="text" />/td>
+                            <td>在途时间(往返)：</td>
+                            <td><input type="text" />时</td>
+                        </tr>
+                        <tr>
+                            <td>任务性质：</td>
+                            <td colspan="5">
+                                <input type="checkbox" value="1" /> 售前
+                                <input type="checkbox" value="1" /> 售后
+                                <input type="checkbox" value="1" /> 响应服务
+                                <input type="checkbox" value="1" /> 巡检服务
+                                <input type="checkbox" value="1" /> 其他
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>到达现场时间：</td>
+                            <td colspan="2"><input type="datetime" /></td>
+                            <td>服务完成时间：</td>
+                            <td colspan="2"><input type="datetime" /></td>
+                        </tr>
+                        <tr>
+                            <td>分析及处理方法：</td>
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr>
+                            <td>遗留问题：</td>
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr>
+                            <td>维护建议：</td>
+                            <td colspan="5"></td>
+                        </tr>
+                    </table>
+                </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
+                        <button type="submit" class="btn btn-primary"> 确定指派 </button>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
 
 
 
