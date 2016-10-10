@@ -13,10 +13,6 @@ namespace com.pmp.model.data
     public class ProjectProcess
     {
         /// <summary>
-        /// 描述
-        /// </summary>
-        public string ProcessDesc { get; set; }
-        /// <summary>
         /// 操作人
         /// </summary>
         public int UserID { get; set; }
@@ -29,5 +25,50 @@ namespace com.pmp.model.data
         /// </summary>
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreateTime { get; set; }
+
+
+        public string FromPlace { set; get; }
+
+        public string ServerPlace { set; get; }
+
+        public int WayHours { set; get; }
+
+        public string ServerType { set; get; }
+
+        public DateTime StartTime { set; get; }
+        public DateTime EndTime { set; get; }
+
+        public int ServerHours
+        {
+            set { }
+            get
+            {
+                try
+                {
+                    return (EndTime - StartTime).Hours;
+                }
+                catch (Exception)
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string ProcessDesc { get; set; }
+
+        /// <summary>
+        /// 遗留问题
+        /// </summary>
+        public string Nodus { set; get; }
+
+        /// <summary>
+        /// 维护建议
+        /// </summary>
+        public string Suggest { set; get; }
+
+
     }
 }

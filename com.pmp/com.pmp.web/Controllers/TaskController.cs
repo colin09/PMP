@@ -432,7 +432,7 @@ namespace com.pmp.web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-
+        /*
         [Authorization]
         public ActionResult AddProcess(long projectId, string desc, HttpPostedFileBase[] files, int overState = 0)
         {
@@ -442,25 +442,31 @@ namespace com.pmp.web.Controllers
                 _projectService.ModifyState(projectId, ProjectStatus.Audit);
 
             return RedirectToAction("AuditDetail", new { id = projectId });
+        }*/
+
+
+        [Authorization]
+        public ActionResult AddProcess(long projectId, ProjectProcess process, HttpPostedFileBase[] files, int overState = 0)
+        {
+            var overMsg = overState > 0 ? " - 完成" : " - 未完";
+            WriteProcess(projectId, process, files);
+            if (overState > 0)
+                _projectService.ModifyState(projectId, ProjectStatus.Audit);
+
+            return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
 
-
-        public bool WriteProcess(long projectId, string desc, HttpPostedFileBase[] files)
+        public bool WriteProcess(long projectId, ProjectProcess process, HttpPostedFileBase[] files)
         {
             try
             {
                 var project = _projectService.GetOneById(projectId);
                 if (project != null)
                 {
-                    var proc = new ProjectProcess()
-                    {
-                        ProcessDesc = desc,
-                        UserID = this._Longin_UserId,
-                        UserName = this._Longin_RealName,
-                        CreateTime = DateTime.Now
-
-                    };
+                    process.UserID = this._Longin_UserId;
+                    process.UserName = this._Longin_RealName;
+                    process.CreateTime = DateTime.Now;
 
                     var fileIndex = 1;
                     if (files != null)
@@ -477,11 +483,11 @@ namespace com.pmp.web.Controllers
 
                                 file.SaveAs(Path.Combine(Request.MapPath("~/Upload/"), saveName));
 
-                                proc.FlieList.Add(pFile);
+                                process.FlieList.Add(pFile);
                             }
                         }
                     }
-                    project.ProcessDesc.Add(proc);
+                    project.ProcessDesc.Add(process);
 
                     _projectService.AddProcess(project);
                 }
@@ -527,7 +533,12 @@ namespace com.pmp.web.Controllers
 
             _projectService.ModifyState(projectId, state);
 
-            WriteProcess((long)projectId, $"[{r}]{desc}", null);
+            var proc = new ProjectProcess()
+            {
+                ProcessDesc =  $"[{r}]{desc}"
+            };
+
+            WriteProcess((long)projectId,proc, null);
 
             return RedirectToAction("AuditDetail", new { id = projectId });
         }

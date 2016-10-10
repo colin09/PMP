@@ -170,8 +170,8 @@
                 </td>
                 <td>@proc.UserName </td>
                 <td>@proc.ProcessDesc</td>
-                <td>0</td>
-                <td>0</td>
+                <td>@proc.ServerHours</td>
+                <td>@proc.WayHours</td>
             </tr>
         }
     }
@@ -269,46 +269,46 @@
                     <table>
                         <tr>
                             <td>出发地点：</td>
-                            <td><input type="text" /> </td>
+                            <td><input type="text" name="FromPlace" /> </td>
                             <td>服务地点：</td>
-                            <td><<input type="text" />/td>
+                            <td><<input type="text" name="ServerPlace" />/td>
                             <td>在途时间(往返)：</td>
-                            <td><input type="text" />时</td>
+                            <td><input type="text" name="WayHours" />时</td>
                         </tr>
                         <tr>
                             <td>任务性质：</td>
                             <td colspan="5">
-                                <input type="checkbox" value="1" /> 售前
-                                <input type="checkbox" value="1" /> 售后
-                                <input type="checkbox" value="1" /> 响应服务
-                                <input type="checkbox" value="1" /> 巡检服务
-                                <input type="checkbox" value="1" /> 其他
+                                <input type="checkbox" name="ServerType" value="1" /> 售前
+                                <input type="checkbox" name="ServerType" value="1" /> 售后
+                                <input type="checkbox" name="ServerType" value="1" /> 响应服务
+                                <input type="checkbox" name="ServerType" value="1" /> 巡检服务
+                                <input type="checkbox" name="ServerType" value="1" /> 其他
                             </td>
                         </tr>
                         <tr>
                             <td>到达现场时间：</td>
-                            <td colspan="2"><input type="datetime" /></td>
+                            <td colspan="2"><input type="datetime" name="StartTime" /></td>
                             <td>服务完成时间：</td>
-                            <td colspan="2"><input type="datetime" /></td>
+                            <td colspan="2"><input type="datetime" name="EndTime" /></td>
                         </tr>
                         <tr>
                             <td>分析及处理方法：</td>
-                            <td colspan="5"></td>
+                            <td colspan="5"> <textarea name="ProcessDesc" rows="3"></textarea></td>
                         </tr>
                         <tr>
                             <td>遗留问题：</td>
-                            <td colspan="5"></td>
+                            <td colspan="5"><textarea name="Nodus" rows="3"></textarea></td>
                         </tr>
                         <tr>
                             <td>维护建议：</td>
-                            <td colspan="5"></td>
+                            <td colspan="5"><textarea name="Suggest" rows="3"></textarea></td>
                         </tr>
                     </table>
                 </div>
                     <div class="modal-footer">
                         <input type="hidden" name="projectId" value="@Model.ID" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
-                        <button type="submit" class="btn btn-primary"> 确定指派 </button>
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
                     </div>
             }
         </div>
