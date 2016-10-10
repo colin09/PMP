@@ -12,53 +12,56 @@
     <h3 class="ptb10">任务详细</h3>
 </div>
 
-<table class="table">
+<table class="table table-bordered">
     <tr>
-        <td class="t-r w220">项目名称： </td>
+        <td class="t-r" colspan="8"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></td>
+    </tr>
+    <tr>
+        <td class="t-r w120 fw">项目名称： </td>
         <td colspan="7">@Model.Name</td>
     </tr>
     <tr>
-        <td class="t-r">项目描述： </td>
+        <td class="t-r fw">项目描述： </td>
         <td colspan="7"> @Html.Raw(Model.Desc)</td>
     </tr>
     <tr>
-        <td class="t-r w220">项目类别： </td>
+        <td class="t-r fw">项目类别： </td>
         <td>@Model.CategoryName</td>
 
-        <td class="t-r">项目编号： </td>
+        <td class="t-r w120 fw">项目编号： </td>
         <td>@Model.Code</td>
 
-        <td class="t-r">合同号： </td>
+        <td class="t-r w120 fw">合同号： </td>
         <td>@Model.ContractCode</td>
 
-        <td class="t-r">项目预算：</td>
-        <td>@Model.Budget</td>
+        <td class="t-r w120 fw">项目预算：</td>
+        <td>￥@Model.Budget</td>
     </tr>
     <tr>
-        <td class="t-r">审核地点： </td>
-        <td> </td>
+        <td class="t-r fw">项目地点： </td>
+        <td>@Model.ProvinceName-@Model.CityName </td>
 
-        <td class="t-r">项目经理： </td>
+        <td class="t-r fw">项目经理： </td>
         <td>@Model.Manager</td>
 
 
-        <td class="t-r">处理人： </td>
+        <td class="t-r fw">处理人： </td>
         <td>@Model.RUserName </td>
 
-        <td class="t-r">手机号： </td>
+        <td class="t-r fw">手机号： </td>
         <td> </td>
     </tr>
 
 
 
     <tr>
-        <td class="t-r">发布时间： </td>
+        <td class="t-r fw">发布时间： </td>
         <td>@Model.CTime</td>
 
-        <td class="t-r">项目阶段： </td>
+        <td class="t-r fw">项目阶段： </td>
         <td>@Model.StatusDesc</td>
 
-        <td class="t-r">预计工期： </td>
+        <td class="t-r fw">预计工期： </td>
         <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
     </tr>
     @*<tr>
@@ -66,7 +69,7 @@
             <td>@Model.Linkman [ @Model.Mobile ]</td>
         </tr>*@
     <tr>
-        <td class="t-r">项目文件： </td>
+        <td class="t-r fw">项目文件： </td>
         <td colspan="7">
             @if (Model.FlieList != null && Model.FlieList.Count > 0)
             {
@@ -81,8 +84,8 @@
     </tr>
 
     <tr>
-        <td class="t-r">项目接单：</td>
-        <td>
+        <td class="t-r fw">项目接单：</td>
+        <td colspan="7">
             @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
             {
                 foreach (var bid in Model.BidUsers)
@@ -107,8 +110,8 @@
     @if (ViewBag.level < 20 && Model.RUserId < 1)
     {
         <tr>
-            <td class="t-r">指派此任务：</td>
-            <td>
+            <td class="t-r fw">指派此任务：</td>
+            <td colspan="7">
                 <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
                 <span id="spnReceiveName"> -- </span>
                 <input type="hidden" name="id" value="@Model.ID" />
@@ -118,8 +121,8 @@
     }
 
     <tr>
-        <td class="t-r">执行方案：</td>
-        <td>
+        <td class="t-r fw">执行方案：</td>
+        <td colspan="7">
             @if (ViewBag.slns != null && ((List<TaskSlnRes>)ViewBag.slns).Count > 0)
             {
                 foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
@@ -150,37 +153,40 @@
 
 
     <tr>
-        <td colspan="8">项目进度</td>
+        <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
     </tr>
     <tr>
+        <td></td>
         <td>工作日期</td>
         <td>处理人</td>
-        <td colspan="4">工作内容</td>
+        <td colspan="3">工作内容</td>
         <td>工作时间</td>
         <td>在途时间</td>
     </tr>
 
     @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
-            {
-                foreach (var proc in Model.ProcessDesc)
-                {
+    {
+        foreach (var proc in Model.ProcessDesc)
+        {
+
             <tr>
+                <td></td>
                 <td>
                     @proc.CreateTime
                 </td>
                 <td>@proc.UserName </td>
-                <td>@proc.ProcessDesc</td>
+                <td colspan="3">@proc.ProcessDesc</td>
                 <td>@proc.ServerHours</td>
                 <td>@proc.WayHours</td>
             </tr>
         }
     }
 
-    @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2)
+    @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2 && false)
     {
         <tr>
-            <td class="t-r">提交项目进度：</td>
-            <td>
+            <td class="t-r fw">提交项目进度：</td>
+            <td colspan="7">
                 <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
                     <textarea name="desc" rows="5" class="w320"> </textarea>
@@ -195,8 +201,8 @@
     @if (Model.Status == 3 && ViewBag.level == 2)
     {
         <tr>
-            <td class="t-r">项目验收：</td>
-            <td>
+            <td class="t-r fw">项目验收：</td>
+            <td colspan="7">
                 <form method="post" action="/Task/AuditSubmit">
                     <input type="hidden" name="projectId" value="@Model.ID" />
                     <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
@@ -209,13 +215,13 @@
     }
 
     <tr>
-        <td class="t-r">项目评价：</td>
-        <td>
+        <td class="t-r fw">项目评价：</td>
+        <td colspan="7">
             @if (ViewBag.evas != null)
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                    <div class="bb mt10 lh25 w600">
+                    <div class="bb mt10 lh25 ">
                         <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
                         @for (var i = 0; i < eval.Grade; i++)
                         {
@@ -232,8 +238,8 @@
     @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate < 1) || (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
     {
         <tr>
-            <td class="t-r">评价：</td>
-            <td>
+            <td class="t-r fw">评价：</td>
+            <td colspan="7">
                 <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
                     <input type="hidden" name="projectId" value="@Model.ID" />
                     <input type="hidden" id="hdgrade" name="grade" value="5" />
@@ -256,8 +262,8 @@
     }
 </table>
 
-<div class="modal fade" id="addProcess">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="addProcess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width:1000px;">
         <div class="modal-content">
             @using (Html.BeginForm("AddProcess", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -265,46 +271,47 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">新增工作内容</h4>
                 </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td>出发地点：</td>
-                            <td><input type="text" name="FromPlace" /> </td>
-                            <td>服务地点：</td>
-                            <td><<input type="text" name="ServerPlace" />/td>
-                            <td>在途时间(往返)：</td>
-                            <td><input type="text" name="WayHours" />时</td>
-                        </tr>
-                        <tr>
-                            <td>任务性质：</td>
-                            <td colspan="5">
-                                <input type="checkbox" name="ServerType" value="1" /> 售前
-                                <input type="checkbox" name="ServerType" value="1" /> 售后
-                                <input type="checkbox" name="ServerType" value="1" /> 响应服务
-                                <input type="checkbox" name="ServerType" value="1" /> 巡检服务
-                                <input type="checkbox" name="ServerType" value="1" /> 其他
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>到达现场时间：</td>
-                            <td colspan="2"><input type="datetime" name="StartTime" /></td>
-                            <td>服务完成时间：</td>
-                            <td colspan="2"><input type="datetime" name="EndTime" /></td>
-                        </tr>
-                        <tr>
-                            <td>分析及处理方法：</td>
-                            <td colspan="5"> <textarea name="ProcessDesc" rows="3"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>遗留问题：</td>
-                            <td colspan="5"><textarea name="Nodus" rows="3"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>维护建议：</td>
-                            <td colspan="5"><textarea name="Suggest" rows="3"></textarea></td>
-                        </tr>
-                    </table>
-                </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>出发地点：</td>
+                                <td><input type="text" name="FromPlace" /> </td>
+                                <td>服务地点：</td>
+                                <td><input type="text" name="ServerPlace" /></td>
+                                <td>在途时间(往返)：</td>
+                                <td><input type="number" name="WayHours" />时</td>
+                            </tr>
+                            <tr>
+                                <td>任务性质：</td>
+                                <td colspan="5">
+                                    <input type="radio" name="ServerType" value="售前" /> 售前
+                                    <input type="radio" name="ServerType" value="售后" /> 售后
+                                    <input type="radio" name="ServerType" value="响应服务" /> 响应服务
+                                    <input type="radio" name="ServerType" value="巡检服务" /> 巡检服务
+                                    <input type="radio" name="ServerType" value="其他" /> 其他
+                                    <input type="text" name="otherType" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>到达现场时间：</td>
+                                <td colspan="2"><input type="time" name="StartTime" /></td>
+                                <td>服务完成时间：</td>
+                                <td colspan="2"><input type="time" name="EndTime" /></td>
+                            </tr>
+                            <tr>
+                                <td>分析及处理方法：</td>
+                                <td colspan="5"> <textarea name="ProcessDesc" rows="3" class="w600"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>遗留问题：</td>
+                                <td colspan="5"><textarea name="Nodus" rows="3" class="w600"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>维护建议：</td>
+                                <td colspan="5"><textarea name="Suggest" rows="3" class="w600"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
                     <div class="modal-footer">
                         <input type="hidden" name="projectId" value="@Model.ID" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
@@ -382,6 +389,10 @@
         $(function () {
             $("#btnCreateSln").click(function () {
                 $('#GiveSln').modal('show');
+            });
+
+            $("#spnAddProc").click(function () {
+                $('#addProcess').modal('show');
             });
 
             $("#btnChoosePerson").click(function () {

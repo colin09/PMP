@@ -108,7 +108,7 @@ namespace com.pmp.web.Controllers
             var project = new MgProject()
             {
                 Category = (ProjectCategroy)task.Catetory,
-                Code = task.Code,
+                Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".",""),
                 Name = task.Name,
                 ContractCode = task.ContractCode,
                 Status = ProjectStatus.Default,
@@ -221,7 +221,6 @@ namespace com.pmp.web.Controllers
                     UserName = userList.FirstOrDefault(u => u.Id == b.UserId)?.Name,
                 }).ToList()
             };
-
             ViewBag.slns = slns.Select(s => new TaskSlnRes
             {
                 SlnDesc = s.SlnDesc,
@@ -238,6 +237,11 @@ namespace com.pmp.web.Controllers
                 UserName = userList.FirstOrDefault(u => u.Id == e.UserId)?.Name,
                 CTime = e.CTime,
             }).ToList();
+
+            log.Info($"========>loginUser:{ _Longin_UserId}, {result.BidUsers.ToJson()}");
+            var isBided = result.BidUsers?.Where(b => b.UserId == _Longin_UserId).Any()??false;
+            ViewBag.isBid = isBided;
+            log.Info($"isBid : {isBided}");
 
             return View(result);
         }

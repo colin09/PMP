@@ -13,86 +13,112 @@
 </h3>
 
 
-<table class="table noborder">
+
+<table class="table table-bordered">
     <tr>
-        <td class="t-r w220 fW">项目类别：</td>
-        <td>@Model.CategoryName </td>
+        <td class="t-r w120 fw">项目名称： </td>
+        <td colspan="7">@Model.Name</td>
     </tr>
     <tr>
-        <td class="t-r fW">项目编号：</td>
+        <td class="t-r fw">项目描述： </td>
+        <td colspan="7"> @Html.Raw(Model.Desc)</td>
+    </tr>
+    <tr>
+        <td class="t-r fw">项目类别： </td>
+        <td>@Model.CategoryName</td>
+
+        <td class="t-r w120 fw">项目编号： </td>
         <td>@Model.Code</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">合同号：</td>
+
+        <td class="t-r w120 fw">合同号： </td>
         <td>@Model.ContractCode</td>
+
+        <td class="t-r w120 fw">项目预算：</td>
+        <td>￥@Model.Budget</td>
     </tr>
     <tr>
-        <td class="t-r fW">预计工期：</td>
-        <td>@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
+        <td class="t-r fw">项目地点： </td>
+        <td>@Model.ProvinceName-@Model.CityName </td>
+
+        <td class="t-r fw">项目经理： </td>
+        <td>@Model.Manager</td>
+
+
+        <td class="t-r fw">处理人： </td>
+        <td>@Model.RUserName </td>
+
+        <td class="t-r fw">手机号： </td>
+        <td> </td>
     </tr>
+
+
+
     <tr>
-        <td class="t-r fW">项目预算：</td>
-        <td>@Model.Budget</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">项目描述：</td>
-        <td>@Html.Raw(Model.Desc)</td>
+        <td class="t-r fw">发布时间： </td>
+        <td>@Model.CTime</td>
+
+        <td class="t-r fw">项目阶段： </td>
+        <td>@Model.StatusDesc</td>
+
+        <td class="t-r fw">预计工期： </td>
+        <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
     </tr>
     @*<tr>
-            <td class="t-r">审核状态：</td>
-            <td>@Model.AuditStatusDesc</td>
+            <td class="t-r">联系方式： </td>
+            <td>@Model.Linkman [ @Model.Mobile ]</td>
         </tr>*@
     <tr>
-        <td class="t-r fW">项目状态：</td>
-        <td>@Model.StatusDesc</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">项目经理：</td>
-        <td>@Model.Manager</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">联系方式：</td>
-        <td>@Model.Linkman [ @Model.Mobile ]</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">发布时间：</td>
-        <td>@Model.CTime</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">最后一次修改时间：</td>
-        <td>@Model.UTime</td>
-    </tr>
-    <tr>
-        <td class="t-r fW">项目文件：</td>
-        <td>
+        <td class="t-r fw">项目文件： </td>
+        <td colspan="7">
             @if (Model.FlieList != null && Model.FlieList.Count > 0)
             {
                 foreach (var file in Model.FlieList)
                 {
-                    <div> <a href="@file.Path">@file.Name</a></div>
-                }
-            }
-
-        </td>
-    </tr>
-    <tr>
-        <td class="t-r fW">项目进度：</td>
-        <td>
-            @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
-            {
-                foreach (var proc in Model.ProcessDesc)
-                {
-                    <div class="bb mtb10 lh25 w900">
-                        <span class="fw">@proc.UserName </span>  <span class="c9"> @proc.CreateTime</span>
-                        <p class="pl25">@proc.ProcessDesc</p>
+                    <div>
+                        <a href="@file.Path">@file.Name</a>
                     </div>
                 }
             }
         </td>
     </tr>
+
+
+
+
     <tr>
-        <td class="t-r fW">项目接单：</td>
-        <td>
+        <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>工作日期</td>
+        <td>处理人</td>
+        <td colspan="3">工作内容</td>
+        <td>工作时间</td>
+        <td>在途时间</td>
+    </tr>
+
+    @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
+    {
+        foreach (var proc in Model.ProcessDesc)
+        {
+
+            <tr>
+                <td></td>
+                <td>
+                    @proc.CreateTime
+                </td>
+                <td>@proc.UserName </td>
+                <td colspan="3">@proc.ProcessDesc</td>
+                <td>@proc.ServerHours</td>
+                <td>@proc.WayHours</td>
+            </tr>
+        }
+    }
+
+
+    <tr>
+        <td class="t-r fw">项目接单：</td>
+        <td colspan="7">
             @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
             {
                 foreach (var bid in Model.BidUsers)
@@ -104,39 +130,18 @@
             }
         </td>
     </tr>
-    @*<tr>
-            <td class="t-r">项目竞标：</td>
-            <td>
-                @if (ViewBag.slns != null)
-                {
-                    foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
-                    {
-                        <div>
-                            <div>
-                                @sln.UserName @sln.CTime
-                                @if (sln.FileList != null && sln.FileList.Count > 0)
-                                {
-                                    <span>[含附件]</span>
-                                }
-                                <p>@sln.SlnDesc</p>
-                            </div>
-                        </div>
-                    }
-                }
+   
 
-            </td>
-        </tr>*@
-
-    @if (Model.BidUsers != null && Model.BidUsers.Select(b => b.UserId == ViewBag._Longin_UserId).Count()>0)
+    @if (Model.BidUsers != null && Model.BidUsers.Where(b => b.UserId == ViewBag._Longin_UserId).Count() > 0)
     {
         @*<p>已接单</p>*@
-        <input type="hidden" value="@Model.BidUsers" />
+        <input type="hidden" value="@ViewBag.isBidc" />
     }
     else if (Model.Status == (int)ProjectStatus.Default)
     {
         <tr>
-            <td class="t-r fW">接单</td>
-            <td>
+            <td class="t-r fw">接单</td>
+            <td colspan="7">
                 <form method="post" action="/Task/JoinProject">
 
                     <input type="hidden" name="projectId" value="@Model.ID" />
@@ -148,8 +153,8 @@
         </tr>
     }
     <tr>
-        <td class="t-r fW">项目评价：</td>
-        <td>
+        <td class="t-r fw">项目评价：</td>
+        <td colspan="7">
             @if (ViewBag.evas != null)
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
