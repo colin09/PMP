@@ -40,6 +40,7 @@
                                 @if ((int)item.Status < 2)
                                 {
                                     <a href="/Task/Modify?Id=@item.ID"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                     <span id="spnDelete" data-id="@item.ID" class="glyphicon glyphicon-remove"></span>
                                 }
                                 <a href="/Task/AuditDetail?id=@item.ID">
                                     [@item.Status.GetName()]
@@ -86,6 +87,16 @@
                 var state = $("#projectState").val();
 
                 window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
+            });
+
+            $("#spnDelete").click(function() {
+                var id = $(this).data("id");
+                $.getJSON("/Task/Delete", { id: id }).done(function() {
+
+                    var pageindex = $(this).data("page");
+                    var state = $("#projectState").val();
+                    window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
+                });
             });
         });
     </script>

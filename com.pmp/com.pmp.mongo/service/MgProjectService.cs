@@ -107,6 +107,14 @@ namespace com.pmp.mongo.service
             return Update(filter, update) > 0;
         }
 
+        public bool Delete(int id)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", id);
+            var update = Builders<MgProject>.Update.Set(p => p.Status, ProjectStatus.Delete)
+                .Set(p=>p.UpdateTime,DateTime.Now);
+
+            return Update(filter, update) > 0;
+        }
 
         public bool DeleteFile(int id, int fileIndex)
         {

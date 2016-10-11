@@ -259,13 +259,31 @@ namespace com.pmp.web.Controllers
             return View(project);
         }
 
+        [Authorization]
+        public ActionResult Delete(int id)
+        {
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return View("MyList");
+
+            if (project.CreatesUserID != _Longin_UserId)
+                return View("MyList");
+
+            _projectService.Delete(id);
+
+            return Json("seccess", JsonRequestBehavior.AllowGet);
+        }
+
         [ValidateInput(false)]
         [Authorization]
         public ActionResult ModifySubmit(TaskInfoReq task, HttpPostedFileBase[] files)
         {
             var project = _projectService.GetOneById(task.Id);
             if (project == null)
-                return View();
+                return View("MyList");
+
+            if (project.CreatesUserID!=_Longin_UserId)
+                return View("MyList");
 
             project.Category = (ProjectCategroy)task.Catetory;
             //project.Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
