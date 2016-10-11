@@ -49,7 +49,7 @@
               {
                   "title": "我的任务",
                   "style": "",
-                  "url": "/Task/MyList"
+                  "url": "/Task/MyList?state=-1"
               }
             ]
         },
@@ -111,9 +111,15 @@
               {
                   "title": "我的任务",
                   "style": "",
-                  "url": "/Task/MyList?state=1",
+                  "url": "/Task/MyList?state=-1",
                   "sort": 1
-              }
+              },
+            {
+                "title": "我的接单",
+                "style": "",
+                "url": "#",
+                "sort": 1
+            }
             ]
         },
         {
