@@ -310,25 +310,30 @@ namespace com.pmp.web.Controllers
             if (files != null)
                 foreach (var file in files)
                 {
-                    if (file.ContentLength > 1024 * 1024 * 2)
-                        return Json("{'error':'文件超大。'}");
+                    if (file != null)
+                    {
+                        if (file.ContentLength > 1024 * 1024 * 2)
+                            return Json("{'error':'文件超大。'}");
 
-                    var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
-                    var pFile = new ProjectFlie();
-                    pFile.Name = Path.GetFileName(file.FileName);
-                    pFile.FileType = 1;
-                    pFile.Path = $"../Upload/{saveName}";
-                    pFile.Index = fileIndex;
+                        var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
+                        var pFile = new ProjectFlie();
+                        pFile.Name = Path.GetFileName(file.FileName);
+                        pFile.FileType = 1;
+                        pFile.Path = $"../Upload/{saveName}";
+                        pFile.Index = fileIndex;
 
-                    var savePath = Path.Combine(Request.MapPath("~/Upload"), saveName);
-                    file.SaveAs(savePath);
+                        var savePath = Path.Combine(Request.MapPath("~/Upload"), saveName);
+                        file.SaveAs(savePath);
 
-                    project.FlieList.Add(pFile);
-                    fileIndex += 1;
+                        project.FlieList.Add(pFile);
+                        fileIndex += 1;
+                    }
                 }
 
             _projectService.Modify(project);
-            return View("AuditDetail", new { id = task.Id });
+            log.Info($"go to detail id :{task.Id}");
+            return View("MyList");
+            //return View("AuditDetail", new { id = task.Id });
         }
 
 

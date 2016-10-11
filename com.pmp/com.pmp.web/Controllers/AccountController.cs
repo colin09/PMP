@@ -691,9 +691,7 @@ namespace com.pmp.web.Controllers
             var service = new MgUserService();
             var user = service.SearchById(id).FirstOrDefault();
 
-
-
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(user.PersonInfo, JsonRequestBehavior.AllowGet);
         }
 
 
