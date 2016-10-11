@@ -87,6 +87,38 @@ namespace com.pmp.mongo.service
             Insert(m);
         }
 
+        public bool Modify(MgProject m)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", m.ID);
+            var update = Builders<MgProject>.Update.Set(p => p.Category, m.Category)
+                .Set(p => p.Name, m.Name)
+                .Set(p => p.ContractCode, m.ContractCode)
+                .Set(p => p.Manager, m.Manager)
+                .Set(p => p.Linkman, m.Linkman)
+                .Set(p => p.Mobile, m.Mobile)
+                .Set(p => p.Desc, m.Desc)
+                .Set(p => p.StartTime, m.StartTime)
+                .Set(p => p.EndTime, m.EndTime)
+                .Set(p => p.Budget, m.Budget)
+                .Set(p => p.ProvinceId, m.ProvinceId)
+                .Set(p => p.CityId, m.CityId)
+                .Set(p => p.FlieList, m.FlieList);
+
+            return Update(filter, update) > 0;
+        }
+
+
+        public bool DeleteFile(int id, int fileIndex)
+        {
+            var filter = Builders<MgProject>.Filter.Eq("ID", id);
+            var m = Search(filter).FirstOrDefault();
+            if (m == null)
+                return false;
+            var list = m.FlieList.Select(f => f.Index != fileIndex).ToList();
+            var update = Builders<MgProject>.Update.Set(p => p.FlieList, m.FlieList);
+            return Update(filter, update) > 0;
+        }
+
         /*
         public bool AuditProject(int id, AuditStatus auditState, string desc)
         {
@@ -105,7 +137,7 @@ namespace com.pmp.mongo.service
             return Update(filter, update) > 0;
         }
 
-        public bool JoinProject(int id,BidUser user)
+        public bool JoinProject(int id, BidUser user)
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
             var project = GetOneById(id);
@@ -117,7 +149,7 @@ namespace com.pmp.mongo.service
             list.Add(user);
 
             var update = Builders<MgProject>.Update.Set(p => p.BidUsers, list);
-            
+
             return Update(filter, update) > 0;
         }
 
@@ -133,7 +165,7 @@ namespace com.pmp.mongo.service
 
         public IList<MgProject> GetListByIds(List<int> ids)
         {
-            var filter = Builders<MgProject>.Filter.In(m=>m.ID,ids);
+            var filter = Builders<MgProject>.Filter.In(m => m.ID, ids);
             return Search(filter);
         }
 
@@ -162,7 +194,7 @@ namespace com.pmp.mongo.service
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", m.ID);
             var update = Builders<MgProject>.Update.Set(p => p.IsEvaluate_E, m.IsEvaluate_E)
-                .Set(p=>p.IsEvaluate_I,m.IsEvaluate_I).Set(p=>p.Status,m.Status);
+                .Set(p => p.IsEvaluate_I, m.IsEvaluate_I).Set(p => p.Status, m.Status);
 
             return Update(filter, update) > 0;
         }

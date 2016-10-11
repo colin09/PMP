@@ -26,6 +26,7 @@ namespace com.pmp.web.Controllers
         private readonly MgEvaluationService _evaluationService;
         private readonly MgCityService _cityService;
         private readonly MgUserService _userService;
+        private readonly MgMessageService _msgService;
 
 
         public TaskController()
@@ -35,6 +36,7 @@ namespace com.pmp.web.Controllers
             _evaluationService = new MgEvaluationService();
             _cityService = new MgCityService();
             _userService = new MgUserService();
+            _msgService = new MgMessageService();
         }
 
         // GET: Task
@@ -108,7 +110,7 @@ namespace com.pmp.web.Controllers
             var project = new MgProject()
             {
                 Category = (ProjectCategroy)task.Catetory,
-                Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".",""),
+                Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
                 Name = task.Name,
                 ContractCode = task.ContractCode,
                 Status = ProjectStatus.Default,
@@ -139,6 +141,7 @@ namespace com.pmp.web.Controllers
                     pFile.Name = Path.GetFileName(file.FileName);
                     pFile.FileType = 1;
                     pFile.Path = $"../Upload/{saveName}";
+                    pFile.Index = fileIndex;
 
                     var savePath = Path.Combine(Request.MapPath("~/Upload"), saveName);
                     file.SaveAs(savePath);
@@ -239,14 +242,96 @@ namespace com.pmp.web.Controllers
             }).ToList();
 
             log.Info($"========>loginUser:{ _Longin_UserId}, {result.BidUsers.ToJson()}");
-            var isBided = result.BidUsers?.Where(b => b.UserId == _Longin_UserId).Any()??false;
+            var isBided = result.BidUsers?.Where(b => b.UserId == _Longin_UserId).Any() ?? false;
             ViewBag.isBid = isBided;
             log.Info($"isBid : {isBided}");
 
             return View(result);
         }
 
+        [Authorization]
+        public ActionResult Modify(int id)
+        {
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return View();
 
+            return View(project);
+        }
+
+        [ValidateInput(false)]
+        [Authorization]
+        public ActionResult ModifySubmit(TaskInfoReq task, HttpPostedFileBase[] files)
+        {
+            var project = _projectService.GetOneById(task.Id);
+            if (project == null)
+                return View();
+
+            project.Category = (ProjectCategroy)task.Catetory;
+            //project.Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
+            project.Name = task.Name;
+            project.ContractCode = task.ContractCode;
+            //project.Status = ProjectStatus.Default,
+            project.Manager = task.Manager;
+            project.Linkman = task.Linkman;
+            project.Mobile = task.Mobile;
+            project.Desc = task.Desc;
+            //project.CreatesUserID = this._Longin_UserId,
+            project.StartTime = task.StartTime;
+            project.EndTime = task.EndTime;
+            //project.AuditStatus = AuditStatus.Default,
+            project.Budget = task.Budget;
+            //project.CreateTime = DateTime.Now,
+
+            project.ProvinceId = task.Province;
+            project.CityId = task.City;
+            project.FlieList = project.FlieList ?? new List<ProjectFlie>();
+
+            var fileIndex = (project.FlieList?.Max(m => m.Index) + 1) ?? 1;
+
+            if (files != null)
+                foreach (var file in files)
+                {
+                    if (file.ContentLength > 1024 * 1024 * 2)
+                        return Json("{'error':'文件超大。'}");
+
+                    var saveName = $"{DateTime.Now.ToOADate()}-{fileIndex}-{Path.GetExtension(file.FileName)}";
+                    var pFile = new ProjectFlie();
+                    pFile.Name = Path.GetFileName(file.FileName);
+                    pFile.FileType = 1;
+                    pFile.Path = $"../Upload/{saveName}";
+                    pFile.Index = fileIndex;
+
+                    var savePath = Path.Combine(Request.MapPath("~/Upload"), saveName);
+                    file.SaveAs(savePath);
+
+                    project.FlieList.Add(pFile);
+                    fileIndex += 1;
+                }
+
+            _projectService.Modify(project);
+            return View("AuditDetail", new { id = task.Id });
+        }
+
+
+        [Authorization]
+        public ActionResult DeleteProjectFile(int id,int fileIndex)
+        {
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return View();
+
+            return View(project);
+        }
+
+
+
+        [Authorization]
+        public ActionResult Notice()
+        {
+            var list = _msgService.GetListByUId(_Longin_UserId);
+            return View(list);
+        }
 
         [Authorization]
         public ActionResult MyList(int pageIndex = 1, int type = 0, int state = -1)
@@ -378,6 +463,27 @@ namespace com.pmp.web.Controllers
         {
             if (userId > 0)
                 _projectService.GiveProject(projectId, userId, desc);
+
+
+            var project = _projectService.GetOneById(projectId);
+            if (project != null && project.BidUsers!=null)
+            {
+                var users = project.BidUsers.Where(u => u.UserId != userId).Select(u => u.UserId).ToList();
+                users.ForEach(uid =>
+                {
+                    var msg = new MgMessage()
+                    {
+                        CreateUser = _Longin_UserId,
+                        CTime =DateTime.Now,
+                        Msg = $"任务[{project.Name}]已被抢单，再接再厉，您可以查看其它项目。",
+                        ToUserId = uid,
+                        ProjectCode = project.Code,
+                        Type = "notice"
+                    };
+                   _msgService.Insert(msg);
+                });
+            }
+
             return RedirectToAction("AuditDetail", new { id = projectId });
         }
 
@@ -539,10 +645,10 @@ namespace com.pmp.web.Controllers
 
             var proc = new ProjectProcess()
             {
-                ProcessDesc =  $"[{r}]{desc}"
+                ProcessDesc = $"[{r}]{desc}"
             };
 
-            WriteProcess((long)projectId,proc, null);
+            WriteProcess((long)projectId, proc, null);
 
             return RedirectToAction("AuditDetail", new { id = projectId });
         }

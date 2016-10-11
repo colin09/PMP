@@ -8,6 +8,38 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .right {
+            /*position: absolute;*/
+            right: 10px;
+            top: 10px;
+            margin-right: 10px;
+            margin-top: 2px;
+            float: right;
+        }
+
+        .userinfo {
+            cursor: pointer;
+            float: left;
+            line-height: 42px;
+            font-size: 14px;
+            color: #fff;
+            font-family: verdana, Tahoma, Arial, Hei, "Microsoft Yahei", SimHei;
+        }
+
+        .userinfodrop {
+            background: #fff none repeat scroll 0 0;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: none;
+            padding: 10px;
+            position: absolute;
+            right: 0;
+            top: 48px;
+            z-index: 200;
+            width: 200px;
+        }
+    </style>
     @RenderSection("header", required: false)
 </head>
 <body>
@@ -38,6 +70,28 @@
                     <a href="/Account/Index">会员中心</a>
                     <a href="/Task/Create">发布任务</a>
                 </div><!-- mainMenuV end -->
+
+
+                <div class="right">
+                    <div class="userinfo">
+                        <span>你好,</span>
+                        <span>@ViewBag._Longin_RealName</span>
+                    </div><!--userinfo-->
+
+                    <div class="userinfodrop" style="display: none;">
+                        <div class="userdata">
+                            <h4>@ViewBag._Longin_RealName</h4>
+                            @*<span class="email">@ViewBag._Longin_RealName</span>*@
+                            <ul>
+                                <li><a href="/Account/AccountPersonal">编辑资料</a></li>
+                                <li><a href="/Account/UpdatePwd">修改密码</a></li>
+                                @*<li><a href="help.html">帮助</a></li>*@
+                                <li><a href="#" id="clone">退出</a></li>
+                            </ul>
+                        </div><!--userdata-->
+                    </div><!--userinfodrop-->
+                </div>
+
             </div><!-- mainMenudl end -->
         </div><!-- navigationBar end -->
 
