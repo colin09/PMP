@@ -683,6 +683,23 @@ namespace com.pmp.web.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
 
         }
+
+
+
+        public ActionResult GetUserInfo(long id)
+        {
+            var service = new MgUserService();
+            var user = service.SearchById(id).FirstOrDefault();
+
+
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
     }
 }
 
