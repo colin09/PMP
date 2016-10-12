@@ -56,19 +56,16 @@
             <input type="text" class="form-control" name="Budget" value="@Model.Budget" placeholder="预算费用" required="">
         </div>
     </div>
-
-    <div class="form-group" ng-app="cityApp">
+    <div class="form-group">
         <label class="col-sm-2 control-label">项目地点</label>
-        <div class="col-sm-10" ng-controller="cityCtl">
-            <select id="slcProv" name="Province" ng-change="change()"  ng-model="defulatProvince">
-                <option ng-repeat="pro in provinces" ng-value="pro.ID" ng-selected="pro.Remark">{{pro.Name}}</option>
-            </select>
-            <select name="City" id="sltCity" ng-model="defulatCity">
-                <option value="0" selected="selected"> - 选择城市 -</option>
-                <option ng-repeat="city in citys" ng-value="city.ID" ng-selected="pro.Remark">{{city.Name}}</option>
-            </select>
+
+        <div class="col-sm-10">
+            <select id="sltProv" name="Province"></select>
+
+            <select id="sltCity" name="City"></select>
         </div>
     </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">项目经理</label>
         <div class="col-sm-10">
@@ -140,13 +137,19 @@
                     $http.get("/Task/GetCityList?parentId=0")
                         .success(function (json) {
                             if (json.length > 0) {
-
+                                var layout = "";
+                                var selectedId = $("#province").val();
                                 $.each(json, function (key, val) {
-                                        val.Remark = "";
-                                    if (val.ID == $("#province").val())
-                                        val.Remark="selected";
-                                });
+                                    //val.Remark = "";
+                                    //if (val.ID == $("#province").val())
+                                    //    val.Remark = "selected";
 
+                                    if (val.ID == selectedId)
+                                        layout += "<option value='" + val.ID + "' selected='selected'>" + val.Name + "</option>";
+                                    else
+                                        layout += "<option value='" + val.ID + "'>" + val.Name + "</option>";
+                                });
+                                $("#slcProv").empty().append(layout);
                                 $scope.provinces = json;
                                 //$scope.defulatProvince = $("#province").val();
                             }
@@ -170,6 +173,35 @@
                     };
                 });
         $(function () {
+            function InitSlt(parentId, sltId, selectedId) {
+                $.getJSON("/Task/GetCityList?parentId=" + parentId)
+                     .success(function (json) {
+                         if (json.length > 0) {
+                             var layout = "";
+
+                             $.each(json, function (key, val) {
+                                 if (val.ID == selectedId)
+                                     layout += "<option value='" + val.ID + "' selected='selected'>" + val.Name + "</option>";
+                                 else
+                                     layout += "<option value='" + val.ID + "'>" + val.Name + "</option>";
+                             });
+                             $("#" + sltId).empty().append(layout);
+                         }
+                     });
+            }
+
+
+            var InitProvinceId = $("#province").val();
+            InitSlt(0, "sltProv", InitProvinceId);
+
+            var InitCityId = $("#city").val();
+            InitSlt(InitProvinceId, "sltCity", InitCityId);
+
+            $("#sltProv").change(function () {
+                var provinceId = $(this).val();
+                InitSlt(provinceId, "sltCity", 0);
+            });
+
 
             var editor = new wangEditor('txtProDesc');
             editor.config.menus = [

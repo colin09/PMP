@@ -280,10 +280,10 @@ namespace com.pmp.web.Controllers
         {
             var project = _projectService.GetOneById(task.Id);
             if (project == null)
-                return View("MyList");
+                return RedirectToAction("MyList");
 
             if (project.CreatesUserID!=_Longin_UserId)
-                return View("MyList");
+                return RedirectToAction("MyList");
 
             project.Category = (ProjectCategroy)task.Catetory;
             //project.Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
@@ -332,7 +332,7 @@ namespace com.pmp.web.Controllers
 
             _projectService.Modify(project);
             log.Info($"go to detail id :{task.Id}");
-            return View("MyList");
+            return RedirectToAction("MyList");
             //return View("AuditDetail", new { id = task.Id });
         }
 

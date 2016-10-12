@@ -124,7 +124,7 @@
                 foreach (var bid in Model.BidUsers)
                 {
                     <div>
-                        <span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>  @bid.UserName 在 @bid.CTime 进行了接单。
+                        @*<span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>*@  @bid.UserName 在 @bid.CTime 进行了接单。
                     </div>
                 }
             }
@@ -211,57 +211,6 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
-<div class="modal fade" id="userPserson">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">接单人信息</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>真实姓名： </td>
-                        <td>
-                            <span id="up_RealName"></span>
-                        </td>
-                        <td>性别： </td>
-                        <td>
-                            <span id="up_Gender"></span>
-                        </td>
-                        <td>出生日期： </td>
-                        <td>
-                            <span id="up_Birthday"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>邮箱： </td>
-                        <td>
-                            <span id="up_Email"></span>
-                        </td>
-                        <td>地址： </td>
-                        <td>
-                            <span id="up_Address"></span>
-                        </td>
-                        <td>职位： </td>
-                        <td>
-                            <span id="up_Position"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>简介： </td>
-                        <td colspan="5">
-                            <span id="up_Introduction"></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 
