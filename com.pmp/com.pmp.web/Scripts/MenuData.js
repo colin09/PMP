@@ -117,7 +117,7 @@
             {
                 "title": "我的消息",
                 "style": "",
-                "url": "#",
+                "url": "/Task/Notice",
                 "sort": 2
             }
             ]

@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace com.pmp.mongo.data
 {
-    [BsonIgnoreExtraElements]
 
+    /// <summary>
+    /// 个人认证信息
+    /// </summary>
+    [BsonIgnoreExtraElements]
     public class MgPersonReal : MgBaseModel
     {
         public string RealName { set; get; }
@@ -19,6 +22,7 @@ namespace com.pmp.mongo.data
         //职业
         public string  Profession { set; get; }
         public string Address { set; get; }
+
 
         /// <summary>
         /// 是否认证[提交1,审核通过2.审核不通过3.]

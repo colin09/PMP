@@ -429,7 +429,13 @@ namespace com.pmp.mongo.service
             return null;
         }
 
-        
+        public bool ModifyPersonEvalScore(int userId, float avgGrade)
+        {
+            var filter = Builders<MgUser>.Filter.Eq(u => u.ID, userId);
+            var update = Builders<MgUser>.Update.Set(u => u.PersonInfo.EvalScore, avgGrade);
+
+            return Update(filter, update) > 0;
+        }
 
     }
 }

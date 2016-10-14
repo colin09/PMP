@@ -56,7 +56,7 @@ namespace com.pmp.mongo.service
         }
 
 
-        public List<MgProject> GetAll(int cUser, int gUser, int type, int state, int city, DateTime? date, PageInfo page, out long total)
+        public List<MgProject> GetAll(int cUser, int gUser, int type, int state,int province, int city, DateTime? date, PageInfo page, out long total)
         {
             var filter = Builders<MgProject>.Filter.Gt("Status", -6);
             if (cUser > 0)
@@ -69,6 +69,8 @@ namespace com.pmp.mongo.service
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.Status, (ProjectStatus)state);
             if (city > 0)
                 filter = filter & Builders<MgProject>.Filter.Eq(p => p.CityId, city);
+            if (province > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.ProvinceId, province);
             if (date != null)
             {
                 var endDate = date.Value.AddDays(1).Date;

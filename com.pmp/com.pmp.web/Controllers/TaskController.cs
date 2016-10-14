@@ -40,11 +40,11 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1, int type = 0, int state = -1, int city = 0, DateTime? date = null)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = -1,int province=0, int city = 0, DateTime? date = null)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(0, 0, type, state, city, date, page, out total);
+            var list = _projectService.GetAll(0, 0, type, state, province, city, date, page, out total);
 
             var cUserIds = list.Select(l => l.CreatesUserID).ToList();
             var rUserIds = list.Select(l => l.ReceiveUserId).ToList();
@@ -282,7 +282,7 @@ namespace com.pmp.web.Controllers
             if (project == null)
                 return RedirectToAction("MyList");
 
-            if (project.CreatesUserID!=_Longin_UserId)
+            if (project.CreatesUserID != _Longin_UserId)
                 return RedirectToAction("MyList");
 
             project.Category = (ProjectCategroy)task.Catetory;
@@ -338,7 +338,7 @@ namespace com.pmp.web.Controllers
 
 
         [Authorization]
-        public ActionResult DeleteProjectFile(int id,int fileIndex)
+        public ActionResult DeleteProjectFile(int id, int fileIndex)
         {
             var project = _projectService.GetOneById(id);
             if (project == null)
@@ -369,7 +369,7 @@ namespace com.pmp.web.Controllers
 
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(cUser, rUser, type, state, 0, null, page, out total);
+            var list = _projectService.GetAll(cUser, rUser, type, state,0, 0, null, page, out total);
 
             ViewBag.state = state;
             ViewBag.pageIndex = pageIndex;
@@ -468,7 +468,7 @@ namespace com.pmp.web.Controllers
             return View(result);
         }
 
-
+        [Authorization]
         public ActionResult JoinProject(int projectId)
         {
             _projectService.JoinProject(projectId, new BidUser()
@@ -489,7 +489,7 @@ namespace com.pmp.web.Controllers
 
 
             var project = _projectService.GetOneById(projectId);
-            if (project != null && project.BidUsers!=null)
+            if (project != null && project.BidUsers != null)
             {
                 var users = project.BidUsers.Where(u => u.UserId != userId).Select(u => u.UserId).ToList();
                 users.ForEach(uid =>
@@ -497,13 +497,13 @@ namespace com.pmp.web.Controllers
                     var msg = new MgMessage()
                     {
                         CreateUser = _Longin_UserId,
-                        CTime =DateTime.Now,
+                        CTime = DateTime.Now,
                         Msg = $"任务[{project.Name}]已被抢单，再接再厉，您可以查看其它项目。",
                         ToUserId = uid,
                         ProjectCode = project.Code,
                         Type = "notice"
                     };
-                   _msgService.Insert(msg);
+                    _msgService.Insert(msg);
                 });
             }
 
@@ -696,10 +696,21 @@ namespace com.pmp.web.Controllers
             if (project != null)
             {
                 if (project.CreatesUserID == this._Longin_UserId)
+                {
+                    m.ToUserId = project.ReceiveUserId;
                     project.IsEvaluate_E = 1;
+
+                    //计算任务人信誉
+                    EvaluationGrade(project.ReceiveUserId);
+                }
                 else if (project.ReceiveUserId == this._Longin_UserId)
+                {
+                    m.ToUserId = project.CreatesUserID;
                     project.IsEvaluate_I = 1;
 
+                    //计算雇主信誉
+
+                }
                 if (project.IsEvaluate_I > 0 && project.IsEvaluate_E > 0)
                     project.Status = ProjectStatus.Over;
 
@@ -707,6 +718,13 @@ namespace com.pmp.web.Controllers
             }
 
             return RedirectToAction("AuditDetail", new { id = projectId });
+        }
+
+
+        private void EvaluationGrade(int userId)
+        {
+            var avg = _evaluationService.CalculateGradeAvg(userId);
+            _userService.ModifyPersonEvalScore(userId, avg);
         }
 
 

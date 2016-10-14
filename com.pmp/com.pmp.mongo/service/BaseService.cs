@@ -13,6 +13,12 @@ namespace com.pmp.mongo.service
 {
     public class BaseService<T> where T : MgBaseModel, new()
     {
+        protected IMongoDatabase _database;
+
+        public BaseService()
+        {
+            _database = MgClient.GetDB();
+        }
 
         /// <summary>
         /// 创建实例T 的自增长起始值：0 

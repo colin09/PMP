@@ -6,6 +6,9 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace com.pmp.mongo.data
 {
 
+    /// <summary>
+    /// 个人基本信息
+    /// </summary>
     [BsonIgnoreExtraElements]
     public class MgPersonInfo : MgBaseModel
     {
@@ -33,5 +36,9 @@ namespace com.pmp.mongo.data
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UTime { set; get; }
 
+        /// <summary>
+        /// 评价平均分[信誉]
+        /// </summary>
+        public float EvalScore { set; get; }
     }
 }

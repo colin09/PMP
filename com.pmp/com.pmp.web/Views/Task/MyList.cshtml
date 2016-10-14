@@ -40,7 +40,7 @@
                                 @if ((int)item.Status < 2)
                                 {
                                     <a href="/Task/Modify?Id=@item.ID"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                     <span id="spnDelete" data-id="@item.ID" class="glyphicon glyphicon-remove"></span>
+                                    <span id="spnDelete" data-id="@item.ID" class="glyphicon glyphicon-remove"></span>
                                 }
                                 <a href="/Task/AuditDetail?id=@item.ID">
                                     [@item.Status.GetName()]
@@ -65,6 +65,24 @@
 
 
 
+<div class="modal fade" id="delProject">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">确认</h4>
+            </div>
+            <div class="modal-body">
+                确定要删除此任务吗？
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="delProjectId" value="0" />
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                <button type="button" id="btnDeleteProject" class="btn btn-primary"> 确定领取 </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 
@@ -89,10 +107,15 @@
                 window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
             });
 
-            $("#spnDelete").click(function() {
+            $("#spnDelete").click(function () {
                 var id = $(this).data("id");
-                $.getJSON("/Task/Delete", { id: id }).done(function() {
+                $("#delProjectId").val(id);
+                $('#delProject').modal('show');
+            });
 
+            $("#btnDeleteProject").click(function () {
+                var id = $("#delProjectId").val();
+                $.getJSON("/Task/Delete", { id: id }).done(function () {
                     var pageindex = $(this).data("page");
                     var state = $("#projectState").val();
                     window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;

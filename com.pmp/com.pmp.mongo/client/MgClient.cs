@@ -17,7 +17,7 @@ namespace com.pmp.mongo.client
         private static IMongoClient _client;
         private static IMongoDatabase _database;
 
-        public static void getClient()
+        private static void getClient()
         {
             _client = new MongoClient(_conn);
             _database = _client.GetDatabase(_dbName);
@@ -31,12 +31,14 @@ namespace com.pmp.mongo.client
         public static IMongoClient GetClient()
         {
             return _client;
-        }
+        }*/
 
         public static IMongoDatabase GetDB()
         {
+            if (_database == null)
+                getClient();
             return _database;
-        }*/
+        }
 
 
 

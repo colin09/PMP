@@ -393,6 +393,10 @@
             <div class="modal-body">
                 <table class="table table-bordered">
                     <tr>
+                        <td>昵称： </td>
+                        <td>
+                            <span id="up_NicklName"></span>
+                        </td>
                         <td>真实姓名： </td>
                         <td>
                             <span id="up_RealName"></span>
@@ -401,12 +405,12 @@
                         <td>
                             <span id="up_Gender"></span>
                         </td>
+                    </tr>
+                    <tr>
                         <td>出生日期： </td>
                         <td>
                             <span id="up_Birthday"></span>
                         </td>
-                    </tr>
-                    <tr>
                         <td>邮箱： </td>
                         <td>
                             <span id="up_Email"></span>
@@ -415,9 +419,19 @@
                         <td>
                             <span id="up_Address"></span>
                         </td>
+                    </tr>
+                    <tr>
                         <td>职位： </td>
                         <td>
                             <span id="up_Position"></span>
+                        </td>
+                        <td>工作年限： </td>
+                        <td>
+                            <span id="up_WorkYear"></span>
+                        </td>
+                        <td>信誉： </td>
+                        <td>
+                            <span id="up_EvalScore"></span>
                         </td>
                     </tr>
                     <tr>
@@ -482,6 +496,7 @@
                 var id = $(this).data("id");
                 $.getJSON("/Account/GetUserInfo?id=" + id)
                      .success(function (json) {
+                         $("#up_NickName").html(json.NickName);
                          $("#up_RealName").html(json.RealName);
                          $("#up_Gender").html(json.Birthday);
                          $("#up_Birthday").html(json.Gender);
@@ -489,6 +504,8 @@
                          $("#up_Address").html(json.Address);
                          $("#up_Position").html(json.Position);
                          $("#up_Introduction").html(json.Introduction);
+                         $("#up_WorkYear").html(json.WorkYear);
+                         $("#up_EvalScore").html(json.EvalScore);
 
                      })
                 $('#userPserson').modal('show');

@@ -32,7 +32,8 @@ namespace com.pmp.mongo.data
         /// 评价描述
         /// </summary>
         public string Desc { get; set; }
-        
+        public int ToUserId { set; get; }
+
         public int UserId { set; get; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]

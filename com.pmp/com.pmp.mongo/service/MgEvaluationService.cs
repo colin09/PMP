@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.pmp.mongo.service
 {
-   public class MgEvaluationService: BaseService<MgEvaluation>
+    public class MgEvaluationService : BaseService<MgEvaluation>
     {
 
 
@@ -49,6 +49,30 @@ namespace com.pmp.mongo.service
             filter = filter & Builders<MgEvaluation>.Filter.Ne("UserId", userId);
             return Search(filter);
         }
+
+
+        public float CalculateGradeAvg(int userId)
+        {
+            var query = _database.GetCollection<MgEvaluation>(new MgEvaluation().GetCollectionName()).Aggregate()
+                .Match(e => e.ToUserId == userId)
+                .Group(e => e.ToUserId, g => new
+                {
+                    count = g.Count(),
+                    totalGrade = g.Sum(s => s.Grade),
+                    totalScore = g.Sum(s => s.Score)
+                });
+            if (query.Any())
+            {
+                var m = query.FirstOrDefault();
+                if (m.count > 0)
+                    return m.totalGrade / (float)m.count;
+            }
+            return 0;
+        }
+
+
+
+
 
     }
 }
