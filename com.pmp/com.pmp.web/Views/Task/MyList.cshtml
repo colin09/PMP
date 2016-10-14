@@ -40,12 +40,17 @@
                                 @if ((int)item.Status < 2)
                                 {
                                     <a href="/Task/Modify?Id=@item.ID"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                    <span id="spnDelete" data-id="@item.ID" class="glyphicon glyphicon-remove"></span>
+                                    @*<span id="spnDelete" data-id="@item.ID" class="glyphicon glyphicon-remove"></span>*@
                                 }
                                 <a href="/Task/AuditDetail?id=@item.ID">
                                     [@item.Status.GetName()]
                                     @item.Code | @item.ContractCode | @item.Name
                                 </a>
+
+                                @if ((int)item.Status < 2)
+                                {
+                                    <button type="button" id="spnDelete" data-id="@item.ID" class="btn btn-primary"> 删除项目 </button>
+                                }
                             </div>
                             <div class="line2 lh25">@item.Desc.TakeString(160)</div>
                             <div class="line3 lh25">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
