@@ -99,6 +99,8 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult Create()
         {
+            if (this._Longin_UserLevel < 10)
+                return RedirectToAction("Index");
             return View();
         }
 

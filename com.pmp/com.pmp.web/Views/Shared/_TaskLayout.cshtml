@@ -46,20 +46,20 @@
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
     <div class="header">
         <div class="topM sline clearfix">
-        <div class="OfcardLogo">
-            <img style="height:60px" src="/images/pmp.png">
-        </div>
-        <h2 style="float:left" class="mt10">任务管理系统</h2>
-        <div class="searchBar mt10">
-            <div class="searchVInput">
-                <form action="#" method="post" name="fo" id="fo" target="_blank">
-                    <a href="javascript:document.getElementById('fo').submit()">搜索</a>
-                    <div><input type="text" autocomplete="off" name="cardname" id="cardname" class="cardnameV" placeholder="关键词或金额"></div>
-                </form>
-            </div><!-- searchVInput end -->
-            <input name="producttype" id="producttype" value="0" type="hidden" />
-        </div><!-- searchBar end -->
-    </div><!-- sline end -->
+            <div class="OfcardLogo">
+                <img style="height:60px" src="/images/pmp.png">
+            </div>
+            <h2 style="float:left" class="mt10">任务管理系统</h2>
+            <div class="searchBar mt10">
+                <div class="searchVInput">
+                    <form action="#" method="post" name="fo" id="fo" target="_blank">
+                        <a href="javascript:document.getElementById('fo').submit()">搜索</a>
+                        <div><input type="text" autocomplete="off" name="cardname" id="cardname" class="cardnameV" placeholder="关键词或金额"></div>
+                    </form>
+                </div><!-- searchVInput end -->
+                <input name="producttype" id="producttype" value="0" type="hidden" />
+            </div><!-- searchBar end -->
+        </div><!-- sline end -->
 
         <div class="navigationBar">
             <div class="navigationBarInnel">
@@ -68,7 +68,10 @@
                     <a href="/Task/Index">首页</a>
                     <a href="/Task/Index">任务中心</a>
                     <a href="/Account/Index">会员中心</a>
-                    <a href="/Task/Create">发布任务</a>
+                    @if (ViewBag._Longin_UserLevel == 2)
+                    {
+                        <a href="/Task/Create">发布任务</a>
+                    }
                 </div><!-- mainMenuV end -->
 
 
