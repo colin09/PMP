@@ -271,47 +271,55 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">新增工作内容</h4>
                 </div>
-                    <div class="modal-body">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>出发地点：</td>
-                                <td><input type="text" name="FromPlace" /> </td>
-                                <td>服务地点：</td>
-                                <td><input type="text" name="ServerPlace" /></td>
-                                <td>在途时间(往返)：</td>
-                                <td><input type="number" name="WayHours" />时</td>
-                            </tr>
-                            <tr>
-                                <td>任务性质：</td>
-                                <td colspan="5">
-                                    <input type="radio" name="ServerType" value="售前" /> 售前
-                                    <input type="radio" name="ServerType" value="售后" /> 售后
-                                    <input type="radio" name="ServerType" value="响应服务" /> 响应服务
-                                    <input type="radio" name="ServerType" value="巡检服务" /> 巡检服务
-                                    <input type="radio" name="ServerType" value="其他" /> 其他
-                                    <input type="text" name="otherType" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>到达现场时间：</td>
-                                <td colspan="2"><input type="time" name="StartTime" /></td>
-                                <td>服务完成时间：</td>
-                                <td colspan="2"><input type="time" name="EndTime" /></td>
-                            </tr>
-                            <tr>
-                                <td>分析及处理方法：</td>
-                                <td colspan="5"> <textarea name="ProcessDesc" rows="3" class="w600"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>遗留问题：</td>
-                                <td colspan="5"><textarea name="Nodus" rows="3" class="w600"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>维护建议：</td>
-                                <td colspan="5"><textarea name="Suggest" rows="3" class="w600"></textarea></td>
-                            </tr>
-                        </table>
-                    </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>出发地点：</td>
+                            <td><input type="text" name="FromPlace" /> </td>
+                            <td>服务地点：</td>
+                            <td><input type="text" name="ServerPlace" /></td>
+                            <td>在途时间(往返)：</td>
+                            <td><input type="number" name="WayHours" />时</td>
+                        </tr>
+                        <tr>
+                            <td>任务性质：</td>
+                            <td colspan="5">
+                                <input type="radio" name="ServerType" value="售前" /> 售前
+                                <input type="radio" name="ServerType" value="售后" /> 售后
+                                <input type="radio" name="ServerType" value="响应服务" /> 响应服务
+                                <input type="radio" name="ServerType" value="巡检服务" /> 巡检服务
+                                <input type="radio" name="ServerType" value="其他" /> 其他
+                                <input type="text" name="otherType" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>到达现场时间：</td>
+                            <td colspan="2"><input type="time" name="StartTime" /></td>
+                            <td>服务完成时间：</td>
+                            <td colspan="2"><input type="time" name="EndTime" /></td>
+                        </tr>
+                        <tr>
+                            <td>分析及处理方法：</td>
+                            <td colspan="5"> <textarea name="ProcessDesc" rows="3" class="w600"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>遗留问题：</td>
+                            <td colspan="5"><textarea name="Nodus" rows="3" class="w600"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>维护建议：</td>
+                            <td colspan="5"><textarea name="Suggest" rows="3" class="w600"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                是否完成：
+                            </td>
+                            <td>
+                                <input type="checkbox" name="overState" value="1" /> 已完成项目
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                     <div class="modal-footer">
                         <input type="hidden" name="projectId" value="@Model.ID" />
                         <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
