@@ -99,7 +99,7 @@ namespace com.pmp.web.Controllers
         [Authorization]
         public ActionResult Create()
         {
-            if (this._Longin_UserLevel < 10)
+            if (this._Longin_UserLevel > 10)
                 return RedirectToAction("Index");
             return View();
         }
@@ -503,7 +503,8 @@ namespace com.pmp.web.Controllers
                         Msg = $"任务[{project.Name}]已被抢单，再接再厉，您可以查看其它项目。",
                         ToUserId = uid,
                         ProjectCode = project.Code,
-                        Type = "notice"
+                        Type = "notice",
+                        IsRead = false
                     };
                     _msgService.Insert(msg);
                 });

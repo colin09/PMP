@@ -23,5 +23,7 @@ namespace com.pmp.mongo.data
         public string ProjectCode { set; get; }
 
         public string Type { set; get; }
+
+        public bool IsRead { set; get; }
     }
 }

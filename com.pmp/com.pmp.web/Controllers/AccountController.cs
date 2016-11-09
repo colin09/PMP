@@ -15,6 +15,14 @@ namespace com.pmp.web.Controllers
 {
     public class AccountController : WebBaseController
     {
+
+        private MgMessageService _msgService;
+
+        public AccountController()
+        {
+            _msgService = new MgMessageService();
+        }
+
         // GET: Account
         [Authorization]
         public ActionResult Index()
@@ -596,7 +604,8 @@ namespace com.pmp.web.Controllers
                             NickName = info[0].PersonInfo.RealName,
                             Phone = info[0].Phone,
                             UserId = info[0].ID,
-                            UserLevel = (UserLevel)info[0].Level
+                            UserLevel = (UserLevel)info[0].Level,
+                            MsgCount = _msgService.GetNoReadCount(info[0].ID)
                         };
                         RecordUserLogonStatus(HttpHelper.ObjectToJson(ui));
                     }

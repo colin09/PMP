@@ -72,6 +72,7 @@
 </head>
 <body>
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
+    <input type="hidden" id="msgCount" value="@ViewBag.msgCount" />
 
     <div class="header">
         <div class="topM sline clearfix">
@@ -189,8 +190,9 @@
         });
         $(function () {
             var level = $("#userLevel").val();
+            var msgCount = $("#msgCount").val();
             $.each(_Menu, function (i, item) {
-                if (item.userLevel.indexOf(","+level+",") > -1) {
+                if (item.userLevel.indexOf("," + level + ",") > -1) {
                     var html = [];
                     $.each(item.menu, function (j, menu) {
                         if (j == 0) {
@@ -202,7 +204,10 @@
                         }
                         if (menu.subMenu != undefined) {
                             $.each(menu.subMenu, function (j, sub) {
-                                html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
+                                if (sub.title == "我的消息" && msgCount > 0)
+                                    html.push("<a href=\"" + sub.url + "\">" + sub.title + "<red>" + msgCount + "</red></a>");
+                                else
+                                    html.push("<a href=\"" + sub.url + "\">" + sub.title + "</a>");
                             });
                         }
                         html.push("</div>");

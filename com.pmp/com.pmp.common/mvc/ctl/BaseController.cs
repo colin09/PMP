@@ -28,6 +28,8 @@ namespace com.pmp.common.mvc.ctl
         //个人账户是否审核
         protected int _Longin_Person_IsApprove = -1;
 
+        private int _msgCount = 0;
+
 
         protected ILog log { get; private set; }
 
@@ -42,6 +44,8 @@ namespace com.pmp.common.mvc.ctl
             ViewBag._Login_CompanyReal_ID = _Login_CompanyReal_ID;
             ViewBag._Longin_CompanyReal_IsApprove = _Longin_CompanyReal_IsApprove;
             ViewBag._Longin_Person_IsApprove = _Longin_Person_IsApprove;
+
+            ViewBag.msgCount = _msgCount;
             
             return base.View();
         }
@@ -56,6 +60,9 @@ namespace com.pmp.common.mvc.ctl
             ViewBag._Login_CompanyReal_ID = _Login_CompanyReal_ID;
             ViewBag._Longin_CompanyReal_IsApprove = _Longin_CompanyReal_IsApprove;
             ViewBag._Longin_Person_IsApprove = _Longin_Person_IsApprove;
+
+            ViewBag.msgCount = _msgCount;
+
             return base.View(model);
         }
 
@@ -73,6 +80,8 @@ namespace com.pmp.common.mvc.ctl
                     _Longin_Phone = user["Phone"].ToString();
                     _Longin_UserLevel = (int)user["UserLevel"];
                     _Longin_RealName = string.IsNullOrWhiteSpace(user["NickName"].ToString()) ? "匿名用户" : user["NickName"].ToString();
+
+                    _msgCount = (int)user["MsgCount"];
                 }
             }
         }

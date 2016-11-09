@@ -19,7 +19,14 @@ namespace com.pmp.mongo.service
             return Search(filter);
         }
 
- 
+
+
+        public int GetNoReadCount(int userId)
+        {
+            var filter = Builders<MgMessage>.Filter.Eq("ToUserId", userId);
+            filter = filter & Builders<MgMessage>.Filter.Eq("IsRead", false);
+            return Search(filter).Count();
+        }
 
 
 

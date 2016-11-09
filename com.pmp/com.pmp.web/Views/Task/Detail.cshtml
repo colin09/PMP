@@ -116,7 +116,7 @@
         }*@
 
 
-    <tr>
+    @*<tr>
         <td class="t-r fw">项目接单：</td>
         <td colspan="7">
             @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
@@ -124,17 +124,17 @@
                 foreach (var bid in Model.BidUsers)
                 {
                     <div>
-                        @*<span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>*@  @bid.UserName 在 @bid.CTime 进行了接单。
+                        @ *<span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>* @  @bid.UserName 在 @bid.CTime 进行了接单。
                     </div>
                 }
             }
         </td>
-    </tr>
+    </tr>*@
 
 
     @if (Model.BidUsers != null && Model.BidUsers.Where(b => b.UserId == ViewBag._Longin_UserId).Count() > 0)
     {
-        @*<p>已接单</p>*@
+        <p>您已接单</p>
         <input type="hidden" value="@ViewBag.isBidc" />
     }
     else if (Model.Status == (int)ProjectStatus.Default)

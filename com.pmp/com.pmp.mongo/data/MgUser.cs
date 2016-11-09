@@ -37,7 +37,7 @@ namespace com.pmp.mongo.data
         /// 默认1启用，0禁用
         /// </summary>
         public int Status { set; get; }
-        
+
     }
 
     public class UserRole
@@ -73,5 +73,7 @@ namespace com.pmp.mongo.data
         public int UserId { get; set; }
         public string Phone { get; set; }
         public UserLevel UserLevel { get; set; }
+
+        public int MsgCount { get; set; }
     }
 }
