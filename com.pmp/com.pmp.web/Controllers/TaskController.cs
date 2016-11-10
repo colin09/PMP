@@ -40,7 +40,7 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1, int type = 0, int state = -1,int province=0, int city = 0, DateTime? date = null)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0,int province=0, int city = 0, DateTime? date = null)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
@@ -112,7 +112,8 @@ namespace com.pmp.web.Controllers
             var project = new MgProject()
             {
                 Category = (ProjectCategroy)task.Catetory,
-                Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
+                //Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
+                Code= $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{task.Catetory}",
                 Name = task.Name,
                 ContractCode = task.ContractCode,
                 Status = ProjectStatus.Default,

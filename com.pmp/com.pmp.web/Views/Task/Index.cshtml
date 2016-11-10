@@ -21,13 +21,13 @@
         </div>
         <div class="col-sm-2 pt5">
             <select class="w180 pt5 " id="proState" name="state">
-                <option value="-1">所有项目</option>
+                @*<option value="-1">所有项目</option>*@
                 <option value="0">待接单的项目</option>
-                <option value="1">待服务的项目</option>
+                @*<option value="1">待服务的项目</option>
                 <option value="2">服务中的项目</option>
                 <option value="3">待验收的项目</option>
                 <option value="4">待评价项目</option>
-                <option value="5">已完成的项目</option>
+                <option value="5">已完成的项目</option>*@
             </select>
         </div>
         <div class="col-sm-4 pt5" ng-app="cityApp">
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-sm-2 pt5">
-            <input type="date" id="proDate" name="date"/>
+            <input type="date" id="proDate" name="date" />
         </div>
         <div class="col-sm-2">
             <button type="submit" class="btn btn-primary btn-sm w100">
@@ -59,7 +59,9 @@
             @*<th class="w120">联系人/电话</th>*@
             <th>项目说明</th>
             <th class="w120">预算金额</th>
+            <th class="w220">项目地点</th>
             <th class="w220">项目时间</th>
+            <th class="w220">项目类型</th>
             <th class="w100">领取</th>
         </tr>
         @{ if (ViewBag.total > 0)
@@ -72,20 +74,24 @@
                             @item.Name
                         </td>
                         @*<td>
-                            @item.Manager | @item.Linkman<br />
-                            @item.Mobile
-                        </td>*@
+                                @item.Manager | @item.Linkman<br />
+                                @item.Mobile
+                            </td>*@
                         <td>
                             <div class="descDiv3">
-                                @item.Desc.TakeString(100)
+                                @item.Desc.TakeString(35)
                             </div>
                         </td>
                         <td>￥：@item.Budget</td>
                         <td>
-                          @item.ProvinceName /  @item.CityName
-                            <br />
+                            @item.ProvinceName /  @item.CityName
+                        </td>
+                        <td>
                             @item.CTime
                             @*@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")*@
+                        </td>
+                        <td>
+                            @item.CategoryName
                         </td>
                         <td>
                             <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span><red> @item.StatusDesc</red></a>

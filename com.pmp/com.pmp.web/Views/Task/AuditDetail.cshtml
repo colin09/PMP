@@ -9,13 +9,15 @@
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
 </div>
 <div>
-    <h3 class="ptb10">任务详细</h3>
+    <h3 class="ptb10" style="width:300px;float:left;">任务详细</h3>
+    <div style="width:120px; float:right; line-height:45px;"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></div>
+    <div class="clear"></div>
 </div>
 
 <table class="table table-bordered">
-    <tr>
-        <td class="t-r" colspan="8"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></td>
-    </tr>
+    @*<tr>
+            <td class="t-r" colspan="8"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></td>
+        </tr>*@
     <tr>
         <td class="t-r w120 fw">项目名称： </td>
         <td colspan="7">@Model.Name</td>
@@ -314,17 +316,25 @@
                             <td>
                                 是否完成：
                             </td>
-                            <td>
+                            <td colspan="5">
                                 <input type="checkbox" name="overState" value="1" /> 已完成项目
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                上传文件：
+                            </td>
+                            <td colspan="5">
+                                <input type="file" name="files"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>
                             </td>
                         </tr>
                     </table>
                 </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="projectId" value="@Model.ID" />
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
-                        <button type="submit" class="btn btn-primary"> 提 交 </button>
-                    </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
+                    <button type="submit" class="btn btn-primary"> 提 交 </button>
+                </div>
             }
         </div>
     </div>
@@ -506,7 +516,7 @@
                      .success(function (json) {
                          $("#up_NickName").html(json.NickName);
                          $("#up_RealName").html(json.RealName);
-                         $("#up_Gender").html(json.Gender);
+                         $("#up_Gender").html(json.Gender == 1 ? "男" : "女");
                          $("#up_Birthday").html(json.Birthday);
                          $("#up_Email").html(json.Email);
                          $("#up_Address").html(json.Address);
