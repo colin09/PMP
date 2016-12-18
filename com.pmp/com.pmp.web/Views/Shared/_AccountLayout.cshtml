@@ -70,7 +70,7 @@
         }
     </style>
 </head>
-<body>
+<body ng-app="userApp">
     <input type="hidden" id="userLevel" value="@ViewBag.level" />
     <input type="hidden" id="msgCount" value="@ViewBag.msgCount" />
 
@@ -100,7 +100,7 @@
                     <a href="/Account/Index">会员中心</a>
                     @if (ViewBag._Longin_UserLevel == 2)
                     {
-                        <a href="/Task/Create">发布任务</a>
+                <a href="/Task/Create">发布任务</a>
                     }
                 </div><!-- mainMenuV end -->
 
@@ -157,10 +157,11 @@
         </div>
     </div>
     <div style="clear: both;color: #777777;padding-top: 35px;text-align: center;">
-        <p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+        <p>适用浏览器：IE10、、FireFox、Chrome、 </p>
         <p>来源：<a href="#" target="_blank">PMP版权所有</a></p>
     </div>
     @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/app.js"></script>
     <script src="~/Scripts/MenuData.js"></script>
     <script src="~/Scripts/menu.js"></script>
     <script src="~/Scripts/layer/layer.js"></script>

@@ -30,6 +30,7 @@ namespace com.pmp.web
                      "~/Scripts/jquery.lazyload.min.js",
                      "~/Scripts/js/jquery.cxscroll.min.js",
                      "~/Scripts/js/jquery.lazyload.min.js",
+                     "~/Scripts/js/jquery.jqprint-0.3.js",
                      "~/Scripts/js/angular.min.js",
                      "~/Scripts/js/angular-sanitize.min.js",
                      "~/Scripts/js/bootstrap.min.js",

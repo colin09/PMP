@@ -244,9 +244,11 @@
     <Content Include="Images\tick.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\userinfoarrow.png" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\general.js" />
     <Content Include="Scripts\Header.js" />
     <Content Include="Scripts\js\jquery.cookie.js" />
+    <Content Include="Scripts\js\jquery.jqprint-0.3.js" />
     <Content Include="Scripts\js\wangEditor.min.js" />
     <Content Include="Scripts\layer\layer.js" />
     <Content Include="Scripts\layer\skin\default\icon-ext.png" />

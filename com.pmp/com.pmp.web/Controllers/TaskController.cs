@@ -472,6 +472,27 @@ namespace com.pmp.web.Controllers
         }
 
         [Authorization]
+        public ActionResult GetTaskProcess(int id)
+        {
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return Json(new
+                {
+                    error = "任务不存在"
+                }, JsonRequestBehavior.AllowGet);
+
+            var userIds = project.ProcessDesc.Select(p => p.UserID).ToList();
+            var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+            project.ProcessDesc.ForEach(p =>
+            {
+                p.UserName = userList.FirstOrDefault(u => u.Id == p.UserID)?.Name;
+            });
+            return Json(project.ProcessDesc, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [Authorization]
         public ActionResult JoinProject(int projectId)
         {
             _projectService.JoinProject(projectId, new BidUser()
