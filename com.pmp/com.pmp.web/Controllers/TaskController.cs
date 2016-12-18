@@ -40,7 +40,7 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0,int province=0, int city = 0, DateTime? date = null)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0, int province = 0, int city = 0, DateTime? date = null)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
@@ -113,7 +113,7 @@ namespace com.pmp.web.Controllers
             {
                 Category = (ProjectCategroy)task.Catetory,
                 //Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
-                Code= $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{task.Catetory}",
+                Code = $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{task.Catetory}",
                 Name = task.Name,
                 ContractCode = task.ContractCode,
                 Status = ProjectStatus.Default,
@@ -372,7 +372,7 @@ namespace com.pmp.web.Controllers
 
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(cUser, rUser, type, state,0, 0, null, page, out total);
+            var list = _projectService.GetAll(cUser, rUser, type, state, 0, 0, null, page, out total);
 
             ViewBag.state = state;
             ViewBag.pageIndex = pageIndex;
@@ -608,6 +608,9 @@ namespace com.pmp.web.Controllers
                     var fileIndex = 1;
                     if (files != null)
                     {
+                        if (process.FlieList == null)
+                            process.FlieList = new List<ProjectFlie>();
+
                         foreach (var file in files)
                         {
                             if (file != null)
