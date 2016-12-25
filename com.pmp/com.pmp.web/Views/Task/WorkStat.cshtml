@@ -1,0 +1,40 @@
+﻿@using com.pmp.common.helper;
+@model List<com.pmp.mongo.data.MgMessage>
+@{
+    ViewBag.Title = "我的工时";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="ptb10 bb">
+    <span>会员中心 > 我的工时</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+
+<div>
+    <h3 class="ptb10">我的工时</h3>
+</div>
+
+
+<table ng-controller="ServerTimeStatController">
+    <tr>
+        <td>开始日期：</td>
+        <td>
+            <input type="date" name="start" ng-model="start" />
+        </td>
+        <td>结束日期：</td>
+        <td>
+            <input type="date" name="end" ng-model="end" />
+        </td>
+        <td>
+            <button ng-click="getDate()" class="btn btn_blue"> 确 定 </button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" align="center">
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div id="main" style="width: 600px;height:400px;"></div>
+
+        </td>
+    </tr>
+</table>
+<script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js"></script>

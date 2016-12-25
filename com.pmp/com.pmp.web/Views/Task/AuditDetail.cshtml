@@ -113,15 +113,15 @@
 
         @if (ViewBag.level < 20 && Model.RUserId < 1)
         {
-        <tr>
-            <td class="t-r fw">指派此任务：</td>
-            <td colspan="7">
-                <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
-                <span id="spnReceiveName"> -- </span>
-                <input type="hidden" name="id" value="@Model.ID" />
-                <input type="hidden" name="ReceiveId" value="0" />
-            </td>
-        </tr>
+            <tr>
+                <td class="t-r fw">指派此任务：</td>
+                <td colspan="7">
+                    <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
+                    <span id="spnReceiveName"> -- </span>
+                    <input type="hidden" name="id" value="@Model.ID" />
+                    <input type="hidden" name="ReceiveId" value="0" />
+                </td>
+            </tr>
         }
 
         <tr>
@@ -131,25 +131,25 @@
             {
                 foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
                 {
-                <div class="w600">
-                    <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
-                    @if (sln.FileList != null && sln.FileList.Count > 0)
+                        <div class="w600">
+                            <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
+                            @if (sln.FileList != null && sln.FileList.Count > 0)
                             {
-                    <p>
-                        <span>附件：</span>
-                        @foreach (var file in sln.FileList)
+                                <p>
+                                    <span>附件：</span>
+                                    @foreach (var file in sln.FileList)
                                     {
-                        <span><a href="@file.Path"> @file.Name </a></span>
+                                        <span><a href="@file.Path"> @file.Name </a></span>
                                     }
-                    </p>
+                                </p>
                             }
-                    <p>说明：@sln.SlnDesc</p>
-                </div>
+                            <p>说明：@sln.SlnDesc</p>
+                        </div>
                     }
                 }
                 else if (Model.RUserId == ViewBag._Longin_UserId)
                 {
-                <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
+                    <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
                 }
             </td>
         </tr>
@@ -160,25 +160,40 @@
             <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
         </tr>
         <tr>
-            <td></td>
-            <td>工作日期</td>
-            <td>处理人</td>
-            <td colspan="3">工作内容</td>
-            <td>工作时间</td>
-            <td>在途时间</td>
-        </tr>
-
-
-        <tr ng-show="showProcess" ng-repeat="item in processList">
             <td>&nbsp;</td>
-            <td ng-bind="item.CreateTime | frmDate">
-                CreateTime
+            <td colspan="7">
+                <table width="100%">
+                    <tr>
+                        <td>工作日期</td>
+                        <td>处理人</td>
+                        <td>工作内容</td>
+                        <td>工作时间</td>
+                        <td>在途时间</td>
+                        <td>详细</td>
+                    </tr>
+                    <tr ng-show="showProcess" ng-repeat="item in processList">
+
+                        <td ng-bind="item.CreateTime | frmDate">
+                            CreateTime
+                        </td>
+                        <td><span ng-bind="item.UserName"></span> </td>
+                        <td ng-bind="item.ProcessDesc">.ProcessDesc</td>
+                        <td ng-bind="item.ServerHours">.ServerHours</td>
+                        <td ng-bind="item.WayHours">.WayHours</td>
+                        <td><a href="javascript:void();" ng-click="showProcessDetail(item)">详细</a></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td ng-bind="totalServer"></td>
+                        <td ng-bind="totalWay"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
             </td>
-            <td><span ng-bind="item.UserName"></span> <a href="javascript:void();" ng-click="showProcessDetail(item)">详细</a></td>
-            <td colspan="3" ng-bind="item.ProcessDesc">.ProcessDesc</td>
-            <td ng-bind="item.ServerHours">.ServerHours</td>
-            <td ng-bind="item.WayHours">.WayHours</td>
         </tr>
+
 
 
 
@@ -202,34 +217,34 @@
 
         @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2 && false)
         {
-        <tr>
-            <td class="t-r fw">提交项目进度：</td>
-            <td colspan="7">
-                <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <textarea name="desc" rows="5" class="w320"> </textarea>
-                    @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
-                    <br />
-                    <input type="checkbox" name="overState" value="1" /> 完成项目
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td class="t-r fw">提交项目进度：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <textarea name="desc" rows="5" class="w320"> </textarea>
+                        @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
+                        <br />
+                        <input type="checkbox" name="overState" value="1" /> 完成项目
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
+                </td>
+            </tr>
         }
         @if (Model.Status == 3 && ViewBag.level == 2)
         {
-        <tr>
-            <td class="t-r fw">项目验收：</td>
-            <td colspan="7">
-                <form method="post" action="/Task/AuditSubmit">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
-                    <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
-                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td class="t-r fw">项目验收：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/AuditSubmit">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
+                        <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
+                        <textarea name="desc" rows="5" class="w320"> </textarea><br />
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
+                </td>
+            </tr>
         }
 
         <tr>
@@ -239,44 +254,44 @@
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                <div class="bb mt10 lh25 ">
-                    <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
-                    @for (var i = 0; i < eval.Grade; i++)
+                        <div class="bb mt10 lh25 ">
+                            <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
+                            @for (var i = 0; i < eval.Grade; i++)
                             {
-                    <img src="~/images/start_red.png" />
+                                <img src="~/images/start_red.png" />
                             }
-                    @*@eval.Score*@
+                            @*@eval.Score*@
 
-                    <p class="pl25">@eval.Desc</p>
-                </div>
+                            <p class="pl25">@eval.Desc</p>
+                        </div>
                     }
                 }
             </td>
         </tr>
         @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate < 1) || (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
         {
-        <tr>
-            <td class="t-r fw">评价：</td>
-            <td colspan="7">
-                <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <input type="hidden" id="hdgrade" name="grade" value="5" />
-                    <div id="divGrade">
-                        <img src="../../images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <span></span>
-                    </div>
+            <tr>
+                <td class="t-r fw">评价：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <input type="hidden" id="hdgrade" name="grade" value="5" />
+                        <div id="divGrade">
+                            <img src="../../images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <span></span>
+                        </div>
 
-                    <input type="hidden" name="score" value="100" /><br />
-                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
+                        <input type="hidden" name="score" value="100" /><br />
+                        <textarea name="desc" rows="5" class="w320"> </textarea><br />
 
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
-            </td>
-        </tr>
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
+                </td>
+            </tr>
         }
     </table>
 

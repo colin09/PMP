@@ -119,6 +119,12 @@
                 "style": "",
                 "url": "/Task/Notice",
                 "sort": 2
+            },
+            {
+                "title": "我的工时",
+                "style": "",
+                "url": "/Task/WorkStat",
+                "sort": 2
             }
             ]
         },

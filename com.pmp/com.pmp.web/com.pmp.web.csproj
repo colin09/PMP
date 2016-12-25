@@ -402,6 +402,7 @@
     <Content Include="Views\Shared\NoAudit.cshtml" />
     <Content Include="Views\Task\Modify.cshtml" />
     <Content Include="Views\Task\Notice.cshtml" />
+    <Content Include="Views\Task\WorkStat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

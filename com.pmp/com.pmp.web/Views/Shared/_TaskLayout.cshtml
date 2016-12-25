@@ -103,7 +103,7 @@
 
 
 
-    <div class="container mt25">
+    <div class="container mt25" ng-app="taskApp">
         @RenderBody()
         <hr />
         <footer class="container">
@@ -112,6 +112,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jq-bs-ng")
+    <script src="~/Scripts/app.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

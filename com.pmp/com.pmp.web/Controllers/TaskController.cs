@@ -130,7 +130,11 @@ namespace com.pmp.web.Controllers
 
                 ProvinceId = task.Province,
                 CityId = task.City,
+                ReceiveUserId = task.RUserId
             };
+            if (project.ReceiveUserId > 0)
+                project.Status = ProjectStatus.Wait;
+
             var fileIndex = 1;
 
             if (files != null)
@@ -830,6 +834,41 @@ namespace com.pmp.web.Controllers
         #endregion
 
 
+
+
+        #region  --  工时统计 --
+        public ActionResult WorkStat()
+        {
+            return View();
+        }
+
+        [Authorization]
+        public ActionResult GetServerTimeStat(DateTime start, DateTime end)
+        {
+            var cUser = 0;
+            var rUser = this._Longin_UserId;
+            var states = new List<ProjectStatus>
+            {
+                ProjectStatus.Over, ProjectStatus.Evaluation
+            }
+            ; //完成的项目
+            var list = _projectService.GetAll(cUser, rUser, states, start, end);
+            log.Info($"GetServerTimeStat: from {start} to {end} , projectCount: {list.Count}");
+            if (list.Count < 1)
+                return Json(new { error = "暂无数据" }, JsonRequestBehavior.AllowGet);
+
+            var result = list.GroupBy(g => g.Category).Select(s => new
+            {
+                name = s.Key.GetName(),
+                value = s.Sum(p => p.ProcessDesc.Sum(c => c.ServerHours))
+            }).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        #endregion
 
 
 
