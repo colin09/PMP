@@ -3,271 +3,307 @@
     ViewBag.Title = "任务详细";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
+<!--startprint-->
+<div id="taskDetial" ng-controller="UserTaskDetailController">
+    <div class="ptb10 bb">
+        <span>会员中心 > 我的任务 > 任务详细</span>
+        <input type="hidden" id="userLevel" value="@ViewBag.level" />
+        <input type="hidden" id="projectId" value="@Model.ID" />
+    </div>
+    <div>
+        <h3 class="ptb10" style="width:300px;float:left;">任务详细</h3>
+        <div style="width:120px; float:right; line-height:45px;"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></div>
+        <div class="clear"></div>
+    </div>
 
-<div class="ptb10 bb">
-    <span>会员中心 > 我的任务 > 任务详细</span>
-    <input type="hidden" id="userLevel" value="@ViewBag.level" />
-</div>
-<div>
-    <h3 class="ptb10" style="width:300px;float:left;">任务详细</h3>
-    <div style="width:120px; float:right; line-height:45px;"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></div>
-    <div class="clear"></div>
-</div>
+    <table class="table table-bordered">
+        @*<tr>
+                <td class="t-r" colspan="8"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></td>
+            </tr>*@
+        <tr>
+            <td class="t-r w120 fw">项目名称： </td>
+            <td colspan="7">@Model.Name</td>
+        </tr>
+        <tr>
+            <td class="t-r fw">项目描述： </td>
+            <td colspan="7"> @Html.Raw(Model.Desc)</td>
+        </tr>
+        <tr>
+            <td class="t-r fw">项目类别： </td>
+            <td>@Model.CategoryName</td>
 
-<table class="table table-bordered">
-    @*<tr>
-            <td class="t-r" colspan="8"><a href="#"> <span id="spnAddProc">新增工作内容</span> </a></td>
-        </tr>*@
-    <tr>
-        <td class="t-r w120 fw">项目名称： </td>
-        <td colspan="7">@Model.Name</td>
-    </tr>
-    <tr>
-        <td class="t-r fw">项目描述： </td>
-        <td colspan="7"> @Html.Raw(Model.Desc)</td>
-    </tr>
-    <tr>
-        <td class="t-r fw">项目类别： </td>
-        <td>@Model.CategoryName</td>
+            <td class="t-r w120 fw">项目编号： </td>
+            <td>@Model.Code</td>
 
-        <td class="t-r w120 fw">项目编号： </td>
-        <td>@Model.Code</td>
+            <td class="t-r w120 fw">合同号： </td>
+            <td>@Model.ContractCode</td>
 
-        <td class="t-r w120 fw">合同号： </td>
-        <td>@Model.ContractCode</td>
+            <td class="t-r w120 fw">项目预算：</td>
+            <td>￥@Model.Budget</td>
+        </tr>
+        <tr>
+            <td class="t-r fw">项目地点： </td>
+            <td>@Model.ProvinceName-@Model.CityName </td>
 
-        <td class="t-r w120 fw">项目预算：</td>
-        <td>￥@Model.Budget</td>
-    </tr>
-    <tr>
-        <td class="t-r fw">项目地点： </td>
-        <td>@Model.ProvinceName-@Model.CityName </td>
-
-        <td class="t-r fw">项目经理： </td>
-        <td>@Model.Manager</td>
-
-
-        <td class="t-r fw">处理人： </td>
-        <td>@Model.RUserName </td>
-
-        <td class="t-r fw">手机号： </td>
-        <td> </td>
-    </tr>
+            <td class="t-r fw">项目经理： </td>
+            <td>@Model.Manager</td>
 
 
+            <td class="t-r fw">处理人： </td>
+            <td>@Model.RUserName </td>
 
-    <tr>
-        <td class="t-r fw">发布时间： </td>
-        <td>@Model.CTime</td>
+            <td class="t-r fw">手机号： </td>
+            <td> </td>
+        </tr>
 
-        <td class="t-r fw">项目阶段： </td>
-        <td>@Model.StatusDesc</td>
 
-        <td class="t-r fw">预计工期： </td>
-        <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
-    </tr>
-    @*<tr>
-            <td class="t-r">联系方式： </td>
-            <td>@Model.Linkman [ @Model.Mobile ]</td>
-        </tr>*@
-    <tr>
-        <td class="t-r fw">项目文件： </td>
-        <td colspan="7">
-            @if (Model.FlieList != null && Model.FlieList.Count > 0)
+
+        <tr>
+            <td class="t-r fw">发布时间： </td>
+            <td>@Model.CTime</td>
+
+            <td class="t-r fw">项目阶段： </td>
+            <td>@Model.StatusDesc</td>
+
+            <td class="t-r fw">预计工期： </td>
+            <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
+        </tr>
+        @*<tr>
+                <td class="t-r">联系方式： </td>
+                <td>@Model.Linkman [ @Model.Mobile ]</td>
+            </tr>*@
+        <tr>
+            <td class="t-r fw">项目文件： </td>
+            <td colspan="7">
+                @if (Model.FlieList != null && Model.FlieList.Count > 0)
             {
                 foreach (var file in Model.FlieList)
                 {
-                    <div>
-                        <a href="@file.Path">@file.Name</a>
-                    </div>
+                <div>
+                    <a href="@file.Path">@file.Name</a>
+                </div>
+                    }
                 }
-            }
-        </td>
-    </tr>
+            </td>
+        </tr>
 
-    <tr>
-        <td class="t-r fw">项目接单：</td>
-        <td colspan="7">
-            @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
+        <tr>
+            <td class="t-r fw">项目接单：</td>
+            <td colspan="7">
+                @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
             {
                 foreach (var bid in Model.BidUsers)
                 {
-                    <form method="post" action="/Task/GiveProject">
-                        <div>
-                            <span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>    @bid.UserName 在 @bid.CTime 进行了接单。
+                <form method="post" action="/Task/GiveProject">
+                    <div>
+                        <span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>    @bid.UserName 在 @bid.CTime 进行了接单。
 
-                            @if (Model.RUserId < 1 && ViewBag.level == 2)
-                            {
-                                <input type="hidden" name="userId" value="@bid.UserId" />
-                                <input type="hidden" name="projectId" value="@Model.ID" />
-                                <button type="submit" class="btn btn-primary">同意接单</button>
-                            }
-                        </div>
-                    </form>
+                        @if (Model.RUserId < 1 && ViewBag.level == 2)
+                                {
+                        <input type="hidden" name="userId" value="@bid.UserId" />
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <button type="submit" class="btn btn-primary">同意接单</button>
+                                }
+                    </div>
+                </form>
+                    }
                 }
-            }
-        </td>
-    </tr>
-
-    @if (ViewBag.level < 20 && Model.RUserId < 1)
-    {
-        <tr>
-            <td class="t-r fw">指派此任务：</td>
-            <td colspan="7">
-                <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
-                <span id="spnReceiveName"> -- </span>
-                <input type="hidden" name="id" value="@Model.ID" />
-                <input type="hidden" name="ReceiveId" value="0" />
             </td>
         </tr>
-    }
 
-    <tr>
-        <td class="t-r fw">执行方案：</td>
-        <td colspan="7">
-            @if (ViewBag.slns != null && ((List<TaskSlnRes>)ViewBag.slns).Count > 0)
+        @if (ViewBag.level < 20 && Model.RUserId < 1)
+        {
+            <tr>
+                <td class="t-r fw">指派此任务：</td>
+                <td colspan="7">
+                    <button type="button" class="btn btn-primary" id="btnChoosePerson"> 选择执行人 </button>
+                    <span id="spnReceiveName"> -- </span>
+                    <input type="hidden" name="id" value="@Model.ID" />
+                    <input type="hidden" name="ReceiveId" value="0" />
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td class="t-r fw">执行方案：</td>
+            <td colspan="7">
+                @if (ViewBag.slns != null && ((List<TaskSlnRes>)ViewBag.slns).Count > 0)
             {
                 foreach (var sln in (ViewBag.slns as List<TaskSlnRes>))
                 {
-                    <div class="w600">
-                        <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
-                        @if (sln.FileList != null && sln.FileList.Count > 0)
-                        {
-                            <p>
-                                <span>附件：</span>
-                                @foreach (var file in sln.FileList)
-                                {
-                                    <span><a href="@file.Path"> @file.Name </a></span>
-                                }
-                            </p>
-                        }
-                        <p>说明：@sln.SlnDesc</p>
-                    </div>
+                        <div class="w600">
+                            <p>  @sln.UserName 在 @sln.CTime 提交项目方案</p>
+                            @if (sln.FileList != null && sln.FileList.Count > 0)
+                            {
+                                <p>
+                                    <span>附件：</span>
+                                    @foreach (var file in sln.FileList)
+                                    {
+                                        <span><a href="@file.Path"> @file.Name </a></span>
+                                    }
+                                </p>
+                            }
+                            <p>说明：@sln.SlnDesc</p>
+                        </div>
+                    }
                 }
-            }
-            else if (Model.RUserId == ViewBag._Longin_UserId)
+                else if (Model.RUserId == ViewBag._Longin_UserId)
+                {
+                    <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
+                }
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td colspan="7">
+                <table width="100%">
+                    <tr>
+                        <td>工作日期</td>
+                        <td>处理人</td>
+                        <td>工作内容</td>
+                        <td>工作时间</td>
+                        <td>在途时间</td>
+                        <td>详细</td>
+                    </tr>
+                    <tr ng-show="showProcess" ng-repeat="item in processList">
+
+                        <td ng-bind="item.CreateTime | frmDate">
+                            CreateTime
+                        </td>
+                        <td><span ng-bind="item.UserName"></span> </td>
+                        <td ng-bind="item.ProcessDesc">.ProcessDesc</td>
+                        <td ng-bind="item.ServerHours">.ServerHours</td>
+                        <td ng-bind="item.WayHours">.WayHours</td>
+                        <td><a href="javascript:void();" ng-click="showProcessDetail(item)">详细</a></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td ng-bind="totalServer"></td>
+                        <td ng-bind="totalWay"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+
+
+
+        @*@if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
             {
-                <button type="button" id="btnCreateSln" class="btn btn-primary">提交项目执行方案</button>
-            }
-        </td>
-    </tr>
+                foreach (var proc in Model.ProcessDesc)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @proc.CreateTime
+                        </td>
+                        <td>@proc.UserName <a href="javascript:void();" data-id="@proc" ng-click="showProcessDetail(@proc)">详细</a></td>
+                        <td colspan="3">@proc.ProcessDesc</td>
+                        <td>@proc.ServerHours</td>
+                        <td>@proc.WayHours</td>
+                    </tr>
+                }
+            }*@
 
-
-
-    <tr>
-        <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>工作日期</td>
-        <td>处理人</td>
-        <td colspan="3">工作内容</td>
-        <td>工作时间</td>
-        <td>在途时间</td>
-    </tr>
-
-    @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
-    {
-        foreach (var proc in Model.ProcessDesc)
+        @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2 && false)
         {
-
             <tr>
-                <td></td>
-                <td>
-                    @proc.CreateTime
+                <td class="t-r fw">提交项目进度：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <textarea name="desc" rows="5" class="w320"> </textarea>
+                        @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
+                        <br />
+                        <input type="checkbox" name="overState" value="1" /> 完成项目
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
                 </td>
-                <td>@proc.UserName </td>
-                <td colspan="3">@proc.ProcessDesc</td>
-                <td>@proc.ServerHours</td>
-                <td>@proc.WayHours</td>
             </tr>
         }
-    }
+        @if (Model.Status == 3 && ViewBag.level == 2)
+        {
+            <tr>
+                <td class="t-r fw">项目验收：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/AuditSubmit">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
+                        <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
+                        <textarea name="desc" rows="5" class="w320"> </textarea><br />
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
+                </td>
+            </tr>
+        }
 
-    @if (Model.RUserId == ViewBag._Longin_UserId && Model.Status == 2 && false)
-    {
         <tr>
-            <td class="t-r fw">提交项目进度：</td>
+            <td class="t-r fw">项目评价：</td>
             <td colspan="7">
-                <form method="post" action="/Task/AddProcess" enctype="multipart/form-data">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <textarea name="desc" rows="5" class="w320"> </textarea>
-                    @*<input type="file" name="file"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>*@
-                    <br />
-                    <input type="checkbox" name="overState" value="1" /> 完成项目
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
-            </td>
-        </tr>
-    }
-    @if (Model.Status == 3 && ViewBag.level == 2)
-    {
-        <tr>
-            <td class="t-r fw">项目验收：</td>
-            <td colspan="7">
-                <form method="post" action="/Task/AuditSubmit">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <input type="radio" value="1" name="isPass" /><span> 验收通过</span>
-                    <input type="radio" value="-1" name="isPass" /><span> 验收不通过 </span><br />
-                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
-            </td>
-        </tr>
-    }
-
-    <tr>
-        <td class="t-r fw">项目评价：</td>
-        <td colspan="7">
-            @if (ViewBag.evas != null)
+                @if (ViewBag.evas != null)
             {
                 foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
                 {
-                    <div class="bb mt10 lh25 ">
-                        <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
-                        @for (var i = 0; i < eval.Grade; i++)
-                        {
-                            <img src="~/images/start_red.png" />
-                        }
-                        @*@eval.Score*@
+                        <div class="bb mt10 lh25 ">
+                            <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
+                            @for (var i = 0; i < eval.Grade; i++)
+                            {
+                                <img src="~/images/start_red.png" />
+                            }
+                            @*@eval.Score*@
 
-                        <p class="pl25">@eval.Desc</p>
-                    </div>
+                            <p class="pl25">@eval.Desc</p>
+                        </div>
+                    }
                 }
-            }
-        </td>
-    </tr>
-    @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate < 1) || (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
-    {
-        <tr>
-            <td class="t-r fw">评价：</td>
-            <td colspan="7">
-                <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <input type="hidden" id="hdgrade" name="grade" value="5" />
-                    <div id="divGrade">
-                        <img src="../../images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <img src="~/images/start_red.png" />
-                        <span></span>
-                    </div>
-
-                    <input type="hidden" name="score" value="100" /><br />
-                    <textarea name="desc" rows="5" class="w320"> </textarea><br />
-
-                    <button type="submit" class="btn btn-primary"> 提 交 </button>
-                </form>
             </td>
         </tr>
-    }
-</table>
+        @if (Model.Status == 4 && ((Model.RUserId == ViewBag._Longin_UserId && Model.PEvaluate < 1) || (Model.CUserID == ViewBag._Longin_UserId && Model.CEvaluate < 1)))
+        {
+            <tr>
+                <td class="t-r fw">评价：</td>
+                <td colspan="7">
+                    <form method="post" action="/Task/GiveEvaluate" enctype="multipart/form-data">
+                        <input type="hidden" name="projectId" value="@Model.ID" />
+                        <input type="hidden" id="hdgrade" name="grade" value="5" />
+                        <div id="divGrade">
+                            <img src="../../images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <img src="~/images/start_red.png" />
+                            <span></span>
+                        </div>
 
-<div class="modal fade bs-example-modal-lg" id="addProcess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width:1000px;">
-        <div class="modal-content">
-            @using (Html.BeginForm("AddProcess", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        <input type="hidden" name="score" value="100" /><br />
+                        <textarea name="desc" rows="5" class="w320"> </textarea><br />
+
+                        <button type="submit" class="btn btn-primary"> 提 交 </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        <button ng-click="printTask()">打印</button>
+    </div>
+
+
+    <div class="modal fade bs-example-modal-lg" id="addProcess" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:1000px;">
+            <div class="modal-content">
+                @using (Html.BeginForm("AddProcess", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -296,9 +332,9 @@
                         </tr>
                         <tr>
                             <td>到达现场时间：</td>
-                            <td colspan="2"><input type="time" name="StartTime" /></td>
+                            <td colspan="2"><input type="datetime" name="StartTime" /></td>
                             <td>服务完成时间：</td>
-                            <td colspan="2"><input type="time" name="EndTime" /></td>
+                            <td colspan="2"><input type="datetime" name="EndTime" /></td>
                         </tr>
                         <tr>
                             <td>分析及处理方法：</td>
@@ -336,137 +372,184 @@
                     <button type="submit" class="btn btn-primary"> 提 交 </button>
                 </div>
             }
+            </div>
         </div>
     </div>
-</div>
 
-
-
-<div class="modal fade" id="getModel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            @using (Html.BeginForm("GiveProject", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    <div class="modal fade" id="getModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @using (Html.BeginForm("GiveProject", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">选择任务执行人</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="divPersonList">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
-                    <button type="submit" class="btn btn-primary"> 确定指派 </button>
-                </div>
-            }
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<div class="modal fade" id="GiveSln">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">提交方案说明</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table noborder">
-                        <tr>
-                            <td>方案描述： </td>
-                            <td>
-                                <textarea class="form-control" name="desc" placeholder="方案描述" rows="5"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>项目文件：</td>
-                            <td><input type="file" id="exampleInputFile" name="files" multiple="multiple"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="projectId" value="@Model.ID" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
-                    <button type="submit" id="btnSaveRUser" class="btn btn-primary"> 确定提交 </button>
-                </div>
-            }
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<div class="modal fade" id="userPserson">
-    <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">接单人信息</h4>
+                <h4 class="modal-title">选择任务执行人</h4>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered">
+                <div id="divPersonList">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="projectId" value="@Model.ID" />
+                <button type="button" class="btn btn-primary" data-dismiss="modal"> 取 消 </button>
+                <button type="submit" class="btn btn-primary"> 确定指派 </button>
+            </div>
+            }
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="GiveSln">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">提交方案说明</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table noborder">
                     <tr>
-                        <td>昵称： </td>
+                        <td>方案描述： </td>
                         <td>
-                            <span id="up_NicklName"></span>
-                        </td>
-                        <td>真实姓名： </td>
-                        <td>
-                            <span id="up_RealName"></span>
-                        </td>
-                        <td>性别： </td>
-                        <td>
-                            <span id="up_Gender"></span>
+                            <textarea class="form-control" name="desc" placeholder="方案描述" rows="5"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td>出生日期： </td>
-                        <td>
-                            <span id="up_Birthday"></span>
-                        </td>
-                        <td>邮箱： </td>
-                        <td>
-                            <span id="up_Email"></span>
-                        </td>
-                        <td>地址： </td>
-                        <td>
-                            <span id="up_Address"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>职位： </td>
-                        <td>
-                            <span id="up_Position"></span>
-                        </td>
-                        <td>工作年限： </td>
-                        <td>
-                            <span id="up_WorkYear"></span>
-                        </td>
-                        <td>信誉： </td>
-                        <td>
-                            <span id="up_EvalScore"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>简介： </td>
-                        <td colspan="5">
-                            <span id="up_Introduction"></span>
-                        </td>
+                        <td>项目文件：</td>
+                        <td><input type="file" id="exampleInputFile" name="files" multiple="multiple"></td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
+                <input type="hidden" name="projectId" value="@Model.ID" />
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                <button type="submit" id="btnSaveRUser" class="btn btn-primary"> 确定提交 </button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+            }
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="userPserson">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">接单人信息</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>昵称： </td>
+                            <td>
+                                <span id="up_NicklName"></span>
+                            </td>
+                            <td>真实姓名： </td>
+                            <td>
+                                <span id="up_RealName"></span>
+                            </td>
+                            <td>性别： </td>
+                            <td>
+                                <span id="up_Gender"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>出生日期： </td>
+                            <td>
+                                <span id="up_Birthday"></span>
+                            </td>
+                            <td>邮箱： </td>
+                            <td>
+                                <span id="up_Email"></span>
+                            </td>
+                            <td>地址： </td>
+                            <td>
+                                <span id="up_Address"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>职位： </td>
+                            <td>
+                                <span id="up_Position"></span>
+                            </td>
+                            <td>工作年限： </td>
+                            <td>
+                                <span id="up_WorkYear"></span>
+                            </td>
+                            <td>信誉： </td>
+                            <td>
+                                <span id="up_EvalScore"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>简介： </td>
+                            <td colspan="5">
+                                <span id="up_Introduction"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
+    <div class="modal fade" id="processDetail">
+        <div class="modal-dialog" style="width:900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">工作内容详细：</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>出发地点：</td>
+                            <td ng-bind="chkProcessDetail.FromPlace"></td>
+                            <td>服务地点：</td>
+                            <td ng-bind="chkProcessDetail.ServerPlace"></td>
+                            <td>在途时间：</td>
+                            <td ng-bind="chkProcessDetail.WayHours"></td>
+                            <td>任务性质：</td>
+                            <td ng-bind="chkProcessDetail.ServerType"></td>
+                        </tr>
+                        <tr>
+                            <td>到达现场时间：</td>
+                            <td ng-bind="chkProcessDetail.StartTime | frmDate"></td>
+                            <td>服务完成时间：</td>
+                            <td ng-bind="chkProcessDetail.EndTime | frmDate"></td>
+
+                            <td>附件：</td>
+                            <td colspan="3">
+                                <span ng-repeat="file in chkProcessDetail.FlieList"><a ng-href="file.Path">{{file.Name}}</a></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>分析及处理方法：</td>
+                            <td colspan="7" ng-bind="chkProcessDetail.ProcessDesc"></td>
+                        </tr>
+                        <tr>
+                            <td>遗留问题：</td>
+                            <td colspan="7" ng-bind="chkProcessDetail.Nodus"></td>
+                        </tr>
+                        <tr>
+                            <td>维护建议：</td>
+                            <td colspan="7" ng-bind="chkProcessDetail.Suggest"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--endprint-->
 @section scripts{
     <script>
         $(function () {

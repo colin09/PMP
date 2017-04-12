@@ -56,7 +56,7 @@ namespace com.pmp.mongo.service
         }
 
 
-        public List<MgProject> GetAll(int cUser, int gUser, int type, int state,int province, int city, DateTime? date, PageInfo page, out long total)
+        public List<MgProject> GetAll(int cUser, int gUser, int type, int state, int province, int city, DateTime? date, PageInfo page, out long total)
         {
             var filter = Builders<MgProject>.Filter.Gt("Status", -6);
             if (cUser > 0)
@@ -80,7 +80,24 @@ namespace com.pmp.mongo.service
             return SearchByPage(filter, order => order.CreateTime, false, page.PageIndex, page.PageSize, out total);
         }
 
+        public List<MgProject> GetAll(int cUser, int gUser, List<ProjectStatus> states, DateTime? start, DateTime? end)
+        {
+            var filter = Builders<MgProject>.Filter.Gt("Status", -6);
+            if (cUser > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.CreatesUserID, cUser);
+            if (gUser > 0)
+                filter = filter & Builders<MgProject>.Filter.Eq(p => p.ReceiveUserId, gUser);
 
+            if (states.Count > 0)
+                filter = filter & Builders<MgProject>.Filter.In(p => p.Status, states);
+
+            if (start != null)
+                filter = filter & Builders<MgProject>.Filter.Gte(p => p.CreateTime, start.Value.Date);
+            if (end != null)
+                filter = filter & Builders<MgProject>.Filter.Lt(p => p.CreateTime, end.Value.AddDays(1).Date);
+
+            return Search(filter);
+        }
 
 
         public void Create(MgProject m)
@@ -113,7 +130,7 @@ namespace com.pmp.mongo.service
         {
             var filter = Builders<MgProject>.Filter.Eq("ID", id);
             var update = Builders<MgProject>.Update.Set(p => p.Status, ProjectStatus.Delete)
-                .Set(p=>p.UpdateTime,DateTime.Now);
+                .Set(p => p.UpdateTime, DateTime.Now);
 
             return Update(filter, update) > 0;
         }

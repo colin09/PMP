@@ -40,7 +40,7 @@ namespace com.pmp.web.Controllers
         }
 
         // GET: Task
-        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0,int province=0, int city = 0, DateTime? date = null)
+        public ActionResult Index(int pageIndex = 1, int type = 0, int state = 0, int province = 0, int city = 0, DateTime? date = null)
         {
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
@@ -113,7 +113,7 @@ namespace com.pmp.web.Controllers
             {
                 Category = (ProjectCategroy)task.Catetory,
                 //Code = $"{task.Catetory}-{DateTime.Now.ToOADate() }".Replace(".", ""),
-                Code= $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{task.Catetory}",
+                Code = $"{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{task.Catetory}",
                 Name = task.Name,
                 ContractCode = task.ContractCode,
                 Status = ProjectStatus.Default,
@@ -130,7 +130,11 @@ namespace com.pmp.web.Controllers
 
                 ProvinceId = task.Province,
                 CityId = task.City,
+                ReceiveUserId = task.RUserId
             };
+            if (project.ReceiveUserId > 0)
+                project.Status = ProjectStatus.Wait;
+
             var fileIndex = 1;
 
             if (files != null)
@@ -372,7 +376,7 @@ namespace com.pmp.web.Controllers
 
             var page = new PageInfo() { PageIndex = pageIndex };
             var total = 0L;
-            var list = _projectService.GetAll(cUser, rUser, type, state,0, 0, null, page, out total);
+            var list = _projectService.GetAll(cUser, rUser, type, state, 0, 0, null, page, out total);
 
             ViewBag.state = state;
             ViewBag.pageIndex = pageIndex;
@@ -470,6 +474,27 @@ namespace com.pmp.web.Controllers
 
             return View(result);
         }
+
+        [Authorization]
+        public ActionResult GetTaskProcess(int id)
+        {
+            var project = _projectService.GetOneById(id);
+            if (project == null)
+                return Json(new
+                {
+                    error = "任务不存在"
+                }, JsonRequestBehavior.AllowGet);
+
+            var userIds = project.ProcessDesc.Select(p => p.UserID).ToList();
+            var userList = _userService.GetUserListByIds(userIds.Distinct().ToList());
+            project.ProcessDesc.ForEach(p =>
+            {
+                p.UserName = userList.FirstOrDefault(u => u.Id == p.UserID)?.Name;
+            });
+            return Json(project.ProcessDesc, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         [Authorization]
         public ActionResult JoinProject(int projectId)
@@ -608,6 +633,9 @@ namespace com.pmp.web.Controllers
                     var fileIndex = 1;
                     if (files != null)
                     {
+                        if (process.FlieList == null)
+                            process.FlieList = new List<ProjectFlie>();
+
                         foreach (var file in files)
                         {
                             if (file != null)
@@ -806,6 +834,41 @@ namespace com.pmp.web.Controllers
         #endregion
 
 
+
+
+        #region  --  工时统计 --
+        public ActionResult WorkStat()
+        {
+            return View();
+        }
+
+        [Authorization]
+        public ActionResult GetServerTimeStat(DateTime start, DateTime end)
+        {
+            var cUser = 0;
+            var rUser = this._Longin_UserId;
+            var states = new List<ProjectStatus>
+            {
+                ProjectStatus.Over, ProjectStatus.Evaluation
+            }
+            ; //完成的项目
+            var list = _projectService.GetAll(cUser, rUser, states, start, end);
+            log.Info($"GetServerTimeStat: from {start} to {end} , projectCount: {list.Count}");
+            if (list.Count < 1)
+                return Json(new { error = "暂无数据" }, JsonRequestBehavior.AllowGet);
+
+            var result = list.GroupBy(g => g.Category).Select(s => new
+            {
+                name = s.Key.GetName(),
+                value = s.Sum(p => p.ProcessDesc.Sum(c => c.ServerHours))
+            }).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        #endregion
 
 
 
