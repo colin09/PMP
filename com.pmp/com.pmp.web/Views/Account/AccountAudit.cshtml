@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "用户审核";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="ptb10 bb">
+    <span>我的信息 > 用户审核列表</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">用户审核</h3>
+</div>
+<div class="pmp_content">
+    <ul class="taskAuditList">
+        <li>
+            <form method="post" action="/Account/AccountAudit">
+                <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+                    <tr>
+                        <td style="padding:10px;font-weight:400">注册类型：</td>
+                        <td style="padding:10px">
+                            <select class="form-control" name="accountType">
+                                @if (ViewBag.accountType == 1)
+                                {
+                                    <option value="1" selected="selected">个人用户</option>
+                                    <option value="2">企业用户</option>
+                                }
+                                else
+                                {
+                                    <option value="1">个人用户</option>
+                                    <option value="2" selected="selected">企业用户</option>
+                                }
+                            </select>
+                        </td>
+                        <td style="padding:10px;font-weight:400">审核状态：</td>
+                        <td style="padding:10px">
+                            <select class="form-control" name="auditType">
+                                @if (ViewBag.auditType == 1)
+                                {
+                                    <option value="1" selected="selected">未审核</option>
+                                    <option value="2">审核通过</option>
+                                    <option value="3">审核未通过</option>
+                                }
+                                else if (ViewBag.auditType == 2)
+                                {
+                                    <option value="1">未审核</option>
+                                    <option value="2" selected="selected">审核通过</option>
+                                    <option value="3">审核未通过</option>}
+                                else if (ViewBag.auditType == 3)
+                                {
+                                    <option value="1">未审核</option>
+                                    <option value="2">审核通过</option>
+                                    <option value="3" selected="selected">审核未通过</option>}
+
+                            </select>
+                        </td>
+                        <td style="padding:10px">
+                            <button class="btn btn_blue">搜索</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div id="auditList" style="padding-top:10px">
+                    <table cellpadding="0" cellspacing="0" class="table_list table">
+                        <tr class="tr_title">
+                            <th>注册类型</th>
+                            <th>注册人</th>
+                            <th>联系方式</th>
+                            <th>提交时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td style="display:none">@ViewBag.accountType</td>
+
+                                    @if (ViewBag.accountType == 1)
+                                    {
+                                        <td style="display:none">@Model[i].ID </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="display:none">@Model[i].CompanyReal_ID</td>
+                                    }
+                                    <td style="display:none">@Model[i].ID </td>
+
+                                    @if (ViewBag.accountType == 1)
+                                    {
+                                        <td>个人</td>
+                                    }
+                                    else
+                                    {
+                                        <td>企业 </td>
+                                    }
+                                    <td> @Model[i].PersonInfo.RealName </td>
+                                    <td>@Model[i].Phone </td>
+
+                                    @if (ViewBag.accountType == 1)
+                                    {
+                                        <td>@Model[i].PersonReal.CreatesTime</td>
+                                    }
+                                    else if (ViewBag.accountType == 2)
+                                    {
+                                        <td>2016-01-01</td>
+                                    }
+                                    @if (ViewBag.auditType == 1)
+                                    {
+                                        <td>未审核</td>
+                                        <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
+                                            <button type="button" class="btn_see btn btn_blue">查看</button>
+                                            <button type="button" class="btn_Pass btn btn_blue">通过</button>&nbsp
+                                            <button type="button" class="btn_NotPass btn btn_red">未通过</button>
+                                        </td>
+                                    }
+                                    else if (ViewBag.auditType == 2)
+                                    {
+                                        <td>审核通过</td>
+                                        <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
+                                            <button type="button" class="btn_see btn btn_blue">查看</button>
+                                        </td>
+                                    }
+                                    else if (ViewBag.auditType == 3)
+                                    {
+                                        <td>审核未通过</td>
+                                        <td>
+                                            <input type="hidden" accountType="@ViewBag.accountType" auditType="@ViewBag.auditType" />
+                                            <button type="button" class="btn_see btn btn_blue">查看</button>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" style="text-align:center;vertical-align:middle;">暂无数据</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </form>
+        </li>
+        <li>
+            @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 2, Total = ViewBag.total })
+        </li>
+    </ul>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(".pagination li").click(function () {
+            var pageindex = $(this).data("page");
+
+            var accountType = $('[name="accountType"]').val();
+            var auditType = $('[name="auditType"]').val();
+
+            window.location.href = 'AccountAudit?pageIndex=' + pageindex + '&AccountType=' + accountType + '&AuditType=' + auditType;
+        });
+
+        $(function () {
+            Array.prototype.slice.call($(".btn_Pass")).forEach(function (item) {
+                item.onclick = function () {
+                    var type = $(item).parents("tr").find("td").eq(0).text();
+                    var id = $(item).parents("tr").find("td").eq(1).text();
+                    audit(2, type, id, "审核通过", "");
+                };
+            });
+
+            Array.prototype.slice.call($(".btn_see")).forEach(function (item) {
+                item.onclick = function () {
+                    var id = $(item).parents("tr").find("td").eq(2).text();
+                    var auditId = $(item).parents("tr").find("td").eq(1).text();
+                    var source = $(this).prev().attr("accountType");
+                    var auditType = $(this).prev().attr("auditType");
+
+                    window.open("/Account/AccountDetail?auditId=" + auditId + "&auditType=" + auditType + "&source=" + source + "&uid=" + id);
+                };
+            });
+
+            Array.prototype.slice.call($(".btn_NotPass")).forEach(function (item) {
+                item.onclick = function () {
+                    var type = $(item).parents("tr").find("td").eq(0).text();
+                    var id = $(item).parents("tr").find("td").eq(1).text();
+
+                    var html =
+                '<div class="contentwrapper"> ' +
+                    ' <form class="stdform" method="post">' +
+                         '<div>' +
+                           '<span>' +
+                           '      <textarea class="longinput" rows="4" placeholder="未通过原因" cols="80" style="width: 100%"></textarea>' +
+                            '</span>' +
+                           '<span>' +
+                       '      <button class="btn_NotPass btn btn-danger" style="margin: 20px 20px " type="button">提交</button>' +
+                       '</span>' +
+                    ' </div>' +
+                  '  </form>' +
+                '</div>';
+                    layer.open({
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['500px', '290px'], //宽高
+                        content: html
+                    });
+                    $(".layui-layer-title").text("请填写未通过原因");
+
+                    Array.prototype.slice.call($(".btn_NotPass")).forEach(function (item) {
+                        item.onclick = function () {
+                            if ($(".longinput").val() == "") {
+                                layer.msg("原因不能为空"); return;
+                            }
+                            audit(3, type, id, "审核成功", $(".longinput").val())
+                        };
+                    });
+                };
+            });
+        })
+        function audit(res, type, id, message, notpassstr) {
+            var data = { res: res, type: type, id: id, notpassstr: notpassstr };
+            $.get("/Account/AccountAuditRes", data, function (res) {
+                if (res == "True") {
+                    $("#layui-layer1").hide();
+                    $("#layui-layer-shade3").hide()
+                    layer.msg(message, { time: 2000, icon: 1 });
+                    window.location.href = "/Account/AccountAudit";
+                } else {
+                    layer.msg("出现异常", { time: 2000, icon: 1 });
+                }
+
+            })
+        }
+    </script>
+}

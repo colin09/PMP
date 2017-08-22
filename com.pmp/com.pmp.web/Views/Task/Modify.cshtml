@@ -1,0 +1,227 @@
+﻿@using com.pmp.web.sms
+@model com.pmp.mongo.data.MgProject
+@{
+    ViewBag.Title = "发布任务";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+@section header{
+    <link href="~/Content/wangEditor.min.css" rel="stylesheet" />
+}
+
+<h2 class="subTitle">编辑任务</h2>
+
+<input type="hidden" id="category" value="@Convert.ToInt32(Model.Category)" />
+<input type="hidden" id="city" value="@Model.CityId" />
+<input type="hidden" id="province" value="@Model.ProvinceId" />
+<input type="hidden" id="desc" value="@Model.Desc" />
+
+
+<form class="form-horizontal" role="form" method="post" action="/Task/ModifySubmit" enctype="multipart/form-data">
+    <input type="hidden" name="Id" value="@Model.ID" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目类别</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="Catetory" id="sltCategory">
+                <option value="1">有线</option>
+                <option value="2">无线</option>
+                <option value="3">服务器</option>
+                <option value="4">设备安装</option>
+                <option value="5">出差</option>
+                <option value="20">其他</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目编号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Code" value="@Model.Code" placeholder="项目编号" readonly="readonly">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="col-sm-2 control-label">项目名称</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Name" value="@Model.Name" placeholder="项目名称" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">合同号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="ContractCode" value="@Model.ContractCode" placeholder="合同号" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">预算</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Budget" value="@Model.Budget" placeholder="预算费用" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目地点</label>
+
+        <div class="col-sm-10">
+            <select id="sltProv" name="Province"></select>
+
+            <select id="sltCity" name="City"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目经理</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Manager" value="@Model.Manager" placeholder="项目经理" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系人</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Linkman" value="@Model.Linkman" placeholder="联系人" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系方式</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Mobile" value="@Model.Mobile" placeholder="联系方式" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目描述</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" name="Desc" id="txtProDesc" value="@Model.Desc" placeholder="项目描述" rows="15"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目开始时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="StartTime" value="@Model.StartTime.ToString("yyyy-MM-dd")" placeholder="项目开始时间" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目结束时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="EndTime" value="@Model.EndTime.ToString("yyyy-MM-dd")" placeholder="项目结束时间" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目文件</label>
+        <div class="col-sm-10">
+            @if (Model.FlieList != null && Model.FlieList.Count > 0)
+            {
+                foreach (var file in Model.FlieList)
+                {
+                    <div>
+                        @file.Name <span class="glyphicon glyphicon-remove" data-index="@file.Index"></span>
+                    </div>
+                }
+            }
+
+            <input type="file" name="files" multiple="multiple"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary"> 修改任务 </button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+
+    <script type="text/javascript" src="~/Scripts/js/wangEditor.min.js"></script>
+    <script>
+        angular.module('cityApp', [])
+            .controller("cityCtl",
+                function ($scope, $http) {
+                    $http.get("/Task/GetCityList?parentId=0")
+                        .success(function (json) {
+                            if (json.length > 0) {
+                                var layout = "";
+                                var selectedId = $("#province").val();
+                                $.each(json, function (key, val) {
+                                    //val.Remark = "";
+                                    //if (val.ID == $("#province").val())
+                                    //    val.Remark = "selected";
+
+                                    if (val.ID == selectedId)
+                                        layout += "<option value='" + val.ID + "' selected='selected'>" + val.Name + "</option>";
+                                    else
+                                        layout += "<option value='" + val.ID + "'>" + val.Name + "</option>";
+                                });
+                                $("#slcProv").empty().append(layout);
+                                $scope.provinces = json;
+                                //$scope.defulatProvince = $("#province").val();
+                            }
+                        });
+                    $scope.change = function (x) {
+                        console.log(x);
+                        var proId = $("#slcProv").val();
+
+                        $http.get("/Task/GetCityList?parentId=" + proId)
+                            .success(function (json) {
+                                if (json.length > 0) {
+
+                                    $.each(json, function (key, val) {
+                                        val.Remark = "";
+                                        if (val.ID == $("#city").val())
+                                            val.Remark = "selected";
+                                    });
+                                    $scope.citys = json;
+                                }
+                            });
+                    };
+                });
+        $(function () {
+            function InitSlt(parentId, sltId, selectedId) {
+                $.getJSON("/Task/GetCityList?parentId=" + parentId)
+                     .success(function (json) {
+                         if (json.length > 0) {
+                             var layout = "";
+
+                             $.each(json, function (key, val) {
+                                 if (val.ID == selectedId)
+                                     layout += "<option value='" + val.ID + "' selected='selected'>" + val.Name + "</option>";
+                                 else
+                                     layout += "<option value='" + val.ID + "'>" + val.Name + "</option>";
+                             });
+                             $("#" + sltId).empty().append(layout);
+                         }
+                     });
+            }
+
+
+            var InitProvinceId = $("#province").val();
+            InitSlt(0, "sltProv", InitProvinceId);
+
+            var InitCityId = $("#city").val();
+            InitSlt(InitProvinceId, "sltCity", InitCityId);
+
+            $("#sltProv").change(function () {
+                var provinceId = $(this).val();
+                InitSlt(provinceId, "sltCity", 0);
+            });
+
+
+            var editor = new wangEditor('txtProDesc');
+            editor.config.menus = [
+                'bold',
+                'underline',
+                'italic',
+                'strikethrough',
+                'eraser',
+                'forecolor',
+                'bgcolor'
+            ];
+            editor.create();
+            // 初始化编辑器的内容
+            editor.$txt.html($("#desc").val());
+
+            $('#sltCategory').val($("#category").val());
+            //$('#slcProv').val($("#province").val());
+            //$('#sltCity').val($("#city").val());
+
+        });
+    </script>
+
+}

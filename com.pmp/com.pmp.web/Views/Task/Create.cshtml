@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "发布任务";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+@section header{
+    <link href="~/Content/wangEditor.min.css" rel="stylesheet" />
+}
+
+<h2 class="subTitle">发布任务</h2>
+
+<form class="form-horizontal" role="form" method="post" action="/Task/CreateSubmint" enctype="multipart/form-data" ng-controller="crateTaskController">
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="col-sm-2 control-label">项目类别</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="Catetory">
+                <option value="1">有线</option>
+                <option value="2">无线</option>
+                <option value="3">服务器</option>
+                <option value="4">设备安装</option>
+                <option value="5">出差</option>
+                <option value="20">其他</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目编号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Code" placeholder="项目编号 - 自动生成" readonly="readonly">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="col-sm-2 control-label">项目名称</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Name" placeholder="项目名称" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">合同号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="ContractCode" placeholder="合同号" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">预算</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Budget" placeholder="预算费用" required="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目地点</label>
+        <div class="col-sm-10">
+            <select id="slcProv" name="Province" ng-change="change()" ng-model="defulatProvince" ng-init="defulatProvince='0'">
+                <option value="0" selected="selected"> - 选择省份 -</option>
+                <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
+            </select>
+            <select name="City">
+                <option value="0" selected="selected"> - 选择城市 -</option>
+                <option ng-repeat="city in citys" ng-value="city.ID">{{city.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目经理</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Manager" placeholder="项目经理" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">执行人：</label>
+        <div class="col-sm-10">
+            <select name="City">
+                <option value="0" selected="selected"> - 选择执行人 -</option>
+                <option ng-repeat="item in executeUsers" ng-value="item.Id">{{item.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系人</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Linkman" placeholder="联系人" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">联系方式</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="Mobile" placeholder="联系方式" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目描述</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" name="Desc" id="txtProDesc" placeholder="项目描述" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目开始时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="StartTime" placeholder="项目开始时间" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目结束时间</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="EndTime" placeholder="项目结束时间" required="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">项目文件</label>
+        <div class="col-sm-10">
+            <input type="file" name="files" multiple="multiple"> <span>文件支持 *.jpg , *.png , *.pdf , *.doc , *.xls  ,文件不能大于2M。</span>
+        </div>
+    </div>
+    @*<div class="form-group">
+            <div class="checkbox col-sm-offset-2 col-sm-10">
+                <label>
+                    <input type="checkbox"> Check me out
+                </label>
+            </div>
+        </div>*@
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary"> 发布任务 </button>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+
+    <script type="text/javascript" src="~/Scripts/js/wangEditor.min.js"></script>
+    <script>
+       
+        $(function () {
+            var editor = new wangEditor('txtProDesc');
+            editor.config.menus = [
+                'bold',
+                'underline',
+                'italic',
+                'strikethrough',
+                'eraser',
+                'forecolor',
+                'bgcolor'
+            ];
+            editor.create();
+        });
+    </script>
+
+}

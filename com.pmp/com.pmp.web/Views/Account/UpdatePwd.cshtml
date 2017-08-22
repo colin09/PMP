@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+<div>
+    <h3 class="ptb10">修改密码</h3>
+</div>
+
+<div style="padding:15px">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="oldpwd" class="col-sm-2 control-label">原始密码：</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="oldpwd" id="oldpwd" value="" placeholder="原始密码" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newpwd" class="col-sm-2 control-label">新密码：</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="newpwd" id="newpwd" value="" placeholder="原始密码" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newpwdCheck" class="col-sm-2 control-label">确认密码：</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="newpwdCheck" id="newpwdCheck" value="" placeholder="确认密码" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn_blue">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(".btn_blue").click(function () {
+            if ($("#newpwd").val() != $("#newpwdCheck").val()) {
+                layer.msg("两次密码输入不一致！"); return;
+            }
+            var data = { oldpwd: $("#oldpwd").val(), newpwd: $("#newpwd").val() }
+            $.get("/Account/UpdatePassWord", data, function (res) {
+                if (res.IsSuccess == "False") {
+                    layer.msg(res.error);
+                } else {
+                    layer.msg("修改成功。");
+                }
+            }, "json")
+        });
+
+    </script>
+}
+

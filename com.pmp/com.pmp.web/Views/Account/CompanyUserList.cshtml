@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "CompanyUserList";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="ptb10 bb">
+    <span>会员信息 > 员工管理</span>
+</div>
+<div>
+    <h3 class="ptb10">员工管理</h3>
+</div>
+<div class="pmp_content">
+    <form method="post" action="/Account/CompanyUserList">
+        <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+            <tr>
+                <td style="padding:10px;font-weight:400">查询：</td>
+                <td style="padding:10px">
+                    <select class="form-control" style="width:150px" name="sel_type">
+                        <option value="3">公司名称</option>
+                        <option value="1">联系人</option>
+                        <option value="2">联系电话</option>
+                    </select>
+                </td>
+                <td style="padding:10px"><input class="form-control" type="text" value="@ViewBag.name" name="name"></td>
+                <td style="padding:10px"><button class="btn btn_blue" type="submit">搜索</button></td>
+            </tr>
+        </table>
+    </form>
+    <ul class="taskAuditList">
+        <li>
+            <table cellpadding="0" cellspacing="0" class="table_list table">
+                <tr class="tr_title">
+                    <th>账户类型</th>
+                    <th>公司名称</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>城市</th>
+                    <th>经营范围</th>
+                    <th>审核状态</th>
+                    <th>操作</th>
+                </tr>
+                @if (Model != null && Model.Count > 0)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                        <tr>
+                            <td style="display:none"> <input type="hidden" value="@Model[i].ID" /></td>
+                            <td>公司账户</td>
+                            <td>@Model[i].Name</td>
+                            <td>@Model[i].ContactsName</td>
+                            <td>@Model[i].Phone</td>
+                            <td>@Model[i].CompayCity</td>
+                            <td>@Model[i].BuinessScope</td>
+
+                            @if (Model[i].IsApprove == 0)
+                    {
+                                <td>未提交</td>
+                            }
+                            else if (Model[i].IsApprove == 1)
+                            {
+                                <td>待审核</td>
+                            }
+                            else if (Model[i].IsApprove == 2)
+                            {
+                                <td>通过</td>
+                            }
+                            else if (Model[i].IsApprove == 3)
+                            {
+                                <td>未通过</td>
+                            }
+                            <td>
+                                <button class="btn btn_blue btn_see">查看员工</button>
+
+                                @if (Model[i].status == 1)
+                                {
+                                    <button class="btn btn_red btn_stop">停用</button>
+                                    <button class="btn btn_red btn_open" style="display:none">启用</button>
+                                }
+
+                                @if (Model[i].status == 0)
+                                {
+                                    <button class="btn btn_red btn_stop" style="display:none">停用</button>
+                                    <button class="btn btn_red btn_open">启用</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="8">暂无信息</td></tr>
+                }
+            </table>
+        </li>
+        <li>
+            @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 2, Total = ViewBag.total })
+        </li>
+    </ul>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(".btn_see").click(function () {
+            var id = $(this).parents(".table_list").find("[type='hidden']").val();
+            window.location.href = "/Account/UserList?type=2&companyID=" + id;
+        });
+        $(".btn_stop").click(function () {
+            $_this = $(this);
+            var id = $(this).parents("tr").find("[type='hidden']").val();
+            var data = { companyId: id, Status: 0 }
+            $.get("/Account/UpdateCompanyStatus", data, function (res) {
+                if (res == "False") {
+                    layer.msg("停用失败。");
+                } else {
+                    layer.msg("停用成功。");
+                    $($_this).parents("td").find(".btn_stop").hide();
+                    $($_this).parents("td").find(".btn_open").show();
+                }
+            })
+        });
+
+        $(".btn_open").click(function () {
+            $_this = $(this);
+            var id = $(this).parents("tr").find("[type='hidden']").val();
+            var data = { companyId: id, Status: 1 }
+            $.get("/Account/UpdateCompanyStatus", data, function (res) {
+                if (res == "False") {
+                    layer.msg("开启失败。");
+                } else {
+                    layer.msg("开启成功。");
+                    $($_this).parents("td").find(".btn_open").hide();
+                    $($_this).parents("td").find(".btn_stop").show();
+                }
+            })
+        });
+
+        $(".pagination li").click(function () {
+            var pageindex = $(this).data("page");
+
+            var sel_type = $("[name='sel_type']").val();
+            var name = $("input[name='name']").val();
+
+            window.location.href = 'CompanyUserList?pageIndex=' + pageindex + '&sel_type=' + sel_type + '&name=' + name;
+        });
+    </script>
+
+}

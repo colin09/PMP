@@ -1,0 +1,33 @@
+﻿@using com.pmp.common.helper;
+@model List<com.pmp.mongo.data.MgMessage>
+@{
+    ViewBag.Title = "消息列表";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="ptb10 bb">
+    <span>会员中心 > 我的消息</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+
+<div>
+    <h3 class="ptb10">消息列表</h3>
+</div>
+
+
+<ul class="taskAuditList">
+    @{ if (Model!=null)
+        {
+            foreach (var item in Model)
+            {
+                <li>
+                    <div class="line2">@item.CTime.ToString("yyyy-MM-dd") | @item.Msg</div>
+                </li>
+            }
+        }
+    }
+    @*<li>
+        @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+    </li>*@
+</ul>
+

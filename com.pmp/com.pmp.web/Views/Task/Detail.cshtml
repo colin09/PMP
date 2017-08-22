@@ -1,0 +1,244 @@
+﻿@using com.pmp.common.helper;
+@using com.pmp.model.data;
+@using com.pmp.model.response;
+@using com.pmp.model.enums
+@model com.pmp.model.response.TaskInfoRes
+@{
+    ViewBag.Title = "详细";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<h3 class="mc10">
+    @Model.Name
+</h3>
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <td class="t-r w120 fw">项目名称： </td>
+        <td colspan="7">@Model.Name</td>
+    </tr>
+    <tr>
+        <td class="t-r fw">项目描述： </td>
+        <td colspan="7"> @Html.Raw(Model.Desc)</td>
+    </tr>
+    <tr>
+        <td class="t-r fw">项目类别： </td>
+        <td>@Model.CategoryName</td>
+
+        <td class="t-r w120 fw">项目编号： </td>
+        <td>@Model.Code</td>
+
+        <td class="t-r w120 fw">合同号： </td>
+        <td>@Model.ContractCode</td>
+
+        <td class="t-r w120 fw">项目预算：</td>
+        <td>￥@Model.Budget</td>
+    </tr>
+    <tr>
+        <td class="t-r fw">项目地点： </td>
+        <td>@Model.ProvinceName-@Model.CityName </td>
+
+        <td class="t-r fw">项目经理： </td>
+        <td>@Model.Manager</td>
+
+        <td colspan="4"> </td>
+        @*<td class="t-r fw">处理人： </td>
+            <td>@Model.RUserName </td>
+
+            <td class="t-r fw">手机号： </td>
+            <td> </td>*@
+    </tr>
+
+
+
+    <tr>
+        <td class="t-r fw">发布时间： </td>
+        <td>@Model.CTime</td>
+
+        <td class="t-r fw">项目阶段： </td>
+        <td>@Model.StatusDesc</td>
+
+        <td class="t-r fw">预计工期： </td>
+        <td colspan="3">@Model.StartTime.ToString("yyyy-MM-dd") - @Model.EndTime.ToString("yyyy-MM-dd")</td>
+    </tr>
+    @*<tr>
+            <td class="t-r">联系方式： </td>
+            <td>@Model.Linkman [ @Model.Mobile ]</td>
+        </tr>*@
+    <tr>
+        <td class="t-r fw">项目文件： </td>
+        <td colspan="7">
+            @if (Model.FlieList != null && Model.FlieList.Count > 0)
+            {
+                foreach (var file in Model.FlieList)
+                {
+                    <div>
+                        <a href="@file.Path">@file.Name</a>
+                    </div>
+                }
+            }
+        </td>
+    </tr>
+
+
+
+
+    @*<tr>
+            <td colspan="8" class="fw"> &nbsp; &nbsp;项目进度：</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>工作日期</td>
+            <td>处理人</td>
+            <td colspan="3">工作内容</td>
+            <td>工作时间</td>
+            <td>在途时间</td>
+        </tr>
+
+        @if (Model.ProcessDesc != null && Model.ProcessDesc.Count > 0)
+        {
+            foreach (var proc in Model.ProcessDesc)
+            {
+
+                <tr>
+                    <td></td>
+                    <td>
+                        @proc.CreateTime
+                    </td>
+                    <td>@proc.UserName </td>
+                    <td colspan="3">@proc.ProcessDesc</td>
+                    <td>@proc.ServerHours</td>
+                    <td>@proc.WayHours</td>
+                </tr>
+            }
+        }*@
+
+
+    @*<tr>
+        <td class="t-r fw">项目接单：</td>
+        <td colspan="7">
+            @if (Model.BidUsers != null && Model.BidUsers.Count > 0)
+            {
+                foreach (var bid in Model.BidUsers)
+                {
+                    <div>
+                        @ *<span class="glyphicon glyphicon-list-alt bidUser" data-id="@bid.UserId"></span>* @  @bid.UserName 在 @bid.CTime 进行了接单。
+                    </div>
+                }
+            }
+        </td>
+    </tr>*@
+
+
+    @if (Model.BidUsers != null && Model.BidUsers.Where(b => b.UserId == ViewBag._Longin_UserId).Count() > 0)
+    {
+        <p>您已接单</p>
+        <input type="hidden" value="@ViewBag.isBidc" />
+    }
+    else if (Model.Status == (int)ProjectStatus.Default)
+    {
+        <tr>
+            <td class="t-r fw">接单</td>
+            <td colspan="7">
+                <form method="post" action="/Task/JoinProject">
+
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+
+                    <button type="submit" id="btnGetProject" class="btn btn-primary"> 接单 </button>
+                </form>
+
+            </td>
+        </tr>
+    }
+    <tr>
+        <td class="t-r fw">项目评价：</td>
+        <td colspan="7">
+            @if (ViewBag.evas != null)
+            {
+                foreach (var eval in (ViewBag.evas as List<TaskEvaRes>))
+                {
+                    <div class="bb mt10 lh25 w900">
+                        <span class="fw">@eval.UserName </span><span class="c9"> @eval.CTime </span>
+                        @for (var i = 0; i < eval.Grade; i++)
+                        {
+                            <img src="~/images/start_red.png" />
+                        }
+                        @*@eval.Score*@
+
+                        <p class="pl25">@eval.Desc</p>
+                    </div>
+                }
+            }
+        </td>
+    </tr>
+</table>
+
+
+
+
+<div class="modal fade" id="getModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("CreateSln", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">提交方案说明</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table noborder">
+                        <tr>
+                            <td>方案描述： </td>
+                            <td>
+                                <textarea class="form-control" name="desc" placeholder="方案描述" rows="5"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>项目文件：</td>
+                            <td><input type="file" id="exampleInputFile" name="files" multiple="multiple"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="projectId" value="@Model.ID" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                    <button type="submit" class="btn btn-primary"> 确定领取 </button>
+                </div>
+            }
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#btnGetProject").click(function () {
+                //$('#getModel').modal('show');
+            });
+
+
+            $(".bidUser").click(function () {
+                var id = $(this).data("id");
+                $.getJSON("/Account/GetUserInfo?id="+id)
+                     .success(function (json) {
+                         $("#up_RealName").html(json.RealName);
+                         $("#up_Gender").html(json.Birthday);
+                         $("#up_Birthday").html(json.Gender);
+                         $("#up_Email").html(json.Email);
+                         $("#up_Address").html(json.Address);
+                         $("#up_Position").html(json.Position);
+                         $("#up_Introduction").html(json.Introduction);
+                         
+                     })
+                $('#userPserson').modal('show');
+            });
+        });
+
+
+    </script>
+}

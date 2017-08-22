@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "企业认证";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+<div class="ptb10 bb">
+    <span>我的信息->企业实名认证</span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">企业实名认证</h3>
+</div>
+<red>
+    <ul class="certify-meta-ul unstyled pl25">
+        <li>请确保您是具有法人资格的商户，您需提供可证明您依法设立、依法经营，开展社会活动的执照，证件等（如营业执照副本)</li>
+        <li>证件有效期在3个月内的商户，请找工商部门更新资料后再行提交</li>
+    </ul>
+</red>
+
+
+<div class="pmp_content">
+    <form class="form-horizontal" role="form" method="post" action="/Account/AccountCompany_ApproveSumbit" style="margin:10px" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="txtname" class="col-sm-2 control-label">企业名称：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtname" name="txtname" value="" placeholder="请输入企业名称" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtcode" class="col-sm-2 control-label">营业执照注册号：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtcode" name="txtcode" value="" placeholder="营业执照注册号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtcity" class="col-sm-2 control-label">城市：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtcity" id="txtcity" placeholder="城市">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">经营范围：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtrange" id="txtrange" placeholder="经营范围" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtzzjgcode" class="col-sm-2 control-label">组织机构代码证号：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtzzjgcode" id="txtzzjgcode" placeholder="组织机构代码证号" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtzzjgimg" class="col-sm-2 control-label">组织机构代码证扫描件：</label>
+            <div class="col-sm-10">
+                <input type="file" name="txtzzjgimg" style="float:left;margin-left:15px" required="required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtlxrName" class="col-sm-2 control-label">联系人：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtlxrName" id="txtlxrName" placeholder="联系人" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtPhone" class="col-sm-2 control-label">联系电话：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtPhone" id="txtPhone" placeholder="联系电话" required="required">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtcompanyaddress" class="col-sm-2 control-label">常用地址：</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="txtcompanyaddress" id="txtcompanyaddress" placeholder="常用地址" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txt_yyzzfbimg" class="col-sm-2 control-label">营业执照副本扫描件：</label>
+            <div class="col-sm-10">
+                <input type="file" name="txt_yyzzfbimg" style="float:left;margin-left:15px" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn_blue">提交审核</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,41 @@
+﻿@model com.pmp.model.response.PageInfo
+<nav>
+
+    <ul class="pagination" data-index="1">
+        <li data-page="@(Model.PageIndex>1?Model.PageIndex-1:1)">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (var i = 0; i < Model.PageCount; i++)
+        {
+            <li class="num @Model.PageIndex==i?'active':''" data-page="@(i+1)"><a href="#">@(i + 1)</a></li>
+        }
+
+
+        <li data-page="@(Model.PageIndex<Model.PageCount?Model.PageIndex+1:Model.PageCount)">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+
+    @*<ul class="pagination" data-index="1">
+            <li data-page="-1">
+                <a href="?pageindex=@(Model.PageIndex>1?Model.PageIndex-1:1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (var i = 0; i < Model.PageCount; i++)
+            {
+                <li class="num @Model.PageIndex==i?'active':''"><a href="?pageindex=@(i+1)">@(i + 1)</a></li>
+            }
+
+
+            <li data-page="+1">
+                <a href="?pageindex=@(Model.PageIndex<Model.PageCount?Model.PageIndex+1:Model.PageCount)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>*@
+</nav>

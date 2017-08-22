@@ -1,0 +1,150 @@
+﻿@using com.pmp.model;
+@using com.pmp.common.helper;
+@model List<com.pmp.model.response.TaskInfoRes>
+@{
+    ViewBag.Title = "全部任务";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<form method="post">
+    <div class="row mt25">
+        <div class="col-sm-2 pt5">
+            <select class="w180 pt5" id="proType" name="type">
+                <option value="0">所有类别</option>
+                <option value="1">有线</option>
+                <option value="2">无线</option>
+                <option value="3">服务器</option>
+                <option value="4">设备安装</option>
+                <option value="5">出差</option>
+                <option value="20">其他</option>
+            </select>
+        </div>
+        <div class="col-sm-2 pt5">
+            <select class="w180 pt5 " id="proState" name="state">
+                @*<option value="-1">所有项目</option>*@
+                <option value="0">待接单的项目</option>
+                @*<option value="1">待服务的项目</option>
+                <option value="2">服务中的项目</option>
+                <option value="3">待验收的项目</option>
+                <option value="4">待评价项目</option>
+                <option value="5">已完成的项目</option>*@
+            </select>
+        </div>
+        <div class="col-sm-4 pt5" ng-app="cityApp">
+            <div ng-controller="cityCtl">
+                <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="defulatProvince" ng-init="defulatProvince='0'">
+                    <option value="0" selected="selected"> - 选择省份 -</option>
+                    <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
+                </select>
+                <select class="w140 pt5" id="sltCity" name="City">
+                    <option value="0" selected="selected"> - 选择城市 -</option>
+                    <option ng-repeat="city in citys" ng-value="city.ID">{{city.Name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-2 pt5">
+            <input type="date" id="proDate" name="date" />
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary btn-sm w100">
+                <span class="glyphicon glyphicon-search"></span> 搜 索
+            </button>
+        </div>
+    </div>
+</form>
+<div class="mt25">
+    <table class="table table-hover">
+        <tr>
+            <th class="w220">@*编号/合同号/*@项目名称</th>
+            @*<th class="w120">联系人/电话</th>*@
+            <th>项目说明</th>
+            <th class="w120">预算金额</th>
+            <th class="w220">项目地点</th>
+            <th class="w220">项目时间</th>
+            <th class="w220">项目类型</th>
+            <th class="w100">领取</th>
+        </tr>
+        @{ if (ViewBag.total > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @*@item.Code | @item.ContractCode<br />*@
+                            @item.Name
+                        </td>
+                        @*<td>
+                                @item.Manager | @item.Linkman<br />
+                                @item.Mobile
+                            </td>*@
+                        <td>
+                            <div class="descDiv3">
+                                @item.Desc.TakeString(35)
+                            </div>
+                        </td>
+                        <td>￥：@item.Budget</td>
+                        <td>
+                            @item.ProvinceName /  @item.CityName
+                        </td>
+                        <td>
+                            @item.CTime
+                            @*@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")*@
+                        </td>
+                        <td>
+                            @item.CategoryName
+                        </td>
+                        <td>
+                            <a href="Detail?id=@item.ID"><span class="glyphicon glyphicon-list-alt"></span><red> @item.StatusDesc</red></a>
+
+                        </td>
+                    </tr>
+
+                }
+            }
+        }
+    </table>
+</div>
+
+@Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".pagination li").click(function () {
+                var pageindex = $(this).data("page");
+                var type = $("#proType").val();
+                var state = $("#proState").val();
+                var city = $("#sltCity").val();
+                var date = $("#proDate").val();
+
+                window.location.href = 'Index?pageIndex=' + pageindex + '&type=' + type + '&state=' + state + '&city=' + city + '&date=' + date;
+            });
+        });
+
+
+        angular.module('cityApp', [])
+         .controller("cityCtl", function ($scope, $http) {
+             $scope.defulatProvince = 0;
+             $scope.defulatCity = 0;
+             $http.get("/Task/GetCityList?parentId=0")
+                 .success(function (json) {
+                     if (json.length > 0) {
+                         $scope.provinces = json;
+                     }
+                 });
+             $scope.change = function (x) {
+                 console.log(x);
+                 var proId = $("#sltProv").val();
+
+                 $http.get("/Task/GetCityList?parentId=" + proId)
+                 .success(function (json) {
+                     if (json.length > 0) {
+                         $scope.citys = json;
+                     }
+                 });
+             };
+         })
+
+    </script>
+}

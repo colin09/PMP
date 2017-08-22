@@ -1,0 +1,147 @@
+﻿@using com.pmp.common.helper;
+@model List<com.pmp.mongo.data.MgProject>
+@{
+    ViewBag.Title = "我的任务";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+<div class="ptb10 bb">
+    <span>会员中心 > 所有任务 </span>
+    <input type="hidden" id="userLevel" value="@ViewBag.level" />
+</div>
+<div>
+    <h3 class="ptb10">我的所有任务</h3>
+</div>
+
+<!-- Nav tabs -->
+<input type="hidden" id="projectState" value="@ViewBag.state" />
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" data-state="-1" class="@ViewBag.state==-1?'active':''"><a href="#divList" role="tab" data-toggle="tab">所有任务</a></li>
+    @if (ViewBag.level == 2)
+    {
+        <li role="presentation" data-state="0" class="@ViewBag.state==0?'active':''"><a href="#divList" role="tab" data-toggle="tab">待接单</a></li>
+    }
+    <li role="presentation" data-state="1" class="@ViewBag.state==1?'active':''"><a href="#divList" role="tab" data-toggle="tab">待服务</a></li>
+    <li role="presentation" data-state="2" class="@ViewBag.state==2?'active':''"><a href="#divList" role="tab" data-toggle="tab">服务中</a></li>
+    <li role="presentation" data-state="3" class="@ViewBag.state==3?'active':''"><a href="#divList" role="tab" data-toggle="tab">待验收</a></li>
+    <li role="presentation" data-state="4" class="@ViewBag.state==4?'active':''"><a href="#divList" role="tab" data-toggle="tab">待评价</a></li>
+    <li role="presentation" data-state="5" class="@ViewBag.state==5?'active':''"><a href="#divList" role="tab" data-toggle="tab">已完成</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content mt25">
+    <div role="tabpanel" class="tab-pane active" id="divList">
+        <ul class="taskAuditList">
+            @{ if (ViewBag.total > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        @*<li class="bb">
+                                <div class="line1 lh25 ptb10">
+                                    @if ((int)item.Status < 2)
+                                    {
+                                        <a href="/Task/Modify?Id=@item.ID"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    }
+                                    <a href="/Task/AuditDetail?id=@item.ID">
+                                        [@item.Status.GetName()]
+                                        @item.Code | @item.ContractCode | @item.Name
+                                    </a>
+
+                                    @if ((int)item.Status < 2)
+                                    {
+                                        <button type="button" id="spnDelete" data-id="@item.ID" class="btn btn-primary"> 删除项目 </button>
+                                    }
+                                </div>
+                                <div class="line2 lh25">@item.Desc.TakeString(160)</div>
+                                <div class="line3 lh25">联系人： @item.Manager | @item.Linkman @item.Mobile  项目时间：@item.StartTime.ToString("yyyy-MM-dd") - @item.EndTime.ToString("yyyy-MM-dd")</div>
+                            </li>*@
+
+                        <li class="">
+                            <div class="line1 lh25 ptb10">
+                                @if ((int)item.Status < 2)
+                                {
+                                    <a href="/Task/Modify?Id=@item.ID"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                }
+                                <a href="/Task/AuditDetail?id=@item.ID">
+                                    [@item.Status.GetName()]
+                                    @item.Code | @item.Name
+                                </a>
+
+                                @if ((int)item.Status < 2)
+                                {
+                                    <button type="button" id="spnDelete" data-id="@item.ID" class="btn btn-primary"> 删除项目 </button>
+                                }
+                            </div>
+                        </li>
+                    }
+                }
+            }
+            <li>
+                @Html.Partial("_pagePartial", new com.pmp.model.response.PageInfo { PageIndex = ViewBag.pageIndex, PageSize = 12, Total = ViewBag.total })
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="delProject">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">确认</h4>
+            </div>
+            <div class="modal-body">
+                确定要删除此任务吗？
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="delProjectId" value="0" />
+                <button type="button" class="btn btn-default" data-dismiss="modal"> 取 消 </button>
+                <button type="button" id="btnDeleteProject" class="btn btn-primary"> 确定领取 </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".nav li").click(function () {
+                var type = $("#proType").val();
+                var state = $(this).data("state");
+
+                window.location.href = 'MyList?pageIndex=1&type=0&state=' + state;
+            });
+
+            $(".pagination li").click(function () {
+                var pageindex = $(this).data("page");
+                var type = $("#proType").val();
+                var state = $("#projectState").val();
+
+                window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
+            });
+
+            $("#spnDelete").click(function () {
+                var id = $(this).data("id");
+                $("#delProjectId").val(id);
+                $('#delProject').modal('show');
+            });
+
+            $("#btnDeleteProject").click(function () {
+                var id = $("#delProjectId").val();
+                $.getJSON("/Task/Delete", { id: id }).done(function () {
+                    var pageindex = $(this).data("page");
+                    var state = $("#projectState").val();
+                    window.location.href = 'MyList?pageIndex=' + pageindex + '&type=0&state=' + state;
+                });
+            });
+        });
+    </script>
+}

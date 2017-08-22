@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录</title>
+    <link href="~/Css/Index.css" rel="stylesheet" />
+    <link href="~/Scripts/layer/skin/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+    <script src="~/Scripts/Public.js"></script>
+    <style>
+        .msgs {
+            display: inline-block;
+            width: 104px;
+            color: #fff;
+            font-size: 12px;
+            border: 1px solid #0697DA;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            background: #0697DA;
+            cursor: pointer;
+        }
+
+        msgs1 {
+            background: #E6E6E6;
+            color: #818080;
+            border: 1px solid #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login">
+        <h1 class="pt35">给我起个名字</h1>
+        <div class="form" style="width:50%;margin: 25px auto;">
+            @*<h3> Sign In </h3>*@
+            <div class="sign-in">
+                <input type="text" class="name" name="username" placeholder="手机号" required="required">
+                <input type="password" class="password" name="password" placeholder="密码" required="required">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="brand1" value="">
+                        <label for="brand1"><span></span>记住我</label>
+                        <a href="javascript::" id="a_registered">注册</a>
+                        <a href="javascript::" id="a_retrieve">找回密码？</a>
+                    </li>
+                </ul>
+                <input type="submit" id="login" value="登陆">
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="layui-layer layui-layer-page layui-layer-rim " id="Pop_layer" style="display:none">
+            <div style="cursor: move;" class="layui-layer-title" id="Pop_layer_Title">注册</div>
+            <div class="layui-layer-content" id="Pop_layer_Content">
+                <div style="width:410px;height:500px">
+                    <div class="register agileits">
+                        <input type="text" class="name" id="username" placeholder="账号" required="required">
+                        <input type="password" class="password" id="password" placeholder="密码" required="required">
+                        <input type="password" class="password" id="checkpassword" placeholder="确认密码" required="required">
+                        <input type="text" class="password" style="width:150px" id="codes" placeholder="验证码" required="required">
+                        <button class="msgs" id="btn_codes">获取验证码</button>
+                        <input name="type" type="radio" checked="checked" value="1">
+                        <span>我要赚钱</span>
+
+                        <input name="type" type="radio" value="2">
+                        <span>我是雇主</span>
+
+                        <input type="submit" id="btn_registered" value="注册">
+                    </div>
+                </div>
+            </div>
+            <span class="layui-layer-setwin">
+                <a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1"></a>
+            </span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $("#username").blur(function () {
+            if (!Public.IsMobile($("#username").val())) {
+                $("#username").val("");
+                layer.msg("账号格式错误！"); return;
+            }
+        });
+        //获取短信验证码
+        var validCode = true;
+        $(".msgs").click(function () {
+
+            if ($("#username").val() == "") {
+                layer.msg("请输入账号!"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请输入密码!"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请输入确认密码!"); return;
+            }
+
+            var time = 60;
+            var code = $(this);
+            if (validCode) {
+                validCode = false;
+                code.addClass("msgs1");
+                code.attr("disabled", true);
+                var t = setInterval(function () {
+                    time--;
+                    code.html(time + "秒");
+                    if (time == 0) {
+                        clearInterval(t);
+                        code.html("重新获取");
+                        validCode = true;
+                        code.removeClass("msgs1");
+                        code.attr("disabled", false);
+                    }
+                }, 1000)
+            }
+        })
+
+        $("#btn_codes").click(function () {
+
+            if ($("#username").val() == "") {
+                layer.msg("请输入账号!"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请输入密码!"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请输入确认密码!"); return;
+            }
+            var data = {
+                user: $("#username").val()
+            };
+            $.get("/AM/CreateCode", data, function (res) {
+                if (res == "True") {
+                    layer.msg("发送成功!");
+                } else {
+                    layer.msg("发送失败!");
+                }
+            })
+
+        });
+
+        $(function () {
+            var iTop = (window.screen.height / 2) - 100 - ($("#Pop_layer_Content div").height() / 2); //获得窗口的垂直位置;
+            var iLeft = (window.screen.width / 2) - 200 - ($("#Pop_layer_Content").width() / 2); //获得窗口的水平位置;
+            $("#Pop_layer").css("top", iTop + "px");
+            $("#Pop_layer").css("left", iLeft + "px");
+        })
+        $(".layui-layer-setwin a").click(function () {
+            $("#Pop_layer").hide();
+        });
+
+        $("#a_registered").click(function () {
+            $("#Pop_layer").show();
+        });
+
+
+        $("#a_retrieve").click(function () {
+            window.location.href = "/Account/RetrievePwd";
+        });
+
+        $("#btn_registered").click(function () {
+
+            if ($("#username").val() == "") {
+                layer.msg("账号不能为空"); return;
+            }
+            if ($("#password").val() == "") {
+                layer.msg("请填写密码"); return;
+            }
+            if ($("#checkpassword").val() == "") {
+                layer.msg("请确认密码"); return;
+            }
+            if ($("#codes").val() == "") {
+                layer.msg("请填写验证码"); return;
+            }
+
+            if ($("#password").val() == $("#checkpassword").val()) {
+                var data = {
+                    code: $("#username").val(),
+                    password: $("#password").val(),
+                    type: $("input[name='type']:checked").val(),
+                    codes: $("#codes").val()
+                };
+                $.post("/Account/AcconutRegistered", data, function (res) {
+                    if (res.IsSuccess == "True") {
+                        $("#Pop_layer").hide();
+                        layer.msg(res.message);
+                    } else {
+                        layer.msg(res.message);
+                    }
+                }, "json")
+            } else {
+                layer.msg("两次密码不统一,请重新输入!");
+            }
+        })
+
+
+        $("#login").click(function () {
+
+
+            if ($("input[name='username']").val() == "") {
+                layer.msg("账号不能为空"); return;
+            }
+            if ($("input[name='password']").val() == "") {
+                layer.msg("请填写密码"); return;
+            }
+            var data = {
+                code: $("input[name='username']").val(),
+                password: $("input[name='password']").val(),
+                Codes: ""
+            };
+            $.post("/Account/SignIn", data, function (res) {
+                if (res.IsSuccess == "True") {
+                    window.location.href = "/Account/AccountDetail";
+                } else {
+                    layer.msg(res.message);
+                }
+            }, "json")
+        });
+
+        var posX;
+        var posY;
+        fdiv = document.getElementById("Pop_layer");
+        document.getElementById("Pop_layer_Title").onmousedown = function (e) {
+            if (!e) e = window.event; //IE
+            posX = e.clientX - parseInt(fdiv.style.left);
+            posY = e.clientY - parseInt(fdiv.style.top);
+            document.onmousemove = mousemove;
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null;
+        }
+        function mousemove(ev) {
+            if (ev == null) ev = window.event;//IE
+            fdiv.style.left = (ev.clientX - posX) + "px";
+            fdiv.style.top = (ev.clientY - posY) + "px";
+        }
+    </script>
+</body>
+</html>
