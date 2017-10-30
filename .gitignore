@@ -70,3 +70,4 @@ packages/
 *.suo
 *.cache
 com.pmp/.vs/com.pmp/v14/.suo
+com.pmp/.idea/
