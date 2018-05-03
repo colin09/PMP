@@ -188,3 +188,26 @@ taskApp.controller("crateTaskController", function ($scope, $http, $filter) {
         }
     });
 });
+
+taskApp.controller("taskCenterController", function ($scope, $http, $filter) {
+
+    $scope.defulatProvince = 0;
+    $scope.defulatCity = 0;
+    $http.get("/Task/GetCityList?parentId=0")
+        .success(function (json) {
+            if (json.length > 0) {
+                $scope.provinces = json;
+            }
+        });
+    $scope.change = function (x) {
+        console.log(x);
+        var proId = $("#sltProv").val();
+
+        $http.get("/Task/GetCityList?parentId=" + proId)
+        .success(function (json) {
+            if (json.length > 0) {
+                $scope.citys = json;
+            }
+        });
+    };
+});

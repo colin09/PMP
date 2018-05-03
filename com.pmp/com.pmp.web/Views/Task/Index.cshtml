@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_TaskLayout.cshtml";
 }
 
-<form method="post">
+<form method="post" ng-controller="taskCenterController">
     <div class="row mt25">
         <div class="col-sm-2 pt5">
             <select class="w180 pt5" id="proType" name="type">
@@ -30,8 +30,8 @@
                 <option value="5">已完成的项目</option>*@
             </select>
         </div>
-        <div class="col-sm-4 pt5" ng-app="cityApp">
-            <div ng-controller="cityCtl">
+        <div class="col-sm-4 pt5">
+            <div>
                 <select class="w140 pt5" id="sltProv" name="Province" ng-change="change()" ng-model="defulatProvince" ng-init="defulatProvince='0'">
                     <option value="0" selected="selected"> - 选择省份 -</option>
                     <option ng-repeat="pro in provinces" ng-value="pro.ID">{{pro.Name}}</option>
@@ -123,28 +123,6 @@
         });
 
 
-        angular.module('cityApp', [])
-         .controller("cityCtl", function ($scope, $http) {
-             $scope.defulatProvince = 0;
-             $scope.defulatCity = 0;
-             $http.get("/Task/GetCityList?parentId=0")
-                 .success(function (json) {
-                     if (json.length > 0) {
-                         $scope.provinces = json;
-                     }
-                 });
-             $scope.change = function (x) {
-                 console.log(x);
-                 var proId = $("#sltProv").val();
-
-                 $http.get("/Task/GetCityList?parentId=" + proId)
-                 .success(function (json) {
-                     if (json.length > 0) {
-                         $scope.citys = json;
-                     }
-                 });
-             };
-         })
 
     </script>
 }
