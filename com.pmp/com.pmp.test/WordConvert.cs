@@ -12,8 +12,13 @@ namespace com.pmp.test
 
         public void Convert()
         {
-            var path = GetPathByDocToHTML(wordFilePath);
-            Console.WriteLine(path);
+            var htmlPath = GetPathByDocToHTML(wordFilePath);
+            var filesPath = $"{rootPath}\\{htmlPath.Replace("html", "files")}";
+
+            var imgConvert = new ImageConvert();
+            imgConvert.CompressImage(filesPath);
+
+            Console.WriteLine(htmlPath);
         }
 
 
